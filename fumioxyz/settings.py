@@ -17,6 +17,7 @@ SECRET_KEY = "*1*(p%w5&n^zm=g3v0wb^kj1d9qzqm)f-pl#^o(izb6sp_z^fc"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# MONO GIA OFFLINE - TO REAL GIA ONLINE EINAI PIO KATW
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
