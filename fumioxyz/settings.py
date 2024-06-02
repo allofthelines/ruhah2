@@ -21,6 +21,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'sawfly-resolved-chimp.ngrok-free.app',  # ngrok stathero or εφημερο
+    'fumio.xyz',
 ]
 # IMPORTANT GIA STRIPE WEBHOOK
 CSRF_TRUSTED_ORIGINS = ['https://sawfly-resolved-chimp.ngrok-free.app']
