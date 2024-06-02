@@ -77,7 +77,7 @@ def profile(request):
 
     if request.method == 'POST':
         if 'user_form' in request.POST:
-            user_form = UserProfileForm(request.POST, instance=user, user=user)
+            user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
                 user_form.save(user=user)
                 return redirect(f'{request.path}?edit=user')
