@@ -183,44 +183,49 @@ def add_item_to_temp(request):
 
     item = Item.objects.get(itemid=item_itemid)
 
+    default_img1_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img1.jpg'
+    default_img2_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img2.jpg'
+    default_img3_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img3.jpg'
+    default_img4_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img4.jpg'
+
     if item_cat == 'top':
-        if temp.item1img.url == '/media/studiooutfittemps/default_img1.jpg':
+        if temp.item1img.url == default_img1_url:
             temp.item1img = item.image
             temp.item1id = item.itemid
         else:
-            if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+            if temp.item4img.url == default_img4_url:
                 temp.item4img = item.image
                 temp.item4id = item.itemid
             else:
                 error_msg = 'Cannot have more than 2 tops.'
     if item_cat == 'bottom':
-        if temp.item2img.url == '/media/studiooutfittemps/default_img2.jpg':
+        if temp.item2img.url == default_img2_url:
             temp.item2img = item.image
             temp.item2id = item.itemid
         else:
-            if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+            if temp.item4img.url == default_img4_url:
                 temp.item4img = item.image
                 temp.item4id = item.itemid
             else:
                 error_msg = 'Cannot have more than 2 bottoms.'
     if item_cat == 'dress':
-        if temp.item2img.url == '/media/studiooutfittemps/default_img2.jpg':
+        if temp.item2img.url == default_img2_url:
             temp.item2img = item.image
             temp.item2id = item.itemid
         else:
             error_msg = 'Remove the 2nd item and try again.'
     if item_cat == 'accessory':
-        if temp.item3img.url == '/media/studiooutfittemps/default_img3.jpg':
+        if temp.item3img.url == default_img3_url:
             temp.item3img = item.image
             temp.item3id = item.itemid
         else:
-            if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+            if temp.item4img.url == default_img4_url:
                 temp.item4img = item.image
                 temp.item4id = item.itemid
             else:
                 error_msg = 'Cannot have more than 2 accessories.'
     if item_cat == 'footwear':
-        if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+        if temp.item4img.url == default_img4_url:
             temp.item4img = item.image
             temp.item4id = item.itemid
         else:
