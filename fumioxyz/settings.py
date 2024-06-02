@@ -261,5 +261,12 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # Media files storage using S3
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+# to evala afou ola kala me heroku
+# mallon gia thn entolh collectstatic sto terminal
+# Static files settings
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static'),
+]
+
 # Activate Django-Heroku
 django_heroku.settings(locals())
