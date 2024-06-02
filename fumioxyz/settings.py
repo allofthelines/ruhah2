@@ -222,8 +222,15 @@ django_heroku.settings(locals())
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = False
-ALLOWED_HOSTS = ['your-heroku-app-name.herokuapp.com']
+# PROSORINA TRUE
+DEBUG = True
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'sawfly-resolved-chimp.ngrok-free.app',  # ngrok stathero or εφημερο
+    'fumio.xyz',
+    'fumio-c90be99ba1a3.herokuapp.com'
+]
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
