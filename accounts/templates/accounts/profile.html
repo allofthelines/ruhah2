@@ -32,7 +32,7 @@
         <!-- User Profile Section -->
         <div id="user" class="content-section" style="display: none; padding: 10px;">
             {% if editing %}
-                <form method="post" action="{% url 'accounts:profile' %}">
+                <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <p style="margin-top: 8px; text-align: left;">
                         Username: @{{ user_form.username }}<br>
