@@ -1,0 +1,182 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+  User Profile
+{% endblock %}
+
+{% block content %}
+
+<div id="profile-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
+
+    <!-- Navigation Menu -->
+    <div id="profile-menu" style="width: 15%;">
+        <a href="#" onclick="showContent('user', 'Profile > User')" style="text-decoration-line: underline; color: blue;">User</a>
+        <a href="#" onclick="showContent('customer', 'Profile > Customer')" style="text-decoration-line: underline; color: blue;">Customer</a>
+        <a href="#" onclick="showContent('stylist', 'Profile > Stylist')" style="text-decoration-line: underline; color: blue;">Stylist</a>
+        <br>
+        <a href="#" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
+        <br>
+        <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="nav-link logout-button">Logout</button>
+        </form>
+    </div>
+
+    <!-- Content Area -->
+    <div id="content" style="width: 70%; padding-left: 5px; margin-top: -16px; text-align: left; display: flex; align-items: flex-start;">
+        <!-- Default Welcome Message -->
+        <div id="default" class="content-section" style="display: block; margin-top: 40px;">
+            {% include "accounts/public_profile_content.html" with profile_user=user is_own_profile=True is_following=False %}
+        </div>
+
+        <!-- User Profile Section -->
+        <div id="user" class="content-section" style="display: none; padding: 10px;">
+            {% if editing %}
+                <form method="post" action="{% url 'accounts:profile' %}">
+                    {% csrf_token %}
+                    <p style="margin-top: 8px; text-align: left;">
+                        Username: @{{ user_form.username }}<br>
+                        Email: {{ user_form.email }}<br>
+                        <br>
+                        Bio: {{ user_form.bio }}<br>
+                        <br>
+                        <a href="{% url 'accounts:followers_list' user.username %}">Followers</a>: {{ user.followers_num }}<br>
+                        <a href="{% url 'accounts:following_list' user.username %}">Following</a>: {{ user.following_num }}<br>
+                    </p>
+                    <input type="hidden" name="user_form" value="user_form">
+                    <button type="submit">Save changes</button>
+                </form>
+            {% else %}
+            <p style="margin-top: 8px; text-align: left;">
+                Username: @{{ user.username }}<br>
+                Email: {{ user.email }}<br>
+                <br>
+                Bio: {{ user.bio }}<br>
+                <br>
+                <a href="{% url 'accounts:followers_list' user.username %}">Followers</a>: {{ user.followers_num }}<br>
+                <a href="{% url 'accounts:following_list' user.username %}">Following</a>: {{ user.following_num }}<br>
+            </p>
+            <form method="get" action="{% url 'accounts:profile' %}">
+                <input type="hidden" name="edit" value="user">
+                <button type="submit" name="edit" value="true">Edit</button>
+            </form>
+            {% endif %}
+        </div>
+
+        <!-- Customer Profile Section -->
+        <div id="customer" class="content-section" style="display: none;">
+            {% if editing %}
+                <form method="post" action="{% url 'accounts:profile' %}">
+                    {% csrf_token %}
+                    <p>
+                        Top: {{ customer_form.top_size_xyz }}<br>
+                        Bottom: {{ customer_form.bottom_size_xyz }}<br>
+                        Waist (inches): {{ customer_form.size_waist_inches }}<br>
+                        Shoe (EU): {{ customer_form.shoe_size_eu }}<br>
+                        <br>
+                        {{ customer_form.height.label_tag }} {{ customer_form.height }}<br>
+                        {{ customer_form.weight.label_tag }} {{ customer_form.weight }}<br>
+                    </p>
+                    <input type="hidden" name="customer_form" value="customer_form">
+                    <button type="submit">Save changes</button>
+                </form>
+            {% else %}
+                <p style="margin-top: 15px;">
+                    Top: {{ user.customer.top_size_xyz }}<br>
+                    Bottom: {{ user.customer.bottom_size_xyz }}<br>
+                    Waist (inches): {{ user.customer.size_waist_inches }}<br>
+                    Shoe (EU): {{ user.customer.shoe_size_eu }}<br>
+                    <br>
+                    Height: {{ user.customer.height }} cm<br>
+                    Weight: {{ user.customer.weight }} kg<br>
+                </p>
+                <form method="get" action="{% url 'accounts:profile' %}">
+                    <input type="hidden" name="edit" value="customer">
+                    <button type="submit" name="edit" value="true">Edit</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <!-- Stylist Profile Section -->
+        <div id="stylist" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+                Current Credits: {{ user.stylist.credits }}<br>
+            </p>
+        </div>
+
+
+        <!-- Settings Section -->
+        <div id="settings" class="content-section" style="display: none;">
+            <p>Welcome to the Settings section. This area is designed to profile you
+                manage and explore various aspects of your settings.
+                From creating new projects to reviewing your work, you'll find
+                all the tools you need here.</p>
+        </div>
+    </div>
+
+    <div id="empty-area" style="width: 15%;">
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const editSection = urlParams.get('edit');
+        if (editSection) {
+            showContent(editSection, `Profile > ${editSection.charAt(0).toUpperCase() + editSection.slice(1)}`);
+        } else {
+            showContent('default', 'My Profile'); // Default section
+        }
+    });
+
+    function showContent(sectionId, headerText) {
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        var section = document.getElementById(sectionId);
+        if (section) {
+            section.style.display = 'block';
+            document.getElementById('page-header').textContent = headerText;
+        }
+    }
+</script>
+
+<style>
+    #profile-menu a {
+        display: block;
+        margin-bottom: 5px; /* Ensure each link is on its own line */
+        text-align: left;
+    }
+
+    @media (max-width: 768px) {
+        #empty-area {
+            width: 5% !important;
+        }
+
+        #profile-menu {
+            width: 15%;
+            flex-direction: row;
+            overflow-x: auto;
+            margin-right: 15px;
+            padding-right: 17px;
+            margin-top: 0px;
+        }
+        #profile-menu a {
+            flex: 1;
+            border-bottom: none;
+        }
+        #content {
+            width: 100%;
+            padding-left: 0px;
+            margin-top: 0;
+        }
+
+        #profile-menu-content {
+            margin-left:-15px
+            width: 115%
+        }
+    }
+</style>
+
+{% endblock %}

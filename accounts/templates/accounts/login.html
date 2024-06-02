@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Log In
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+<p>
+    <br>Not a member? <a href="{% url 'accounts:signup' %}">Sign up</a>
+    <br>Forgot password? <a href="{% url 'accounts:password_reset' %}">Reset</a>
+
+
+<style>
+form {
+    margin-top: -20px;
+}
+</style>
+
+{% endblock %}

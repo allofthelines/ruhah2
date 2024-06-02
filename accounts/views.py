@@ -1,0 +1,237 @@
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from accounts.models import CustomUser, Customer, Stylist
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from .forms import SignUpForm, UserProfileForm, CustomerForm, StylistForm
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)  # Use the custom SignUpForm
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False  # Deactivate account till it is confirmed
+            user.save()
+            send_confirmation_email(user)  # Send confirmation email
+            return redirect('accounts:account_activation_sent')  # Redirect to a page indicating that an activation email has been sent
+    else:
+        form = SignUpForm()  # Use the custom SignUpForm
+    return render(request, 'accounts/signup.html', {'form': form})
+
+def send_confirmation_email(user):
+    subject = 'Welcome'
+    from_email = 'FUMIO <fumioxyz1@gmail.com>'
+    message = render_to_string('accounts/activation_email.txt', {
+        'user': user,
+        'domain': settings.EMAIL_DOMAIN,
+        'protocol': settings.EMAIL_PROTOCOL,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': default_token_generator.make_token(user),
+    })
+    send_mail(subject, message, from_email, [user.email], fail_silently=False)
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)  # Optionally log the user in
+        return redirect('accounts:activation_success')
+    else:
+        return render(request, 'accounts/activation_invalid.html')
+
+
+
+
+def activation_success(request):
+    return render(request, 'accounts/activation_success.html')
+
+def account_activation_sent(request):
+    return render(request, 'accounts/account_activation_sent.html')
+
+
+
+
+@login_required
+def profile(request):
+    user = request.user # to idio me custom
+    customer = getattr(user, 'customer', None) #vlepei to child mode san attribute
+    stylist = getattr(user, 'stylist', None) #vlepei to child mode san attribute
+
+    user_form = UserProfileForm(instance=user, user=user)
+    customer_form = CustomerForm(instance=customer, customer=customer) if customer else None
+    stylist_form = StylistForm(instance=stylist, stylist=stylist) if stylist else None
+
+    editing = request.GET.get('edit') == 'true'
+
+    if request.method == 'POST':
+        if 'user_form' in request.POST:
+            user_form = UserProfileForm(request.POST, instance=user, user=user)
+            if user_form.is_valid():
+                user_form.save(user=user)
+                return redirect(f'{request.path}?edit=user')
+            else:
+                editing = 'true'
+                return redirect(f'{request.path}?edit=user')
+        elif 'customer_form' in request.POST and customer:
+            customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
+            if customer_form.is_valid():
+                customer_form.save(customer=customer)
+                return redirect(f'{request.path}?edit=customer')
+        elif 'stylist_form' in request.POST and stylist:
+            stylist_form = StylistForm(request.POST, instance=stylist, stylist=stylist)
+            if stylist_form.is_valid():
+                stylist_form.save(stylist=stylist)
+                return redirect(f'{request.path}?edit=stylist') # redirect sto stylist section otan save changes
+
+    # edw kanei execute to GET
+    return render(request, 'accounts/profile.html', {
+        'user_form': user_form,
+        'customer_form': customer_form,
+        'stylist_form': stylist_form,
+        'user': user,
+        'editing': editing
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from django.contrib.auth.forms import PasswordResetForm
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import send_mail
+from django.utils.encoding import force_bytes
+
+def password_reset_request(request):
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data['email']
+            associated_users = CustomUser.objects.filter(email=data)
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "accounts/password_reset_email.html"
+                    c = {
+                        "email": user.email,
+                        'domain': settings.EMAIL_DOMAIN,
+                        'site_name': 'Website',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': settings.EMAIL_PROTOCOL,
+                    }
+                    email = render_to_string(email_template_name, c)
+                    from_email = 'FUMIO <fumioxyz1@gmail.com>'  # Set the sender name here
+                    send_mail(subject, email, from_email, [user.email], fail_silently=False)
+            return redirect("accounts:password_reset_done")
+    password_reset_form = PasswordResetForm()
+    return render(request=request, template_name="accounts/password_reset.html", context={"password_reset_form": password_reset_form})
+
+
+
+
+from django.contrib.auth.views import PasswordResetConfirmView
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'accounts/password_reset_confirm.html'
+    success_url = reverse_lazy('accounts:password_reset_complete')
+
+
+
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import CustomUser, UserFollows
+from django.contrib.auth.models import AnonymousUser
+
+def public_profile(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    is_own_profile = (request.user == profile_user)
+    is_following = False
+
+    if request.user.is_authenticated and not isinstance(request.user, AnonymousUser):
+        is_following = UserFollows.objects.filter(user_from=request.user, user_to=profile_user).exists()
+
+    context = {
+        'profile_user': profile_user,
+        'is_own_profile': is_own_profile,
+        'is_following': is_following,
+    }
+    return render(request, 'accounts/public_profile.html', context)
+
+@login_required
+def follow(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    if request.method == 'POST' and request.user != profile_user:
+        UserFollows.objects.get_or_create(user_from=request.user, user_to=profile_user)
+    return redirect('accounts:public_profile', username=username)
+
+@login_required
+def unfollow(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    if request.method == 'POST' and request.user != profile_user:
+        UserFollows.objects.filter(user_from=request.user, user_to=profile_user).delete()
+    return redirect('accounts:public_profile', username=username)
+
+def followers_list(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    followers = UserFollows.objects.filter(user_to=profile_user).select_related('user_from')
+    followers_list = [relation.user_from for relation in followers]
+    context = {
+        'profile_user': profile_user,
+        'followers': followers_list,
+    }
+    return render(request, 'accounts/followers_list.html', context)
+
+
+def following_list(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    following = UserFollows.objects.filter(user_from=profile_user).select_related('user_to')
+    following_list = [relation.user_to for relation in following]
+    context = {
+        'profile_user': profile_user,
+        'following': following_list,
+    }
+    return render(request, 'accounts/following_list.html', context)

@@ -1,0 +1,44 @@
+from django import forms
+from .models import Ticket
+
+class TicketForm(forms.Form):
+    # Multiple choice fields
+
+    STYLE_CHOICES = [
+        ('casual', 'casual'),
+        ('boho', 'boho'),
+        ('gorpcore', 'gorpcore'),
+        ('indie', 'indie'),
+        ('loungewear', 'loungewear'),
+        ('preppy', 'preppy'),
+        ('streetwear', 'streetwear'),
+        ('y2k', 'y2k'),
+    ]
+
+    OCCASION_CHOICES = [
+        ('everyday', 'everyday'),
+        ('special', 'special'),
+    ]
+
+    SIZE_CHOICES = [
+        ('XS', 'XS'),
+        ('S', 'S'),
+        ('M', 'M'),
+        ('L', 'L'),
+        ('XL', 'XL'),
+    ]
+
+    style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
+    style2 = forms.ChoiceField(choices=STYLE_CHOICES, label='Style 2')
+    occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion')
+    condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
+    price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('under 40', 'under 40'), ('under 80', 'under 80')], label='Price')
+    notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
+        'rows': 4,
+        'cols': 20,
+        'placeholder': '"play with layering"\n"pastel palette"\n"emphasize my shoulders"\n"for a trip to greece"'}), required=False)
+
+    size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
+    size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size')
+    size_waist_inches = forms.IntegerField(label='Waist (inches)')
+    size_shoe_eu = forms.FloatField(label='Shoe Size (EU)')

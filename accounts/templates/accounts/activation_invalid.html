@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Sign Up
+{% endblock %}
+
+{% block content %}
+<p style="margin-top: -10px;">
+    The activation link is invalid or has expired.<br>
+    Please try to <a href="{% url 'accounts:signup' %}">register</a> again.<br>
+</p>
+{% endblock %}

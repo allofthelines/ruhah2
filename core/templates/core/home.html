@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block scripts %}
+  <script src="{% static "core/home.js" %}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <form id="outfits-form" method="post">
+    {% csrf_token %}
+    <input id="winner-input" name="winner" hidden>
+
+    <div id="outfits-container">
+      {% for outfit in outfits %}
+        <input id="outfit{{ forloop.counter }}-input" name="outfit{{ forloop.counter }}" value="{{ outfit.pk }}" hidden>
+        <div class="outfit">
+          <input id="outfit{{ forloop.counter }}-image" type="image" class="outfit-image" src="{{ outfit.image.url }}">
+          <br>
+        </div>
+        {% if forloop.first %}
+          <div id="outfit-separator">
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </form>
+{% endblock %}

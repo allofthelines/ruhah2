@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block page-header %}
+    Box
+{% endblock %}
+
+{% block content %}
+<div class="success-message">
+    <p style="margin-top: 0;">
+        Your ticket has been successfully submitted.<br>
+        You created <strong>Ticket #{{ ticket_id }}</strong>.<br>
+        <br>
+        Please complete the $15 styling fee payment <br>
+        to confirm the shipment of your box <br>
+        with our stylists' picks.<br><br>
+
+        <a href="{% url 'box:create-checkout-session' ticket_id=ticket_id %}"
+           style="display: block; width: fit-content; margin: 0 auto; margin-top:15px;"
+           target="_blank" class="btn btn-primary">Order Fumio Box</a><br><br>
+
+        Remember that <br>
+        all shipping is free (delivery and return) and <br>
+        the styling fee is returned to you in full <br>
+        as a discount on the item(s) you choose to keep.<br>
+    </p>
+    <!--
+    <a href="{% url 'box:ticket_form' %}" class="btn">Submit another ticket</a>
+    -->
+</div>
+{% endblock %}

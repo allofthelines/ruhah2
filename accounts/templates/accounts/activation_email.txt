@@ -1,0 +1,7 @@
+Hello {{ user.username }},
+
+Please click the link below to confirm your email address and complete the registration:
+
+{{ protocol }}://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
+
+Thank you!

@@ -1,0 +1,214 @@
+<div class="profile-container">
+    <div class="profile-left">
+        {% if profile_user.pfp %}
+            <img src="{{ profile_user.pfp.url }}" alt="Profile Picture" class="profile-picture">
+        {% endif %}
+    </div>
+    <div class="profile-right">
+        <div class="profile-row">
+            <span class="profile-username">@{{ profile_user.username }}</span>
+            {% if not is_own_profile and request.user.is_authenticated %}
+                {% if is_following %}
+                    <button id="unfollow-button" onclick="submitUnfollowForm()">Following</button>
+                    <a href="#" onclick="submitUnfollowForm()">Unfollow</a>
+                {% else %}
+                    <button id="follow-button" onclick="submitFollowForm()">Follow</button>
+                {% endif %}
+                <form id="follow-form" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                <form id="unfollow-form" method="post" action="{% url 'accounts:unfollow' profile_user.username %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+            {% endif %}
+        </div>
+        <div class="profile-row">
+            <a href="{% url 'accounts:followers_list' profile_user.username %}">Followers</a>: {{ profile_user.followers_num }}
+            <a href="{% url 'accounts:following_list' profile_user.username %}">Following</a>: {{ profile_user.following_num }}
+        </div>
+        <div class="profile-row">
+            {% if profile_user.bio %} {{ profile_user.bio }} {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- New Row with Buttons -->
+<div class="button-row">
+    <div id="button-them-by-me" class="button-left active-button" onclick="showThemByMe()">Them by Me</div>
+    <div id="button-me-by-them" class="button-right" onclick="showMeByThem()">Me by Them</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Display User's Outfits -->
+<div id="outfit-container">
+    <!-- Default content - 'Them by Me' -->
+    <div id="them-by-me-content" class="outfit-grid">
+        {% for outfit in profile_user.outfit_set.all %}
+        <div class="outfit-item">
+            <img src="{{ outfit.image.url }}" alt="Outfit Image">
+        </div>
+        {% if 'default_img.jpg' not in outfit.portrait.url %}
+        <div class="outfit-item">
+            <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait">
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <!-- 'Me by Them' content (initially hidden) -->
+    <div id="me-by-them-content" class="outfit-grid hidden">
+        {% for ticket in profile_user.ticket_set.all %}
+            {% if ticket.outfit1 %}
+                <div class="outfit-item">
+                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image">
+                </div>
+                {% if 'default_img.jpg' not in ticket.outfit1.portrait.url %}
+                <div class="outfit-item">
+                    <img src="{{ ticket.outfit1.portrait.url }}" alt="Outfit Portrait">
+                </div>
+                {% endif %}
+            {% endif %}
+            {% if ticket.outfit2 %}
+                <div class="outfit-item">
+                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image">
+                </div>
+                {% if 'default_img.jpg' not in ticket.outfit2.portrait.url %}
+                <div class="outfit-item">
+                    <img src="{{ ticket.outfit2.portrait.url }}" alt="Outfit Portrait">
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function showThemByMe() {
+        document.getElementById('them-by-me-content').classList.remove('hidden');
+        document.getElementById('me-by-them-content').classList.add('hidden');
+        document.getElementById('button-them-by-me').classList.add('active-button');
+        document.getElementById('button-me-by-them').classList.remove('active-button');
+    }
+
+    function showMeByThem() {
+        document.getElementById('them-by-me-content').classList.add('hidden');
+        document.getElementById('me-by-them-content').classList.remove('hidden');
+        document.getElementById('button-them-by-me').classList.remove('active-button');
+        document.getElementById('button-me-by-them').classList.add('active-button');
+    }
+</script>
+
+<style>
+    .profile-container {
+        display: flex;
+        align-items: flex-start;
+        margin-top: -25px;
+        margin-left: 15%;
+        margin-right: 15%;
+        justify-content: center;
+    }
+    .profile-left {
+        margin-right: 20px;
+    }
+    .profile-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profile-row {
+        margin-bottom: 10px;
+    }
+    .profile-username {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    #unfollow-button, #follow-button {
+        margin-left: 10px;
+    }
+    @media (max-width: 768px) {
+        .profile-container {
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    /* Styles for the new button row */
+    .button-row {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid black;
+        margin-top: 20px;
+        width: 100%;
+    }
+    .button-left, .button-right {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        border-right: 1px solid black;
+        cursor: pointer;
+    }
+    .button-right {
+        border-right: none;
+    }
+    .button-left:hover, .button-right:hover {
+        background-color: #f0f0f0;
+    }
+
+    .active-button {
+        font-weight: bold;
+    }
+
+    /* Common grid layout */
+    .outfit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3-column layout on desktop */
+        grid-gap: 10px;
+        margin-top: 20px;
+    }
+    .outfit-item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        overflow: hidden;
+    }
+    .outfit-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+    @media (max-width: 768px) {
+        .outfit-grid {
+            grid-template-columns: 1fr; /* 1-column layout on mobile */
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>

@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+  Search Users
+{% endblock %}
+
+{% block content %}
+  <form method="GET" action="{% url 'core:search' %}">
+    <input type="text" name="q" placeholder="Search for users">
+    <button type="submit">Search</button>
+  </form>
+
+    <!--
+  {% if query %}
+    <p>Results for "{{ query }}":</p>
+  {% else %}
+    <p>Please enter a search query to find users.</p>
+  {% endif %}
+  -->
+  <p><br></p>
+
+  <div style="margin-top: -25px;">
+    <ul style="list-style-type: none; padding: 0;">
+        {% for user in users %}
+            {% if user.username %}
+                <li style="display: flex; align-items: center; margin-bottom: 15px;">
+                    {% if user.pfp %}
+                        <img src="{{ user.pfp.url }}" alt="Profile Picture" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 15px;">
+                    {% endif %}
+                    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 50px;">
+                        <div>
+                            <a href="{% url 'accounts:public_profile' user.username %}" style="font-weight: bold;">@{{ user.username }}</a>
+                        </div>
+                        <div>
+                            {% if request.user.is_authenticated and user != request.user %}
+                                {% if user in request.user.following.all %}
+                                    <button onclick="submitUnfollowForm('{{ user.username }}')">Following</button>
+                                    <a href="#" onclick="submitUnfollowForm('{{ user.username }}')">Unfollow</a>
+                                {% else %}
+                                    <button onclick="submitFollowForm('{{ user.username }}')">Follow</button>
+                                {% endif %}
+                                <form id="follow-form-{{ user.username }}" method="post" action="{% url 'accounts:follow' user.username %}" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                                <form id="unfollow-form-{{ user.username }}" method="post" action="{% url 'accounts:unfollow' user.username %}" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+  </div>
+
+  <script>
+    function submitFollowForm(username) {
+        document.getElementById('follow-form-' + username).submit();
+    }
+    function submitUnfollowForm(username) {
+        document.getElementById('unfollow-form-' + username).submit();
+    }
+  </script>
+{% endblock %}

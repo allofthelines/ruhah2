@@ -1,0 +1,223 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+  Studio
+{% endblock %}
+
+{% block content %}
+
+<!-- ERROR MESSAGE -->
+<div id="error-message" class="error-messages" style="color: red; display: none;">
+    <p>Only registered members can submit outfits.</p>
+</div>
+
+<!-- TICKET LINE -->
+<table id="studio-tickets-table">
+    <thead>
+        <tr>
+            <th>Style</th>
+            <th>Occasion</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ ticket.style1 }}</td>
+            <td>{{ ticket.occasion }}</td>
+            <td>{{ ticket.notes }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Your <strong>Outfit</strong> for Ticket #{{ ticket.id }}</p>
+
+<!-- FINAL OUTFIT IMAGES (TEMP) -->
+<div id="contB">
+    <div class="contA">
+        <img src="/media/outfits/default_img.jpg" alt="Default image" class="outfit-image">
+        <button type="button" class="link-style" style="display: none;" onclick="removeItemFromOutfit(this)">Remove</button>
+    </div>
+    <div class="contA">
+        <img src="/media/outfits/default_img.jpg" alt="Default image" class="outfit-image">
+        <button type="button" class="link-style" style="display: none;" onclick="removeItemFromOutfit(this)">Remove</button>
+    </div>
+    <div class="contA">
+        <img src="/media/outfits/default_img.jpg" alt="Default image" class="outfit-image">
+        <button type="button" class="link-style" style="display: none;" onclick="removeItemFromOutfit(this)">Remove</button>
+    </div>
+    <div class="contA">
+        <img src="/media/outfits/default_img.jpg" alt="Default image" class="outfit-image">
+        <button type="button" class="link-style" style="display: none;" onclick="removeItemFromOutfit(this)">Remove</button>
+    </div>
+</div>
+
+<!-- GAP -->
+<p></p>
+
+<!-- SUBMIT OUTFIT BUTTON -->
+<button type="button" id="submit-outfit-guest">Submit Outfit</button>
+
+<!-- GAP -->
+<p></p>
+
+<!-- SEARCH FORM -->
+<form method="GET" action="{% url 'studio:studio_items_guest' ticket.id %}" id="search-form">
+    <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
+    <button type="submit">Search Clothes</button>
+</form>
+
+<p></p>
+
+<!-- DISPLAY SEARCH RESULTS -->
+<div id="contB-search">
+    {% for item in items %}
+    <div class="contA">
+        <img src="{{ item.image.url }}" alt="Item Image">
+        <button type="button" class="link-style" onclick="addItemToOutfit('{{ item.image.url }}')">Add</button>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    #contB, #contB-search {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 1x4 layout in desktop */
+        grid-gap: 2px;
+        border: 0px solid black; /* Border around the entire container */
+        margin: 0 0px; /* extra margins on the left and right (exei hdh 20px apo body) */
+    }
+
+    .contA {
+        display: flex;
+        flex-direction: column; /* Image on top, link on bottom */
+        border: 1px solid black; /* Thin borders as specified, like regular table lines */
+    }
+
+    .contA img {
+        width: 100%;
+        height: auto;
+        flex-grow: 1; /* Image takes up the available space */
+        border-bottom: 1px solid black; /* Add bottom border to the image DOULEVEI */
+    }
+
+    .contA button {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid black; /* Thin border between image and button DEN DOULEVEI (DES PANW) */
+        display: block;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: blue;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        #contB, #contB-search {
+            grid-template-columns: repeat(2, 1fr); /* 2x2 layout in mobile */
+        }
+
+        .outfit-image {
+        width: 100%; /* Makes images responsive */
+        max-width: 100%; /* Ensures images do not overflow their container */
+        height: auto; /* Maintains aspect ratio */
+        margin-bottom: 0px; /* FTIAXNEI TO EXTRA KENO ANAMESA SE IMG KAI BUTTON - EINAI SET STO STYLES.CSS SE 20 */
+        }
+    }
+
+    /* kanw fake to button san link */
+    .link-style {
+        background: none;
+        border: none;
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        padding: 10px; /* Adjust padding to match 'Remove' link */
+        width: 100%;
+        font-family: inherit; /* Inherit the font family from parent elements */
+        font-size: inherit; /* Optionally ensure the font size is also inherited */
+        border-top: 1px solid black; /* kanonika einai sto contA a alla edw */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Restore outfit state from local storage
+        const storedOutfit = JSON.parse(localStorage.getItem('outfitState'));
+        const placeholders = document.getElementById('contB').getElementsByClassName('contA');
+
+        if (storedOutfit) {
+            for (let i = 0; i < storedOutfit.length; i++) {
+                const img = placeholders[i].querySelector('img');
+                const button = placeholders[i].querySelector('button');
+
+                if (storedOutfit[i] !== null) {
+                    img.src = storedOutfit[i];
+                    button.style.display = 'block';
+                } else {
+                    img.src = '/media/outfits/default_img.jpg';
+                    button.style.display = 'block'; // Ensure buttons are visible initially
+                }
+            }
+        } else {
+            // Ensure all buttons are visible initially even if there's no stored state
+            for (let i = 0; i < placeholders.length; i++) {
+                const button = placeholders[i].querySelector('button');
+                button.style.display = 'block'; // Ensure buttons are visible initially
+            }
+        }
+    });
+
+    function addItemToOutfit(imageUrl) {
+        const outfitContainer = document.getElementById('contB');
+        const placeholders = outfitContainer.getElementsByClassName('contA');
+
+        for (let i = 0; i < placeholders.length; i++) {
+            const placeholder = placeholders[i];
+            const img = placeholder.querySelector('img');
+            const button = placeholder.querySelector('button');
+
+            if (img.src.includes('default_img.jpg')) {
+                img.src = imageUrl;
+                button.style.display = 'block'; // Ensure the button is visible
+                saveOutfitState();
+                break;
+            }
+        }
+    }
+
+    function removeItemFromOutfit(button) {
+        const placeholder = button.parentElement;
+        const img = placeholder.querySelector('img');
+
+        img.src = '/media/outfits/default_img.jpg';
+        button.style.display = 'block'; // Ensure the button remains visible
+        saveOutfitState();
+    }
+
+    function saveOutfitState() {
+        const outfitContainer = document.getElementById('contB');
+        const placeholders = outfitContainer.getElementsByClassName('contA');
+        const outfitState = [];
+
+        for (let i = 0; i < placeholders.length; i++) {
+            const img = placeholders[i].querySelector('img');
+            if (img.src.includes('default_img.jpg')) {
+                outfitState.push(null);
+            } else {
+                outfitState.push(img.src);
+            }
+        }
+
+        localStorage.setItem('outfitState', JSON.stringify(outfitState));
+    }
+
+    document.getElementById('submit-outfit-guest').addEventListener('click', function() {
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.style.display = 'block';
+    });
+</script>
+
+{% endblock %}

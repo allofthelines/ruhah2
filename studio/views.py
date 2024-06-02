@@ -1,0 +1,297 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
+from box.models import Ticket
+from core.models import Outfit
+from accounts.models import CustomUser
+from .models import StudioOutfitTemp, Item
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.contrib import messages
+from django.utils import timezone
+from .management.commands.image_processing import create_composite_image
+from studio.models import CustomUser
+
+import time
+from django.core.files import File
+
+
+
+
+
+
+def studio_tickets(request):
+    ticket_list = Ticket.objects.filter(status='open')
+    paginator = Paginator(ticket_list, 20)  # Show 20 tickets per page
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    if request.user.is_authenticated:
+        following_user_ids = list(request.user.following_list.values_list('id', flat=True))
+    else:
+        following_user_ids = []
+
+    context = {
+        'page_obj': page_obj,
+        'following_user_ids': following_user_ids,
+    }
+    print('TEST TEST TEST', following_user_ids)
+    return render(request, 'studio/studio_tickets.html', context)
+
+
+
+
+@login_required
+def studio_items(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+    user = request.user
+
+    # Clear any lingering error messages for authenticated users
+    storage = messages.get_messages(request)
+    storage.used = False  # Ensure the storage is marked as not used
+    for message in list(storage):
+        # Only keep messages that are not the guest-only message
+        if str(message) == 'Only registered users can submit outfits.':
+            message.message = ''  # Clear the message content
+            storage.used = True  # Ensure the storage is marked as used to clear the message
+
+    outfit_temp, created = StudioOutfitTemp.objects.get_or_create(ticket=ticket, user=user)
+
+    # Prepare image URLs in a list or dictionary
+    image_urls = [outfit_temp.get_image_url(i) for i in range(1, 5)]
+
+    if 'reset' in request.GET:
+        item_to_reset = request.GET['reset']
+        setattr(outfit_temp, f'{item_to_reset}img', 'studiooutfittemps/default_img.jpg')
+        setattr(outfit_temp, f'{item_to_reset}id', '')
+        outfit_temp.save()
+        return redirect('studio:studio_items', ticket_id=ticket_id)
+
+    context = {
+        'ticket': ticket,
+        'outfit_temp': outfit_temp,
+        'image_urls': image_urls
+    }
+    return render(request, 'studio/studio_items.html', context)
+
+
+
+def studio_items_guest(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    search_query = request.GET.get('search_query', '')
+
+    if search_query:
+        query = Q()
+        for term in search_query.split():
+            query |= Q(tags__icontains=term)
+        items = Item.objects.filter(query).distinct()[:20]  # Limit to first 20 search results
+    else:
+        items = Item.objects.all()[:20]  # Limit to first 20 items
+
+    image_urls = []  # No pre-loaded images for guests
+
+    if not request.user.is_authenticated:
+        user = CustomUser(username='guest')
+        messages.error(request, 'Only registered users can submit outfits.')
+    else:
+        user = request.user
+
+    context = {
+        'ticket': ticket,
+        'items': items,
+        'image_urls': image_urls,
+        'user': user,
+    }
+
+    return render(request, 'studio/studio_items_guest.html', context)
+
+
+
+
+
+def studio_items_reset(request, ticket_id, item_id):
+    # Fetch the StudioOutfitTemp instance
+    # edw to item_id = 1 2 3 4
+    user = request.user
+    ticket = Ticket.objects.get(pk=ticket_id)
+    outfit_temp = StudioOutfitTemp.objects.get(ticket=ticket, user=user)
+
+    # Reset the specific item image and id based on item_id
+    setattr(outfit_temp, f'item{item_id}img', f'studiooutfittemps/default_img{item_id}.jpg')
+    setattr(outfit_temp, f'item{item_id}id', '')
+    outfit_temp.save()
+
+    # Redirect back to the studio_items view
+    return redirect('studio:studio_items', ticket_id=ticket_id)
+
+
+
+
+
+
+from django.shortcuts import render
+from .models import Item
+
+@login_required
+def item_search(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    user = request.user
+    outfit_temp, created = StudioOutfitTemp.objects.get_or_create(ticket=ticket, user=user)
+
+    # Prepare image URLs in a list or dictionary
+    image_urls = [outfit_temp.get_image_url(i) for i in range(1, 5)]
+
+    search_query = request.GET.get('search_query', '')
+    items = Item.objects.all()
+    if search_query:
+        words = search_query.split()
+        query = Q()
+        for word in words:
+            query &= Q(tags__icontains=word)
+        items = items.filter(query)
+
+    # Filter items based on the ticket's sizes
+    items = items.filter(
+        Q(cat='top', size_xyz=ticket.size_top_xyz) |
+        Q(cat='bottom', size_xyz=ticket.size_bottom_xyz) |
+        Q(cat='footwear', size_eu=ticket.size_shoe_eu) |
+        Q(cat='accessory')
+    )
+
+    # Filter items based on availability of stock
+    items = items.filter(
+        Q(stock__isnull=True) | Q(stock__gt=0),
+        is_ship_ready='yes'
+    )
+
+    return render(request, 'studio/studio_items.html', {
+        'ticket': ticket,
+        'outfit_temp': outfit_temp,
+        'items': items,
+        'image_urls': image_urls
+    })
+
+
+def add_item_to_temp(request):
+    # edw to item_itemid = kwdikos rouxou
+    # sto URL PREPEI '/MEDIA/STUDIOOUTFITTEMPS/IMAGE.JPG'
+    item_itemid = request.POST.get('item_itemid')
+    item_cat = request.POST.get('item_cat')
+    ticket_id = request.POST.get('ticket_id')
+    user = request.user
+    temp = StudioOutfitTemp.objects.get(ticket_id=ticket_id, user=user)
+    error_msg =''
+
+    item = Item.objects.get(itemid=item_itemid)
+
+    if item_cat == 'top':
+        if temp.item1img.url == '/media/studiooutfittemps/default_img1.jpg':
+            temp.item1img = item.image
+            temp.item1id = item.itemid
+        else:
+            if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+                temp.item4img = item.image
+                temp.item4id = item.itemid
+            else:
+                error_msg = 'Cannot have more than 2 tops.'
+    if item_cat == 'bottom':
+        if temp.item2img.url == '/media/studiooutfittemps/default_img2.jpg':
+            temp.item2img = item.image
+            temp.item2id = item.itemid
+        else:
+            if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+                temp.item4img = item.image
+                temp.item4id = item.itemid
+            else:
+                error_msg = 'Cannot have more than 2 bottoms.'
+    if item_cat == 'dress':
+        if temp.item2img.url == '/media/studiooutfittemps/default_img2.jpg':
+            temp.item2img = item.image
+            temp.item2id = item.itemid
+        else:
+            error_msg = 'Remove the 2nd item and try again.'
+    if item_cat == 'accessory':
+        if temp.item3img.url == '/media/studiooutfittemps/default_img3.jpg':
+            temp.item3img = item.image
+            temp.item3id = item.itemid
+        else:
+            if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+                temp.item4img = item.image
+                temp.item4id = item.itemid
+            else:
+                error_msg = 'Cannot have more than 2 accessories.'
+    if item_cat == 'footwear':
+        if temp.item4img.url == '/media/studiooutfittemps/default_img4.jpg':
+            temp.item4img = item.image
+            temp.item4id = item.itemid
+        else:
+            error_msg = 'Remove the 4th item and try again.'
+
+
+    # ERROR MESSAGE STO HTML SE PERIPTWSH POU PAEI NA VALEI 3 TOPS PX
+    if error_msg != '':
+        messages.error(request, error_msg)
+
+    temp.save()
+    return redirect('studio:studio_items', ticket_id=ticket_id)  # Redirect back to the item selection page
+
+
+
+
+
+
+
+
+
+def submit_outfit(request, ticket_id):
+    user = request.user
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    temp = get_object_or_404(StudioOutfitTemp, user=user, ticket=ticket)
+
+    if not (temp.item1id and temp.item2id and temp.item3id):
+        messages.error(request, 'Submission failed.\nPlease include at least 3 items.')
+        return redirect('studio:studio_items', ticket_id=ticket_id)
+
+    # Create new outfit
+    new_outfit = Outfit.objects.create(
+        maker_id=user,  # Updated field
+        ticket_id=ticket,  # Assigning the ticket instance instead of the ID
+        timestamp=timezone.now(),
+        image='outfits/default_img.jpg'  # Use default image
+    )
+
+    # Fetch Item instances using itemid
+    item_ids = [temp.item1id, temp.item2id, temp.item3id, temp.item4id]
+    items = Item.objects.filter(itemid__in=[item_id for item_id in item_ids if item_id])
+
+    # Ensure all items exist
+    if len(items) != len([item_id for item_id in item_ids if item_id]):
+        messages.error(request, 'Some items do not exist.')
+        return redirect('studio:studio_items', ticket_id=ticket_id)
+
+    # Set items for the new outfit
+    new_outfit.items.set(items)
+
+    # Update ticket
+    ticket.current_outfits += 1
+    ticket.outfits_all.add(new_outfit)
+    if ticket.current_outfits >= ticket.maximum_outfits:
+        ticket.status = 'closed'
+    ticket.save()
+
+    # Add a delay to give time for the outfit to be fully created
+    time.sleep(2)
+
+    # Process the outfit's items to create a composite image
+    image_path = create_composite_image(new_outfit)
+
+    if image_path:
+        # Update the outfit's image field
+        with open(image_path, 'rb') as img_file:
+            new_outfit.image.save(f'outfit_{new_outfit.id}.jpeg', File(img_file), save=True)
+    else:
+        messages.error(request, 'Image processing failed.')
+
+    return redirect('studio:studio_success')
+
+def studio_success(request):
+    return render(request, 'studio/studio_success.html')

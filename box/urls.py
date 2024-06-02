@@ -1,0 +1,14 @@
+from django.urls import path
+from .views import ticket_view, success_view, api_tickets
+from .views import ticket_view, success_view, api_tickets, stripe_webhook, create_checkout_session
+from .views import payment_successful, payment_rejected
+
+urlpatterns = [
+    path('ticket/', ticket_view, name='ticket_form'),
+    path('ticket/success/', success_view, name='success_url'),
+    path('api/tickets/', api_tickets, name='api-tickets'),
+    path('webhook/stripe/', stripe_webhook, name='stripe-webhook'),
+    path('create-checkout-session/<int:ticket_id>/', create_checkout_session, name='create-checkout-session'),
+    path('payment-successful/', payment_successful, name='payment_successful'),
+    path('payment-rejected/', payment_rejected, name='payment_rejected'),
+]

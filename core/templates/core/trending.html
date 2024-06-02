@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+  Trending
+{% endblock %}
+
+{% block content %}
+  <table id="trending-table">
+    <tr>
+      <th>Rank</th>
+      <!-- <th>Rating</th> -->
+      <th>Outfit</th>
+    </tr>
+
+    {% for outfit in page_obj.object_list %}
+      <tr>
+        <td>{{ outfit.rank }}</td>
+        <!-- <td>{{ outfit.rating }}</td> -->
+        <td>
+            <img src="{{ outfit.image.url }}">
+            <br>
+            <span>
+              {% if outfit.maker_id %}
+                <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
+              {% else %}
+                @Unknown
+              {% endif %}
+            </span>
+            <br><br>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {% if page_obj.has_other_pages %}
+    <nav>
+      {% for i in paginator.page_range %}
+        {% if i == page_obj.number %}
+          <span id="active-page-link">{{ i }}</span>
+        {% else %}
+          <a href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  {% endif %}
+{% endblock %}
+

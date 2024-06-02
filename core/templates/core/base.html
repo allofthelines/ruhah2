@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added viewport meta tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> <!-- STOP ZOOM OTAN INPUT -->
+
+  <link rel="stylesheet" href="{% static "core/styles.css" %}">
+  <link rel="icon" href="{% static 'core/favicon.png' %}" type="image/png">
+  <link rel="manifest" href="{% static 'manifest.json' %}"> <!-- Link to manifest.json -->
+
+  <title>FUMIO</title>
+  {% block scripts %}{% endblock %}
+</head>
+
+<body>
+<div id="header">
+  <!-- <h1 id="header-title"><a href="{% url 'core:home' %}" style="text-decoration: none; color: inherit;">FUMIO</a></h1> -->
+  <h1 id="header-title">FUMIO</h1>
+  <nav>
+    <a class="nav-link" href="{% url 'core:home' %}">Home</a>
+    <a class="nav-link" href="{% url 'box:ticket_form' %}">Box</a>
+    <a class="nav-link" href="{% url 'core:trending' %}">Trending</a>
+    <a class="nav-link" href="{% url 'studio:studio_tickets' %}">Studio</a>
+
+    {% if user.is_authenticated %}
+        {% if user.username == "guest" %}
+            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+        {% else %}
+            <a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a>
+        {% endif %}
+    {% else %}
+        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+    {% endif %}
+  </nav>
+</div>
+
+<div id="content">
+  <h2 id="page-header">
+    {% block page-header %}{% endblock %}
+  </h2>
+    {% block content %}{% endblock %}
+</div>
+
+<footer id="footer" style="text-align:center; padding:20px; font-family:inherit;">
+    <br><br><br>
+    <div>
+    <span><a class="nav-link" href="{% url 'core:terms' %}">Terms</a></span>
+    <span><a class="nav-link" href="{% url 'core:privacy' %}">Privacy</a></span>
+    <span><a class="nav-link" href="{% url 'core:help' %}">Help</a></span>
+    <span><a class="nav-link" href="{% url 'core:social' %}">Social</a></span>
+    <span><a class="nav-link" href="{% url 'core:search' %}">Search</a></span>
+  </div>
+  <div>
+    © 2024 FUMIO
+  </div>
+</footer>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('{% static 'serviceworker.js' %}')
+    .then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(error) {
+      console.log('ServiceWorker registration failed: ', error);
+    });
+  }
+</script>
+
+</body>
+</html>

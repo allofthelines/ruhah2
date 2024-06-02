@@ -1,0 +1,208 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+  Help
+{% endblock %}
+
+{% block content %}
+
+<div id="help-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
+    <!-- Navigation Menu -->
+    <div id="help-menu" style="width: 15%;">
+        <a href="#" onclick="showContent('box', 'Help > Box')" style="text-decoration-line: underline; color: blue;">Box</a>
+        <a href="#" onclick="showContent('studio', 'Help > Studio')" style="text-decoration-line: underline; color: blue;">Studio</a>
+        <br>
+        <a href="#" onclick="showContent('stylists', 'Help > Stylists')" style="text-decoration-line: underline; color: blue;">Stylists</a>
+        <br>
+        <a href="#" onclick="showContent('delivery', 'Help > Delivery')" style="text-decoration-line: underline; color: blue;">Delivery</a>
+        <a href="#" onclick="showContent('returns', 'Help > Returns')" style="text-decoration-line: underline; color: blue;">Returns</a>
+        <br>
+        <a href="#" onclick="showContent('careers', 'Help > Careers')" style="text-decoration-line: underline; color: blue;">Careers</a>
+        <a href="#" onclick="showContent('locations', 'Help > Locations')" style="text-decoration-line: underline; color: blue;">Locations</a>
+        <a href="#" onclick="showContent('contact', 'Help > Contact')" style="text-decoration-line: underline; color: blue;">Contact</a>
+    </div>
+
+    <!-- Content Area -->
+    <div id="content" style="width: 70%%; padding-left: 5px; margin-top: -16px;">
+        <div id="help" class="content-section active" style="display: block;">
+            <p>Welcome. Please choose the section you need assistance with.<br><br>
+        </div>
+
+        <div id="box" class="content-section" style="display: none;">
+            <p><h3>What is a Fumio Box?</h3>
+            A box delivered to your door that includes 6-8 items.
+            These items make for 2 different outfits, 3-4 items each,
+            curated by human stylists based on your personal requests.
+            <h3>Do i have to buy everything in it?</h3>
+            No. You buy and keep only the items you want to.
+            The rest you put them back to the box and return them to us for free.
+            <h3>How are the outfits curated?</h3>
+            Currently our outfit selection system includes a combination of stylist curation,
+            public voting and decision making by our in-house fashion experts and trend analysts.
+            In the future we will offer the option to choose a specific stylist of your choice to make your outfit.
+            <h3>What do i pay for?</h3>
+            <ul>
+                <li>A $15 styling fee to order the Box. This includes all Box shipping costs, both delivery and return.</li>
+                <li>The price of each item that you want to keep.</li>
+            </ul>
+            The styling fee is returned to you as discount on the items you purchased.<br>
+            If you decide to keep all the items that belong to the same outfit you get -20% discount on them.<br>
+            <h3>Is it a subscription service?</h3>
+            No. You only pay each time you order a Box.</p>
+        </div>
+        <div id="studio" class="content-section" style="display: none;">
+            <p><h3>What is the Fumio Studio?</h3>
+                Fumio Studio is a platform where Stylists can view and respond to outfit requests from users.
+                It provides access to our entire catalogue, including items from our own collection
+                and our suppliers. In the Studio, you can browse, search, and select items to create and
+                submit outfits quickly and easily.
+                <h3>How do I search for items to include in my outfit?</h3>
+                You can search for items using keywords that you think describe
+                the item you have in mind and its attributes ("blue" "distressed" "stripes" "loafer" etc).
+                We provide a keyword guide to assist you, but feel free to try different keywords if you
+                don't find what you're looking for with the first try.
+                <h3>Do I need to worry about the sizes of the items I select?</h3>
+                No. Our item search algorithm automatically filters items to fit the customer's size.
+                You can focus purely on aesthetics and style.
+                <h3>What kind of items are available in the catalogue?</h3>
+                The catalogue includes a wide range of clothing items such as shirts, trousers, dresses,
+                and accessories like bags and glasses. These items can be either new or pre-owned
+                and come from our own collection or from suppliers we collaborate with.
+                If an item appears in your search, it is available and ready to ship.
+                In case of any unexpected issues, we will replace it with a similar item.
+                <h3>Why are some requests yellow?</h3>
+                The user that submitted a yellow request follows you at Fumio.
+        </div>
+        <div id="stylists" class="content-section" style="display: none;">
+            <p>
+                <h3>Who is a Fumio Stylist?</h3>
+                A registered user who creates an outfit as a response to a customer request.
+                Stylists make the suggestions, we handle everything else.
+                As a Stylist, you can sign up and start styling right away in the Fumio Studio.
+                <h3>What happens if a customer buys my outfit?</h3>
+                For each user request, up to 10 stylists recommend one or more outfits each.
+                Each time your outfit is delivered to the customer and the customer chooses to buy
+                items you recommended you get notified and earn credits.
+                These credits can be cashed out whenever you want.
+                <h3>What happens if they don't?</h3>
+                Nothing.
+                <h3>How can I cash out my earned credits?</h3>
+                Visit your Stylist Profile page and follow the instructions provided there.
+                <h3>Is it really that simple?</h3>
+                Yes. Sign up, start styling, and earn credits for your chosen outfits.
+
+            </p>
+        </div>
+
+        <div id="delivery" class="content-section" style="display: none;">
+            <p>We currently only deliver to the UK and Greece.<br>
+                <ul>
+                    <li>Standard Delivery: 3-5 working days.</li>
+                    <li>Free Box delivery for all orders.</li>
+                </ul>
+                You will receive by email a tracking number to monitor your delivery status.<br>
+                <br>
+                <strong>Disclaimer</strong>: Once packages are picked up by the carrier, we are not responsible for lost or damaged packages.
+                We recommend contacting the carrier directly for any delivery-related issues.
+                However, feel free to contact us for any issue or question, and we will do our best to find a solution.</p>
+        </div>
+        <div id="returns" class="content-section" style="display: none;">
+            <p><h3>Items not purchased</h3>
+                We offer free returns on all items in your Fumio Box that you did not purchase.<br>
+                <ul>
+                    <li>You have 3 days to decide what to keep and what to return.</li>
+                    <li>Place the items you don’t want back to the Box.
+                        Make sure they are in the same condition as found
+                        with all original packaging and tags.</li>
+                    <li>Seal the Box with the tape provided and attach the pre-paid return label outside.</li>
+                    <li>Go to the nearest post-office and return the Box.</li>
+                </ul>
+                <h3>Items purchased</h3>
+                We accept returns on items purchased within 30 days.
+                The customer is responsible for the carrier choice and the shipping cost.<br>
+                <ul>
+                    <li>Include a piece of paper with the original order number inside the package.</li>
+                    <li>Attach a paper with the return address on the outside of the package.</li>
+                    <li>Make sure to select a delivery option with a tracking number.</li>
+                    <li>As soon as we receive the package we will refund the amount back to your payment method.</li>
+                </ul>
+                <strong>Keep in mind:</strong> It may take up to 14 business days to receive a refund.
+                If your refund hasn’t been issued within that time, please contact us and we'll sort things out.
+            <p/>
+        </div>
+
+        <div id="careers" class="content-section" style="display: none;">
+            <p>As a Fumio Stylist, all you need is your phone and the internet in order to create and earn.
+            You can sign up and start styling at any time.<br><br>
+            If you are interested in joining our operations team,
+            although we are not currently looking to add new members,
+            we are always excited to connect with like-minded people.
+            If you appreciate what we do, enjoy trying new things, and love solving problems,
+            feel free to drop us an email. We would be happy to hear from you.</p>
+        </div>
+        <div id="locations" class="content-section" style="display: none;">
+            <p>Mannequin House, 5 Blackhorse Ln, E17 6SX, London, United Kingdom<br><br>
+                Spetson 126, 11363, Athens, Greece
+        </div>
+        <div id="contact" class="content-section" style="display: none;">
+            <p>Customer care: support@fumio.xyz<br><br>All other enquiries: contact@fumio.xyz</p>
+        </div>
+    </div>
+
+    <div id="empty-area" style="width: 15%;">
+    </div>
+</div>
+
+<script>
+    function showContent(sectionId, headerText) {
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+        document.getElementById('page-header').textContent = headerText;
+    }
+</script>
+
+<style>
+    #help-menu a {
+        display: block;
+        margin-bottom: 5px; /* Ensure each link is on its own line */
+        text-align: left;
+    }
+
+    #content-selection, #content-selection-active {
+        /* einai centered by default opote prepei na kaneis page breaks*/
+    }
+
+    @media (max-width: 768px) {
+        #empty-area {
+            width: 5% !important;
+            /* background-color: red; */
+        }
+        #help-menu {
+            width: 15%;
+            flex-direction: row;
+            overflow-x: auto;
+            margin-right: 15px;
+            padding-right: 21px;
+            margin-top: 0px;
+            /* background-color: green; */
+        }
+        #help-menu a {
+            flex: 1;
+            border-bottom: none;
+        }
+        #content {
+            width: 100%;
+            padding-left: 0px;
+            margin-top: 0;
+        }
+        #help-menu-content {
+            margin-left:-15px
+            width: 115%
+        }
+    }
+</style>
+
+{% endblock %}

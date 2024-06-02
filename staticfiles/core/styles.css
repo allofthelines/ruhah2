@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* LALALALAL to evala gia footer sticky */
+html {
+  height: 100%;
+}
+
+/* LALALALAL to evala gia footer sticky */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 20px;
+  font-family: 'Roboto Mono';
+    font-size: 15px;
+}
+
+select, option, button, input, textarea {
+    font-family: 'Roboto Mono';
+}
+
+textarea {
+    font-size: 14px;
+}
+
+/* Additional styling to enforce font on dropdown options */
+select {
+    font-family: 'Roboto Mono', monospace; /* Ensure select element itself is styled */
+}
+
+option {
+    font-family: 'Roboto Mono', monospace !important; /* Use !important to enforce the font style */
+}
+
+
+
+
+a:visited {
+    color: blue; /* Visited link color */
+}
+
+#header {
+  height: 100%; /* LALALA dokimase 120px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#header-title {
+  color: black;
+  font-family: 'Rubik', sans-serif;  /* Add the font-family */
+  font-size: 2rem; /* LALALALA 2.5rem isws better*/
+  font-weight: medium;
+  line-height: 50%;
+  letter-spacing: 0.125em;
+  text-indent: 0.125em; /* diorthwnei to letter-spacing */
+  margin-top: 25px;
+
+}
+
+#main-menu {
+  color: red;
+}
+
+.nav-link {
+    /* kanto black an thes menu mavra */
+}
+
+.logout-button {
+    background: none;       /* No background color */
+    color: blue;           /* Text color - set this to black as you requested */
+    border: none;           /* No border */
+    padding: 0;             /* Remove padding to align with other links */
+    font-family: inherit;   /* Inherits font from the parent element */
+    font-size: inherit;     /* Inherits font size from the parent element */
+    cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
+    text-decoration: underline;  /* No underline */
+    font-weight: normal;
+}
+
+#page-header {
+  margin-bottom: 2rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
+#content {
+  flex: 1; /* LALALALALA to evala gia to sticky footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticket-form textarea {
+    width: 100%;  /* Makes the textarea span the full width of its container */
+    height: auto; /* Lets the height grow as per the rows specified */
+    padding: 8px; /* Adds some padding inside the textarea */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+.stripe-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ensures the container spans the full width */
+}
+
+
+#upload-preview {
+  max-width: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+#outfits-container {
+  display: flex;
+  flex-direction: row;  /* Ensures images are next to each other in normal mode */
+  justify-content: space-between;  /* Distributes space evenly between the items */
+  align-items: center;  /* Align items vertically */
+  padding: 0 20px;  /* Adds padding to the left and right */
+  box-sizing: border-box;  /* Includes padding in the element's total width */
+}
+
+.outfit {
+  text-align: center;
+}
+
+.outfit-image {
+  width: 100%;  /* Makes images responsive */
+  max-width: 100%;  /* Ensures images do not overflow their container */
+  height: auto;  /* Maintains aspect ratio */
+  object-fit: contain;  /* Ensures the images fit inside their container without being cropped */
+  display: block;
+  margin: 0 auto;  /* Centers the image inside the outfit div */
+}
+
+#outfit-separator {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+#active-page-link {
+  color: #808080;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TRENDING TABLE */
+#trending-table, #trending-table td, #trending-table th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+#trending-table {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#trending-table td {
+   text-align: center;
+}
+
+/* STUDIO TABLE 1.1 + 2.1 */
+#studio-tickets-table, #studio-tickets-table td, #studio-tickets-table th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left: 0px; /* EVALA STO BODY ALLA AN THELW VAZW KAI EDW EXTRA*/
+  margin-right: 0px; /* EVALA STO BODY ALLA AN THELW VAZW KAI EDW EXTRA*/
+}
+
+
+
+
+
+/* Styles specifically for images within the table */
+#studio-outfits-table img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain; /* Maintains aspect ratio without cropping */
+}
+
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-family: 'Rubik', sans-serif; /* Consistency in font usage */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    #trending-table img {
+        width: 200px;
+        height: 200px;
+        object-fit: contain; /* Maintains aspect ratio without cropping */
+        width: 100%; /* Makes images responsive */
+        max-width: 100%; /* Allows the image to shrink in smaller views */
+        height: auto; /* Adjusts height automatically to maintain aspect ratio */
+    }
+
+    #trending-table {
+        margin-left: 10px;
+        margin-right: 10px;
+}
+
+    #outfits-container {
+        flex-direction: column; /* Ensures images are stacked vertically */
+        padding: 0 10px; /* keno deksia/aristera. aftomata exei ligo opote ase sto mhden*/
+    }
+
+    .outfit-image {
+        width: 100%; /* Makes images responsive */
+        max-width: 100%; /* Ensures images do not overflow their container */
+        height: auto; /* Maintains aspect ratio */
+        margin-bottom: 20px; /* Adds space between stacked images */
+    }
+
+    #studio-outfits-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+  }
+
+    #studio-outfits-table td, #studio-outfits-table th {
+        display: inline-block;
+        width: 50%; /* Makes each cell take up half the width of the table */
+        box-sizing: border-box; /* Includes padding and border in the element's total width */
+  }
+
+    #studio-outfits-table img {
+        width: 200px;
+        height: 200px;
+        object-fit: contain; /* Maintains aspect ratio without cropping */
+        width: 100%; /* Makes images responsive */
+        max-width: 100%; /* Allows the image to shrink in smaller views */
+        height: auto; /* Adjusts height automatically to maintain aspect ratio */
+  }
+
+    .logout-button {
+        background: none;       /* No background color */
+        color: blue;           /* Text color - set this to black as you requested */
+        border: none;           /* No border */
+        padding: 0;             /* Remove padding to align with other links */
+        font-family: inherit;   /* Inherits font from the parent element */
+        font-size: inherit;     /* Inherits font size from the parent element */
+        cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
+        text-decoration: underline;  /* No underline */
+        font-weight: normal;
+}
+}
