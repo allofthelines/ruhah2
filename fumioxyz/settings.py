@@ -24,7 +24,11 @@ ALLOWED_HOSTS = [
     'fumio.xyz',
 ]
 # IMPORTANT GIA STRIPE WEBHOOK
-CSRF_TRUSTED_ORIGINS = ['https://sawfly-resolved-chimp.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = [
+    'https://sawfly-resolved-chimp.ngrok-free.app',
+    'https://fumio.xyz',
+    'https://www.fumio.xyz'
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
