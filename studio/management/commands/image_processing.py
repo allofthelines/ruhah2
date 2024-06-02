@@ -3,7 +3,8 @@ import random
 import numpy as np
 from PIL import Image
 from django.conf import settings
-
+from django.core.files.storage import default_storage
+from django.core.files.base.ContentFile
 
 def pad_to_square(image):
     width, height = image.size
@@ -12,7 +13,6 @@ def pad_to_square(image):
     new_image.paste(image, ((max_dim - width) // 2, ((max_dim - height) // 2)))
     return new_image
 
-
 def expand_image(image, expansion_percent):
     width, height = image.size
     expansion_width = int(width * expansion_percent / 100)
@@ -20,30 +20,25 @@ def expand_image(image, expansion_percent):
     expanded_image = image.resize((width + expansion_width, height + expansion_height), Image.ANTIALIAS)
     return expanded_image
 
-
 def create_canvas(total_area):
     side_length = int(np.sqrt(total_area) * 1.3)
     print(f"Canvas side length: {side_length}")  # Debugging line
     canvas = Image.new('RGBA', (side_length, side_length), (0, 0, 0, 0))  # Transparent canvas
     return canvas
 
-
 def calculate_overlap_area(box1, box2):
     left = max(box1[0], box2[0])
     upper = max(box1[1], box2[1])
     right = min(box1[2], box2[2])
     lower = min(box1[3], box2[3])
-
     if left < right and upper < lower:
         return (right - left) * (lower - upper)
     return 0
-
 
 def calculate_non_empty_area(image):
     alpha = image.split()[-1]
     non_empty_pixels = np.array(alpha).astype(bool).sum()
     return non_empty_pixels
-
 
 def resize_image_to_non_empty_area(image, target_non_empty_area):
     non_empty_area = calculate_non_empty_area(image)
@@ -55,11 +50,9 @@ def resize_image_to_non_empty_area(image, target_non_empty_area):
     resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
     return resized_image
 
-
 def pack_images(images, canvas):
     canvas_width, canvas_height = canvas.size
     positions = []
-
     top_images = [img for img in images if img['category'] == 'top']
     bottom_images = [img for img in images if img['category'] == 'bottom']
     footwear_images = [img for img in images if img['category'] == 'footwear']
@@ -146,19 +139,19 @@ def pack_images(images, canvas):
 
     return canvas
 
-
 def create_composite_image(outfit):
     items = outfit.items.all()
     images = []
 
     for item in items:
-        img_path = os.path.join(settings.MEDIA_ROOT, item.image.path)
+        img_path = item.image.name
         print(f"Loading image from: {img_path}")  # Debugging line
-        if os.path.exists(img_path):
-            image = Image.open(img_path).convert('RGBA')
-            padded_image = pad_to_square(image)
-            expanded_image = expand_image(padded_image, 10)
-            images.append({'image': expanded_image, 'category': item.cat})
+        if default_storage.exists(img_path):
+            with default_storage.open(img_path) as img_file:
+                image = Image.open(img_file).convert('RGBA')
+                padded_image = pad_to_square(image)
+                expanded_image = expand_image(padded_image, 10)
+                images.append({'image': expanded_image, 'category': item.cat})
         else:
             print(f"Image not found: {img_path}")  # Debugging line
 
@@ -189,7 +182,8 @@ def create_composite_image(outfit):
     # Paste the composite image on the white background
     white_background.paste(composite_image, (0, 0), composite_image)
 
-    output_path = os.path.join(settings.MEDIA_ROOT, 'outfits', f'outfit_{outfit.id}.jpeg')
-    white_background.save(output_path, format='JPEG')
+    output_path = os.path.join('outfits', f'outfit_{outfit.id}.jpeg')
+    output_content = ContentFile(white_background.tobytes(), name=output_path)
+    default_storage.save(output_path, output_content)
 
     return output_path
