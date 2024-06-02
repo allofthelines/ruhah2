@@ -181,7 +181,6 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 
 
-
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import CustomUser, UserFollows
 from django.contrib.auth.models import AnonymousUser
