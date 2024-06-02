@@ -129,7 +129,9 @@ EMAIL_HOST_PASSWORD = 'gcxtfsvznyycqowj'
 
 # Ensure this is set to your production domain
 if os.getenv('DJANGO_ENV') == 'production':
-    EMAIL_DOMAIN = 'fumio.xyz'
+    # ALLAKSE TO SE EMAIL_DOMAIN = 'fumio.xyz' OTAN KATAFEREIS NA TO SYNDESEIS
+    # GIA TO CONFIRMATION EMAIL NA STALEI EKEI
+    EMAIL_DOMAIN = 'https://fumio-c90be99ba1a3.herokuapp.com'
     EMAIL_PROTOCOL = 'https'
     SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
