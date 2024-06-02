@@ -131,6 +131,10 @@ EMAIL_HOST_PASSWORD = 'gcxtfsvznyycqowj'
 if os.getenv('DJANGO_ENV') == 'production':
     EMAIL_DOMAIN = 'fumio.xyz'
     EMAIL_PROTOCOL = 'https'
+    SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 else:
     EMAIL_DOMAIN = 'localhost:8000'
     EMAIL_PROTOCOL = 'http'
