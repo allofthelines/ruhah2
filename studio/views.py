@@ -11,6 +11,8 @@ from django.utils import timezone
 from .management.commands.image_processing import create_composite_image
 from studio.models import CustomUser
 from django.conf import settings
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 
 
 import time
@@ -292,13 +294,14 @@ def submit_outfit(request, ticket_id):
     image_path = create_composite_image(new_outfit)
 
     if image_path:
-        # Update the outfit's image field
-        with open(image_path, 'rb') as img_file:
-            new_outfit.image.save(f'outfit_{new_outfit.id}.jpeg', File(img_file), save=True)
+        with default_storage.open(image_path, 'rb') as img_file:
+            new_outfit.image.save(f'outfit_{new_outfit.id}.jpeg', img_file, save=True)
+        messages.success(request, 'Outfit submitted successfully.')
     else:
         messages.error(request, 'Image processing failed.')
 
     return redirect('studio:studio_success')
+
 
 def studio_success(request):
     return render(request, 'studio/studio_success.html')
