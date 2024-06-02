@@ -4,6 +4,9 @@ from django.conf import settings
 from django.utils.timezone import now
 from PIL import Image
 import os
+from django.core.files.storage import default_storage
+from io import BytesIO
+from django.core.files.base import ContentFile
 
 class CustomUser(AbstractUser):
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
@@ -40,8 +43,7 @@ class CustomUser(AbstractUser):
         super().save(*args, **kwargs)
 
         if self.pfp:
-            img_path = self.pfp.path
-            img = Image.open(img_path)
+            img = Image.open(self.pfp)
 
             # Ensure the image is a square
             width, height = img.size
@@ -55,9 +57,15 @@ class CustomUser(AbstractUser):
             img = img.crop((left, top, right, bottom))
             img = img.resize((300, 300), Image.ANTIALIAS)
 
-            # Save the processed image
-            img.save(img_path)
+            # Save the processed image to a BytesIO object
+            img_io = BytesIO()
+            img.save(img_io, format='JPEG')
+            img_content = ContentFile(img_io.getvalue(), self.pfp.name)
 
+            # Save the processed image back to the model field
+            self.pfp.save(self.pfp.name, img_content, save=False)
+
+        super().save(*args, **kwargs)
 
 
 
