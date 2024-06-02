@@ -229,6 +229,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'sawfly-resolved-chimp.ngrok-free.app',  # ngrok stathero or εφημερο
     'fumio.xyz',
+    'www.fumio.xyz',
     'fumio-c90be99ba1a3.herokuapp.com'
 ]
 
