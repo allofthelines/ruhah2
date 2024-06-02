@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.utils import timezone
 from .management.commands.image_processing import create_composite_image
 from studio.models import CustomUser
+from django.conf import settings
+
 
 import time
 from django.core.files import File
