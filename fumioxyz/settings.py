@@ -122,11 +122,13 @@ EMAIL_HOST_USER = 'fumioxyz1@gmail.com'
 DEFAULT_FROM_EMAIL = 'fumioxyz1@gmail.com'
 EMAIL_HOST_PASSWORD = 'gcxtfsvznyycqowj'
 
-EMAIL_DOMAIN = 'localhost:8000'
-# EMAIL_DOMAIN = 'sawfly-resolved-chimp.ngrok-free.app'
-EMAIL_PROTOCOL = 'http'
-# EMAIL_DOMAIN = 'fumio.xyz' otan production
-# EMAIL_PROTOCOL = 'https'
+# Ensure this is set to your production domain
+if os.getenv('DJANGO_ENV') == 'production':
+    EMAIL_DOMAIN = 'fumio.xyz'
+    EMAIL_PROTOCOL = 'https'
+else:
+    EMAIL_DOMAIN = 'localhost:8000'
+    EMAIL_PROTOCOL = 'http'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
