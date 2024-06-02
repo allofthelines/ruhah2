@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from django.conf import settings
 from django.core.files.storage import default_storage
-from django.core.files.base.ContentFile
+from django.core.files.base import ContentFile
 
 def pad_to_square(image):
     width, height = image.size
