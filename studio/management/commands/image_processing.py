@@ -139,6 +139,7 @@ def pack_images(images, canvas):
 
     return canvas
 
+
 def create_composite_image(outfit):
     items = outfit.items.all()
     images = []
@@ -182,8 +183,12 @@ def create_composite_image(outfit):
     # Paste the composite image on the white background
     white_background.paste(composite_image, (0, 0), composite_image)
 
-    output_path = os.path.join('outfits', f'outfit_{outfit.id}.jpeg')
-    output_content = ContentFile(white_background.tobytes(), name=output_path)
-    default_storage.save(output_path, output_content)
+    output_path = f'outfits/outfit_{outfit.id}.jpeg'
+    image_file = ContentFile(b'')
+    white_background.save(image_file, format='JPEG')
+
+    image_file.seek(0)
+    default_storage.save(output_path, image_file)
 
     return output_path
+
