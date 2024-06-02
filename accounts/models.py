@@ -60,10 +60,10 @@ class CustomUser(AbstractUser):
             # Save the processed image to a BytesIO object
             img_io = BytesIO()
             img.save(img_io, format='JPEG')
-            img_content = ContentFile(img_io.getvalue(), self.pfp.name)
+            img_content = ContentFile(img_io.getvalue(), os.path.basename(self.pfp.name)) # path apofevgei pfps/pfps bug
 
             # Save the processed image back to the model field
-            self.pfp.save(self.pfp.name, img_content, save=False)
+            self.pfp.save(os.path.basename(self.pfp.name), img_content, save=False)
 
         super().save(*args, **kwargs)
 
