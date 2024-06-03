@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.utils.timezone import now
-from PIL import Image
+from PIL import Image, ExifTags
 import os
 from django.core.files.storage import default_storage
 from io import BytesIO
