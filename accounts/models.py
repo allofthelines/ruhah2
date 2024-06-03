@@ -45,6 +45,26 @@ class CustomUser(AbstractUser):
         if self.pfp:
             img = Image.open(self.pfp)
 
+            # Rotate image based on EXIF orientation
+            # lynei to provlhma sto mobile sideways upload
+            try:
+                for orientation in ExifTags.TAGS.keys():
+                    if ExifTags.TAGS[orientation] == 'Orientation':
+                        break
+
+                exif = img._getexif()
+                if exif is not None:
+                    orientation = exif.get(orientation, 1)
+                    if orientation == 3:
+                        img = img.rotate(180, expand=True)
+                    elif orientation == 6:
+                        img = img.rotate(270, expand=True)
+                    elif orientation == 8:
+                        img = img.rotate(90, expand=True)
+            except (AttributeError, KeyError, IndexError):
+                # If the image doesn't have EXIF data or it can't be accessed
+                pass
+
             # Ensure the image is a square
             width, height = img.size
             min_dim = min(width, height)
