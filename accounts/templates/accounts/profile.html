@@ -49,11 +49,11 @@
                     <button type="submit">Save changes</button>
                 </form>
             {% else %}
-                <p style="margin-top: 8px; text-align: left; font-size: 15px !important;">
-                    Username123: @{{ user.username }}<br>
+                <p style="margin-top: 8px; text-align: left;">
+                    Username: @{{ user.username }}<br>
                     Email: {{ user.email }}<br>
                     <br>
-                    Profile Picture: {{ user.pfp.url }}<br>
+                    Profile Picture: {{ getFilenameFromUrl(user.pfp.url) }}<br>
                     <br>
                     Bio: {{ user.bio }}<br>
                     <br>
@@ -144,6 +144,18 @@
             document.getElementById('page-header').textContent = headerText;
         }
     }
+
+    function getFilenameFromUrl(url) {
+        // Split the URL path into an array
+        const urlParts = url.split('/');
+
+        // Get the last element (filename)
+        const filename = urlParts[urlParts.length - 1];
+
+        // Return only the filename and extension
+        return filename;
+}
+
 </script>
 
 <style>
