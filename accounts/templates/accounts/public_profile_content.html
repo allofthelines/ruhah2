@@ -9,10 +9,10 @@
             <span class="profile-username">@{{ profile_user.username }}</span>
             {% if not is_own_profile and request.user.is_authenticated %}
                 {% if is_following %}
-                    <button id="unfollow-button" onclick="submitUnfollowForm()">Following</button>
-                    <a href="#" onclick="submitUnfollowForm()">Unfollow</a>
+                    <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Following</button>
+                    <a href="#" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</a>
                 {% else %}
-                    <button id="follow-button" onclick="submitFollowForm()">Follow</button>
+                    <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')">Follow</button>
                 {% endif %}
                 <form id="follow-form" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
                     {% csrf_token %}
