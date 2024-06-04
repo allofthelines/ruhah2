@@ -14,10 +14,10 @@
                 {% else %}
                     <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')">Follow</button>
                 {% endif %}
-                <form id="follow-form" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
+                <form id="follow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
                     {% csrf_token %}
                 </form>
-                <form id="unfollow-form" method="post" action="{% url 'accounts:unfollow' profile_user.username %}" style="display: none;">
+                <form id="unfollow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:unfollow' profile_user.username %}" style="display: none;">
                     {% csrf_token %}
                 </form>
             {% endif %}
@@ -116,11 +116,22 @@
 <script>
     function submitFollowForm(username) {
         console.log('Following:', username); // Debugging
-        document.getElementById('follow-form-' + username).submit();
+        var form = document.getElementById('follow-form-' + username);
+        if (form) {
+            form.submit();
+        } else {
+            console.error('Follow form not found for user:', username);
+        }
     }
+
     function submitUnfollowForm(username) {
         console.log('Unfollowing:', username); // Debugging
-        document.getElementById('unfollow-form-' + username).submit();
+        var form = document.getElementById('unfollow-form-' + username);
+        if (form) {
+            form.submit();
+        } else {
+            console.error('Unfollow form not found for user:', username);
+        }
     }
 </script>
 
