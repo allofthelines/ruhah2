@@ -34,8 +34,8 @@
             {% if editing %}
                 <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <p style="margin-top: 8px; text-align: left; font-size: 15px;">
-                        Username123: @{{ user_form.username }}<br>
+                    <p style="margin-top: 8px; text-align: left;">
+                        Username: @{{ user_form.username }}<br>
                         Email: {{ user_form.email }}<br>
                         <br>
                         <label for="id_pfp">Profile Picture: </label>
@@ -49,7 +49,7 @@
                     <button type="submit">Save changes</button>
                 </form>
             {% else %}
-                <p style="margin-top: 8px; text-align: left;">
+                <p style="margin-top: 8px; text-align: left; font-size: 15px;">
                     Username: @{{ user.username }}<br>
                     Email: {{ user.email }}<br>
                     <br>
