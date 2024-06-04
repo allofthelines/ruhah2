@@ -42,9 +42,11 @@
 
 <script>
     function submitFollowForm(username) {
+        console.log('Following:', username); // Debugging
         document.getElementById('follow-form-' + username).submit();
     }
     function submitUnfollowForm(username) {
+        console.log('Unfollowing:', username); // Debugging
         document.getElementById('unfollow-form-' + username).submit();
     }
 </script>
