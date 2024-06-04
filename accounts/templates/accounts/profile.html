@@ -34,7 +34,7 @@
             {% if editing %}
                 <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <p style="margin-top: 8px; text-align: left;">
+                    <p style="margin-top: 8px; text-align: left; font-size: 15px;">
                         Username: @{{ user_form.username }}<br>
                         Email: {{ user_form.email }}<br>
                         <br>
@@ -49,21 +49,21 @@
                     <button type="submit">Save changes</button>
                 </form>
             {% else %}
-            <p style="margin-top: 8px; text-align: left;">
-                Username: @{{ user.username }}<br>
-                Email: {{ user.email }}<br>
-                <br>
-                Profile Picture: {{ user.pfp.url }}<br>
-                <br>
-                Bio: {{ user.bio }}<br>
-                <br>
-                <a href="{% url 'accounts:followers_list' user.username %}">Followers</a>: {{ user.followers_num }}<br>
-                <a href="{% url 'accounts:following_list' user.username %}">Following</a>: {{ user.following_num }}<br>
-            </p>
-            <form method="get" action="{% url 'accounts:profile' %}">
-                <input type="hidden" name="edit" value="user">
-                <button type="submit" name="edit" value="true">Edit</button>
-            </form>
+                <p style="margin-top: 8px; text-align: left;">
+                    Username: @{{ user.username }}<br>
+                    Email: {{ user.email }}<br>
+                    <br>
+                    Profile Picture: {{ user.pfp.url }}<br>
+                    <br>
+                    Bio: {{ user.bio }}<br>
+                    <br>
+                    <a href="{% url 'accounts:followers_list' user.username %}">Followers</a>: {{ user.followers_num }}<br>
+                    <a href="{% url 'accounts:following_list' user.username %}">Following</a>: {{ user.following_num }}<br>
+                </p>
+                <form method="get" action="{% url 'accounts:profile' %}">
+                    <input type="hidden" name="edit" value="user">
+                    <button type="submit" name="edit" value="true">Edit</button>
+                </form>
             {% endif %}
         </div>
 
