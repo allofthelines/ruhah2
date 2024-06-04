@@ -7,19 +7,23 @@
     <div class="profile-right">
         <div class="profile-row">
             <span class="profile-username">@{{ profile_user.username }}</span>
-            {% if not is_own_profile and request.user.is_authenticated %}
-                {% if is_following %}
-                    <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Following</button>
-                    <a href="#" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</a>
-                {% else %}
-                    <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')">Follow</button>
+            {% if is_own_profile %}
+                <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'">Edit</button>
+            {% else %}
+                {% if request.user.is_authenticated %}
+                    {% if is_following %}
+                        <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Following</button>
+                        <a href="#" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</a>
+                    {% else %}
+                        <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')">Follow</button>
+                    {% endif %}
+                    <form id="follow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                    <form id="unfollow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:unfollow' profile_user.username %}" style="display: none;">
+                        {% csrf_token %}
+                    </form>
                 {% endif %}
-                <form id="follow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
-                    {% csrf_token %}
-                </form>
-                <form id="unfollow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:unfollow' profile_user.username %}" style="display: none;">
-                    {% csrf_token %}
-                </form>
             {% endif %}
         </div>
         <div class="profile-row">
@@ -31,6 +35,7 @@
         </div>
     </div>
 </div>
+
 
 
 
