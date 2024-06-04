@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load custom_filters %}
 
 {% block page-header %}
   User Profile
@@ -53,7 +54,7 @@
                     Username: @{{ user.username }}<br>
                     Email: {{ user.email }}<br>
                     <br>
-                    Profile Picture: {{ user.pfp.url|split:'/')|last }}<br>
+                    Profile Picture: {{ user.pfp.url|filename }}<br>
                     <br>
                     Bio: {{ user.bio }}<br>
                     <br>
