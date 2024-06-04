@@ -14,6 +14,9 @@
         <a href="#" onclick="showContent('user', 'Profile > User')" style="text-decoration-line: underline; color: blue;">User</a>
         <a href="#" onclick="showContent('customer', 'Profile > Customer')" style="text-decoration-line: underline; color: blue;">Customer</a>
         <a href="#" onclick="showContent('stylist', 'Profile > Stylist')" style="text-decoration-line: underline; color: blue;">Stylist</a>
+        <a href="#" onclick="showContent('them', 'Profile > Them')" style="text-decoration-line: underline; color: blue;">Them</a>
+        <a href="#" onclick="showContent('me', 'Profile > Me')" style="text-decoration-line: underline; color: blue;">Me</a>
+        <a href="#" onclick="showContent('upload', 'Profile > Upload')" style="text-decoration-line: underline; color: blue;">Upload</a>
         <br>
         <a href="#" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
         <br>
@@ -106,6 +109,27 @@
         <div id="stylist" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
                 Current Credits: {{ user.stylist.credits }}<br>
+            </p>
+        </div>
+
+        <!-- Them Profile Section -->
+        <div id="them" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+                Empty
+            </p>
+        </div>
+
+        <!-- Me Profile Section -->
+        <div id="me" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+                Empty
+            </p>
+        </div>
+
+        <!-- Upload Profile Section -->
+        <div id="upload" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+                Empty
             </p>
         </div>
 
