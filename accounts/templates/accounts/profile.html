@@ -27,9 +27,6 @@
     <div id="content" style="width: 70%; padding-left: 5px; margin-top: -16px; text-align: left; display: flex; align-items: flex-start;">
         <!-- Default Welcome Message -->
         <div id="default" class="content-section" style="display: block; margin-top: 40px;">
-            {% include "accounts/public_profile_content.html" with profile_user=user is_own_profile=True is_following=False %}
-        </div>
-
         <!-- User Profile Section -->
         <div id="user" class="content-section" style="display: none; padding: 10px;">
             {% if editing %}
@@ -66,6 +63,7 @@
                     <button type="submit" name="edit" value="true">Edit</button>
                 </form>
             {% endif %}
+        </div>
         </div>
 
         <!-- Customer Profile Section -->
