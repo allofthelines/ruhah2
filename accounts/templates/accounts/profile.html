@@ -53,7 +53,7 @@
                     Username: @{{ user.username }}<br>
                     Email: {{ user.email }}<br>
                     <br>
-                    Profile Picture: {{ user.pfp.url|getFilenameFromUrl }}<br>
+                    Profile Picture: {{ user.pfp.url }}<br>
                     <br>
                     Bio: {{ user.bio }}<br>
                     <br>
@@ -144,18 +144,6 @@
             document.getElementById('page-header').textContent = headerText;
         }
     }
-
-    function getFilenameFromUrl(url) {
-        // Split the URL path into an array
-        const urlParts = url.split('/');
-
-        // Get the last element (filename)
-        const filename = urlParts[urlParts.length - 1];
-
-        // Return only the filename and extension
-        return filename;
-}
-
 </script>
 
 <style>
