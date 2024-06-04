@@ -53,7 +53,7 @@
                     Username: @{{ user.username }}<br>
                     Email: {{ user.email }}<br>
                     <br>
-                    Profile Picture: {{ getFilenameFromUrl(user.pfp.url) }}<br>
+                    Profile Picture: {{ user.pfp.url|getFilenameFromUrl }}<br>
                     <br>
                     Bio: {{ user.bio }}<br>
                     <br>
