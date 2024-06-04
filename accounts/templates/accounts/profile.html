@@ -116,7 +116,19 @@
         <!-- Them Profile Section -->
         <div id="them" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
-                Empty
+                {% for outfit in profile_user.outfit_set.all %}
+            <!-- COMMENT OUT FOR NOW PROSWRINO
+            <div class="outfit-item">
+                <img src="{{ outfit.image.url }}" alt="Outfit Image">
+            </div>
+            -->
+            {% if 'default_img.jpg' not in outfit.portrait.url %}
+            <div class="outfit-item" onclick="toggleImage(this)">
+                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+            </div>
+            {% endif %}
+        {% endfor %}
             </p>
         </div>
 
@@ -178,6 +190,19 @@
         display: block;
         margin-bottom: 5px; /* Ensure each link is on its own line */
         text-align: left;
+    }
+
+    .outfit-item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        overflow: hidden;
+    }
+    .outfit-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
     }
 
     @media (max-width: 768px) {
