@@ -66,8 +66,9 @@
             </div>
             -->
             {% if 'default_img.jpg' not in outfit.portrait.url %}
-            <div class="outfit-item">
-                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait">
+            <div class="outfit-item" onclick="toggleImage(this)">
+                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
             </div>
             {% endif %}
         {% endfor %}
@@ -82,8 +83,9 @@
                 </div>
                 -->
                 {% if 'default_img.jpg' not in ticket.outfit1.portrait.url %}
-                <div class="outfit-item">
-                    <img src="{{ ticket.outfit1.portrait.url }}" alt="Outfit Portrait">
+                <div class="outfit-item" onclick="toggleImage(this)">
+                    <img src="{{ ticket.outfit1.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="image" style="display: none;">
                 </div>
                 {% endif %}
             {% endif %}
@@ -94,14 +96,38 @@
                 </div>
                 -->
                 {% if 'default_img.jpg' not in ticket.outfit2.portrait.url %}
-                <div class="outfit-item">
-                    <img src="{{ ticket.outfit2.portrait.url }}" alt="Outfit Portrait">
+                <div class="outfit-item" onclick="toggleImage(this)">
+                    <img src="{{ ticket.outfit2.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image" class="image" style="display: none;">
                 </div>
                 {% endif %}
             {% endif %}
         {% endfor %}
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+<script>
+    function toggleImage(element) {
+        const portrait = element.querySelector('.portrait');
+        const image = element.querySelector('.image');
+
+        if (portrait.style.display === 'none') {
+            portrait.style.display = 'block';
+            image.style.display = 'none';
+        } else {
+            portrait.style.display = 'none';
+            image.style.display = 'block';
+        }
+    }
+</script>
 
 <script>
     function showThemByMe() {
@@ -140,6 +166,17 @@
         }
     }
 </script>
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
     .profile-container {
