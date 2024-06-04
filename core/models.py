@@ -21,7 +21,6 @@ class Outfit(models.Model):
     maker_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     timestamp = models.DateTimeField(default=timezone.now)
     items = models.ManyToManyField('studio.Item', blank=True)
-    hidden = models.BooleanField(default=False)  # portrait otan sto profile
 
     def __str__(self):
         return f"pk={self.pk}, rating={self.rating}"
