@@ -271,6 +271,7 @@ heroku config:set AWS_SECRET_ACCESS_KEY=+UrGJhTOKYzqQR6FmtCWHxIk9AN7UESnno30rVB6
 heroku config:set AWS_S3_REGION_NAME=eu-north-1
 heroku config:set AWS_STORAGE_BUCKET_NAME=ruhahbucket
 heroku config:set AWS_S3_CUSTOM_DOMAIN=ruhahbucket.s3.amazonaws.com
+heroku config:set DATABASE_URL=postgres://u2m4eitidqus9h:pee586005c3b1480311c39e8ae5fc8a73c73c3cc3a761f88757f6d6edea43b6f2@c8lj070d5ubs83.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dce2g9f2qaunuh
 
 heroku config
 
