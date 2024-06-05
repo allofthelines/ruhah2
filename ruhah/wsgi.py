@@ -1,5 +1,5 @@
 """
-WSGI config for fumioxyz project.
+WSGI config for ruhah project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fumioxyz.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ruhah.settings")
 
 application = get_wsgi_application()
