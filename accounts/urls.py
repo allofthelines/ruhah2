@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup/', views.signup, name='signup'),
     path('profile/', views.profile, name='profile'),
+    path('upload_success/', views.upload_success, name='upload_success'),
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('activation_success/', views.activation_success, name='activation_success'),
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
