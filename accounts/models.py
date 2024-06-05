@@ -110,6 +110,26 @@ class UserFollows(models.Model):
         return f'{self.user_from} follows {self.user_to}'
 
 
+class PortraitUpload(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('notified', 'Notified'),
+    ]
+
+    portrait_img = models.ImageField(upload_to='portraituploads/')
+    wearer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ticket_id_int = models.IntegerField(null=True, blank=True)
+    outfit_id = models.ForeignKey('core.Outfit', on_delete=models.SET_NULL, null=True, blank=True)
+    timedate_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"{self.wearer_id.username}'s portrait upload"
+
+
+
 
 
 
