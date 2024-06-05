@@ -91,16 +91,25 @@ USE_SQLITE = os.getenv('USE_SQLITE', 'False').lower() in ('true', '1', 't')
 '''
 
 # Database
-DATABASES = {}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ruhahlocal',  # The name of the local database you created
+        'USER': 'arislocal',   # Your PostgreSQL username
+        'PASSWORD': 'passlocal',  # Your PostgreSQL password
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+# Overwrite the default database settings with the production settings if available
+# Production (Heroku): If the DATABASE_URL environment variable is set (which Heroku sets automatically),
+# it overrides the local settings with the production database settings provided by Heroku.
 if os.getenv('DATABASE_URL'):
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
+
+
 
 
 # Password validation
