@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer, Stylist
+from accounts.models import CustomUser, Customer, Stylist, PortraitUpload
 from django.contrib.auth.models import User
 
 
@@ -110,3 +110,25 @@ class StylistForm(forms.ModelForm):
         if commit:
             stylist.save()
         return stylist
+
+
+
+class PortraitUploadForm(forms.ModelForm):
+    ticket_id_int = forms.IntegerField()
+
+    class Meta:
+        model = PortraitUpload
+        fields = ['portrait_img', 'ticket_id_int']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        self.user = user
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.wearer_id = self.user  # Automatically assign the wearer_id
+        instance.status = 'pending'  # Automatically assign status to 'pending'
+        if commit:
+            instance.save()
+        return instance
