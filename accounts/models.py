@@ -83,7 +83,9 @@ class CustomUser(AbstractUser):
             img_content = ContentFile(img_io.getvalue(), os.path.basename(self.pfp.name)) # path apofevgei pfps/pfps bug
 
             # Save the processed image back to the model field
-            self.pfp.save(os.path.basename(self.pfp.name), img_content, save=False)
+            # to apo katw htan etsi kai isws einai to error otan ftaixneis superuser
+            # self.pfp.save(os.path.basename(self.pfp.name), img_content, save=False)
+            self.pfp.save(img_content.name, img_content, save=False)
 
         super().save(*args, **kwargs)
 
