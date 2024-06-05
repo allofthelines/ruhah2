@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UserProfileForm, CustomerForm, StylistForm
+from .forms import SignUpForm, UserProfileForm, CustomerForm, StylistForm, PortraitUploadForm
 
 def signup(request):
     if request.method == 'POST':
@@ -62,16 +62,20 @@ def account_activation_sent(request):
 
 
 
+from .models import PortraitUpload
+from box.models import Ticket
+
 
 @login_required
 def profile(request):
-    user = request.user # to idio me custom
-    customer = getattr(user, 'customer', None) #vlepei to child mode san attribute
-    stylist = getattr(user, 'stylist', None) #vlepei to child mode san attribute
+    user = request.user
+    customer = getattr(user, 'customer', None)
+    stylist = getattr(user, 'stylist', None)
 
     user_form = UserProfileForm(instance=user, user=user)
     customer_form = CustomerForm(instance=customer, customer=customer) if customer else None
     stylist_form = StylistForm(instance=stylist, stylist=stylist) if stylist else None
+    portrait_upload_form = PortraitUploadForm(user=user)  # Pass user to the form
 
     editing = request.GET.get('edit') == 'true'
 
@@ -80,9 +84,6 @@ def profile(request):
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
                 user_form.save(user=user)
-                return redirect(f'{request.path}?edit=user')
-            else:
-                editing = 'true'
                 return redirect(f'{request.path}?edit=user')
         elif 'customer_form' in request.POST and customer:
             customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
@@ -93,16 +94,29 @@ def profile(request):
             stylist_form = StylistForm(request.POST, instance=stylist, stylist=stylist)
             if stylist_form.is_valid():
                 stylist_form.save(stylist=stylist)
-                return redirect(f'{request.path}?edit=stylist') # redirect sto stylist section otan save changes
+                return redirect(f'{request.path}?edit=stylist')
+        elif 'portrait_upload_form' in request.POST:
+            portrait_upload_form = PortraitUploadForm(request.POST, request.FILES, user=user)  # Pass user to the form
+            if portrait_upload_form.is_valid():
+                portrait_upload = portrait_upload_form.save(commit=False)
+                portrait_upload.wearer_id = user  # Automatically assign the current user
+                portrait_upload.status = 'pending'  # Automatically assign status to 'pending'
+                portrait_upload.save()
+                return redirect('accounts:upload_success')  # Redirect to the success page
 
-    # edw kanei execute to GET
     return render(request, 'accounts/profile.html', {
         'user_form': user_form,
         'customer_form': customer_form,
         'stylist_form': stylist_form,
+        'portrait_upload_form': portrait_upload_form,
         'user': user,
         'editing': editing
     })
+
+
+@login_required
+def upload_success(request):
+    return render(request, 'accounts/upload_success.html')
 
 
 
