@@ -62,7 +62,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "fumioxyz.urls"
+ROOT_URLCONF = "ruhah.urls"
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "fumioxyz.wsgi.application"
+WSGI_APPLICATION = "ruhah.wsgi.application"
 
 
 # Database
