@@ -13,5 +13,6 @@ class OutfitAdmin(admin.ModelAdmin):
         return ""
     thumbnail.short_description = 'Image'
 
+
 # Register the Outfit model with the OutfitAdmin options
 admin.site.register(Outfit, OutfitAdmin)
