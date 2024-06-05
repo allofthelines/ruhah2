@@ -23,12 +23,15 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'sawfly-resolved-chimp.ngrok-free.app',  # ngrok stathero or εφημερο
     'fumio.xyz',
+    'ruhah.com'
 ]
 # IMPORTANT GIA STRIPE WEBHOOK
 CSRF_TRUSTED_ORIGINS = [
     'https://sawfly-resolved-chimp.ngrok-free.app',
     'https://fumio.xyz',
-    'https://www.fumio.xyz'
+    'https://www.fumio.xyz',
+    'https://ruhah.com',
+    'https://www.ruhah.com'
 ]
 
 INSTALLED_APPS = [
@@ -148,7 +151,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 
-PWA_APP_NAME = 'Fumio'
+PWA_APP_NAME = 'Ruhah'
 PWA_APP_DESCRIPTION = "My Progressive Web App"
 PWA_APP_THEME_COLOR = '#000000'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
@@ -240,6 +243,8 @@ ALLOWED_HOSTS = [
     'sawfly-resolved-chimp.ngrok-free.app',  # ngrok stathero or εφημερο
     'fumio.xyz',
     'www.fumio.xyz',
+    'ruhah.com',
+    'www.ruhah.com',
     'fumio-c90be99ba1a3.herokuapp.com'
 ]
 
