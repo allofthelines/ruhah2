@@ -130,7 +130,11 @@
         <!-- Upload Profile Section -->
         <div id="upload" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
-                Empty
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ portrait_upload_form.as_p }}
+                    <button type="submit" name="portrait_upload_form">Submit</button>
+                </form>
             </p>
         </div>
 
