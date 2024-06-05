@@ -10,7 +10,7 @@ project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(project_path)
 
 # Set up Django environment
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fumioxyz.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ruhah.settings')
 django.setup()
 
 class Command(BaseCommand):
