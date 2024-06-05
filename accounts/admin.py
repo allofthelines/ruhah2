@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Stylist, Customer, Seller, Supplier, UserFollows
+from .models import CustomUser, Stylist, Customer, Seller, Supplier, UserFollows, PortraitUpload
+from django.utils.timezone import now
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
@@ -60,3 +61,19 @@ class UserFollowsAdmin(admin.ModelAdmin):
     list_filter = ('created',)
     raw_id_fields = ('user_from', 'user_to')
 admin.site.register(UserFollows, UserFollowsAdmin)
+
+
+class PortraitUploadAdmin(admin.ModelAdmin):
+    list_display = ('id', 'ticket_id_int', 'wearer_id', 'portrait_img', 'status', 'age_in_hours')
+    search_fields = ('ticket_id_int', 'wearer_id__username', 'status')
+    list_filter = ('status',)
+    readonly_fields = ('timedate_created',)
+
+    def age_in_hours(self, obj):
+        delta = now() - obj.timedate_created
+        return int(delta.total_seconds() // 3600)
+
+    age_in_hours.short_description = 'Age in Hours'  # Set a readable column name
+
+
+admin.site.register(PortraitUpload, PortraitUploadAdmin)
