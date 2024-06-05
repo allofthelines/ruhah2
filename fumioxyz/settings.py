@@ -261,10 +261,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ta evala se heroku san environment variables
 # sto terminal mou heroku config:set AWS_ACCESS_KEY_ID=AKIA3FLD37VQC5XLDFVV (5 fores)
 
+heroku config:set AWS_ACCESS_KEY_ID=AKIA3FLD37VQC5XLDFVV
+heroku config:set AWS_SECRET_ACCESS_KEY=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
+heroku config:set AWS_S3_REGION_NAME=eu-north-1
+heroku config:set AWS_STORAGE_BUCKET_NAME=ruhahbucket
+heroku config:set AWS_S3_CUSTOM_DOMAIN=ruhahbucket.s3.amazonaws.com
+
+heroku config
+
 # AWS S3 settings
 AWS_ACCESS_KEY_ID = 'AKIA3FLD37VQC5XLDFVV'
 AWS_SECRET_ACCESS_KEY = '+UrGJhTOKYzqQR6FmtCWHxIk9AN7UESnno30rVB6'
-AWS_STORAGE_BUCKET_NAME = 'fumiobucket'
+AWS_STORAGE_BUCKET_NAME = 'ruhahbucket'
 AWS_S3_REGION_NAME = 'eu-north-1'  # e.g., us-west-1
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_DEFAULT_ACL = None
@@ -286,6 +294,8 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Media files storage using S3
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 # to evala afou ola kala me heroku
 # mallon gia thn entolh collectstatic sto terminal
