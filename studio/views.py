@@ -104,6 +104,7 @@ def studio_items_guest(request, ticket_id):
         'items': items,
         'image_urls': image_urls,
         'user': user,
+        'MEDIA_URL': settings.MEDIA_URL,
     }
 
     return render(request, 'studio/studio_items_guest.html', context)
