@@ -63,6 +63,16 @@
   Click here to add app to homescreen
 </div>
 
+<div id="mobileMessage" class="mobile-message">
+  Share > Add to Home Screen to download the App
+</div>
+
+
+
+
+
+
+
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('{% static 'serviceworker.js' %}')
@@ -72,29 +82,24 @@
       console.log('ServiceWorker registration failed: ', error);
     });
   }
+</script>
 
 
 
-
+<script>
   // PWA install prompt
   let deferredPrompt;
   const installPrompt = document.getElementById('installPrompt');
 
   window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent the mini-infobar from appearing on mobile
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    // Update UI notify the user they can install the PWA
-    installPrompt.style.display = 'block';
+    e.preventDefault();                             // Prevent the mini-infobar from appearing on mobile
+    deferredPrompt = e;                             // Stash the event so it can be triggered later.
+    installPrompt.style.display = 'block';          // Update UI notify the user they can install the PWA
 
     installPrompt.addEventListener('click', (e) => {
-      // Hide the app provided install promotion
-      installPrompt.style.display = 'none';
-      // Show the install prompt
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice.then((choiceResult) => {
+      installPrompt.style.display = 'none';                 // Hide the app provided install promotion
+      deferredPrompt.prompt();                              // Show the install prompt
+      deferredPrompt.userChoice.then((choiceResult) => {    // Wait for the user to respond to the prompt
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted the install prompt');
         } else {
@@ -103,6 +108,23 @@
         deferredPrompt = null;
       });
     });
+  });
+
+  // Function to detect mobile devices
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  // Function to check if the app is running in standalone mode
+  function isInStandaloneMode() {
+    return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone);
+  }
+
+  // Display message if on mobile and not in standalone mode
+  window.addEventListener('load', () => {
+    if (isMobile() && !isInStandaloneMode()) {
+      document.getElementById('mobileMessage').style.display = 'block';
+    }
   });
 
 </script>
