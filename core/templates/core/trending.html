@@ -17,7 +17,7 @@
         <td>{{ outfit.rank }}</td>
         <!-- <td>{{ outfit.rating }}</td> -->
         <td>
-            <img src="{{ outfit.image.url }}">
+            <img src="{{ outfit.image.url }}" class="outfit-image">
             <br>
             <span>
               {% if outfit.maker_id %}
@@ -43,5 +43,19 @@
       {% endfor %}
     </nav>
   {% endif %}
+
+
+
+<style>
+  .outfit-image {
+      max-width: 500px;
+      max-height: 500px;
+      width: auto;
+      height: auto;
+  }
+</style>
+
+
+
 {% endblock %}
 
