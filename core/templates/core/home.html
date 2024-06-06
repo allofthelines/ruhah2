@@ -7,46 +7,33 @@
 {% endblock %}
 
 {% block content %}
-  <style>
-    /* Apply margin to the entire page content */
-    .page-container {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
+  <form id="outfits-form" method="post">
+    {% csrf_token %}
+    <input id="winner-input" name="winner" hidden>
 
+    <div id="outfits-container">
+      {% for outfit in outfits %}
+        <input id="outfit{{ forloop.counter }}-input" name="outfit{{ forloop.counter }}" value="{{ outfit.pk }}" hidden>
+        <div class="outfit">
+          <input id="outfit{{ forloop.counter }}-image" type="image" class="outfit-image" src="{{ outfit.image.url }}">
+          <br>
+        </div>
+        {% if forloop.first %}
+          <div id="outfit-separator">
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </form>
+
+
+<style>
     .outfit-image {
         max-width: 500px;
         max-height: 500px;
         width: auto;
         height: auto;
     }
+</style>
 
-    @media (max-width: 768px) {
-        .page-container {
-            margin-left: 15px;
-            margin-right: 15px;
-        }
-    }
-  </style>
-
-  <div class="page-container">
-    <form id="outfits-form" method="post">
-      {% csrf_token %}
-      <input id="winner-input" name="winner" hidden>
-
-      <div id="outfits-container">
-        {% for outfit in outfits %}
-          <input id="outfit{{ forloop.counter }}-input" name="outfit{{ forloop.counter }}" value="{{ outfit.pk }}" hidden>
-          <div class="outfit">
-            <input id="outfit{{ forloop.counter }}-image" type="image" class="outfit-image" src="{{ outfit.image.url }}">
-            <br>
-          </div>
-          {% if forloop.first %}
-            <div id="outfit-separator">
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </form>
-  </div>
 {% endblock %}
