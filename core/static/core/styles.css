@@ -248,12 +248,14 @@ footer {
 
     #trending-table {
         margin-left: 10px;
-        margin-right: 30px;
+        margin-right: 10px;
 }
 
     #outfits-container {
         flex-direction: column; /* Ensures images are stacked vertically */
         padding: 0 10px; /* keno deksia/aristera. aftomata exei ligo opote ase sto mhden*/
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .outfit-image {
