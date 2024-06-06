@@ -157,7 +157,7 @@
                     img.src = storedOutfit[i];
                     button.style.display = 'block';
                 } else {
-                    img.src = '/media/outfits/default_img.jpg';
+                    img.src = '{{ MEDIA_URL }}outfits/default_img.jpg';
                     button.style.display = 'block'; // Ensure buttons are visible initially
                 }
             }
@@ -192,7 +192,7 @@
         const placeholder = button.parentElement;
         const img = placeholder.querySelector('img');
 
-        img.src = '/media/outfits/default_img.jpg';
+        img.src = '{{ MEDIA_URL }}outfits/default_img.jpg';
         button.style.display = 'block'; // Ensure the button remains visible
         saveOutfitState();
     }
