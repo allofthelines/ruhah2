@@ -109,25 +109,26 @@
       });
     });
   });
+</script>
 
-  // Function to detect mobile devices
+
+<script>
   function isMobile() {
     return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
-  // Function to check if the app is running in standalone mode
   function isInStandaloneMode() {
     return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone);
   }
 
-  // Display message if on mobile and not in standalone mode
   window.addEventListener('load', () => {
     if (isMobile() && !isInStandaloneMode()) {
       document.getElementById('mobileMessage').style.display = 'block';
     }
   });
-
 </script>
+
+
 
 </body>
 </html>
