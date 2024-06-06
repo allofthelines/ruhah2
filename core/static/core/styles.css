@@ -136,7 +136,7 @@ a:visited {
   align-items: center;  /* Align items vertically */
   padding: 0 20px;  /* Adds padding to the left and right */
   box-sizing: border-box;  /* Includes padding in the element's total width */
-    background-color: red;
+    /*background-color: red;*/
 }
 
 .outfit {
