@@ -222,7 +222,7 @@ footer {
 
 
 
-/*
+
 .mobile-message {
   display: none;
   position: fixed;
@@ -233,22 +233,23 @@ footer {
   border: 1px solid #000;
   padding: 5px 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto Mono';
   font-size: 14px;
   z-index: 1000;
 }
-*/
 
+
+/*
 .mobile-message {
   width: 100%;
   text-align: center;
   padding-top: 10px 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto Mono';
   font-size: 14px;
   color: #333;
   margin-top: 0px;
 }
-
+*/
 
 
 
@@ -281,7 +282,7 @@ footer {
     #trending-table {
         margin-left: 10px;
         margin-right: 10px;
-}
+    }
 
     #outfits-container {
         flex-direction: column; /* Ensures images are stacked vertically */
@@ -301,13 +302,13 @@ footer {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
-  }
+    }
 
     #studio-outfits-table td, #studio-outfits-table th {
         display: inline-block;
         width: 50%; /* Makes each cell take up half the width of the table */
         box-sizing: border-box; /* Includes padding and border in the element's total width */
-  }
+    }
 
     #studio-outfits-table img {
         width: 200px;
@@ -316,7 +317,7 @@ footer {
         width: 100%; /* Makes images responsive */
         max-width: 100%; /* Allows the image to shrink in smaller views */
         height: auto; /* Adjusts height automatically to maintain aspect ratio */
-  }
+    }
 
     .logout-button {
         background: none;       /* No background color */
@@ -328,5 +329,5 @@ footer {
         cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
         text-decoration: underline;  /* No underline */
         font-weight: normal;
-}
+    }
 }
