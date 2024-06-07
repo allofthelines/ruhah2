@@ -9,7 +9,7 @@ class Command(BaseCommand):
         api_key = os.getenv('SHOPIFY_API_KEY_DEV')
         api_secret = os.getenv('SHOPIFY_API_SECRET_DEV')
         access_token = os.getenv('SHOPIFY_ACCESS_TOKEN_DEV')
-        shop_url = f"https://{api_key}:{api_secret}@your-store-name.myshopify.com/admin"
+        shop_url = f"https://{api_key}:{api_secret}@fumioxyz.myshopify.com/admin"
 
         shopify.ShopifyResource.set_site(shop_url)
         session = shopify.Session(shop_url, version="2023-04", token=access_token)
