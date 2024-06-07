@@ -45,10 +45,12 @@
 
 
 <!-- New Row with Buttons -->
+{% comment %}
 <div class="button-row">
     <div id="button-them-by-me" class="button-left active-button" onclick="showThemByMe()">Them by Me</div>
     <div id="button-me-by-them" class="button-right" onclick="showMeByThem()">Me by Them</div>
 </div>
+{% endcomment %}
 
 
 
@@ -62,6 +64,9 @@
 
 <!-- Display User's Outfits -->
 <div id="outfit-container">
+
+
+
     <!-- Default content - 'Them by Me' -->
     <div id="them-by-me-content" class="outfit-grid">
         {% for outfit in profile_user.outfit_set.all %}
@@ -78,6 +83,9 @@
             {% endif %}
         {% endfor %}
     </div>
+
+
+{% comment %}
     <!-- 'Me by Them' content (initially hidden) -->
     <div id="me-by-them-content" class="outfit-grid hidden">
         {% for ticket in profile_user.ticket_set.all %}
@@ -109,6 +117,9 @@
             {% endif %}
         {% endfor %}
     </div>
+{% endcomment %}
+
+
 </div>
 
 
