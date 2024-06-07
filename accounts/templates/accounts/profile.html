@@ -47,8 +47,6 @@
                         <input type="file" name="pfp" id="id_pfp"><br><br>
                         Bio: {{ user_form.bio }}<br>
                         <br>
-                        <a href="{% url 'accounts:followers_list' user.username %}">Followers</a>: {{ user.followers_num }}<br>
-                        <a href="{% url 'accounts:following_list' user.username %}">Following</a>: {{ user.following_num }}<br>
                     </p>
                     <input type="hidden" name="user_form" value="user_form">
                     <button type="submit">Save changes</button>
@@ -62,8 +60,6 @@
                     <br>
                     Bio: {{ user.bio }}<br>
                     <br>
-                    <a href="{% url 'accounts:followers_list' user.username %}">Followers</a>: {{ user.followers_num }}<br>
-                    <a href="{% url 'accounts:following_list' user.username %}">Following</a>: {{ user.following_num }}<br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit" value="user">
