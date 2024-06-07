@@ -15,7 +15,9 @@ class Command(BaseCommand):
         session = shopify.Session(shop_url, version="2023-04", token=access_token)
         shopify.ShopifyResource.activate_session(session)
 
-        # Example: Fetch Products
+        # Fetch Products from Shopify
         products = shopify.Product.find()
         for product in products:
-            self.stdout.write(self.style.SUCCESS(f"Product: {product.title}"))
+            title = product.title
+            availability = sum(variant.inventory_quantity for variant in product.variants)
+            self.stdout.write(self.style.SUCCESS(f"Product: {title}, Availability: {availability}"))
