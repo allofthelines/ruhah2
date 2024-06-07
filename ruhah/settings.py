@@ -8,6 +8,10 @@ import os
 from pathlib import Path
 import dj_database_url # postgres import
 
+SHOPIFY_API_KEY_DEV = os.getenv('SHOPIFY_API_KEY_DEV')
+SHOPIFY_API_SECRET_DEV = os.getenv('SHOPIFY_API_SECRET_DEV')
+SHOPIFY_ACCESS_TOKEN_DEV = os.getenv('SHOPIFY_ACCESS_TOKEN_DEV')
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
