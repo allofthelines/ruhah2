@@ -2,7 +2,10 @@
 SHOULD WORK FOR
 *LOCAL/DEVELOPMENT*
 AND
-*HEROKU/PRODUCTION*
+*HEROKU/PRODUCTION* terminal: heroku config
+
+terminal: heroku config
+des
 '''
 
 import os
