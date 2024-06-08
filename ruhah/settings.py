@@ -21,6 +21,7 @@ SECRET_KEY = config('SECRET_KEY') # inside .env file *1*(p%w5&n^zm=g3v0wb^kj1d9q
 ENVIRONMENT = config('ENVIRONMENT', default='development')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
