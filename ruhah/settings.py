@@ -167,6 +167,18 @@ if ENVIRONMENT == 'development':
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# TROUBLESHOOTING SVHSE ME
+if ENVIRONMENT == 'development':
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'core/static'),
+    ]
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
 
 
 
