@@ -14,8 +14,6 @@ import dj_database_url # postgres
 from decouple import config, Csv # gia local/development mode
 import django_heroku
 
-print('TEST')
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY') # inside .env file *1*(p%w5&n^zm=g3v0wb^kj1d9qzqm)f-pl#^o(izb6sp_z^fc
 ENVIRONMENT = config('ENVIRONMENT', default='development')
@@ -99,14 +97,11 @@ WSGI_APPLICATION = "ruhah.wsgi.application"
 if ENVIRONMENT == 'production':
     DATABASES = {
         'default': dj_database_url.config(default=config('DATABASE_URL'))
-        # dj_database_url.config(conn_max_age=600, ssl_require=True)
-
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': config('DB_NAME', default='ruhahlocal'),
             'USER': config('DB_USER', default='arislocal'),
             'PASSWORD': config('DB_PASSWORD', default='passlocal'),
@@ -159,8 +154,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' # media aws
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/' # uploaded by users
 
 if ENVIRONMENT == 'development':
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     # STATIC_URL = '/static/'
     # MEDIA_URL = '/media/'
 
