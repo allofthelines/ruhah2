@@ -14,7 +14,7 @@ import dj_database_url # postgres
 from decouple import config, Csv # gia local/development mode
 import django_heroku
 
-
+print('TEST')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY') # inside .env file *1*(p%w5&n^zm=g3v0wb^kj1d9qzqm)f-pl#^o(izb6sp_z^fc
