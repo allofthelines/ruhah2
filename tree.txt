@@ -1,0 +1,857 @@
+.
+├── Procfile
+├── README.md
+├── accounts
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── admin.cpython-38.pyc
+│   │   ├── apps.cpython-38.pyc
+│   │   ├── forms.cpython-38.pyc
+│   │   ├── models.cpython-38.pyc
+│   │   ├── tests.cpython-38.pyc
+│   │   ├── urls.cpython-38.pyc
+│   │   └── views.cpython-38.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_alter_customer_height_alter_customer_weight.py
+│   │   ├── 0003_customuser_is_customer_customuser_is_seller_seller.py
+│   │   ├── 0004_rename_items_seller_items_uploaded_and_more.py
+│   │   ├── 0005_supplier_name.py
+│   │   ├── 0006_supplier_address_alter_supplier_location.py
+│   │   ├── 0007_supplier_contact.py
+│   │   ├── 0008_userfollows_customuser_followers_list.py
+│   │   ├── 0009_customuser_bio_customuser_name_customuser_pfp.py
+│   │   ├── 0010_alter_customuser_pfp_alter_userfollows_user_from_and_more.py
+│   │   ├── 0011_alter_userfollows_options.py
+│   │   ├── 0012_portraitupload.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-38.pyc
+│   │       ├── 0002_alter_customer_height_alter_customer_weight.cpython-38.pyc
+│   │       ├── 0002_rename_stylist_customuser_is_stylist.cpython-38.pyc
+│   │       ├── 0003_customuser_is_customer_customuser_is_seller_seller.cpython-38.pyc
+│   │       ├── 0003_stylist.cpython-38.pyc
+│   │       ├── 0004_customer.cpython-38.pyc
+│   │       ├── 0004_rename_items_seller_items_uploaded_and_more.cpython-38.pyc
+│   │       ├── 0005_alter_customer_options.cpython-38.pyc
+│   │       ├── 0005_customer_temp_field.cpython-38.pyc
+│   │       ├── 0005_supplier_name.cpython-38.pyc
+│   │       ├── 0006_remove_customer_temp_field.cpython-38.pyc
+│   │       ├── 0006_supplier_address_alter_supplier_location.cpython-38.pyc
+│   │       ├── 0007_supplier_contact.cpython-38.pyc
+│   │       ├── 0008_userfollows_customuser_followers_list.cpython-38.pyc
+│   │       ├── 0009_customuser_bio_customuser_name_customuser_pfp.cpython-38.pyc
+│   │       ├── 0010_alter_customuser_pfp_alter_userfollows_user_from_and_more.cpython-38.pyc
+│   │       ├── 0011_alter_userfollows_options.cpython-38.pyc
+│   │       ├── 0012_portraitupload.cpython-38.pyc
+│   │       └── __init__.cpython-38.pyc
+│   ├── models.py
+│   ├── templates
+│   │   └── accounts
+│   │       ├── account_activation_sent.html
+│   │       ├── activation_email.txt
+│   │       ├── activation_invalid.html
+│   │       ├── activation_success.html
+│   │       ├── followers_list.html
+│   │       ├── following_list.html
+│   │       ├── login.html
+│   │       ├── password_reset.html
+│   │       ├── password_reset_complete.html
+│   │       ├── password_reset_confirm.html
+│   │       ├── password_reset_done.html
+│   │       ├── password_reset_email.html
+│   │       ├── profile.html
+│   │       ├── public_profile.html
+│   │       ├── public_profile_content.html
+│   │       ├── signup.html
+│   │       └── upload_success.html
+│   ├── templatetags
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-38.pyc
+│   │   │   └── custom_filters.cpython-38.pyc
+│   │   └── custom_filters.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── box
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── admin.cpython-38.pyc
+│   │   ├── apps.cpython-38.pyc
+│   │   ├── forms.cpython-38.pyc
+│   │   ├── models.cpython-38.pyc
+│   │   ├── tests.cpython-38.pyc
+│   │   ├── urls.cpython-38.pyc
+│   │   └── views.cpython-38.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_ticket_max_outfits.py
+│   │   ├── 0003_remove_ticket_max_outfits_ticket_current_outfits_and_more.py
+│   │   ├── 0004_alter_ticket_current_outfits.py
+│   │   ├── 0005_ticket_outfits_all.py
+│   │   ├── 0006_ticket_stylists_all.py
+│   │   ├── 0007_remove_ticket_stylists_all_ticket_stylists_all.py
+│   │   ├── 0008_ticket_size_bottom_xyz_ticket_size_shoe_eu_and_more.py
+│   │   ├── 0009_return_order.py
+│   │   ├── 0010_alter_ticket_customer.py
+│   │   ├── 0011_alter_ticket_style2.py
+│   │   ├── 0012_remove_ticket_customer_ticket_creator_id.py
+│   │   ├── 0013_alter_order_ticket_id_alter_ticket_creator_id_and_more.py
+│   │   ├── 0014_remove_order_customer_id_order_creator_id.py
+│   │   ├── 0015_remove_return_customer_id_return_creator_id_and_more.py
+│   │   ├── 0016_remove_return_creator_id_return_returner_id.py
+│   │   ├── 0017_alter_ticket_outfit1_alter_ticket_outfit2.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-38.pyc
+│   │       ├── 0002_rename_a_ticket_style1.cpython-38.pyc
+│   │       ├── 0002_ticket_max_outfits.cpython-38.pyc
+│   │       ├── 0003_remove_ticket_max_outfits_ticket_current_outfits_and_more.cpython-38.pyc
+│   │       ├── 0003_rename_b_ticket_condition_rename_c_ticket_exclude_and_more.cpython-38.pyc
+│   │       ├── 0004_alter_ticket_current_outfits.cpython-38.pyc
+│   │       ├── 0004_remove_ticket_i_remove_ticket_j.cpython-38.pyc
+│   │       ├── 0005_remove_ticket_exclude_remove_ticket_include.cpython-38.pyc
+│   │       ├── 0005_ticket_outfits_all.cpython-38.pyc
+│   │       ├── 0006_rename_note_ticket_notes.cpython-38.pyc
+│   │       ├── 0006_ticket_stylists_all.cpython-38.pyc
+│   │       ├── 0007_remove_ticket_stylists_all_ticket_stylists_all.cpython-38.pyc
+│   │       ├── 0007_ticket_customer_ticket_outfit1_ticket_outfit2_and_more.cpython-38.pyc
+│   │       ├── 0008_alter_ticket_notes_alter_ticket_outfit1_and_more.cpython-38.pyc
+│   │       ├── 0008_ticket_size_bottom_xyz_ticket_size_shoe_eu_and_more.cpython-38.pyc
+│   │       ├── 0009_return_order.cpython-38.pyc
+│   │       ├── 0010_alter_ticket_customer.cpython-38.pyc
+│   │       ├── 0011_alter_ticket_style2.cpython-38.pyc
+│   │       ├── 0012_remove_ticket_customer_ticket_creator_id.cpython-38.pyc
+│   │       ├── 0013_alter_order_ticket_id_alter_ticket_creator_id_and_more.cpython-38.pyc
+│   │       ├── 0014_remove_order_customer_id_order_creator_id.cpython-38.pyc
+│   │       ├── 0015_remove_return_customer_id_return_creator_id_and_more.cpython-38.pyc
+│   │       ├── 0016_remove_return_creator_id_return_returner_id.cpython-38.pyc
+│   │       ├── 0017_alter_ticket_outfit1_alter_ticket_outfit2.cpython-38.pyc
+│   │       └── __init__.cpython-38.pyc
+│   ├── models.py
+│   ├── templates
+│   │   └── box
+│   │       ├── payment_rejected.html
+│   │       ├── payment_successful.html
+│   │       ├── success.html
+│   │       └── ticket_form.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── core
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── admin.cpython-38.pyc
+│   │   ├── apps.cpython-38.pyc
+│   │   ├── forms.cpython-38.pyc
+│   │   ├── models.cpython-38.pyc
+│   │   ├── urls.cpython-38.pyc
+│   │   └── views.cpython-38.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── management
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   └── __init__.cpython-38.pyc
+│   │   └── commands
+│   │       ├── __init__.py
+│   │       ├── __pycache__
+│   │       │   ├── __init__.cpython-38.pyc
+│   │       │   └── list_models.cpython-38.pyc
+│   │       └── list_models.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_outfit_items.py
+│   │   ├── 0003_alter_outfit_image.py
+│   │   ├── 0004_alter_outfit_image.py
+│   │   ├── 0005_remove_outfit_thumbnail.py
+│   │   ├── 0006_remove_outfit_stylist_outfit_maker_id.py
+│   │   ├── 0007_remove_outfit_ticketid_outfit_ticket_id.py
+│   │   ├── 0008_alter_outfit_maker_id.py
+│   │   ├── 0009_outfit_portrait.py
+│   │   ├── 0010_outfit_hidden.py
+│   │   ├── 0011_remove_outfit_hidden.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-38.pyc
+│   │       ├── 0002_auto_20200622_1645.cpython-38.pyc
+│   │       ├── 0002_outfit_items.cpython-38.pyc
+│   │       ├── 0003_alter_outfit_image.cpython-38.pyc
+│   │       ├── 0003_auto_20200622_1657.cpython-38.pyc
+│   │       ├── 0004_alter_outfit_image.cpython-38.pyc
+│   │       ├── 0004_auto_20200622_1835.cpython-38.pyc
+│   │       ├── 0005_auto_20200623_0052.cpython-38.pyc
+│   │       ├── 0005_remove_outfit_thumbnail.cpython-38.pyc
+│   │       ├── 0006_dog_thumbnail.cpython-38.pyc
+│   │       ├── 0006_remove_outfit_stylist_outfit_maker_id.cpython-38.pyc
+│   │       ├── 0007_dog_ticketid.cpython-38.pyc
+│   │       ├── 0007_remove_outfit_ticketid_outfit_ticket_id.cpython-38.pyc
+│   │       ├── 0008_alter_dog_id.cpython-38.pyc
+│   │       ├── 0008_alter_outfit_maker_id.cpython-38.pyc
+│   │       ├── 0009_dog_stylist_dog_timestamp.cpython-38.pyc
+│   │       ├── 0009_outfit_portrait.cpython-38.pyc
+│   │       ├── 0010_outfit_hidden.cpython-38.pyc
+│   │       ├── 0011_remove_outfit_hidden.cpython-38.pyc
+│   │       └── __init__.cpython-38.pyc
+│   ├── models.py
+│   ├── static
+│   │   ├── core
+│   │   │   ├── favicon.png
+│   │   │   ├── home.js
+│   │   │   ├── styles.css
+│   │   │   └── upload.js
+│   │   ├── images
+│   │   │   └── icons
+│   │   │       ├── icon-128x128.png
+│   │   │       ├── icon-144x144.png
+│   │   │       ├── icon-152x152.png
+│   │   │       ├── icon-192x192.png
+│   │   │       ├── icon-384x384.png
+│   │   │       ├── icon-512x512.png
+│   │   │       ├── icon-72x72.png
+│   │   │       └── icon-96x96.png
+│   │   ├── manifest.json
+│   │   ├── offline.html
+│   │   └── serviceworker.js
+│   ├── templates
+│   │   └── core
+│   │       ├── base.html
+│   │       ├── delivery.html
+│   │       ├── forms.py
+│   │       ├── help.html
+│   │       ├── home.html
+│   │       ├── privacy.html
+│   │       ├── search.html
+│   │       ├── social.html
+│   │       ├── terms.html
+│   │       ├── trending.html
+│   │       └── upload.html
+│   ├── urls.py
+│   └── views.py
+├── data.json
+├── db.sqlite3
+├── local_backup.dump
+├── manage.py
+├── media
+│   ├── items
+│   │   ├── 10920949.png
+│   │   ├── 11111111.png
+│   │   ├── 11690201.png
+│   │   ├── 11722011.png
+│   │   ├── 11739279.png
+│   │   ├── 11739279_i2TG2wn.png
+│   │   ├── 12170086.png
+│   │   ├── 12312312.png
+│   │   ├── 12384753.png
+│   │   ├── 12688827.png
+│   │   ├── 13995523.png
+│   │   ├── 13995523_FkaRJ2b.png
+│   │   ├── 14199454.png
+│   │   ├── 14482479.png
+│   │   ├── 14792887.png
+│   │   ├── 14816821.png
+│   │   ├── 16378170.png
+│   │   ├── 16496141.png
+│   │   ├── 16742314.png
+│   │   ├── 16901676.png
+│   │   ├── 16902077.png
+│   │   ├── 16905592.png
+│   │   ├── 17349452.png
+│   │   ├── 17762621.png
+│   │   ├── 19398096.png
+│   │   ├── 19440266.png
+│   │   ├── 19538477.png
+│   │   ├── 19894825.png
+│   │   ├── 20357955.png
+│   │   ├── 20677318.png
+│   │   ├── 21543835.png
+│   │   ├── 22121768.png
+│   │   ├── 22786941.png
+│   │   ├── 24497222.png
+│   │   ├── 24812846.png
+│   │   ├── 24822224.png
+│   │   ├── 24822225.png
+│   │   ├── 24822226.png
+│   │   ├── 24822226_Z3E23ie.png
+│   │   ├── 24822227.png
+│   │   ├── 25455229.png
+│   │   ├── 25967333.png
+│   │   ├── 26210678.png
+│   │   ├── 26275839.png
+│   │   ├── 26324601.png
+│   │   ├── 26324602.png
+│   │   ├── 26324603.png
+│   │   ├── 26324604.png
+│   │   ├── 26324605.png
+│   │   ├── 26324606.png
+│   │   ├── 26851110.png
+│   │   ├── 27778419.png
+│   │   ├── 27947624.png
+│   │   ├── 28373000.png
+│   │   ├── 28462257.png
+│   │   ├── 28943253.png
+│   │   ├── 29206369.png
+│   │   ├── 30219020.png
+│   │   ├── 30242490.png
+│   │   ├── 31634025.png
+│   │   ├── 31867500.png
+│   │   ├── 32349015.png
+│   │   ├── 33930236.png
+│   │   ├── 34117720.png
+│   │   ├── 34324889.png
+│   │   ├── 34943344.png
+│   │   ├── 35326111.png
+│   │   ├── 35515458.png
+│   │   ├── 36790249.png
+│   │   ├── 39186013.png
+│   │   ├── 39651001.png
+│   │   ├── 40226762.png
+│   │   ├── 40447580.png
+│   │   ├── 41409503.png
+│   │   ├── 45392567.png
+│   │   ├── 45451949.png
+│   │   ├── 46779021.png
+│   │   ├── 46980215.png
+│   │   ├── 48089368.png
+│   │   ├── 48457352.png
+│   │   ├── 48652946.png
+│   │   ├── 48833385.png
+│   │   ├── 48941555.png
+│   │   ├── 49834210.png
+│   │   ├── 50228159.png
+│   │   ├── 50423119.png
+│   │   ├── 51148133.png
+│   │   ├── 51897920.png
+│   │   ├── 53292316.png
+│   │   ├── 54892543.png
+│   │   ├── 55304973.png
+│   │   ├── 55379399.png
+│   │   ├── 55564730.png
+│   │   ├── 55931147.png
+│   │   ├── 56909533.png
+│   │   ├── 56991234.png
+│   │   ├── 58006343.png
+│   │   ├── 59079817.png
+│   │   ├── 59217907.png
+│   │   ├── 59541437.png
+│   │   ├── 59700471.png
+│   │   ├── 60095343.png
+│   │   ├── 61047379.png
+│   │   ├── 61184786.png
+│   │   ├── 61353001.png
+│   │   ├── 61644948.png
+│   │   ├── 61792427.png
+│   │   ├── 62734681.png
+│   │   ├── 63532212.png
+│   │   ├── 63554941.png
+│   │   ├── 65055722.png
+│   │   ├── 65315109.png
+│   │   ├── 65348860.png
+│   │   ├── 65969834.png
+│   │   ├── 66103873.png
+│   │   ├── 66175178.png
+│   │   ├── 66361742.png
+│   │   ├── 67110582.png
+│   │   ├── 67386615.png
+│   │   ├── 67503295.png
+│   │   ├── 67503569.png
+│   │   ├── 68013084.png
+│   │   ├── 68500401.png
+│   │   ├── 69348748.png
+│   │   ├── 69408481.png
+│   │   ├── 69584729.png
+│   │   ├── 70318166.png
+│   │   ├── 70949159.png
+│   │   ├── 73872083.png
+│   │   ├── 74989930.png
+│   │   ├── 75337417.png
+│   │   ├── 75862705.png
+│   │   ├── 76102013.png
+│   │   ├── 76239632.png
+│   │   ├── 77679075.png
+│   │   ├── 77712595.png
+│   │   ├── 77853379.png
+│   │   ├── 78756580.png
+│   │   ├── 78756581.png
+│   │   ├── 78756582.png
+│   │   ├── 78756583.png
+│   │   ├── 79570590.png
+│   │   ├── 79933565.png
+│   │   ├── 80125458.png
+│   │   ├── 80143591.png
+│   │   ├── 81165515.png
+│   │   ├── 81547475.png
+│   │   ├── 82161484.png
+│   │   ├── 83063230.png
+│   │   ├── 83179038.png
+│   │   ├── 83352453.png
+│   │   ├── 84284753.png
+│   │   ├── 84287354.png
+│   │   ├── 85033076.png
+│   │   ├── 85598173.png
+│   │   ├── 86024537.png
+│   │   ├── 88528528.png
+│   │   ├── 88888888.png
+│   │   ├── 88936417.png
+│   │   ├── 89581898.png
+│   │   ├── 89599843.png
+│   │   ├── 89818237.png
+│   │   ├── 90017337.png
+│   │   ├── 90222992.png
+│   │   ├── 90508929.png
+│   │   ├── 90764377.png
+│   │   ├── 91248729.png
+│   │   ├── 91419951.png
+│   │   ├── 91805584.png
+│   │   ├── 92552144.png
+│   │   ├── 92673543.png
+│   │   ├── 93581304.png
+│   │   ├── 94893683.png
+│   │   ├── 94915126.png
+│   │   ├── 95328857.png
+│   │   ├── 95416576.png
+│   │   ├── 97382797.png
+│   │   ├── 97441732.png
+│   │   ├── 97737848.png
+│   │   ├── 97963066.png
+│   │   ├── 98819447.png
+│   │   ├── 98983349.png
+│   │   ├── 99191903.png
+│   │   ├── default.jpg
+│   │   └── default_UdQQhtK.jpg
+│   ├── items-new
+│   ├── items-not-square
+│   ├── outfits
+│   │   ├── default_img.jpg
+│   │   ├── outfit_154.jpeg
+│   │   ├── outfit_154_ECT09Qq.jpeg
+│   │   ├── outfit_155.jpeg
+│   │   ├── outfit_155_DYP5GXL.jpeg
+│   │   ├── outfit_156.jpeg
+│   │   ├── outfit_156_w455CcH.jpeg
+│   │   ├── outfit_157.jpeg
+│   │   ├── outfit_157_1AGxlnK.jpeg
+│   │   ├── outfit_158.jpeg
+│   │   ├── outfit_158_JdKqhD3.jpeg
+│   │   ├── outfit_159.jpeg
+│   │   ├── outfit_159_HEiu5MO.jpeg
+│   │   ├── outfit_160.jpeg
+│   │   ├── outfit_160_dWekwa0.jpeg
+│   │   ├── outfit_161.jpeg
+│   │   ├── outfit_161_AejeF4T.jpeg
+│   │   ├── outfit_162.jpeg
+│   │   ├── outfit_162_Ec58h6U.jpeg
+│   │   ├── outfit_163.jpeg
+│   │   ├── outfit_163_wejRf5x.jpeg
+│   │   ├── outfit_164.jpeg
+│   │   ├── outfit_164_tDS81V2.jpeg
+│   │   ├── outfit_165.jpeg
+│   │   ├── outfit_165_k7O0HOR.jpeg
+│   │   ├── outfit_166.jpeg
+│   │   ├── outfit_166_e316gzz.jpeg
+│   │   ├── outfit_167.jpeg
+│   │   ├── outfit_167_axOfnkh.jpeg
+│   │   ├── outfit_168.jpeg
+│   │   ├── outfit_168_vq6amSg.jpeg
+│   │   ├── outfit_169.jpeg
+│   │   ├── outfit_169_pzDG0mT.jpeg
+│   │   ├── outfit_170.jpeg
+│   │   ├── outfit_170_B3sZYTT.jpeg
+│   │   ├── outfit_171.jpeg
+│   │   ├── outfit_171_Im4SipU.jpeg
+│   │   ├── outfit_172.jpeg
+│   │   ├── outfit_172_D1BvF96.jpeg
+│   │   ├── outfit_173.jpeg
+│   │   ├── outfit_173_cs9GL2I.jpeg
+│   │   ├── outfit_174.jpeg
+│   │   ├── outfit_174_VRCyune.jpeg
+│   │   ├── outfit_175.jpeg
+│   │   ├── outfit_175_cpJ5ZkN.jpeg
+│   │   ├── outfit_176.jpeg
+│   │   ├── outfit_176_6PlZZRP.jpeg
+│   │   ├── outfit_177.jpeg
+│   │   ├── outfit_177_VLS9hKo.jpeg
+│   │   ├── outfit_178.jpeg
+│   │   ├── outfit_178_eYDnX0s.jpeg
+│   │   ├── outfit_179.jpeg
+│   │   ├── outfit_179_NM6AxUi.jpeg
+│   │   ├── outfit_180.jpeg
+│   │   ├── outfit_180_4wx0t6a.jpeg
+│   │   ├── outfit_181.jpeg
+│   │   ├── outfit_181_3giefbW.jpeg
+│   │   ├── outfit_182.jpeg
+│   │   ├── outfit_182_5k7lEMe.jpeg
+│   │   ├── outfit_183.jpeg
+│   │   ├── outfit_183_0wmx1SX.jpeg
+│   │   ├── outfit_184.jpeg
+│   │   ├── outfit_184_VFU1xH0.jpeg
+│   │   ├── outfit_185.jpeg
+│   │   ├── outfit_185_M6L5Ijq.jpeg
+│   │   ├── outfit_186.jpeg
+│   │   ├── outfit_186_muft0ge.jpeg
+│   │   ├── outfit_187.jpeg
+│   │   ├── outfit_187_f2ugdl2.jpeg
+│   │   ├── outfit_188.jpeg
+│   │   ├── outfit_188_tYfKgKj.jpeg
+│   │   ├── outfit_189.jpeg
+│   │   ├── outfit_189_xQfujxF.jpeg
+│   │   ├── outfit_190.jpeg
+│   │   ├── outfit_190_cGY7VsS.jpeg
+│   │   ├── outfit_191.jpeg
+│   │   ├── outfit_191_mc5xTkr.jpeg
+│   │   ├── outfit_192.jpeg
+│   │   ├── outfit_192_mxiuyFL.jpeg
+│   │   ├── outfit_193.jpeg
+│   │   ├── outfit_193_2tyrIyL.jpeg
+│   │   ├── outfit_194.jpeg
+│   │   └── outfit_194_JjOCZIp.jpeg
+│   ├── pfps
+│   │   ├── 11935091_10207846513467194_6663900507274045730_n.jpg
+│   │   ├── 222.jpg
+│   │   ├── Dr_Kami_Anderson_Black_Girls_Learn_Languages.jpg
+│   │   ├── Screenshot_2024-05-29_at_10.18.31PM.png
+│   │   ├── Screenshot_2024-05-29_at_10.21.11PM.png
+│   │   ├── Screenshot_2024-05-29_at_10.22.20PM.png
+│   │   ├── Screenshot_2024-06-01_at_4.02.35PM.png
+│   │   ├── default_img.jpg
+│   │   └── default_img_pnqVlXN.jpg
+│   ├── portraits
+│   │   ├── 481vvs024rfb1.jpg
+│   │   ├── 90d465714334c3cdaf6cbe80064a3d6a.jpg
+│   │   ├── Screenshot_2024-06-01_at_6.46.10PM.jpg
+│   │   ├── Screenshot_2024-06-01_at_6.46.10PM.png
+│   │   ├── Screenshot_2024-06-01_at_6.46.10PM_FRudQv6.jpg
+│   │   ├── aZDn57n_460s.jpg
+│   │   ├── d6167d83e8d9b464559b185c1b171998.jpg
+│   │   ├── default_img.jpg
+│   │   ├── e7a1396741154b787911a8c6c9ba21a6f5b55a5f.jpg
+│   │   └── merlin_199349727_05db850c-4ee9-47ed-ab0d-671f4ae1e74e-superJumbo.jpg
+│   └── studiooutfittemps
+│       ├── default_img.jpg
+│       ├── default_img1.jpg
+│       ├── default_img2.jpg
+│       ├── default_img3.jpg
+│       └── default_img4.jpg
+├── pyproject.toml
+├── requirements
+│   ├── Makefile
+│   ├── dev.in
+│   ├── dev.txt
+│   ├── main.in
+│   └── main.txt
+├── requirements.txt
+├── ruhah
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── settings.cpython-38.pyc
+│   │   ├── urls.cpython-38.pyc
+│   │   └── wsgi.cpython-38.pyc
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── runtime.txt
+├── scripts
+│   ├── NEW_ITEM.py
+│   ├── clear_data_q.py
+│   ├── copy_data_q_main.py
+│   └── sync_migrations.py
+├── staticfiles
+│   ├── admin
+│   │   ├── css
+│   │   │   ├── autocomplete.css
+│   │   │   ├── base.css
+│   │   │   ├── changelists.css
+│   │   │   ├── dark_mode.css
+│   │   │   ├── dashboard.css
+│   │   │   ├── forms.css
+│   │   │   ├── login.css
+│   │   │   ├── nav_sidebar.css
+│   │   │   ├── responsive.css
+│   │   │   ├── responsive_rtl.css
+│   │   │   ├── rtl.css
+│   │   │   ├── vendor
+│   │   │   │   └── select2
+│   │   │   │       ├── LICENSE-SELECT2.md
+│   │   │   │       ├── select2.css
+│   │   │   │       └── select2.min.css
+│   │   │   └── widgets.css
+│   │   ├── img
+│   │   │   ├── LICENSE
+│   │   │   ├── README.txt
+│   │   │   ├── calendar-icons.svg
+│   │   │   ├── gis
+│   │   │   │   ├── move_vertex_off.svg
+│   │   │   │   └── move_vertex_on.svg
+│   │   │   ├── icon-addlink.svg
+│   │   │   ├── icon-alert.svg
+│   │   │   ├── icon-calendar.svg
+│   │   │   ├── icon-changelink.svg
+│   │   │   ├── icon-clock.svg
+│   │   │   ├── icon-deletelink.svg
+│   │   │   ├── icon-no.svg
+│   │   │   ├── icon-unknown-alt.svg
+│   │   │   ├── icon-unknown.svg
+│   │   │   ├── icon-viewlink.svg
+│   │   │   ├── icon-yes.svg
+│   │   │   ├── inline-delete.svg
+│   │   │   ├── search.svg
+│   │   │   ├── selector-icons.svg
+│   │   │   ├── sorting-icons.svg
+│   │   │   ├── tooltag-add.svg
+│   │   │   └── tooltag-arrowright.svg
+│   │   └── js
+│   │       ├── SelectBox.js
+│   │       ├── SelectFilter2.js
+│   │       ├── actions.js
+│   │       ├── admin
+│   │       │   ├── DateTimeShortcuts.js
+│   │       │   └── RelatedObjectLookups.js
+│   │       ├── autocomplete.js
+│   │       ├── calendar.js
+│   │       ├── cancel.js
+│   │       ├── change_form.js
+│   │       ├── collapse.js
+│   │       ├── core.js
+│   │       ├── filters.js
+│   │       ├── inlines.js
+│   │       ├── jquery.init.js
+│   │       ├── nav_sidebar.js
+│   │       ├── popup_response.js
+│   │       ├── prepopulate.js
+│   │       ├── prepopulate_init.js
+│   │       ├── theme.js
+│   │       ├── urlify.js
+│   │       └── vendor
+│   │           ├── jquery
+│   │           │   ├── LICENSE.txt
+│   │           │   ├── jquery.js
+│   │           │   └── jquery.min.js
+│   │           ├── select2
+│   │           │   ├── LICENSE.md
+│   │           │   ├── i18n
+│   │           │   │   ├── af.js
+│   │           │   │   ├── ar.js
+│   │           │   │   ├── az.js
+│   │           │   │   ├── bg.js
+│   │           │   │   ├── bn.js
+│   │           │   │   ├── bs.js
+│   │           │   │   ├── ca.js
+│   │           │   │   ├── cs.js
+│   │           │   │   ├── da.js
+│   │           │   │   ├── de.js
+│   │           │   │   ├── dsb.js
+│   │           │   │   ├── el.js
+│   │           │   │   ├── en.js
+│   │           │   │   ├── es.js
+│   │           │   │   ├── et.js
+│   │           │   │   ├── eu.js
+│   │           │   │   ├── fa.js
+│   │           │   │   ├── fi.js
+│   │           │   │   ├── fr.js
+│   │           │   │   ├── gl.js
+│   │           │   │   ├── he.js
+│   │           │   │   ├── hi.js
+│   │           │   │   ├── hr.js
+│   │           │   │   ├── hsb.js
+│   │           │   │   ├── hu.js
+│   │           │   │   ├── hy.js
+│   │           │   │   ├── id.js
+│   │           │   │   ├── is.js
+│   │           │   │   ├── it.js
+│   │           │   │   ├── ja.js
+│   │           │   │   ├── ka.js
+│   │           │   │   ├── km.js
+│   │           │   │   ├── ko.js
+│   │           │   │   ├── lt.js
+│   │           │   │   ├── lv.js
+│   │           │   │   ├── mk.js
+│   │           │   │   ├── ms.js
+│   │           │   │   ├── nb.js
+│   │           │   │   ├── ne.js
+│   │           │   │   ├── nl.js
+│   │           │   │   ├── pl.js
+│   │           │   │   ├── ps.js
+│   │           │   │   ├── pt-BR.js
+│   │           │   │   ├── pt.js
+│   │           │   │   ├── ro.js
+│   │           │   │   ├── ru.js
+│   │           │   │   ├── sk.js
+│   │           │   │   ├── sl.js
+│   │           │   │   ├── sq.js
+│   │           │   │   ├── sr-Cyrl.js
+│   │           │   │   ├── sr.js
+│   │           │   │   ├── sv.js
+│   │           │   │   ├── th.js
+│   │           │   │   ├── tk.js
+│   │           │   │   ├── tr.js
+│   │           │   │   ├── uk.js
+│   │           │   │   ├── vi.js
+│   │           │   │   ├── zh-CN.js
+│   │           │   │   └── zh-TW.js
+│   │           │   ├── select2.full.js
+│   │           │   └── select2.full.min.js
+│   │           └── xregexp
+│   │               ├── LICENSE.txt
+│   │               ├── xregexp.js
+│   │               └── xregexp.min.js
+│   ├── core
+│   │   ├── favicon.png
+│   │   ├── home.js
+│   │   ├── styles.css
+│   │   └── upload.js
+│   ├── css
+│   │   └── django-pwa-app.css
+│   ├── django_extensions
+│   │   ├── css
+│   │   │   └── jquery.autocomplete.css
+│   │   ├── img
+│   │   │   └── indicator.gif
+│   │   └── js
+│   │       ├── jquery.ajaxQueue.js
+│   │       ├── jquery.autocomplete.js
+│   │       └── jquery.bgiframe.js
+│   ├── fonts
+│   │   └── bootstrap
+│   │       ├── glyphicons-halflings-regular.eot
+│   │       ├── glyphicons-halflings-regular.svg
+│   │       ├── glyphicons-halflings-regular.ttf
+│   │       ├── glyphicons-halflings-regular.woff
+│   │       └── glyphicons-halflings-regular.woff2
+│   ├── images
+│   │   └── icons
+│   │       ├── Thumbs.db
+│   │       ├── icon-128x128.png
+│   │       ├── icon-144x144.png
+│   │       ├── icon-152x152.png
+│   │       ├── icon-192x192.png
+│   │       ├── icon-384x384.png
+│   │       ├── icon-512x512.png
+│   │       ├── icon-72x72.png
+│   │       ├── icon-96x96.png
+│   │       ├── splash-1125x2436.png
+│   │       ├── splash-1242x2208.png
+│   │       ├── splash-1242x2688.png
+│   │       ├── splash-1536x2048.png
+│   │       ├── splash-1668x2224.png
+│   │       ├── splash-1668x2388.png
+│   │       ├── splash-2048x2732.png
+│   │       ├── splash-640x1136.png
+│   │       ├── splash-750x1334.png
+│   │       └── splash-828x1792.png
+│   ├── manifest.json
+│   ├── offline.html
+│   ├── serviceworker.js
+│   └── studio
+│       └── studio_tickets.js
+├── studio
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── admin.cpython-38.pyc
+│   │   ├── apps.cpython-38.pyc
+│   │   ├── image_processing.cpython-38.pyc
+│   │   ├── models.cpython-38.pyc
+│   │   ├── tests.cpython-38.pyc
+│   │   ├── urls.cpython-38.pyc
+│   │   └── views.cpython-38.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── management
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   └── __init__.cpython-38.pyc
+│   │   └── commands
+│   │       ├── 1_create_item.py
+│   │       ├── 2_item_image.py
+│   │       ├── 3_item_tags.py
+│   │       ├── __init__.py
+│   │       ├── __pycache__
+│   │       │   ├── 1_create_item.cpython-38.pyc
+│   │       │   ├── 2_item_image.cpython-38.pyc
+│   │       │   ├── 3_item_tags.cpython-38.pyc
+│   │       │   ├── NEW_ITEM.cpython-38.pyc
+│   │       │   ├── __init__.cpython-38.pyc
+│   │       │   ├── delete_double_tags.cpython-38.pyc
+│   │       │   ├── fill_random.cpython-38.pyc
+│   │       │   ├── get_tags_from_excel.cpython-38.pyc
+│   │       │   ├── image_processing.cpython-38.pyc
+│   │       │   ├── item_image.cpython-38.pyc
+│   │       │   ├── item_tags.cpython-38.pyc
+│   │       │   ├── test_shopify.cpython-38.pyc
+│   │       │   ├── write_image_to_item_from_media.cpython-38.pyc
+│   │       │   └── write_tags_to_item_from_excel.cpython-38.pyc
+│   │       ├── delete_double_tags.py
+│   │       ├── fill_random.py
+│   │       ├── image_processing.py
+│   │       ├── new_item.py
+│   │       └── test_shopify.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_item_image.py
+│   │   ├── 0003_item_itemid_alter_item_name.py
+│   │   ├── 0004_item_cat.py
+│   │   ├── 0005_studiooutfittemp.py
+│   │   ├── 0006_alter_studiooutfittemp_item1id_and_more.py
+│   │   ├── 0007_studiooutfittemp_ticket_studiooutfittemp_user.py
+│   │   ├── 0008_alter_item_name_remove_item_tags_item_tags.py
+│   │   ├── 0009_item_shoe_mw_item_size_chest_inches_item_size_eu_and_more.py
+│   │   ├── 0010_alter_item_brand_alter_item_condition_and_more.py
+│   │   ├── 0011_alter_item_itemid.py
+│   │   ├── 0012_alter_item_itemid.py
+│   │   ├── 0013_item_stock.py
+│   │   ├── 0014_item_sku_alter_item_itemid.py
+│   │   ├── 0015_item_taglist.py
+│   │   ├── 0016_item_price.py
+│   │   ├── 0017_alter_item_cat.py
+│   │   ├── 0018_alter_item_size_xyz.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-38.pyc
+│   │       ├── 0002_item_image.cpython-38.pyc
+│   │       ├── 0003_item_itemid_alter_item_name.cpython-38.pyc
+│   │       ├── 0004_item_cat.cpython-38.pyc
+│   │       ├── 0005_studiooutfittemp.cpython-38.pyc
+│   │       ├── 0006_alter_studiooutfittemp_item1id_and_more.cpython-38.pyc
+│   │       ├── 0007_studiooutfittemp_ticket_studiooutfittemp_user.cpython-38.pyc
+│   │       ├── 0008_alter_item_name_remove_item_tags_item_tags.cpython-38.pyc
+│   │       ├── 0009_item_shoe_mw_item_size_chest_inches_item_size_eu_and_more.cpython-38.pyc
+│   │       ├── 0010_alter_item_brand_alter_item_condition_and_more.cpython-38.pyc
+│   │       ├── 0011_alter_item_itemid.cpython-38.pyc
+│   │       ├── 0012_alter_item_itemid.cpython-38.pyc
+│   │       ├── 0013_item_stock.cpython-38.pyc
+│   │       ├── 0014_item_sku_alter_item_itemid.cpython-38.pyc
+│   │       ├── 0015_item_taglist.cpython-38.pyc
+│   │       ├── 0016_item_price.cpython-38.pyc
+│   │       ├── 0017_alter_item_cat.cpython-38.pyc
+│   │       ├── 0018_alter_item_size_xyz.cpython-38.pyc
+│   │       └── __init__.cpython-38.pyc
+│   ├── models.py
+│   ├── static
+│   │   └── studio
+│   │       └── studio_tickets.js
+│   ├── templates
+│   │   └── studio
+│   │       ├── studio_items.html
+│   │       ├── studio_items_guest.html
+│   │       ├── studio_success.html
+│   │       └── studio_tickets.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── tables.xlsx
+└── tree.txt
+
+78 directories, 777 files
