@@ -27,14 +27,11 @@ class Command(BaseCommand):
 import os
 from django.core.management.base import BaseCommand
 import shopify
-from dotenv import load_dotenv
 
 class Command(BaseCommand):
     help = 'Test Shopify API connection and display product details'
     
     def handle(self, *args, **kwargs):
-        load_dotenv()  # Load environment variables from .env file
-        
         api_key = os.getenv('SHOPIFY_API_KEY_DEV')
         api_secret = os.getenv('SHOPIFY_API_SECRET_DEV')
         access_token = os.getenv('SHOPIFY_ACCESS_TOKEN_DEV')
