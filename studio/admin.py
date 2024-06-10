@@ -4,7 +4,7 @@ from django.utils.html import format_html
 
 # Register your models here.
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image', 'size_xyz', 'is_ship_ready']
+    list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image', 'size_xyz', 'sizes_xyz', 'is_ship_ready']
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
     list_filter = ['condition', 'is_ship_ready', 'location', 'size_xyz', 'cat']
     ordering = ['itemid']
