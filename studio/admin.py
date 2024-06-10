@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Item, Tag, StudioOutfitTemp, ShopifyStore, SizeCategory
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
+from .forms import ShopifyStoreForm
 
 class SizesFilter(SimpleListFilter):
     title = 'sizes'
@@ -67,5 +68,7 @@ class ShopifyStoreAdmin(admin.ModelAdmin):
     list_display = ('name', 'shop_url', 'api_key', 'api_secret', 'access_token')
     search_fields = ('name', 'shop_url')
     readonly_fields = ('size_mapping',)
+
+    form = ShopifyStoreForm
 
 admin.site.register(ShopifyStore, ShopifyStoreAdmin)
