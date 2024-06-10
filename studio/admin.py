@@ -17,7 +17,7 @@ class SizesFilter(SimpleListFilter):
         return queryset
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image', 'is_ship_ready'] # vale alliws kapws to sizes_xyz oxi directly giati error
+    list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image'] # vale alliws kapws to sizes_xyz oxi directly giati error
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
     list_filter = ['condition', 'is_ship_ready', 'location', 'cat', SizesFilter] # eftiaksa custom filter
     ordering = ['itemid']
