@@ -14,3 +14,4 @@ django-heroku==0.3.1 # gia heroku
 django-pwa==1.1.0 # pwa
 ShopifyAPI==12.5.0
 python-decouple==3.8
+jsonfield==3.1.0
