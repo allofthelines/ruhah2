@@ -2,6 +2,7 @@ from django.db import models
 from accounts.models import CustomUser
 from django.conf import settings
 from box.models import Ticket
+import jsonfield
 # from multiselectfield import MultiSelectField
 # ALLAKSE TO SIZE_XYZ SE MULTIPLE
 
@@ -80,3 +81,17 @@ class StudioOutfitTemp(models.Model):
 
     def __str__(self):
         return f"Studio Outfit Temp {self.id}"
+
+
+
+
+class ShopifyStore(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    api_key = models.CharField(max_length=255, null=True, blank=True)
+    api_secret = models.CharField(max_length=255, null=True, blank=True)
+    access_token = models.CharField(max_length=255, null=True, blank=True)
+    shop_url = models.CharField(max_length=255, null=True, blank=True)
+    size_mapping = jsonfield.JSONField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
