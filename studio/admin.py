@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item, Tag, StudioOutfitTemp
+from .models import Item, Tag, StudioOutfitTemp, ShopifyStore
 from django.utils.html import format_html
 
 # Register your models here.
@@ -44,3 +44,22 @@ class TagAdmin(admin.ModelAdmin):
     fields = ['id', 'tag_name', 'tag_type']
 
 admin.site.register(Tag, TagAdmin)
+
+class ShopifyStoreAdmin(admin.ModelAdmin):
+    list_display = ('name', 'shop_url', 'api_key', 'api_secret', 'access_token')
+    search_fields = ('name', 'shop_url')
+    readonly_fields = ('size_mapping',)
+
+    def has_add_permission(self, request, obj=None):
+        return super().has_add_permission(request, obj)
+
+    def has_change_permission(self, request, obj=None):
+        return super().has_change_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        return super().has_delete_permission(request, obj)
+
+    def has_view_permission(self, request, obj=None):
+        return super().has_view_permission(request, obj)
+
+admin.site.register(ShopifyStore, ShopifyStoreAdmin)
