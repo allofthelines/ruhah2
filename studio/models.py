@@ -14,6 +14,25 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag_name
 
+class SizeCategory(models.Model):
+    SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
+
+    name = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class ShopifyStore(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    api_key = models.CharField(max_length=255, null=True, blank=True)
+    api_secret = models.CharField(max_length=255, null=True, blank=True)
+    access_token = models.CharField(max_length=255, null=True, blank=True)
+    shop_url = models.CharField(max_length=255, null=True, blank=True)
+    size_mapping = jsonfield.JSONField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
 
 class Item(models.Model):
     CONDITION_CHOICES = [
@@ -48,8 +67,10 @@ class Item(models.Model):
     stock = models.IntegerField(blank=True, null=True)
 
     SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
-
     size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True, null=True)
+
+    sizes_xyz = models.ManyToManyField(SizeCategory, blank=True)
+
     size_uk = models.FloatField(null=True, blank=True)
     size_us = models.FloatField(null=True, blank=True)
     size_eu = models.FloatField(null=True, blank=True)
@@ -57,6 +78,9 @@ class Item(models.Model):
     size_waist_inches = models.FloatField(null=True, blank=True)
     shoe_mw = models.CharField(max_length=10, choices=[('man', 'man'), ('woman', 'woman'), ('unisex', 'unisex')],
                                blank=True, null=True)
+
+    shopify_store = models.ForeignKey(ShopifyStore, on_delete=models.SET_NULL, blank=True, null=True)
+    shopify_product_id = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.itemid
@@ -81,17 +105,3 @@ class StudioOutfitTemp(models.Model):
 
     def __str__(self):
         return f"Studio Outfit Temp {self.id}"
-
-
-
-
-class ShopifyStore(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
-    api_key = models.CharField(max_length=255, null=True, blank=True)
-    api_secret = models.CharField(max_length=255, null=True, blank=True)
-    access_token = models.CharField(max_length=255, null=True, blank=True)
-    shop_url = models.CharField(max_length=255, null=True, blank=True)
-    size_mapping = jsonfield.JSONField(null=True, blank=True)
-
-    def __str__(self):
-        return self.name
