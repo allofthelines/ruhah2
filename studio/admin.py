@@ -1,12 +1,25 @@
 from django.contrib import admin
 from .models import Item, Tag, StudioOutfitTemp, ShopifyStore
 from django.utils.html import format_html
+from django.contrib.admin import SimpleListFilter
 
-# Register your models here.
+class SizesFilter(SimpleListFilter):
+    title = 'sizes'
+    parameter_name = 'sizes_xyz'
+
+    def lookups(self, request, model_admin):
+        sizes = SizeCategory.objects.all()
+        return [(size.id, size.name) for size in sizes]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(sizes_xyz__id__exact=self.value())
+        return queryset
+
 class ItemAdmin(admin.ModelAdmin):
     list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image', 'size_xyz', 'is_ship_ready'] # vale alliws kapws to sizes_xyz oxi directly giati error
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
-    list_filter = ['condition', 'is_ship_ready', 'location', 'size_xyz', 'cat']
+    list_filter = ['condition', 'is_ship_ready', 'location', 'size_xyz', 'cat', SizesFilter] # eftiaksa custom filter
     ordering = ['itemid']
     fields = ['itemid', 'name', 'cat', 'brand', 'owner', 'condition',
               'location', 'is_ship_ready', 'tags', 'taglist', 'image',
@@ -17,6 +30,11 @@ class ItemAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="width: 40px; height: 40px;" />', obj.image.url)
         return ""
     thumbnail.short_description = 'Image'
+
+    def display_sizes(self, obj):
+        return ", ".join([size.name for size in obj.sizes_xyz.all()])
+
+    display_sizes.short_description = 'Sizes'
 
     def display_tags(self, obj):
         return ", ".join([tag.tag_name for tag in obj.tags.all()])
