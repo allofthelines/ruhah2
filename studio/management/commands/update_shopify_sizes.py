@@ -3,7 +3,7 @@
 import os
 from django.core.management.base import BaseCommand
 import shopify
-from studio.models import Item
+from studio.models import Item, SizeCategory, ShopifyStore
 
 class Command(BaseCommand):
     help = 'Update item sizes based on Shopify product availability'
