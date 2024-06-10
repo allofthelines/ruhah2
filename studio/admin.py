@@ -10,7 +10,7 @@ class ItemAdmin(admin.ModelAdmin):
     ordering = ['itemid']
     fields = ['itemid', 'name', 'cat', 'brand', 'owner', 'condition',
               'location', 'is_ship_ready', 'tags', 'taglist', 'image',
-              'size_xyz']
+              'size_xyz', 'sizes_xyz', 'shopify_store', 'shopify_product_id', 'price']
 
     def thumbnail(self, obj):
         if obj.image:
