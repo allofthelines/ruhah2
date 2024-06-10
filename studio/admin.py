@@ -50,16 +50,4 @@ class ShopifyStoreAdmin(admin.ModelAdmin):
     search_fields = ('name', 'shop_url')
     readonly_fields = ('size_mapping',)
 
-    def has_add_permission(self, request, obj=None):
-        return super().has_add_permission(request, obj)
-
-    def has_change_permission(self, request, obj=None):
-        return super().has_change_permission(request, obj)
-
-    def has_delete_permission(self, request, obj=None):
-        return super().has_delete_permission(request, obj)
-
-    def has_view_permission(self, request, obj=None):
-        return super().has_view_permission(request, obj)
-
 admin.site.register(ShopifyStore, ShopifyStoreAdmin)
