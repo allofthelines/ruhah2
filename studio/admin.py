@@ -8,7 +8,7 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
     list_filter = ['condition', 'is_ship_ready', 'location', 'size_xyz', 'cat']
     ordering = ['itemid']
-    fields = ['itemid', 'name', 'cat', 'brand', 'owner', 'condition',
+    fields = ['id', 'itemid', 'name', 'cat', 'brand', 'owner', 'condition',
               'location', 'is_ship_ready', 'tags', 'taglist', 'image',
               'size_xyz', 'sizes_xyz', 'shopify_store', 'shopify_product_id', 'price']
 
