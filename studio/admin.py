@@ -19,7 +19,7 @@ class SizesFilter(SimpleListFilter):
 class ItemAdmin(admin.ModelAdmin):
     list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image'] # vale alliws kapws to sizes_xyz oxi directly giati error
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
-    list_filter = ['condition', 'is_ship_ready', 'location', 'cat', SizesFilter] # eftiaksa custom filter
+    list_filter = [SizesFilter, 'condition', 'location', 'cat'] # eftiaksa custom filter
     ordering = ['itemid']
     fields = ['itemid', 'name', 'cat', 'brand', 'owner', 'condition',
               'location', 'is_ship_ready', 'tags', 'taglist', 'image',
