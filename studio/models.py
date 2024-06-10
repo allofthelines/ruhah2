@@ -24,6 +24,8 @@ class SizeCategory(models.Model):
 
 class ShopifyStore(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
     api_key = models.CharField(max_length=255, null=True, blank=True)
     api_secret = models.CharField(max_length=255, null=True, blank=True)
     access_token = models.CharField(max_length=255, null=True, blank=True)
