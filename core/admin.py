@@ -3,7 +3,7 @@ from django.utils.html import format_html
 from .models import Outfit
 
 class OutfitAdmin(admin.ModelAdmin):
-    list_display = ('id', 'thumbnail', 'maker_id', 'image', 'rating', 'ticket_id')
+    list_display = ('id', 'thumbnail', 'maker_id', 'image', 'portrait', 'rating', 'ticket_id')
     list_filter = ('ticket_id',)
     search_fields = ('rating', 'id', 'ticket_id__id', 'maker_id__username')  # Adjust based on the actual fields
 
