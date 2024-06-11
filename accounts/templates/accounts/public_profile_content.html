@@ -66,7 +66,23 @@
 <div id="outfit-container">
 
 
+    <div id="them-by-me-content" class="outfit-grid">
+        {% for outfit in profile_user.outfit_set.all %}
+            {% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}
+                <div class="outfit-item" onclick="toggleImage(this)">
+                    <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                </div>
+            {% else %}
+                <div class="outfit-item">
+                    <img src="{{ outfit.image.url }}" alt="Outfit Image">
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 
+
+    {% comment %}
     <!-- Default content - 'Them by Me' -->
     <div id="them-by-me-content" class="outfit-grid">
         {% for outfit in profile_user.outfit_set.all %}
@@ -84,8 +100,6 @@
         {% endfor %}
     </div>
 
-
-    {% comment %}
     <!-- 'Me by Them' content (initially hidden) -->
     <div id="me-by-them-content" class="outfit-grid hidden">
         {% for ticket in profile_user.ticket_set.all %}
