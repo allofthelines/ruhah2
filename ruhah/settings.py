@@ -201,7 +201,7 @@ DEFAULT_FROM_EMAIL = 'fumioxyz1@gmail.com'
 # Ensure this is set to your production domain
 if os.getenv('DJANGO_ENV') == 'production':
     # AFTO STELNEI TA EMAIL GIA SIGNUP CONFIRMATION
-    EMAIL_DOMAIN = 'fumio.xyz'
+    EMAIL_DOMAIN = 'ruhah.com'
     EMAIL_PROTOCOL = 'https'
     SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
