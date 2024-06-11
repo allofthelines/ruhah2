@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from ruhah import settings
 from .forms import TicketForm  # Ensure you create this form in the forms.py file
 from .models import Ticket  # Make sure you have this model defined in your models.py
 import stripe
@@ -141,6 +142,7 @@ from django.utils import timezone
 # edw ksekinaei stripe
 def create_checkout_session(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
+    domain_name = settings.DOMAIN_NAME
 
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -155,8 +157,8 @@ def create_checkout_session(request, ticket_id):
             'quantity': 1,
         }],
         mode='payment',
-        success_url=request.build_absolute_uri(reverse('box:payment_successful')) + '?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url=request.build_absolute_uri(reverse('box:payment_rejected')),
+        success_url=f"{domain_name}{reverse('box:payment_successful')}?session_id={{CHECKOUT_SESSION_ID}}",
+        cancel_url=f"{domain_name}{reverse('box:payment_rejected')}",
         metadata={
             'ticket_id': ticket.id
         }
@@ -193,7 +195,7 @@ def stripe_webhook(request):
         # DES PIO KATW
         ticket_id = session['metadata']['ticket_id']
         ticket = Ticket.objects.get(id=ticket_id)
-        ticket.status = 'open'
+        ticket.status = 'open' # doulevei
         ticket.save()
 
         # Extract payment details from the session
