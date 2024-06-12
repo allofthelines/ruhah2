@@ -21,10 +21,11 @@ def get_portrait_upload_path(instance, filename):
     filename = f"portrait_{instance.id}.{ext}"
     return os.path.join('portraits/', filename)
 
+
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
-    image = models.ImageField(upload_to=get_image_upload_path, default="outfits/default_img.jpg")
-    portrait = models.ImageField(upload_to=get_portrait_upload_path, default="portraits/default_img.jpg")
+    image = models.ImageField(upload_to="outfits/", default="outfits/default_img.jpg")
+    portrait = models.ImageField(upload_to="portraits/", default="portraits/default_img.jpg")
     ticket_id = models.ForeignKey('box.Ticket', on_delete=models.SET_NULL, null=True, blank=True)
     maker_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     timestamp = models.DateTimeField(default=timezone.now)
@@ -35,17 +36,31 @@ class Outfit(models.Model):
 
     @property
     def rank(self):
-        return Outfit.objects.aggregate(rank=Count("rating", filter=Q(rating__gt=self.rating), distinct=True) + 1)["rank"]
+        return Outfit.objects.aggregate(rank=Count("rating", filter=Q(rating__gt=self.rating), distinct=True) + 1)[
+            "rank"]
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            # Save instance first to get the primary key (pk)
-            super().save(*args, **kwargs)
-            # Reassign the portrait upload path with the ID now available
-            self.portrait.name = get_portrait_upload_path(self, self.portrait.name)
+        is_new = self.pk is None
         super().save(*args, **kwargs)
+        if is_new:
+            self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
+            super().save(update_fields=['portrait'])
         self._resize_image(500, 500)
         self._resize_portrait(500, 500)
+
+    def _get_portrait_upload_path(self, filename):
+        ext = filename.split('.')[-1]
+        base_filename = f"portrait_{self.pk}"
+        filename = f"{base_filename}.{ext}"
+        filepath = os.path.join('portraits/', filename)
+
+        counter = 1
+        while os.path.exists(os.path.join(settings.MEDIA_ROOT, filepath)):
+            filename = f"{base_filename}_{counter}.{ext}"
+            filepath = os.path.join('portraits/', filename)
+            counter += 1
+
+        return filepath
 
     def _resize_image(self, width, height):
         if self.image.width < width and self.image.height < height:
@@ -85,7 +100,6 @@ class Outfit(models.Model):
 
     class Meta:
         db_table = 'outfit_table'
-
 '''
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
