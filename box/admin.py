@@ -8,6 +8,14 @@ class TicketAdmin(admin.ModelAdmin):
     list_display = ['id', 'status', 'creator_id', 'notes', 'outfit1', 'outfit2']
     list_filter = ['status', 'occasion', 'style1', 'style2']
 
+    def short_notes(self, obj):
+        if obj.notes:
+            return obj.notes[:15] + '...' if len(obj.notes) > 15 else obj.notes
+        return ""
+
+    short_notes.short_description = 'Notes'
+admin.site.register(Ticket, TicketAdmin)
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'type', 'ticket_id', 'status', 'timestamp', 'hours_preparing')
     list_filter = ('status', 'type')
