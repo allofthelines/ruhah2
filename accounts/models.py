@@ -181,32 +181,3 @@ class Seller(models.Model):
     class Meta:
         verbose_name = 'Seller'
         verbose_name_plural = 'Sellers'
-
-
-
-
-
-
-
-
-class Supplier(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20, blank=True, null=True)
-    location = models.CharField(max_length=20, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    contact = models.CharField(max_length=50, blank=True, null=True)
-    items_catalogue = models.ManyToManyField('studio.Item', blank=True)
-    timestamp = models.DateTimeField(default=now)
-    items_sold = models.IntegerField(blank=True, null=True, default=0)
-    items_boxed = models.IntegerField(blank=True, null=True, default=0)
-    total_sales = models.IntegerField(blank=True, null=True, default=0)
-    fumio_profit = models.IntegerField(blank=True, null=True, default=0)
-    supplier_profit = models.IntegerField(blank=True, null=True, default=0)
-    notes = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        verbose_name = 'Supplier'
-        verbose_name_plural = 'Suppliers'
-
-    def __str__(self):
-        return f'Supplier {self.id}'
