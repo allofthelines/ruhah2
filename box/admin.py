@@ -14,7 +14,6 @@ class TicketAdmin(admin.ModelAdmin):
         return ""
 
     short_notes.short_description = 'Notes'
-admin.site.register(Ticket, TicketAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'type', 'ticket_id', 'status', 'timestamp', 'hours_preparing')
