@@ -48,11 +48,18 @@
 <!-- GAP -->
 <p></p>
 
+{% comment %}
 <!-- SUBMIT OUTFIT BUTTON -->
 <form method="post" action="{% url 'studio:submit_outfit' ticket.id %}">
     {% csrf_token %}
     <button type="submit">Submit Outfit</button>
 </form>
+{% endcomment %}
+<form method="post" action="{% url 'studio:submit_outfit' ticket.id %}" id="submit-outfit-form">
+    {% csrf_token %}
+    <button type="submit" id="submit-button">Submit Outfit</button>
+</form>
+
 
 <!-- GAP -->
 <p></p>
@@ -80,6 +87,40 @@
     </div>
     {% endfor %}
 </div>
+
+
+
+
+
+
+
+
+<script>
+document.getElementById('submit-outfit-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form from submitting immediately
+    var submitButton = document.getElementById('submit-button');
+    var originalText = submitButton.innerText;
+    var loadingTexts = ['Submitting.', 'Submitting..', 'Submitting...'];
+    var currentIndex = 0;
+
+    submitButton.disabled = true; // Disable the button to prevent multiple submissions
+
+    var interval = setInterval(function() {
+        submitButton.innerText = loadingTexts[currentIndex];
+        currentIndex = (currentIndex + 1) % loadingTexts.length;
+    }, 500);
+
+    // Submit the form after a brief delay to allow for the UI update
+    setTimeout(function() {
+        document.getElementById('submit-outfit-form').submit();
+    }, 100);
+});
+</script>
+
+
+
+
+
 
 <style>
     #contB {
