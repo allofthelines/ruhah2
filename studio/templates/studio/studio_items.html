@@ -96,30 +96,41 @@
 
 
 <script>
-document.getElementById('submit-outfit-form').addEventListener('submit', function(event) {
+document.addEventListener('DOMContentLoaded', function () {
     var submitButton = document.getElementById('submit-button');
-    var loadingTexts = ['Submitting.', 'Submitting..', 'Submitting...'];
-    var currentIndex = 0;
+    var originalText = submitButton.innerText;
 
-    submitButton.disabled = true; // Disable the button to prevent multiple submissions
+    document.getElementById('submit-outfit-form').addEventListener('submit', function(event) {
+        var loadingTexts = ['Submitting.', 'Submitting..', 'Submitting...'];
+        var currentIndex = 0;
 
-    var interval = setInterval(function() {
-        submitButton.innerText = loadingTexts[currentIndex];
-        currentIndex = (currentIndex + 1) % loadingTexts.length;
-    }, 500);
+        submitButton.disabled = true; // Disable the button to prevent multiple submissions
 
-    // Listen for page unload event
-    window.addEventListener('beforeunload', function () {
-        clearInterval(interval); // Clear the interval if the page unloads
+        var interval = setInterval(function() {
+            submitButton.innerText = loadingTexts[currentIndex];
+            currentIndex = (currentIndex + 1) % loadingTexts.length;
+        }, 500);
+
+        // Allow the form to submit
+        setTimeout(function() {
+            document.getElementById('submit-outfit-form').submit();
+        }, 100);
+
+        // Listen for page unload event
+        window.addEventListener('beforeunload', function () {
+            clearInterval(interval); // Clear the interval if the page unloads
+        });
     });
 
-    // Allow the form to submit
-    setTimeout(function() {
-        document.getElementById('submit-outfit-form').submit();
-    }, 100);
+    // Reset button state when navigating back to the page
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            submitButton.disabled = false;
+            submitButton.innerText = originalText;
+        }
+    });
 });
 </script>
-
 
 
 
