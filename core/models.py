@@ -25,7 +25,7 @@ def get_portrait_upload_path(instance, filename):
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
     image = models.ImageField(upload_to="outfits/", default="outfits/default_img.jpg")
-    portrait = models.ImageField(upload_to="portraits/", default="portraits/default_img.jpg")
+    portrait = models.ImageField(upload_to="portraits/", default="portraits/default_img.jpg", blank=True, null=True)
     ticket_id = models.ForeignKey('box.Ticket', on_delete=models.SET_NULL, null=True, blank=True)
     maker_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     timestamp = models.DateTimeField(default=timezone.now)
@@ -36,17 +36,21 @@ class Outfit(models.Model):
 
     @property
     def rank(self):
-        return Outfit.objects.aggregate(rank=Count("rating", filter=Q(rating__gt=self.rating), distinct=True) + 1)[
-            "rank"]
+        return Outfit.objects.aggregate(rank=Count("rating", filter=Q(rating__gt=self.rating), distinct=True) + 1)["rank"]
 
     def save(self, *args, **kwargs):
-        is_new = self.pk is None
+        # Check if a new file has been uploaded to the portrait field
+        if self.pk and self._state.adding is False:
+            old_instance = Outfit.objects.get(pk=self.pk)
+            if self.portrait and self.portrait != old_instance.portrait:
+                # Process new portrait file
+                self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
+                super().save(update_fields=['portrait'])
+                self._resize_portrait(500, 500)
+
+        # Always process the image field
         super().save(*args, **kwargs)
-        if is_new:
-            self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
-            super().save(update_fields=['portrait'])
         self._resize_image(500, 500)
-        self._resize_portrait(500, 500)
 
     def _get_portrait_upload_path(self, filename):
         ext = filename.split('.')[-1]
@@ -81,7 +85,7 @@ class Outfit(models.Model):
             image.save(f, 'JPEG')
 
     def _resize_portrait(self, width, height):
-        if self.portrait.width < width and self.portrait.height < height:
+        if not self.portrait:
             return
 
         with self.portrait.open() as f:
@@ -100,6 +104,7 @@ class Outfit(models.Model):
 
     class Meta:
         db_table = 'outfit_table'
+
 '''
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
