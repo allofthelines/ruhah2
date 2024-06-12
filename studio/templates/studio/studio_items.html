@@ -97,9 +97,7 @@
 
 <script>
 document.getElementById('submit-outfit-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form from submitting immediately
     var submitButton = document.getElementById('submit-button');
-    var originalText = submitButton.innerText;
     var loadingTexts = ['Submitting.', 'Submitting..', 'Submitting...'];
     var currentIndex = 0;
 
@@ -110,12 +108,18 @@ document.getElementById('submit-outfit-form').addEventListener('submit', functio
         currentIndex = (currentIndex + 1) % loadingTexts.length;
     }, 500);
 
-    // Submit the form after a brief delay to allow for the UI update
+    // Listen for page unload event
+    window.addEventListener('beforeunload', function () {
+        clearInterval(interval); // Clear the interval if the page unloads
+    });
+
+    // Allow the form to submit
     setTimeout(function() {
         document.getElementById('submit-outfit-form').submit();
     }, 100);
 });
 </script>
+
 
 
 
