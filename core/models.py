@@ -11,6 +11,7 @@ from django.utils import timezone
 # lynei to circular import ypotithetai error
 from django.apps import apps
 from django.conf import settings
+import os
 
 def get_image_upload_path(instance, filename):
     return os.path.join('outfits/', filename)
