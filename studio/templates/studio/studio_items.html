@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var originalText = submitButton.innerText;
 
     document.getElementById('submit-outfit-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
         var loadingTexts = ['Submitting.', 'Submitting..', 'Submitting...'];
         var currentIndex = 0;
 
@@ -111,8 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
             currentIndex = (currentIndex + 1) % loadingTexts.length;
         }, 500);
 
-        // Allow the form to submit
+        // Submit the form after a brief delay to allow for the UI update
         setTimeout(function() {
+            clearInterval(interval); // Clear the interval to stop the animation
             document.getElementById('submit-outfit-form').submit();
         }, 100);
 
@@ -131,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
 
 
 
