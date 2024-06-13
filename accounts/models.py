@@ -21,6 +21,7 @@ class CustomUser(AbstractUser):
     bio = models.CharField(max_length=150, blank=True, null=True)
     name = models.CharField(max_length=30, blank=True, null=True)
     pfp = models.ImageField(upload_to='pfps/', blank=True, null=True, default='pfps/default_img.jpg')
+    credits = models.IntegerField(default=0)
 
     profile_visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, default='public')
 
