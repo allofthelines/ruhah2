@@ -25,7 +25,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'name', 'bio', 'pfp', 'profile_visibility']
+        fields = ['username', 'email', 'name', 'bio', 'pfp', 'profile_visibility', 'credits']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
