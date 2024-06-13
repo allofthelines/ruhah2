@@ -136,3 +136,21 @@ class PortraitUploadForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+class ProfileSettingsForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['profile_visibility']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['profile_visibility'].initial = user.profile_visibility
+
+    def save(self, commit=True, user=None):
+        user = super().save(commit=False)
+        user.profile_visibility = self.cleaned_data['profile_visibility']
+        if commit:
+            user.save()
+        return user
