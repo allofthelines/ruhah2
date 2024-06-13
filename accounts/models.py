@@ -111,19 +111,17 @@ class UserFollows(models.Model):
         return f'{self.user_from} follows {self.user_to}'
 
 class UserItemLikes(models.Model):
-    clicker = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='clicker_likes')
-    item = models.ForeignKey('studio.Item', on_delete=models.CASCADE)
-    styler = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='styler_likes')
+    liker = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='liker_likes', blank=True, null=True)
+    item = models.ForeignKey('studio.Item', on_delete=models.CASCADE, blank=True, null=True)
+    styler = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='styler_likes', blank=True, null=True)
 
     def __str__(self):
-        return f"Clicker: {self.clicker.username}, Item: {self.item}, Styler: {self.styler.username}"
+        return f"Liker: {self.liker.username}, Item: {self.item}, Styler: {self.styler.username if self.styler else 'None'}"
 
     class Meta:
         db_table = 'user_item_likes'
         verbose_name = 'User Item Like'
         verbose_name_plural = 'User Item Likes'
-
-
 
 
 class PortraitUpload(models.Model):
