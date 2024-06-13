@@ -52,6 +52,22 @@ class UserFollowsAdmin(admin.ModelAdmin):
     raw_id_fields = ('user_from', 'user_to')
 admin.site.register(UserFollows, UserFollowsAdmin)
 
+class UserItemLikesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'liker_username', 'item', 'styler_username')
+    list_filter = ('liker', 'styler')
+
+    def liker_username(self, obj):
+        return obj.liker.username
+    liker_username.admin_order_field = 'liker'  # Allows column order sorting
+    liker_username.short_description = 'liker'  # Renames column head
+
+    def styler_username(self, obj):
+        return obj.styler.username
+    styler_username.admin_order_field = 'styler'
+    styler_username.short_description = 'Styler'
+
+admin.site.register(UserItemLikes, UserItemLikesAdmin)
+
 
 class PortraitUploadAdmin(admin.ModelAdmin):
     list_display = ('id', 'ticket_id_int', 'wearer_id', 'portrait_img', 'status', 'age_in_hours')
