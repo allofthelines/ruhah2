@@ -7,6 +7,6 @@ def clear_user_item_cart():
 
 print("Loading tasks from accounts...")
 
-@shared_task
+@shared_task(name='accounts.tasks.test_task')
 def test_task():
     print("Test task executed")
