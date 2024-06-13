@@ -47,8 +47,6 @@
                         <br>
                         Credits: {{ user.credits }}<br>
                         <br>
-                        <label for="id_profile_visibility">Profile Visibility: </label>
-                        {{ user_form.profile_visibility }}<br><br>
                     </p>
                     <input type="hidden" name="user_form" value="user_form">
                     <button type="submit">Save changes</button>
@@ -63,8 +61,6 @@
                     Bio: {{ user.bio }}<br>
                     <br>
                     Credits: {{ user.credits }}<br>
-                    <br>
-                    Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
