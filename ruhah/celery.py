@@ -1,4 +1,5 @@
-# ruhah/celery.py
+# to evala gia na katharizei to useritemcarts kathe 6 wres
+# den doulevei idk giati
 
 from __future__ import absolute_import, unicode_literals
 import os

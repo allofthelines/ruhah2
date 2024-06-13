@@ -13,6 +13,7 @@ from pathlib import Path
 import dj_database_url # postgres
 from decouple import config, Csv # gia local/development mode
 import django_heroku
+from celery import Celery
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY') # inside .env file *1*(p%w5&n^zm=g3v0wb^kj1d9qzqm)f-pl#^o(izb6sp_z^fc
@@ -20,6 +21,8 @@ ENVIRONMENT = config('ENVIRONMENT', default='development')
 DEBUG = config('DEBUG', default=True, cast=bool)
 DOMAIN_NAME = config('DOMAIN_NAME', default='http://localhost:8000')
 
+# CELERY DEN DOULEVEI IDK GIATI
+# TO EVALA GIA NA KATHARIZEI ITEMUSERCART KATHE 6 WRES
 CELERY_BROKER_URL = config('REDIS_URL', default='redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = config('REDIS_URL', default='redis://localhost:6379/0')
 CELERY_BEAT_SCHEDULE = {
