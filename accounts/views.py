@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UserProfileForm, CustomerForm, StylistForm, PortraitUploadForm
+from .forms import SignUpForm, UserProfileForm, CustomerForm, StylistForm, PortraitUploadForm, ProfileSettingsForm
 
 def signup(request):
     if request.method == 'POST':
@@ -76,8 +76,10 @@ def profile(request):
     customer_form = CustomerForm(instance=customer, customer=customer) if customer else None
     stylist_form = StylistForm(instance=stylist, stylist=stylist) if stylist else None
     portrait_upload_form = PortraitUploadForm(user=user)  # Pass user to the form
+    profile_settings_form = ProfileSettingsForm(instance=user, user=user)
 
     editing = request.GET.get('edit') == 'true'
+    editing_settings = request.GET.get('edit_settings') == 'true'
 
     if request.method == 'POST':
         if 'user_form' in request.POST:
@@ -103,14 +105,21 @@ def profile(request):
                 portrait_upload.status = 'pending'  # Automatically assign status to 'pending'
                 portrait_upload.save()
                 return redirect('accounts:upload_success')  # Redirect to the success page
+        elif 'profile_settings_form' in request.POST:
+            profile_settings_form = ProfileSettingsForm(request.POST, instance=user, user=user)
+            if profile_settings_form.is_valid():
+                profile_settings_form.save(user=user)
+                return redirect(f'{request.path}?edit_settings=false')
 
     return render(request, 'accounts/profile.html', {
         'user_form': user_form,
         'customer_form': customer_form,
         'stylist_form': stylist_form,
         'portrait_upload_form': portrait_upload_form,
+        'profile_settings_form': profile_settings_form,
         'user': user,
-        'editing': editing
+        'editing': editing,
+        'editing_settings': editing_settings
     })
 
 
