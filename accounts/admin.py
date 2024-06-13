@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Stylist, Customer, Seller, UserFollows, PortraitUpload
+from .models import CustomUser, Stylist, Customer, Seller, UserFollows, PortraitUpload, UserItemLikes
 from django.utils.timezone import now
 
 class CustomUserAdmin(UserAdmin):
@@ -51,6 +51,22 @@ class UserFollowsAdmin(admin.ModelAdmin):
     list_filter = ('created',)
     raw_id_fields = ('user_from', 'user_to')
 admin.site.register(UserFollows, UserFollowsAdmin)
+
+class UserItemLikesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'clicker_username', 'item', 'styler_username')
+    list_filter = ('clicked_username', 'styler_username')
+
+    def clicker_username(self, obj):
+        return obj.clicker.username
+    clicker_username.admin_order_field = 'clicker'  # Allows column order sorting
+    clicker_username.short_description = 'Clicker'  # Renames column head
+
+    def styler_username(self, obj):
+        return obj.styler.username
+    styler_username.admin_order_field = 'styler'
+    styler_username.short_description = 'Styler'
+
+admin.site.register(UserItemLikes, UserItemLikesAdmin)
 
 
 class PortraitUploadAdmin(admin.ModelAdmin):
