@@ -9,6 +9,11 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 
 class CustomUser(AbstractUser):
+    VISIBILITY_CHOICES = [
+        ('public', 'Public'),
+        ('private', 'Private'),
+        ('followers', 'Followers'),
+    ]
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_customer = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_seller = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
@@ -16,6 +21,8 @@ class CustomUser(AbstractUser):
     bio = models.CharField(max_length=150, blank=True, null=True)
     name = models.CharField(max_length=30, blank=True, null=True)
     pfp = models.ImageField(upload_to='pfps/', blank=True, null=True, default='pfps/default_img.jpg')
+
+    profile_visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, default='public')
 
     followers_list = models.ManyToManyField(
         'self',
