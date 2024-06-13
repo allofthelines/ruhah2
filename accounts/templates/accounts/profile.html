@@ -140,7 +140,7 @@
             {% if editing_settings %}
                 <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <p style="margin-top: 8px; text-align: left;">
+                    <p style="margin-top: 15px; text-align: left;">
                         <label for="id_profile_visibility">Profile Visibility: </label>
                         {{ profile_settings_form.profile_visibility }}<br><br>
                     </p>
@@ -148,7 +148,7 @@
                     <button type="submit">Save changes</button>
                 </form>
             {% else %}
-                <p style="margin-top: 8px; text-align: left;">
+                <p style="margin-top: 15px; text-align: left;">
                     Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
                 </p>
