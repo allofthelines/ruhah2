@@ -68,6 +68,25 @@ class UserItemLikesAdmin(admin.ModelAdmin):
 
 admin.site.register(UserItemLikes, UserItemLikesAdmin)
 
+
+class UserItemCartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'buyer_username', 'item', 'styler_username')
+    list_filter = ('buyer', 'styler')
+
+    def buyer_username(self, obj):
+        return obj.buyer.username if obj.buyer else 'None'
+    buyer_username.admin_order_field = 'buyer'  # Allows column order sorting
+    buyer_username.short_description = 'Buyer'  # Renames column head
+
+    def styler_username(self, obj):
+        return obj.styler.username if obj.styler else 'None'
+    styler_username.admin_order_field = 'styler'
+    styler_username.short_description = 'Styler'
+
+admin.site.register(UserItemCart, UserItemCartAdmin)
+
+
+
 class PortraitUploadAdmin(admin.ModelAdmin):
     list_display = ('id', 'ticket_id_int', 'wearer_id', 'portrait_img', 'status', 'age_in_hours')
     search_fields = ('ticket_id_int', 'wearer_id__username', 'status')
