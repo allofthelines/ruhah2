@@ -25,7 +25,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'name', 'bio', 'pfp']
+        fields = ['username', 'email', 'name', 'bio', 'pfp', 'profile_visibility']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -36,6 +36,7 @@ class UserProfileForm(forms.ModelForm):
             self.fields['name'].initial = user.name
             self.fields['bio'].initial = user.bio
             self.fields['pfp'].initial = user.pfp
+            self.fields['profile_visibility'].initial = user.profile_visibility
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -49,6 +50,7 @@ class UserProfileForm(forms.ModelForm):
         user.username = self.cleaned_data['username']
         user.name = self.cleaned_data['name']
         user.bio = self.cleaned_data['bio']
+        user.profile_visibility = self.cleaned_data['profile_visibility']
         if 'pfp' in self.cleaned_data:
             user.pfp = self.cleaned_data['pfp']
 
