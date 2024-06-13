@@ -119,9 +119,8 @@ class UserItemLikes(models.Model):
         return f"Liker: {self.liker.username}, Item: {self.item}, Styler: {self.styler.username if self.styler else 'None'}"
 
     class Meta:
-        db_table = 'user_item_likes'
-        verbose_name = 'User Item Like'
-        verbose_name_plural = 'User Item Likes'
+        verbose_name = 'UserItemLikes'
+        verbose_name_plural = 'UserItemLikes'
 
 
 class PortraitUpload(models.Model):
