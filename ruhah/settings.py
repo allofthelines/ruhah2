@@ -20,6 +20,16 @@ ENVIRONMENT = config('ENVIRONMENT', default='development')
 DEBUG = config('DEBUG', default=True, cast=bool)
 DOMAIN_NAME = config('DOMAIN_NAME', default='http://localhost:8000')
 
+CELERY_BROKER_URL = config('REDIS_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = config('REDIS_URL', default='redis://localhost:6379/0')
+CELERY_BEAT_SCHEDULE = {
+    'clear_user_item_cart': {
+        'task': 'accounts.tasks.clear_user_item_cart',
+        'schedule': 21600.0,  # 6 hours in seconds
+    },
+}
+CELERY_TIMEZONE = 'UTC'
+
 
 ALLOWED_HOSTS = [
     'localhost',
