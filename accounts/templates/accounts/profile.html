@@ -13,12 +13,12 @@
     <div id="profile-menu" style="width: 15%;">
         <a href="#" onclick="showContent('user', 'Profile > Data')" style="text-decoration-line: underline; color: blue;">Data</a>
         <a href="#" onclick="showContent('customer', 'Profile > Sizes')" style="text-decoration-line: underline; color: blue;">Sizes</a>
-        <br>
         <a href="#" onclick="showContent('likes', 'Profile > Likes')" style="text-decoration-line: underline; color: blue;">Likes</a>
-        <a href="#" onclick="showContent('cart', 'Profile > Cart')" style="text-decoration-line: underline; color: blue;">Cart</a>
+        <a href="#" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
+        <br>
         <a href="#" onclick="showContent('upload', 'Profile > Upload')" style="text-decoration-line: underline; color: blue;">Upload</a>
         <br>
-        <a href="#" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
+        <a href="#" onclick="showContent('cart', 'Profile > Cart')" style="text-decoration-line: underline; color: blue;">Cart</a>
         <br>
         <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
         {% csrf_token %}
