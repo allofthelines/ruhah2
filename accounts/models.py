@@ -123,6 +123,19 @@ class UserItemLikes(models.Model):
         verbose_name_plural = 'UserItemLikes'
 
 
+class UserItemCart(models.Model):
+    buyer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='buyer_cart', blank=True, null=True)
+    item = models.ForeignKey('studio.Item', on_delete=models.CASCADE, blank=True, null=True)
+    styler = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='styler_cart', blank=True, null=True)
+
+    def __str__(self):
+        return f"Buyer: {self.buyer.username if self.buyer else 'None'}, Item: {self.item}, Styler: {self.styler.username if self.styler else 'None'}"
+
+    class Meta:
+        verbose_name = 'UserItemCart'
+        verbose_name_plural = 'UserItemCarts'
+
+
 class PortraitUpload(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
