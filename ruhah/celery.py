@@ -7,7 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ruhah.settings')
 
 app = Celery('ruhah')
 
-app.config_from_object(settings, namespace='CELERY')
+# app.config_from_object(settings, namespace='CELERY')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 @app.task(bind=True)
