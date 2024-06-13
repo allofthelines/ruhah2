@@ -54,7 +54,7 @@ admin.site.register(UserFollows, UserFollowsAdmin)
 
 class UserItemLikesAdmin(admin.ModelAdmin):
     list_display = ('id', 'clicker_username', 'item', 'styler_username')
-    list_filter = ('clicked_username', 'styler_username')
+    list_filter = ('clicker', 'styler')
 
     def clicker_username(self, obj):
         return obj.clicker.username
