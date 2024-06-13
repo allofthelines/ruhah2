@@ -67,19 +67,22 @@
 
 
     <div id="them-by-me-content" class="outfit-grid">
-        {% for outfit in profile_user.outfit_set.all %}
-            {% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}
-                <div class="outfit-item" onclick="toggleImage(this)">
-                    <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-                </div>
-            {% else %}
-                <div class="outfit-item">
-                    <img src="{{ outfit.image.url }}" alt="Outfit Image">
-                </div>
-            {% endif %}
-        {% endfor %}
+        {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
+            {% for outfit in profile_user.outfit_set.all %}
+                {% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}
+                    <div class="outfit-item" onclick="toggleImage(this)">
+                        <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                        <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                    </div>
+                {% else %}
+                    <div class="outfit-item">
+                        <img src="{{ outfit.image.url }}" alt="Outfit Image">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
+
 
 
     {% comment %}
