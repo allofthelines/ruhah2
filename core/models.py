@@ -62,14 +62,13 @@ class Outfit(models.Model):
         ext = filename.split('.')[-1]
         base_filename = f"portrait_{self.pk}"
         filename = f"{base_filename}.{ext}"
-        filepath = os.path.join('portraits/', filename)
 
         counter = 1
-        while os.path.exists(os.path.join(settings.MEDIA_ROOT, filepath)):
+        while os.path.exists(os.path.join(settings.MEDIA_ROOT, 'portraits/', filename)):
             filename = f"{base_filename}_{counter}.{ext}"
-            filepath = os.path.join('portraits/', filename)
             counter += 1
 
+        filepath = os.path.join('portraits/', filename)
         return filepath
 
     def _resize_image(self, width, height):
