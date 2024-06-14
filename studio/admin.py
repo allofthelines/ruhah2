@@ -23,7 +23,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = [SizesFilter, 'condition', 'location', 'cat', 'shopify_store'] # eftiaksa custom filter
     ordering = ['itemid']
     fields = [
-        'image', 'item_id', 'tags'
+        'image', 'item_id', 'tags',
         'shopify_product_id', 'shopify_store', 'cat', 'taglist', 'condition',
         'name', 'price', 'sizes_xyz', 'size_waist_inches', 'size_uk',
         'brand', 'location'
