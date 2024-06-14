@@ -86,7 +86,7 @@ def studio_items_guest(request, ticket_id):
     if search_query:
         query = Q()
         for term in search_query.split():
-            query |= Q(tags__icontains=term)
+            query &= Q(tags__icontains=term)
         items = Item.objects.filter(query).distinct()[:20]  # Limit to first 20 search results
     else:
         items = Item.objects.all()[:20]  # Limit to first 20 items
@@ -203,11 +203,13 @@ def item_search(request, ticket_id):
         Q(cat='accessory')
     ).distinct()  # Adding distinct to avoid duplicates
 
+    '''
     # Filter items based on availability of stock (assuming availability is implicit in sizes_xyz)
     items = items.filter(
         Q(stock__isnull=True) | Q(stock__gt=0),
         is_ship_ready='yes'
     ).distinct()  # Adding distinct to avoid duplicates
+    '''
 
     return render(request, 'studio/studio_items.html', {
         'ticket': ticket,
