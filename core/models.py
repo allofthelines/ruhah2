@@ -49,9 +49,11 @@ class Outfit(models.Model):
         if self.pk and self._state.adding is False:
             old_instance = Outfit.objects.get(pk=self.pk)
             if self.portrait and self.portrait != old_instance.portrait:
-                # Process new portrait file
+                # Rename the new portrait file
                 self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
+                # Save the instance to ensure the new name is set
                 super().save(update_fields=['portrait'])
+                # Process the new portrait image
                 self._process_portrait_image()
 
         # Always process the image field
@@ -94,6 +96,9 @@ class Outfit(models.Model):
         if not self.portrait:
             return
 
+        # Define the output path for the processed image
+        output_path = self.portrait.path
+
         with self.portrait.open() as f:
             img = Image.open(f).convert("RGBA")
 
@@ -112,8 +117,7 @@ class Outfit(models.Model):
 
         final_image = background.convert("RGB")
 
-        with self.portrait.open("wb") as f:
-            final_image.save(f, 'JPEG')
+        final_image.save(output_path, 'JPEG')
 
     class Meta:
         db_table = 'outfit_table'
