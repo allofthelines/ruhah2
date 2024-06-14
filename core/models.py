@@ -118,6 +118,8 @@ class Outfit(models.Model):
         final_image.save(temp_buffer, format='JPEG')
         temp_buffer.seek(0)
 
+        print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', self.portrait.name)
+
         self.portrait.save(self.portrait.name, ContentFile(temp_buffer.read()), save=False)
 
     class Meta:
