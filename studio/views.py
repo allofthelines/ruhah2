@@ -162,14 +162,6 @@ def item_search(request, ticket_id):
         Q(cat='accessory')
     ).distinct()  # Adding distinct to avoid duplicates
 
-    '''
-    # Filter items based on availability of stock (assuming availability is implicit in sizes_xyz)
-    items = items.filter(
-        Q(stock__isnull=True) | Q(stock__gt=0),
-        is_ship_ready='yes'
-    ).distinct()  # Adding distinct to avoid duplicates
-    '''
-
     return render(request, 'studio/studio_items.html', {
         'ticket': ticket,
         'outfit_temp': outfit_temp,
