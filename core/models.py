@@ -45,20 +45,17 @@ class Outfit(models.Model):
         return Outfit.objects.aggregate(rank=Count("rating", filter=Q(rating__gt=self.rating), distinct=True) + 1)["rank"]
 
     def save(self, *args, **kwargs):
-        # Check if a new file has been uploaded to the portrait field
-        if self.pk and self._state.adding is False:
-            old_instance = Outfit.objects.get(pk=self.pk)
-            if self.portrait and self.portrait != old_instance.portrait:
-                # Rename the new portrait file
-                self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
-                # Save the instance to ensure the new name is set
-                super().save(update_fields=['portrait'])
-                # Process the new portrait image
-                self._process_portrait_image()
-
-        # Always process the image field
+        # Always process the image field first
         super().save(*args, **kwargs)
         self._resize_image(500, 500)
+
+        # Process the portrait if it has been changed or newly uploaded
+        if self.portrait and self.portrait != Outfit.objects.get(pk=self.pk).portrait:
+            self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
+            # Process the new portrait image
+            self._process_portrait_image()
+            # Save the instance again to store the processed portrait
+            super().save(update_fields=['portrait'])
 
     def _get_portrait_upload_path(self, filename):
         ext = filename.split('.')[-1]
@@ -96,9 +93,7 @@ class Outfit(models.Model):
         if not self.portrait:
             return
 
-        # Define the output path for the processed image
-        output_path = self.portrait.path
-
+        # Open the uploaded portrait image
         with self.portrait.open() as f:
             img = Image.open(f).convert("RGBA")
 
@@ -117,10 +112,17 @@ class Outfit(models.Model):
 
         final_image = background.convert("RGB")
 
-        final_image.save(output_path, 'JPEG')
+        # Save the processed image to a BytesIO object
+        temp_buffer = io.BytesIO()
+        final_image.save(temp_buffer, format='JPEG')
+        temp_buffer.seek(0)
+
+        # Save the processed image back to the ImageField
+        self.portrait.save(self.portrait.name, ContentFile(temp_buffer.read()), save=False)
 
     class Meta:
         db_table = 'outfit_table'
+
 
 
 
