@@ -37,10 +37,9 @@ class Command(BaseCommand):
                    sheet.cell(row=1, column=5).value,
                    sheet.cell(row=1, column=6).value,
                    sheet.cell(row=1, column=9).value,
-                   sheet.cell(row=1, column=10).value,
                    sheet.cell(row=1, column=11).value]
 
-        expected_headers = ['itemid', 'name', 'type', 'brand', 'condition', 'location', 'cat', 'size_xyz', 'price']
+        expected_headers = ['itemid', 'name', 'type', 'brand', 'condition', 'location', 'cat', 'price']
         if headers != expected_headers:
             print(headers)
             self.stdout.write(self.style.ERROR('Headers do not match the expected values'))
@@ -55,7 +54,6 @@ class Command(BaseCommand):
             condition = row[4].value  # Sixth column (F)
             location = row[5].value  # Seventh column (G)
             cat = row[8].value  # Tenth column (J)
-            size_xyz = row[9].value
             price = row[10].value
 
             if itemid:
