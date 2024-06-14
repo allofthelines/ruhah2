@@ -135,6 +135,7 @@ class Outfit(models.Model):
 
 
 
+
 '''
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
