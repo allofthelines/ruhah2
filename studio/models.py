@@ -41,10 +41,6 @@ class Item(models.Model):
         ('new', 'new'),
         ('pre-owned', 'pre-owned'),
     ]
-    SHIP_READY_CHOICES = [
-        ('yes', 'yes'),
-        ('no', 'no'),
-    ]
     CAT_CHOICES = [
         ('top', 'top'),
         ('bottom', 'bottom'),
@@ -53,36 +49,31 @@ class Item(models.Model):
         ('dress', 'dress')
     ]
 
+    # SHOPIFY API
     name = models.CharField(max_length=255, blank=True, null=True)
     price = models.FloatField(null=True, blank=True)
-    cat = models.CharField(max_length=20, choices=CAT_CHOICES, blank=True)
-    itemid = models.CharField(max_length=30, blank=True, null=True)
-    sku = models.CharField(max_length=30, blank=True, null=True)
-    brand = models.CharField(max_length=100, default='nologo', blank=True, null=True)
-    owner = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, blank=True, null=True)
-    condition = models.CharField(max_length=10, choices=CONDITION_CHOICES, blank=True, null=True)
-    location = models.CharField(max_length=255, blank=True, null=True)
-    is_ship_ready = models.CharField(max_length=3, choices=SHIP_READY_CHOICES, blank=True, null=True)
-    tags = models.CharField(max_length=255, blank=True, null=True)
-    taglist = models.ManyToManyField('studio.Tag', blank=True)
-    image = models.ImageField(upload_to="items/", default='items/default.jpg', blank=True, null=True)
-    stock = models.IntegerField(blank=True, null=True)
-
-    SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
-    size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True, null=True)
-
     sizes_xyz = models.ManyToManyField(SizeCategory, blank=True)
+    size_waist_inches = models.FloatField(null=True, blank=True) # RENAME RE-TYPE
+    size_uk = models.FloatField(null=True, blank=True) # RENAME sizes_shoe_uk
+    size_eu = models.FloatField(null=True, blank=True) # RENAME sizes_shoe_eu
 
-    size_uk = models.FloatField(null=True, blank=True)
-    size_us = models.FloatField(null=True, blank=True)
-    size_eu = models.FloatField(null=True, blank=True)
-    size_chest_inches = models.FloatField(null=True, blank=True)
-    size_waist_inches = models.FloatField(null=True, blank=True)
-    shoe_mw = models.CharField(max_length=10, choices=[('man', 'man'), ('woman', 'woman'), ('unisex', 'unisex')],
-                               blank=True, null=True)
+    # SHOPIFY STORE DB
+    brand = models.CharField(max_length=100, default='nologo', blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
 
+    # TYPE ME XERI DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
     shopify_store = models.ForeignKey(ShopifyStore, on_delete=models.SET_NULL, blank=True, null=True)
     shopify_product_id = models.CharField(max_length=255, blank=True, null=True)
+    cat = models.CharField(max_length=20, choices=CAT_CHOICES, blank=True)
+    taglist = models.ManyToManyField('studio.Tag', blank=True)
+    condition = models.CharField(max_length=10, choices=CONDITION_CHOICES, blank=True, null=True)
+
+    # AUTO GEN ME SCRIPT
+    tags = models.CharField(max_length=255, blank=True, null=True)
+    itemid = models.CharField(max_length=30, blank=True, null=True)
+
+    # DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
+    image = models.ImageField(upload_to="items/", default='items/default.jpg', blank=True, null=True)
 
     def __str__(self):
         return self.itemid
