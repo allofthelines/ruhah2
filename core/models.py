@@ -51,7 +51,6 @@ class Outfit(models.Model):
             if self.portrait and self.portrait != old_instance.portrait:
                 # Rename and process new portrait file
                 self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
-                print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', self.portrait.name)
                 # super().save(update_fields=['portrait'])
                 # commented out giati ginetai sto _process_portrait_image()
                 # an to vgaleis afto ksana comment-in
@@ -72,7 +71,6 @@ class Outfit(models.Model):
             counter += 1
 
         filepath = os.path.join('portraits/', filename)
-        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', filepath)
         # oxi filepath giati sto save bainei aftomata to portraits/ nomizw
         return filename
 
@@ -101,7 +99,6 @@ class Outfit(models.Model):
         with self.portrait.open() as f:
             img = Image.open(f).convert("RGBA")
 
-        print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', self.portrait.name)
         new_size = (700, 700)
         background = Image.new("RGBA", new_size, (255, 255, 255, 255))
 
@@ -120,8 +117,6 @@ class Outfit(models.Model):
         temp_buffer = io.BytesIO()
         final_image.save(temp_buffer, format='JPEG')
         temp_buffer.seek(0)
-
-        print('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', self.portrait.name)
 
         self.portrait.save(self.portrait.name, ContentFile(temp_buffer.read()), save=False)
 
