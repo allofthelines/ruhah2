@@ -23,7 +23,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = [SizesFilter, 'condition', 'location', 'cat', 'shopify_store'] # eftiaksa custom filter
     ordering = ['itemid']
     fields = ['itemid', 'name', 'cat', 'brand', 'owner', 'condition',
-              'location', 'is_ship_ready', 'tags', 'taglist', 'image',
+              'location', 'tags', 'taglist', 'image',
               'sizes_xyz', 'shopify_store', 'shopify_product_id', 'price']
 
     def thumbnail(self, obj):
