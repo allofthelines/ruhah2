@@ -33,6 +33,16 @@ class SizeShoeUkCategory(models.Model):
     def __str__(self):
         return self.name
 
+class SizeWaistInchCategory(models.Model):
+    SIZE_CHOICES = [('23', '23'), ('24', '24'), ('25', '25'), ('26', '26'), ('27', '27'),
+                    ('28', '28'), ('29', '29'), ('30', '30'), ('31', '31'), ('32', '32'),
+                    ('33', '33'), ('34', '34'), ('35', '35'), ('36', '36'), ('37', '37')]
+
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class ShopifyStore(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     location = models.CharField(max_length=255, null=True, blank=True)
@@ -64,6 +74,9 @@ class Item(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     price = models.FloatField(null=True, blank=True)
     sizes_xyz = models.ManyToManyField(SizeCategory, blank=True)
+    sizes_shoe_uk = models.ManyToManyField(SizeShoeUkCategory, blank=True)
+    # sizes_waist_inches = models.models.ManyToManyField(SizeWaistInchCategory, blank=True)
+
     size_waist_inches = models.FloatField(null=True, blank=True) # RENAME RE-TYPE
     size_uk = models.FloatField(null=True, blank=True) # RENAME sizes_shoe_uk
     size_eu = models.FloatField(null=True, blank=True) # RENAME sizes_shoe_eu
