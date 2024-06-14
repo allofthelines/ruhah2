@@ -52,7 +52,9 @@ class Outfit(models.Model):
                 # Rename and process new portrait file
                 self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
                 print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', self.portrait.name)
-                super().save(update_fields=['portrait'])
+                # super().save(update_fields=['portrait'])
+                # commented out giati ginetai sto _process_portrait_image()
+                # an to vgaleis afto ksana comment-in
                 self._process_portrait_image()
 
         # Always process the image field
