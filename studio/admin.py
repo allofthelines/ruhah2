@@ -18,11 +18,11 @@ class SizesFilter(SimpleListFilter):
         return queryset
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'itemid', 'owner', 'thumbnail', 'image', 'shopify_store'] # vale alliws kapws to sizes_xyz oxi directly giati error
+    list_display = ['id', 'itemid', 'thumbnail', 'image', 'shopify_store'] # vale alliws kapws to sizes_xyz oxi directly giati error
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
     list_filter = [SizesFilter, 'condition', 'location', 'cat', 'shopify_store'] # eftiaksa custom filter
     ordering = ['itemid']
-    fields = ['itemid', 'name', 'cat', 'brand', 'owner', 'condition',
+    fields = ['itemid', 'name', 'cat', 'brand', 'condition',
               'location', 'tags', 'taglist', 'image',
               'sizes_xyz', 'shopify_store', 'shopify_product_id', 'price']
 
