@@ -51,7 +51,7 @@ class Outfit(models.Model):
             if self.portrait and self.portrait != old_instance.portrait:
                 # Rename and process new portrait file
                 self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
-                print('BBBBBBBBBBBBBBBBBB', self.portrait.name)
+                print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', self.portrait.name)
                 super().save(update_fields=['portrait'])
                 self._process_portrait_image()
 
@@ -71,7 +71,8 @@ class Outfit(models.Model):
 
         filepath = os.path.join('portraits/', filename)
         print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', filepath)
-        return filepath
+        # oxi filepath giati sto save bainei aftomata to portraits/ nomizw
+        return filename
 
     def _resize_image(self, width, height):
         if self.image.width < width and self.image.height < height:
