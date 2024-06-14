@@ -22,6 +22,17 @@ class SizeCategory(models.Model):
     def __str__(self):
         return self.name
 
+class SizeShoeUkCategory(models.Model):
+    SIZE_CHOICES = [('2', '2'), ('2.5', '2.5'), ('3', '3'), ('3.5', '3.5'), ('4', '4'), ('4.5', '4.5'),
+                    ('5', '5'), ('5.5', '5.5'), ('6', '6'), ('6.5', '6.5'), ('7', '7'), ('7.5', '7.5'),
+                    ('8', '8'), ('8.5', '8.5'), ('9', '9'), ('9.5', '9.5'), ('10', '10'), ('10.5', '10.5'),
+                    ('11', '11'), ('11.5', '11.5'), ('12', '12'), ('12.5', '12.5'), ('13', '13'), ('13.5', '13.5')]
+
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class ShopifyStore(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     location = models.CharField(max_length=255, null=True, blank=True)
