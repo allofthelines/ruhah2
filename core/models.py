@@ -50,9 +50,8 @@ class Outfit(models.Model):
             old_instance = Outfit.objects.get(pk=self.pk)
             if self.portrait and self.portrait != old_instance.portrait:
                 # Rename and process new portrait file
-                print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', filepath)
                 self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
-                print('CCCCCCCCCCCCCCCCCCCCCCCC', filepath)
+                print('BBBBBBBBBBBBBBBBBB', self.portrait.name)
                 super().save(update_fields=['portrait'])
                 self._process_portrait_image()
 
