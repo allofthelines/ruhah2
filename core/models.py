@@ -27,110 +27,6 @@ def get_portrait_upload_path(instance, filename):
 
 
 
-
-class Outfit(models.Model):
-    rating = models.IntegerField(default=1000)
-    image = models.ImageField(upload_to="outfits/", default="outfits/default_img.jpg")
-    portrait = models.ImageField(upload_to="portraits/", default="portraits/default_img.jpg", blank=True, null=True)
-    ticket_id = models.ForeignKey('box.Ticket', on_delete=models.SET_NULL, null=True, blank=True)
-    maker_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-    timestamp = models.DateTimeField(default=timezone.now)
-    items = models.ManyToManyField('studio.Item', blank=True)
-
-    def __str__(self):
-        return f"pk={self.pk}, rating={self.rating}"
-
-    @property
-    def rank(self):
-        return Outfit.objects.aggregate(rank=Count("rating", filter=Q(rating__gt=self.rating), distinct=True) + 1)["rank"]
-
-    def save(self, *args, **kwargs):
-        # Always process the image field first
-        super().save(*args, **kwargs)
-        self._resize_image(500, 500)
-
-        # Process the portrait if it has been changed or newly uploaded
-        if self.portrait and self.portrait != Outfit.objects.get(pk=self.pk).portrait:
-            self.portrait.name = self._get_portrait_upload_path(self.portrait.name)
-            # Process the new portrait image
-            self._process_portrait_image()
-            # Save the instance again to store the processed portrait
-            super().save(update_fields=['portrait'])
-
-    def _get_portrait_upload_path(self, filename):
-        ext = filename.split('.')[-1]
-        base_filename = f"portrait_{self.pk}"
-        filename = f"{base_filename}.{ext}"
-        filepath = os.path.join('portraits/', filename)
-
-        counter = 1
-        while os.path.exists(os.path.join(settings.MEDIA_ROOT, filepath)):
-            filename = f"{base_filename}_{counter}.{ext}"
-            filepath = os.path.join('portraits/', filename)
-            counter += 1
-
-        return filepath
-
-    def _resize_image(self, width, height):
-        if self.image.width < width and self.image.height < height:
-            return
-
-        with self.image.open() as f:
-            image = Image.open(f)
-            image.load()
-
-        if image.width > width:
-            aspect_ratio = image.width / image.height
-            image = image.resize((width, round(width / aspect_ratio)))
-
-        if image.height > height:
-            image = image.crop((0, image.height - height, width, image.height))
-
-        with self.image.open("wb") as f:
-            image.save(f, 'JPEG')
-
-    def _process_portrait_image(self):
-        if not self.portrait:
-            return
-
-        # Open the uploaded portrait image
-        with self.portrait.open() as f:
-            img = Image.open(f).convert("RGBA")
-
-        new_size = (700, 700)
-        background = Image.new("RGBA", new_size, (255, 255, 255, 255))
-
-        scale_factor = random.uniform(0.8, 0.9)
-        img.thumbnail((new_size[0] * scale_factor, new_size[1] * scale_factor), Image.ANTIALIAS)
-
-        paste_position = (
-            (new_size[0] - img.size[0]) // 2,
-            (new_size[1] - img.size[1]) // 2
-        )
-
-        background.paste(img, paste_position, img)
-
-        final_image = background.convert("RGB")
-
-        # Save the processed image to a BytesIO object
-        temp_buffer = io.BytesIO()
-        final_image.save(temp_buffer, format='JPEG')
-        temp_buffer.seek(0)
-
-        # Save the processed image back to the ImageField
-        self.portrait.save(self.portrait.name, ContentFile(temp_buffer.read()), save=False)
-
-    class Meta:
-        db_table = 'outfit_table'
-
-
-
-
-
-
-
-
-'''
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
     image = models.ImageField(upload_to="outfits/", default="outfits/default_img.jpg")
@@ -217,7 +113,7 @@ class Outfit(models.Model):
 
 
 
-
+'''
 
 class Outfit(models.Model):
     rating = models.IntegerField(default=1000)
