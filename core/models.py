@@ -99,6 +99,7 @@ class Outfit(models.Model):
         with self.portrait.open() as f:
             img = Image.open(f).convert("RGBA")
 
+        print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', self.portrait.name)
         new_size = (700, 700)
         background = Image.new("RGBA", new_size, (255, 255, 255, 255))
 
@@ -118,7 +119,7 @@ class Outfit(models.Model):
         final_image.save(temp_buffer, format='JPEG')
         temp_buffer.seek(0)
 
-        print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', self.portrait.name)
+        print('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', self.portrait.name)
 
         self.portrait.save(self.portrait.name, ContentFile(temp_buffer.read()), save=False)
 
