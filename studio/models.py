@@ -101,7 +101,6 @@ class Item(models.Model):
     sizes_waist_inches = models.ManyToManyField(SizeWaistInchCategory, blank=True)
 
     # SHOPIFY STORE DB
-    brand = models.CharField(max_length=100, default='nologo', blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
 
     # TYPE ME XERI DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
