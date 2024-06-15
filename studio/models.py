@@ -44,14 +44,42 @@ class SizeWaistInchCategory(models.Model):
         return self.size
 
 class ShopifyStore(models.Model):
+    # rename to EcommerceStore
     name = models.CharField(max_length=255, null=True, blank=True)
-    location = models.CharField(max_length=255, null=True, blank=True)
-    address = models.CharField(max_length=255, null=True, blank=True)
+    shop_url = models.CharField(max_length=255, null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True) # delete
+
+    PLATFORM_CHOICES = [
+        ('shopify', 'Shopify'),
+        ('bigcommerce', 'BigCommerce'),
+        ('woocommerce', 'WooCommerce'),
+        ('magento', 'Magento'),
+        ('squarespace', 'Squarespace'),
+        ('wix', 'Wix'),
+        ('prestashop', 'PrestaShop'),
+        ('weebly', 'Weebly'),
+        ('bigcartel', 'BigCartel'),
+    ]
+
+    # address
+    address_street_1 = models.CharField(max_length=255, null=True, blank=True)
+    address_street_2 = models.CharField(max_length=255, null=True, blank=True)
+    address_postal_code = models.CharField(max_length=50, null=True, blank=True)
+    address_city = models.CharField(max_length=50, null=True, blank=True)
+    address_country = models.CharField(max_length=50, null=True, blank=True)
+
+    # api
+    store_platform = models.CharField(max_length=50, choices=PLATFORM_CHOICES, null=True, blank=True)
+    api_store_id = models.CharField(max_length=255, null=True, blank=True)
     api_key = models.CharField(max_length=255, null=True, blank=True)
     api_secret = models.CharField(max_length=255, null=True, blank=True)
-    access_token = models.CharField(max_length=255, null=True, blank=True)
-    shop_url = models.CharField(max_length=255, null=True, blank=True)
+    access_token = models.CharField(max_length=255, null=True, blank=True) # rename api_access_token
+
     size_mapping = jsonfield.JSONField(null=True, blank=True)
+
+    # delete
+    location = models.CharField(max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name
