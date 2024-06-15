@@ -72,7 +72,7 @@ class ShopifyStore(models.Model):
     api_store_id = models.CharField(max_length=255, null=True, blank=True)
     api_key = models.CharField(max_length=255, null=True, blank=True)
     api_secret = models.CharField(max_length=255, null=True, blank=True)
-    api_access_token = models.CharField(max_length=255, null=True, blank=True) # rename api_access_token
+    api_access_token = models.CharField(max_length=255, null=True, blank=True)
 
     size_mapping = jsonfield.JSONField(null=True, blank=True)
 
