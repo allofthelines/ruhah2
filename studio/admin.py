@@ -59,11 +59,11 @@ admin.site.register(StudioOutfitTemp, StudioOutfitTempAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['id', 'tag_name', 'tag_type']
+    list_display = ['tag_name', 'tag_type']
     search_fields = ['tag_name', 'tag_type']
     list_filter = ['tag_type']
     ordering = ['tag_type']
-    fields = ['id', 'tag_name', 'tag_type']
+    fields = ['tag_name', 'tag_type']
 
 admin.site.register(Tag, TagAdmin)
 
