@@ -25,7 +25,7 @@ class ItemAdmin(admin.ModelAdmin):
     fields = [
         'image', 'itemid', 'tags',
         'shopify_product_id', 'shopify_store', 'cat', 'taglist', 'condition',
-        'name', 'price', 'sizes_xyz', 'size_waist_inches', 'size_uk',
+        'name', 'price', 'sizes_xyz', 'size_waist_inches',
         'brand', 'location'
     ]
 
