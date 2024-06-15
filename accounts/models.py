@@ -196,19 +196,3 @@ class Customer(models.Model):
     class Meta:
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
-
-
-
-
-class Seller(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-    items_uploaded = models.ManyToManyField('studio.Item', blank=True)
-    items_sold = models.IntegerField(blank=True, null=True, default=0)
-    total_sales = models.IntegerField(blank=True, null=True, default=0)
-    fumio_profit = models.IntegerField(blank=True, null=True, default=0)
-    seller_profit = models.IntegerField(blank=True, null=True, default=0)
-
-    class Meta:
-        verbose_name = 'Seller'
-        verbose_name_plural = 'Sellers'
