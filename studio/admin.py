@@ -41,7 +41,7 @@ class ItemAdmin(admin.ModelAdmin):
     display_sizes.short_description = 'Sizes'
 
     def display_tags(self, obj):
-        return ", ".join([tag.tag_name for tag in obj.tags.all()])
+        return ", ".join([tag.tag_name for tag in obj.taglist.all()])
 
 admin.site.register(Item, ItemAdmin)
 
