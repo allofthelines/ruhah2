@@ -31,7 +31,7 @@ class SizeShoeUkCategory(models.Model):
     size = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.size
 
 class SizeWaistInchCategory(models.Model):
     SIZE_CHOICES = [('23', '23'), ('24', '24'), ('25', '25'), ('26', '26'), ('27', '27'),
@@ -41,7 +41,7 @@ class SizeWaistInchCategory(models.Model):
     size = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.size
 
 class ShopifyStore(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
