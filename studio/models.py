@@ -47,7 +47,6 @@ class ShopifyStore(models.Model):
     # rename to EcommerceStore
     name = models.CharField(max_length=255, null=True, blank=True)
     shop_url = models.CharField(max_length=255, null=True, blank=True)
-    location = models.CharField(max_length=255, null=True, blank=True) # delete
 
     PLATFORM_CHOICES = [
         ('shopify', 'Shopify'),
@@ -76,10 +75,6 @@ class ShopifyStore(models.Model):
     access_token = models.CharField(max_length=255, null=True, blank=True) # rename api_access_token
 
     size_mapping = jsonfield.JSONField(null=True, blank=True)
-
-    # delete
-    location = models.CharField(max_length=255, null=True, blank=True)
-    address = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name
