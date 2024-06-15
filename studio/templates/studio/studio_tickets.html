@@ -16,25 +16,27 @@
     </thead>
     <tbody>
       {% for ticket in page_obj %}
+        {% if ticket.creator_id.id != user.id %}
           <!-- grafw creator_id.id giati creator_id=='eleni' an thes na to allakseis go @ customuser kai these __str__-->
-        {% with ticket.creator_id.id as creator_id %}
-          {% if creator_id in following_user_ids %}
-          <tr style="background-color: #FDFD96;">
-          {% else %}
-          <tr>
-          {% endif %}
-            <td>{{ ticket.style1 }}</td>
-            <td>{{ ticket.occasion }}</td>
-            <td>{{ ticket.notes }}</td>
-            <td>
-              {% if user.is_authenticated %}
-                <a href="{% url 'studio:studio_items' ticket.id %}">Choose</a>
-              {% else %}
-                <a href="{% url 'studio:studio_items_guest' ticket.id %}">Choose</a>
-              {% endif %}
-            </td>
-          </tr>
-        {% endwith %}
+          {% with ticket.creator_id.id as creator_id %}
+            {% if creator_id in following_user_ids %}
+            <tr style="background-color: #FDFD96;">
+            {% else %}
+            <tr>
+            {% endif %}
+              <td>{{ ticket.style1 }}</td>
+              <td>{{ ticket.occasion }}</td>
+              <td>{{ ticket.notes }}</td>
+              <td>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'studio:studio_items' ticket.id %}">Choose</a>
+                {% else %}
+                  <a href="{% url 'studio:studio_items_guest' ticket.id %}">Choose</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endwith %}
+        {% endif %}
       {% endfor %}
     </tbody>
   </table>
@@ -52,3 +54,4 @@
     </span>
   </nav>
 {% endblock %}
+
