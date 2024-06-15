@@ -68,7 +68,7 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = [
             'top_size_xyz', 'bottom_size_xyz', 'size_waist_inches',
-            'shoe_size_eu', 'height', 'weight'
+            'shoe_size_eu', 'shoe_size_uk', 'height', 'weight'
         ]
 
     def __init__(self, *args, **kwargs):
@@ -79,6 +79,7 @@ class CustomerForm(forms.ModelForm):
             self.fields['bottom_size_xyz'].initial = customer.bottom_size_xyz
             self.fields['size_waist_inches'].initial = customer.size_waist_inches
             self.fields['shoe_size_eu'].initial = customer.shoe_size_eu
+            self.fields['shoe_size_uk'].initial = customer.shoe_size_uk
             self.fields['height'].initial = customer.height
             self.fields['weight'].initial = customer.weight
 
@@ -88,6 +89,7 @@ class CustomerForm(forms.ModelForm):
         customer.bottom_size_xyz = self.cleaned_data['bottom_size_xyz']
         customer.size_waist_inches = self.cleaned_data['size_waist_inches']
         customer.shoe_size_eu = self.cleaned_data['shoe_size_eu']
+        customer.shoe_size_uk = self.cleaned_data['shoe_size_uk']
         customer.height = self.cleaned_data['height']
         customer.weight = self.cleaned_data['weight']
         if commit:
