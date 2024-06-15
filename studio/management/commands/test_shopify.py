@@ -53,11 +53,12 @@ class Command(BaseCommand):
                 primary_key = product.id  # Fetching the primary key (Shopify product ID)
                 self.stdout.write(self.style.SUCCESS(f"Product ID: {primary_key} - {title}"))
                 
-                # Display the availability of each size
+                # Display the availability and price of each size
                 for variant in product.variants:
                     size = variant.option1  # Assuming size is the first option
                     availability = variant.inventory_quantity
-                    self.stdout.write(self.style.SUCCESS(f"  {title}, {size}, Availability: {availability}"))
+                    price = variant.price  # Fetching the price
+                    self.stdout.write(self.style.SUCCESS(f"  {title}, {size}, Availability: {availability}, Price: {price}"))
         except Exception as e:
             self.stderr.write(self.style.ERROR(f"Error fetching products: {e}"))
             
