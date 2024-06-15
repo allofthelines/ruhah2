@@ -36,11 +36,15 @@ class Ticket(models.Model):
     SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
+    SIZE_WAIST_INCHES_CHOICES = [(str(size), str(size)) for size in range(24, 39)]
+    SHOE_SIZE_UK_CHOICES = [(str(size), str(size)) for size in range(2, 14)] + \
+                           [(str(size + 0.5), str(size + 0.5)) for size in range(2, 13)]
 
     size_top_xyz = models.CharField(max_length=3, choices=SIZE_CHOICES, blank=True, null=True)
     size_bottom_xyz = models.CharField(max_length=3, choices=SIZE_CHOICES, blank=True, null=True)
-    size_waist_inches = models.IntegerField(blank=True, null=True)
+    size_waist_inches = models.CharField(max_length=10, choices=SIZE_WAIST_INCHES_CHOICES, null=True, blank=True)
     size_shoe_eu = models.CharField(max_length=10, choices=SHOE_SIZE_EU_CHOICES, null=True, blank=True)
+    size_shoe_uk = models.CharField(max_length=10, choices=SHOE_SIZE_UK_CHOICES, null=True, blank=True)
 
     maximum_outfits = models.IntegerField(default=5)
     current_outfits = models.IntegerField(default=0)

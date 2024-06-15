@@ -182,12 +182,15 @@ class Customer(models.Model):
     SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
+    SIZE_WAIST_INCHES_CHOICES = [(str(size), str(size)) for size in range(24, 39)]
+    SHOE_SIZE_UK_CHOICES = [(str(size), str(size)) for size in range(2, 14)] + \
+                           [(str(size + 0.5), str(size + 0.5)) for size in range(2, 13)]
 
     top_size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
     bottom_size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
-    size_waist_inches = models.IntegerField(default=0, null=True, blank=True)
+    size_waist_inches = models.CharField(max_length=10, choices=SIZE_WAIST_INCHES_CHOICES, null=True, blank=True)
     shoe_size_eu = models.CharField(max_length=10, choices=SHOE_SIZE_EU_CHOICES, null=True, blank=True)
-    shoe_size_uk = models.FloatField(null=True, blank=True)
+    shoe_size_uk = models.CharField(max_length=10, choices=SHOE_SIZE_UK_CHOICES, null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
     birth_year = models.IntegerField(null=True, blank=True)
