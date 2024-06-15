@@ -18,15 +18,11 @@ body {
   min-height: 100vh;
   margin: 0 20px;
   font-family: 'Roboto Mono';
-    /*font-family: 'Poppins', sans-serif;
-    font-weight: 300;*/
   font-size: 15px;
 }
 
 select, option, button, input, textarea {
     font-family: 'Roboto Mono';
-    /*font-family: 'Poppins', sans-serif;
-    font-weight: 300;*/
 }
 
 textarea {
@@ -45,9 +41,8 @@ option {
 
 
 
-a:link, a:visited {
+a:visited {
     color: blue; /* Visited link color */
-    text-decoration: none;
 }
 
 #header {
