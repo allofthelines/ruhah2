@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item, Tag, StudioOutfitTemp, ShopifyStore, SizeCategory
+from .models import Item, Tag, StudioOutfitTemp, ShopifyStore, SizeCategory, SizeShoeUkCategory, SizeWaistInchCategory
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
 from .forms import ShopifyStoreForm
