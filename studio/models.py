@@ -68,11 +68,11 @@ class ShopifyStore(models.Model):
     address_country = models.CharField(max_length=50, null=True, blank=True)
 
     # api
-    store_platform = models.CharField(max_length=50, choices=PLATFORM_CHOICES, null=True, blank=True)
+    platform = models.CharField(max_length=50, choices=PLATFORM_CHOICES, null=True, blank=True)
     api_store_id = models.CharField(max_length=255, null=True, blank=True)
     api_key = models.CharField(max_length=255, null=True, blank=True)
     api_secret = models.CharField(max_length=255, null=True, blank=True)
-    access_token = models.CharField(max_length=255, null=True, blank=True) # rename api_access_token
+    api_access_token = models.CharField(max_length=255, null=True, blank=True) # rename api_access_token
 
     size_mapping = jsonfield.JSONField(null=True, blank=True)
 
