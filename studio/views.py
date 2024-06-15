@@ -158,7 +158,9 @@ def item_search(request, ticket_id):
     items = items.filter(
         Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
         Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
-        Q(cat='footwear', sizes_xyz__name=ticket.size_shoe_eu) |
+        Q(cat='footwear') & (
+                Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
+        ) |
         Q(cat='accessory')
     ).distinct()  # Adding distinct to avoid duplicates
 

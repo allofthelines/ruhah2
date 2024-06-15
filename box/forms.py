@@ -41,4 +41,4 @@ class TicketForm(forms.Form):
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
     size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size')
     size_waist_inches = forms.IntegerField(label='Waist (inches)')
-    size_shoe_eu = forms.FloatField(label='Shoe Size (EU)')
+    size_shoe_eu = forms.CharField(choices=SIZE_CHOICES, label='Shoe Size (EU)')
