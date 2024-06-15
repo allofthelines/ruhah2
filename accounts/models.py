@@ -186,7 +186,6 @@ class Customer(models.Model):
     size_waist_inches = models.IntegerField(default=0, null=True, blank=True)
     shoe_size_eu = models.FloatField(null=True, blank=True)
     shoe_size_uk = models.FloatField(null=True, blank=True)
-    shoe_size_us = models.FloatField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
     birth_year = models.IntegerField(null=True, blank=True)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Stylist, Customer, Seller, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
+from .models import CustomUser, Stylist, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
 from django.utils.timezone import now
 
 class CustomUserAdmin(UserAdmin):
@@ -33,15 +33,6 @@ class CustomerAdmin(admin.ModelAdmin):
 
     get_username.short_description = 'username'
 admin.site.register(Customer, CustomerAdmin)
-
-
-
-
-class SellerAdmin(admin.ModelAdmin):
-    list_display = ['user', 'items_sold', 'total_sales', 'fumio_profit', 'seller_profit']
-    search_fields = ['user__username']
-    list_filter = ['items_sold', 'total_sales']
-admin.site.register(Seller, SellerAdmin)
 
 
 
