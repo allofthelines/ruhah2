@@ -8,7 +8,6 @@ class CustomerForm(forms.ModelForm):
         fields = ['top_size_xyz',
                   'bottom_size_xyz',
                   'size_waist_inches',
-                  'size_chest_inches',
                   'shoe_size_eu',
                   'height',
                   'weight',
