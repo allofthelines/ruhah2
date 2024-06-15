@@ -19,14 +19,14 @@ class SizesFilter(SimpleListFilter):
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = ['id', 'itemid', 'thumbnail', 'image', 'ecommerce_store'] # vale alliws kapws to sizes_xyz oxi directly giati error
-    search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
+    search_fields = ['name', 'itemid', 'location', 'tags']
     list_filter = [SizesFilter, 'condition', 'location', 'cat', 'ecommerce_store'] # eftiaksa custom filter
     ordering = ['itemid']
     fields = [
         'image', 'itemid', 'tags',
         'ecommerce_product_id', 'ecommerce_store', 'cat', 'taglist', 'condition',
         'name', 'price', 'sizes_xyz', 'sizes_shoe_uk', 'sizes_waist_inches',
-        'brand', 'location'
+        'location'
     ]
 
     def thumbnail(self, obj):
