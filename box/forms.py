@@ -30,6 +30,9 @@ class TicketForm(forms.Form):
 
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
+    SIZE_WAIST_INCHES_CHOICES = [(str(size), str(size)) for size in range(23, 37)]
+    SHOE_SIZE_UK_CHOICES = [(str(size), str(size)) for size in range(2, 14)] + \
+                           [(str(size + 0.5), str(size + 0.5)) for size in range(2, 13)]
 
     style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style2 = forms.ChoiceField(choices=STYLE_CHOICES, label='Style 2')
@@ -43,5 +46,6 @@ class TicketForm(forms.Form):
 
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
     size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size')
-    size_waist_inches = forms.IntegerField(label='Waist (inches)')
+    size_waist_inches = forms.ChoiceField(choices=SIZE_WAIST_INCHES_CHOICES, label='Waist (inches)')
     size_shoe_eu = forms.ChoiceField(choices=SHOE_SIZE_EU_CHOICES, label='Shoe Size (EU)')
+    size_shoe_uk = forms.ChoiceField(choices=SHOE_SIZE_UK_CHOICES, label='Shoe Size (UK)')
