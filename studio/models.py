@@ -101,7 +101,7 @@ class Item(models.Model):
     sizes_waist_inches = models.ManyToManyField(SizeWaistInchCategory, blank=True)
 
     # SHOPIFY STORE DB
-    location = models.CharField(max_length=255, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True) # location_country or location_city?
 
     # TYPE ME XERI DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
     ecommerce_store = models.ForeignKey(EcommerceStore, on_delete=models.SET_NULL, blank=True, null=True)
