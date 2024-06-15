@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Item, Tag, StudioOutfitTemp, ShopifyStore, SizeCategory, SizeShoeUkCategory, SizeWaistInchCategory
+from .models import Item, Tag, StudioOutfitTemp, EcommerceStore, SizeCategory, SizeShoeUkCategory, SizeWaistInchCategory
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
-from .forms import ShopifyStoreForm
+from .forms import EcommerceStoreForm
 
 class SizesFilter(SimpleListFilter):
     title = 'sizes'
@@ -18,13 +18,13 @@ class SizesFilter(SimpleListFilter):
         return queryset
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'itemid', 'thumbnail', 'image', 'shopify_store'] # vale alliws kapws to sizes_xyz oxi directly giati error
+    list_display = ['id', 'itemid', 'thumbnail', 'image', 'ecommerce_store'] # vale alliws kapws to sizes_xyz oxi directly giati error
     search_fields = ['name', 'brand', 'itemid', 'location', 'tags']
-    list_filter = [SizesFilter, 'condition', 'location', 'cat', 'shopify_store'] # eftiaksa custom filter
+    list_filter = [SizesFilter, 'condition', 'location', 'cat', 'ecommerce_store'] # eftiaksa custom filter
     ordering = ['itemid']
     fields = [
         'image', 'itemid', 'tags',
-        'shopify_product_id', 'shopify_store', 'cat', 'taglist', 'condition',
+        'ecommerce_product_id', 'ecommerce_store', 'cat', 'taglist', 'condition',
         'name', 'price', 'sizes_xyz', 'sizes_shoe_uk', 'sizes_waist_inches',
         'brand', 'location'
     ]
@@ -67,10 +67,10 @@ class TagAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag, TagAdmin)
 
-class ShopifyStoreAdmin(admin.ModelAdmin):
+class EcommerceStoreAdmin(admin.ModelAdmin):
     list_display = ('name', 'shop_url', 'platform', 'api_key', 'api_secret', 'api_access_token')
     search_fields = ('name', 'shop_url')
 
-    form = ShopifyStoreForm
+    form = EcommerceStoreForm
 
-admin.site.register(ShopifyStore, ShopifyStoreAdmin)
+admin.site.register(EcommerceStore, EcommerceStoreAdmin)

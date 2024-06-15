@@ -1,10 +1,10 @@
 from django import forms
-from .models import ShopifyStore
+from .models import EcommerceStore
 from django.forms import JSONField
 
-class ShopifyStoreForm(forms.ModelForm):
+class EcommerceStoreForm(forms.ModelForm):
     size_mapping = JSONField(widget=forms.Textarea)
 
     class Meta:
-        model = ShopifyStore
+        model = EcommerceStore
         fields = '__all__'
