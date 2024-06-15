@@ -45,8 +45,9 @@ option {
 
 
 
-a:visited {
+a:link, a:visited {
     color: blue; /* Visited link color */
+    text-decoration: none;
 }
 
 #header {
