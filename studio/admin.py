@@ -68,7 +68,7 @@ class TagAdmin(admin.ModelAdmin):
 admin.site.register(Tag, TagAdmin)
 
 class ShopifyStoreAdmin(admin.ModelAdmin):
-    list_display = ('name', 'shop_url', 'api_key', 'api_secret', 'access_token')
+    list_display = ('name', 'shop_url', 'platform', 'api_key', 'api_secret', 'api_access_token')
     search_fields = ('name', 'shop_url')
 
     form = ShopifyStoreForm
