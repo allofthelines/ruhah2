@@ -180,11 +180,13 @@ class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
+    SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
+                           [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
 
     top_size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
     bottom_size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
     size_waist_inches = models.IntegerField(default=0, null=True, blank=True)
-    shoe_size_eu = models.FloatField(null=True, blank=True)
+    shoe_size_eu = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
     shoe_size_uk = models.FloatField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
