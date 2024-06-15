@@ -75,7 +75,7 @@ class Item(models.Model):
     price = models.FloatField(null=True, blank=True)
     sizes_xyz = models.ManyToManyField(SizeCategory, blank=True)
     sizes_shoe_uk = models.ManyToManyField(SizeShoeUkCategory, blank=True)
-    # sizes_waist_inches = models.models.ManyToManyField(SizeWaistInchCategory, blank=True)
+    sizes_waist_inches = models.ManyToManyField(SizeWaistInchCategory, blank=True)
 
     size_waist_inches = models.FloatField(null=True, blank=True) # RENAME RE-TYPE
     size_uk = models.FloatField(null=True, blank=True) # RENAME sizes_shoe_uk
