@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Outfit
-from accounts.models import Customer, Stylist
+from accounts.models import Customer
 
 class OutfitRatingForm(forms.Form):
     outfit1 = forms.IntegerField()

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Stylist, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
+from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
 from django.utils.timezone import now
 
 class CustomUserAdmin(UserAdmin):
@@ -15,14 +15,6 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('is_stylist', 'name', 'bio', 'pfp', 'profile_visibility', 'credits')}),
     )
 admin.site.register(CustomUser, CustomUserAdmin)
-
-
-
-class StylistAdmin(admin.ModelAdmin):
-    list_display = ['user', 'credits']
-admin.site.register(Stylist, StylistAdmin)
-
-
 
 
 class CustomerAdmin(admin.ModelAdmin):

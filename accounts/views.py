@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer, Stylist
+from accounts.models import CustomUser, Customer
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UserProfileForm, CustomerForm, StylistForm, PortraitUploadForm, ProfileSettingsForm
+from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm
 
 def signup(request):
     if request.method == 'POST':
@@ -70,11 +70,9 @@ from box.models import Ticket
 def profile(request):
     user = request.user
     customer = getattr(user, 'customer', None)
-    stylist = getattr(user, 'stylist', None)
 
     user_form = UserProfileForm(instance=user, user=user)
     customer_form = CustomerForm(instance=customer, customer=customer) if customer else None
-    stylist_form = StylistForm(instance=stylist, stylist=stylist) if stylist else None
     portrait_upload_form = PortraitUploadForm(user=user)  # Pass user to the form
     profile_settings_form = ProfileSettingsForm(instance=user, user=user)
 
@@ -92,11 +90,6 @@ def profile(request):
             if customer_form.is_valid():
                 customer_form.save(customer=customer)
                 return redirect(f'{request.path}?edit=customer')
-        elif 'stylist_form' in request.POST and stylist:
-            stylist_form = StylistForm(request.POST, instance=stylist, stylist=stylist)
-            if stylist_form.is_valid():
-                stylist_form.save(stylist=stylist)
-                return redirect(f'{request.path}?edit=stylist')
         elif 'portrait_upload_form' in request.POST:
             portrait_upload_form = PortraitUploadForm(request.POST, request.FILES, user=user)  # Pass user to the form
             if portrait_upload_form.is_valid():
@@ -114,7 +107,6 @@ def profile(request):
     return render(request, 'accounts/profile.html', {
         'user_form': user_form,
         'customer_form': customer_form,
-        'stylist_form': stylist_form,
         'portrait_upload_form': portrait_upload_form,
         'profile_settings_form': profile_settings_form,
         'user': user,

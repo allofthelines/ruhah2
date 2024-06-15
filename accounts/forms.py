@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer, Stylist, PortraitUpload
+from accounts.models import CustomUser, Customer, PortraitUpload
 from django.contrib.auth.models import User
 
 
@@ -95,25 +95,6 @@ class CustomerForm(forms.ModelForm):
         return customer
 
 
-
-
-class StylistForm(forms.ModelForm):
-    class Meta:
-        model = Stylist
-        fields = ['credits']
-
-    def __init__(self, *args, **kwargs):
-        stylist = kwargs.pop('stylist', None)
-        super().__init__(*args, **kwargs)
-        if stylist:
-            self.fields['credits'].initial = stylist.credits
-
-    def save(self, commit=True, stylist=None):
-        stylist = super().save(commit=False)
-        stylist.credits = self.cleaned_data['credits']
-        if commit:
-            stylist.save()
-        return stylist
 
 
 
