@@ -43,7 +43,7 @@ class SizeWaistInchCategory(models.Model):
     def __str__(self):
         return self.size
 
-class ShopifyStore(models.Model):
+class EcommerceStore(models.Model):
     # rename to EcommerceStore
     name = models.CharField(max_length=255, null=True, blank=True)
     shop_url = models.CharField(max_length=255, null=True, blank=True)
@@ -105,8 +105,8 @@ class Item(models.Model):
     location = models.CharField(max_length=255, blank=True, null=True)
 
     # TYPE ME XERI DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
-    shopify_store = models.ForeignKey(ShopifyStore, on_delete=models.SET_NULL, blank=True, null=True)
-    shopify_product_id = models.CharField(max_length=255, blank=True, null=True)
+    ecommerce_store = models.ForeignKey(EcommerceStore, on_delete=models.SET_NULL, blank=True, null=True)
+    ecommerce_product_id = models.CharField(max_length=255, blank=True, null=True)
     cat = models.CharField(max_length=20, choices=CAT_CHOICES, blank=True)
     taglist = models.ManyToManyField('studio.Tag', blank=True)
     condition = models.CharField(max_length=10, choices=CONDITION_CHOICES, blank=True, null=True)
