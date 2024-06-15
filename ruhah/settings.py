@@ -168,6 +168,9 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' # media aws
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/' # uploaded by users
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'core/static'),
+    ]
 
 if ENVIRONMENT == 'development':
     # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
