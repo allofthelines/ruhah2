@@ -184,7 +184,6 @@ class Customer(models.Model):
     top_size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
     bottom_size_xyz = models.CharField(max_length=10, choices=SIZE_CHOICES, null=True, blank=True)
     size_waist_inches = models.IntegerField(default=0, null=True, blank=True)
-    size_chest_inches = models.IntegerField(default=0, null=True, blank=True)
     shoe_size_eu = models.FloatField(null=True, blank=True)
     shoe_size_uk = models.FloatField(null=True, blank=True)
     shoe_size_us = models.FloatField(null=True, blank=True)
