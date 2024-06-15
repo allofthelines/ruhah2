@@ -15,12 +15,12 @@ class Command(BaseCommand):
             shopify_store = item.shopify_store
             api_key = shopify_store.api_key
             api_secret = shopify_store.api_secret
-            access_token = shopify_store.access_token
+            api_access_token = shopify_store.api_access_token
             shop_url = f"https://{api_key}:{api_secret}@fumioxyz.myshopify.com/admin"
             # shop_url = f"https://{api_key}:{api_secret}@{shopify_store.shop_url}/admin"
             
             shopify.ShopifyResource.set_site(shop_url)
-            session = shopify.Session(shop_url, version="2023-04", token=access_token)
+            session = shopify.Session(shop_url, version="2023-04", token=api_access_token)
             shopify.ShopifyResource.activate_session(session)
             
             try:
