@@ -18,7 +18,7 @@ body {
   min-height: 100vh;
   margin: 0 20px;
   font-family: 'Roboto Mono';
-  font-size: 13px;
+  font-size: 14px;
 }
 
 select, option, button, input, textarea {
