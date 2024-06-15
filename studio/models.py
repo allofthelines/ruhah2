@@ -33,6 +33,18 @@ class SizeShoeUkCategory(models.Model):
     def __str__(self):
         return self.size
 
+class SizeShoeEuCategory(models.Model):
+    SIZE_CHOICES = [('34', '34'), ('34.5', '34.5'), ('35', '35'), ('35.5', '35.5'), ('36', '36'), ('36.5', '36.5'),
+                    ('37', '37'), ('37.5', '37.5'), ('38', '38'), ('38.5', '38.5'), ('39', '39'), ('39.5', '39.5'),
+                    ('40', '40'), ('40.5', '40.5'), ('41', '41'), ('41.5', '41.5'), ('42', '42'), ('42.5', '42.5'),
+                    ('43', '43'), ('43.5', '43.5'), ('44', '44'), ('44.5', '44.5'), ('45', '45'), ('45.5', '45.5'),
+                    ('46', '46'), ('46.5', '46.5'), ('47', '47'), ('47.5', '47.5'), ('48', '48')]
+
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
+
+    def __str__(self):
+        return self.size
+
 class SizeWaistInchCategory(models.Model):
     SIZE_CHOICES = [('23', '23'), ('24', '24'), ('25', '25'), ('26', '26'), ('27', '27'),
                     ('28', '28'), ('29', '29'), ('30', '30'), ('31', '31'), ('32', '32'),
@@ -98,6 +110,7 @@ class Item(models.Model):
     price = models.FloatField(null=True, blank=True)
     sizes_xyz = models.ManyToManyField(SizeCategory, blank=True)
     sizes_shoe_uk = models.ManyToManyField(SizeShoeUkCategory, blank=True)
+    sizes_shoe_eu = models.ManyToManyField(SizeShoeEuCategory, blank=True)
     sizes_waist_inches = models.ManyToManyField(SizeWaistInchCategory, blank=True)
 
     # SHOPIFY STORE DB
