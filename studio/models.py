@@ -77,8 +77,6 @@ class Item(models.Model):
     sizes_shoe_uk = models.ManyToManyField(SizeShoeUkCategory, blank=True)
     sizes_waist_inches = models.ManyToManyField(SizeWaistInchCategory, blank=True)
 
-    size_eu = models.FloatField(null=True, blank=True) # RENAME sizes_shoe_eu
-
     # SHOPIFY STORE DB
     brand = models.CharField(max_length=100, default='nologo', blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
