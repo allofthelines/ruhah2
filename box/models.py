@@ -34,11 +34,13 @@ class Ticket(models.Model):
     stylists_all = models.ManyToManyField(CustomUser, blank=True, related_name='stylist_tickets')
 
     SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
+    SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
+                           [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
 
     size_top_xyz = models.CharField(max_length=3, choices=SIZE_CHOICES, blank=True, null=True)
     size_bottom_xyz = models.CharField(max_length=3, choices=SIZE_CHOICES, blank=True, null=True)
     size_waist_inches = models.IntegerField(blank=True, null=True)
-    size_shoe_eu = models.FloatField(blank=True, null=True)
+    size_shoe_eu = models.CharField(max_length=10, choices=SHOE_SIZE_EU_CHOICES, null=True, blank=True)
 
     maximum_outfits = models.IntegerField(default=5)
     current_outfits = models.IntegerField(default=0)
