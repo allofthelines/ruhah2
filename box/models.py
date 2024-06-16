@@ -13,7 +13,7 @@ from django.conf import settings
 
 class Ticket(models.Model):
     style1 = models.CharField(max_length=100)
-    style2 = models.CharField(max_length=100, blank=True, null=True)
+    style2 = models.ForeignKey('studio.Style', on_delete=models.SET_NULL, null=True, related_name='style2_tickets', blank=True)
     occasion = models.CharField(max_length=100)
     condition = models.CharField(max_length=100)
     price = models.CharField(max_length=100)

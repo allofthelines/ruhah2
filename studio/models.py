@@ -1,7 +1,6 @@
 from django.db import models
 from accounts.models import CustomUser
 from django.conf import settings
-from box.models import Ticket
 import jsonfield
 # from multiselectfield import MultiSelectField
 # ALLAKSE TO SIZE_XYZ SE MULTIPLE
@@ -141,7 +140,7 @@ class Item(models.Model):
 
 class StudioOutfitTemp(models.Model):
     # etsi wste otan kanw refresh na krathsw to idio
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True, blank=True)
+    ticket = models.ForeignKey('box.Ticket', on_delete=models.CASCADE, null=True, blank=True)  # box.Ticket lynei circular import
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
     item1img = models.ImageField(upload_to='studiooutfittemps/', default='studiooutfittemps/default_img1.jpg')
