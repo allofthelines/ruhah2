@@ -148,7 +148,7 @@
                         *Trending Styles: ☐Indie ☐Gorpcore ☐Preppy ☐Y2k ☐Preppy ☐Goth
                         <label for="id_trending_styles">Trending Styles: </label>
                         <div style="display: flex;">
-                            <select id="id_trending_styles_from" multiple style="width: 200px;">
+                            <select id="id_trending_styles_from" multiple style="width: 50px;">
                                 {% for style in available_styles %}
                                     <option value="{{ style.id }}">{{ style.style_name }}</option>
                                 {% endfor %}
@@ -159,7 +159,7 @@
                                 <button type="button" onclick="removeTrendingStyle()"> &lt; </button>
                             </div>
 
-                            <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 200px;">
+                            <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 50px;">
                                 {% for style in user.trending_styles.all %}
                                     <option value="{{ style.id }}">{{ style.style_name }}</option>
                                 {% endfor %}
