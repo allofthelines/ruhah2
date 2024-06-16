@@ -31,8 +31,16 @@ def studio_tickets(request):
 
     if request.user.is_authenticated:
         following_user_ids = list(request.user.following_list.values_list('id', flat=True))
+        # Filter tickets based on the has_submitted_outfits method
+        filtered_tickets = [ticket for ticket in page_obj if
+                            ticket.creator_id.id != request.user.id and ticket.has_submitted_outfits(request.user)]
     else:
         following_user_ids = []
+        filtered_tickets = []
+
+    # Create a new paginator for the filtered tickets
+    paginator = Paginator(filtered_tickets, 20)
+    page_obj = paginator.get_page(page_number)
 
     context = {
         'page_obj': page_obj,
