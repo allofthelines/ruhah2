@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 from django.db.models import Count
+from django.db.models import Q
 from django.views.generic import TemplateView
 
 from .forms import OutfitRatingForm
@@ -43,6 +44,21 @@ class TrendingView(ListView):
     model = Outfit
     ordering = "-rating"
     paginate_by = 5
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset()
+
+        if user.is_authenticated:
+            if user.trending_mode == 'following':
+                following_ids = UserFollows.objects.filter(user_from=user).values_list('user_to_id', flat=True)
+                queryset = queryset.filter(maker_id__in=following_ids)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['trending_mode'] = self.request.user.trending_mode if self.request.user.is_authenticated else 'discover'
+        return context
 
 class UploadView(CreateView):
     model = Outfit
