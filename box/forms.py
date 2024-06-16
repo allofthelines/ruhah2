@@ -1,5 +1,6 @@
 from django import forms
 from .models import Ticket
+from studio.models import Style
 
 class TicketForm(forms.Form):
     # Multiple choice fields
@@ -35,7 +36,7 @@ class TicketForm(forms.Form):
                            [(str(size + 0.5), str(size + 0.5)) for size in range(2, 13)]
 
     style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
-    style2 = forms.ChoiceField(choices=STYLE_CHOICES, label='Style 2')
+    style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion')
     condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
     price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('under 40', 'under 40'), ('under 80', 'under 80')], label='Price')
