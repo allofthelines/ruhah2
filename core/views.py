@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 
 from .forms import OutfitRatingForm
 from .models import Outfit
-from accounts.models import Customer, CustomUser
+from accounts.models import Customer, CustomUser, UserFollows
 from box.models import Ticket  # Assuming the Ticket model is in the box app
 
 def home(request):
