@@ -142,9 +142,6 @@
                         <label for="id_profile_visibility">Profile Visibility: </label>
                         {{ profile_settings_form.profile_visibility }}<br>
                         <br>
-                        Home Location: London<br>
-                        Home Style: Indie<br>
-                        <br>
                         Trending Style: Indie<br>
                         <label for="id_trending_mode">Trending Mode: </label>
                         {{ profile_settings_form.trending_mode }}<br>
@@ -160,17 +157,12 @@
                 <p style="margin-top: 15px; text-align: left;">
                     Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
-                    Home Location: London<br>
-                    Home Style: Indie<br>
-                    <br>
-                    Trending Location: London<br>
                     Trending Style: Indie<br>
+                    Trending Mode: {{ user.get_trending_mode_display }}<br>
                     <br>
                     Studio Location: London<br>
                     Studio Style: Indie<br>
                     <br>
-                    Box Autofill Address: Yes<br>
-                    Box Autofill Name: Yes<br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit_settings" value="true">
