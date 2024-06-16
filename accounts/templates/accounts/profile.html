@@ -142,7 +142,34 @@
                         <label for="id_profile_visibility">Profile Visibility: </label>
                         {{ profile_settings_form.profile_visibility }}<br>
                         <br>
-                        *Trending Styles: ☐Indie ☐Gorpcore ☐Preppy ☐Y2k ☐Preppy ☐Goth <br>
+
+
+
+                        *Trending Styles: ☐Indie ☐Gorpcore ☐Preppy ☐Y2k ☐Preppy ☐Goth
+                        <label for="id_trending_styles">Trending Styles: </label>
+                        <div style="display: flex;">
+                            <select id="id_trending_styles_from" multiple style="width: 200px;">
+                                {% for style in available_styles %}
+                                    <option value="{{ style.id }}">{{ style.style_name }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <div style="margin: 0 10px;">
+                                <button type="button" onclick="addTrendingStyle()"> &gt; </button><br>
+                                <button type="button" onclick="removeTrendingStyle()"> &lt; </button>
+                            </div>
+
+                            <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 200px;">
+                                {% for style in user.trending_styles.all %}
+                                    <option value="{{ style.id }}">{{ style.style_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+
+
+                        <br>
                         <label for="id_trending_mode">Trending Mode: </label>
                         {{ profile_settings_form.trending_mode }}<br>
                         <br>
@@ -177,6 +204,17 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -204,6 +242,37 @@
         }
     }
 </script>
+
+
+
+<script>
+function addTrendingStyle() {
+    const from = document.getElementById('id_trending_styles_from');
+    const to = document.getElementById('id_trending_styles_to');
+
+    while (from.selectedOptions.length > 0) {
+        const option = from.selectedOptions[0];
+        from.remove(option.index);
+        to.add(option);
+    }
+}
+
+function removeTrendingStyle() {
+    const from = document.getElementById('id_trending_styles_to');
+    const to = document.getElementById('id_trending_styles_from');
+
+    while (from.selectedOptions.length > 0) {
+        const option = from.selectedOptions[0];
+        from.remove(option.index);
+        to.add(option);
+    }
+}
+</script>
+
+
+
+
+
 
 
 <style>

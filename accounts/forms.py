@@ -119,7 +119,7 @@ class PortraitUploadForm(forms.ModelForm):
 class ProfileSettingsForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['profile_visibility', 'trending_mode']
+        fields = ['profile_visibility', 'trending_mode', 'trending_styles']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -127,11 +127,12 @@ class ProfileSettingsForm(forms.ModelForm):
         if user:
             self.fields['profile_visibility'].initial = user.profile_visibility
             self.fields['trending_mode'].initial = user.trending_mode
+            self.fields['trending_styles'].initial = user.trending_styles.all()
 
     def save(self, commit=True, user=None):
         user = super().save(commit=False)
         user.profile_visibility = self.cleaned_data['profile_visibility']
         user.trending_mode = self.cleaned_data['trending_mode']
-        if commit:
-            user.save()
+        user.save()
+        user.trending_styles.set(self.cleaned_data['trending_styles'])
         return user
