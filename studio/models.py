@@ -7,6 +7,12 @@ import jsonfield
 # ALLAKSE TO SIZE_XYZ SE MULTIPLE
 
 
+class Style(models.Model):
+    style_name = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
+
 class Tag(models.Model):
     tag_name = models.CharField(max_length=100, blank=True)
     tag_type = models.CharField(max_length=100, blank=True)
