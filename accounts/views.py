@@ -84,6 +84,7 @@ def profile(request):
         if 'user_form' in request.POST:
             print('CCCC\n\n\n', 'CCCC\n\n\n')
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
+            print('XXXXX\n\n\n', user_form.cleaned_data['bio'], 'XXXXXX\n\n\n')
             if user_form.is_valid():
                 user_form.save(user=user)
                 print('AAAAAAAAAAAAAAAAAAAAA\n\n\n', user_form.cleaned_data['bio'], 'AAAAAAAAAAAAAAAAAAAAAAAAA\n\n\n')
