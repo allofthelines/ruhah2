@@ -315,7 +315,7 @@ td, th {
 }
 
 th {
-    font-weight: 600;
+    /*font-weight: 600;*/
     text-align: left;
 }
 
@@ -432,7 +432,7 @@ table thead th.sorted .sortoptions a.sortremove:after {
     position: absolute;
     top: -6px;
     left: 3px;
-    font-weight: 200;
+    /*font-weight: 200;*/
     font-size: 1.125rem;
     color: var(--body-quiet-color);
 }

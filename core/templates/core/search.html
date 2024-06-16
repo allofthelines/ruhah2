@@ -29,7 +29,7 @@
                     {% endif %}
                     <div style="display: flex; flex-direction: column; justify-content: space-between; height: 50px;">
                         <div>
-                            <a href="{% url 'accounts:public_profile' user.username %}" style="font-weight: bold;">@{{ user.username }}</a>
+                            <a href="{% url 'accounts:public_profile' user.username %}" style="/*font-weight: bold;*/">@{{ user.username }}</a>
                         </div>
                         <div>
                             {% if request.user.is_authenticated and user != request.user %}
