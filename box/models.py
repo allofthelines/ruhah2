@@ -25,7 +25,10 @@ class Ticket(models.Model):
         ('closed', 'closed'),
         ('boxed', 'boxed'),
     ]
+    COLORTYPE_CHOICES = [('white', 'white'), ('golden', 'golden')]
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='notpaid')
+    colortype = models.CharField(max_length=10, choices=COLORTYPE_CHOICES, default='white')
     timestamp = models.DateTimeField(default=timezone.now)
     creator_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     outfit1 = models.ForeignKey(Outfit, on_delete=models.SET_NULL, null=True, blank=True, related_name='ticket_outfit1')
