@@ -145,13 +145,18 @@
 
 
 
+                        <label for="id_profile_visibility">Profile Visibility: </label>
+                        {{ profile_settings_form.profile_visibility }}<br>
+                        <br>
                         <label for="id_trending_styles">Trending Styles: </label>
                         <div style="display: flex; align-items: center;">
                             <div style="text-align: center;">
                                 <p>Available</p>
                                 <select id="id_trending_styles_from" multiple style="width: 80px; height: 150px;">
                                     {% for style in available_styles %}
-                                        <option value="{{ style.id }}">{{ style.style_name }}</option>
+                                        {% if style not in user_trending_styles %}
+                                            <option value="{{ style.id }}">{{ style.style_name }}</option>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
@@ -164,7 +169,7 @@
                             <div style="text-align: center;">
                                 <p>Chosen</p>
                                 <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 80px; height: 150px;">
-                                    {% for style in user.trending_styles.all %}
+                                    {% for style in user_trending_styles %}
                                         <option value="{{ style.id }}">{{ style.style_name }}</option>
                                     {% endfor %}
                                 </select>
@@ -257,26 +262,24 @@
 
 <script>
 function addTrendingStyle() {
-    const from = document.getElementById('id_trending_styles_from');
-    const to = document.getElementById('id_trending_styles_to');
-
-    while (from.selectedOptions.length > 0) {
-        const option = from.selectedOptions[0];
-        from.remove(option.index);
-        to.add(option);
-    }
+    var from = document.getElementById('id_trending_styles_from');
+    var to = document.getElementById('id_trending_styles_to');
+    moveSelectedOptions(from, to);
 }
 
 function removeTrendingStyle() {
-    const from = document.getElementById('id_trending_styles_to');
-    const to = document.getElementById('id_trending_styles_from');
-
-    while (from.selectedOptions.length > 0) {
-        const option = from.selectedOptions[0];
-        from.remove(option.index);
-        to.add(option);
-    }
+    var from = document.getElementById('id_trending_styles_to');
+    var to = document.getElementById('id_trending_styles_from');
+    moveSelectedOptions(from, to);
 }
+
+function moveSelectedOptions(from, to) {
+    var selectedOptions = Array.from(from.selectedOptions);
+    selectedOptions.forEach(function(option) {
+        to.appendChild(option);
+    });
+}
+
 </script>
 
 
