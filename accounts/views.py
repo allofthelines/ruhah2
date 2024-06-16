@@ -84,6 +84,7 @@ def profile(request):
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
                 user_form.save(user=user)
+                print('AAAAAAAAAAAAAAAAAAAAA\n\n\n', user_form.cleaned_data['bio'], 'AAAAAAAAAAAAAAAAAAAAAAAAA\n\n\n')
                 return redirect(f'{request.path}?edit=user')
         elif 'customer_form' in request.POST and customer:
             customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
