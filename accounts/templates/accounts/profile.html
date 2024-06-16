@@ -142,7 +142,7 @@
                         <label for="id_profile_visibility">Profile Visibility: </label>
                         {{ profile_settings_form.profile_visibility }}<br>
                         <br>
-                        Trending Style: Indie<br>
+                        Trending Style: Indie ☐ Gorpcore ☐ Preppy ☐ Y2k ☐ Preppy ☐ Goth ☐ <br>
                         <label for="id_trending_mode">Trending Mode: </label>
                         {{ profile_settings_form.trending_mode }}<br>
                         <br>
@@ -157,11 +157,11 @@
                 <p style="margin-top: 15px; text-align: left;">
                     Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
-                    Trending Style: Indie<br>
+                    *Trending Styles: Indie Gorpcore Preppy<br>
                     Trending Mode: {{ user.get_trending_mode_display }}<br>
                     <br>
-                    Studio Location: London<br>
-                    Studio Style: Indie<br>
+                    *Studio Location: London<br>
+                    *Studio Styles: Indie<br>
                     <br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
