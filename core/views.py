@@ -57,8 +57,14 @@ class TrendingView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['trending_mode'] = self.request.user.trending_mode if self.request.user.is_authenticated else 'discover'
+        user = self.request.user
+        if user.is_authenticated:
+            context['trending_mode'] = user.trending_mode
+        else:
+            context['trending_mode'] = 'discover'
+
         return context
+
 
 class UploadView(CreateView):
     model = Outfit

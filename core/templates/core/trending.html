@@ -13,34 +13,22 @@
     </tr>
 
     {% for outfit in page_obj.object_list %}
-      {% if not user.is_authenticated %}
-        {% assign show_outfit = True %}
-      {% elif trending_mode == 'discover' %}
-        {% assign show_outfit = True %}
-      {% elif trending_mode == 'following' %}
-        {% assign show_outfit = outfit.maker_id in user.following_list.all %}
-      {% else %}
-        {% assign show_outfit = False %}
-      {% endif %}
-
-      {% if show_outfit %}
-        <tr>
-          <td>{{ outfit.rank }}</td>
-          <!-- <td>{{ outfit.rating }}</td> -->
-          <td>
-            <img src="{{ outfit.image.url }}" class="outfit-image">
-            <br>
-            <span>
-              {% if outfit.maker_id %}
-                <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
-              {% else %}
-                @Unknown
-              {% endif %}
-            </span>
-            <br><br>
-          </td>
-        </tr>
-      {% endif %}
+      <tr>
+        <td>{{ outfit.rank }}</td>
+        <!-- <td>{{ outfit.rating }}</td> -->
+        <td>
+          <img src="{{ outfit.image.url }}" class="outfit-image">
+          <br>
+          <span>
+            {% if outfit.maker_id %}
+              <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
+            {% else %}
+              @Unknown
+            {% endif %}
+          </span>
+          <br><br>
+        </td>
+      </tr>
     {% endfor %}
   </table>
 
