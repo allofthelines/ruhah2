@@ -20,6 +20,7 @@
         <form method="post" class="ticket-form">
             {% csrf_token %}
             {{ form.style1.label_tag }} {{ form.style1 }}<br>
+            {{ form.style2.label_tag }} {{ form.style2 }}<br>
             {{ form.occasion.label_tag }} {{ form.occasion }}<br>
             {{ form.condition.label_tag }} {{ form.condition }}<br>
             {{ form.price.label_tag }} {{ form.price }}<br>
@@ -48,6 +49,7 @@
         <form method="post" class="ticket-form">
             {% csrf_token %}
             {{ form.style1.label_tag }} {{ form.style1 }}<br>
+            {{ form.style2.label_tag }} {{ form.style2 }}<br>
             {{ form.occasion.label_tag }} {{ form.occasion }}<br>
             {{ form.condition.label_tag }} {{ form.condition }}<br>
             {{ form.price.label_tag }} {{ form.price }}<br>
@@ -61,6 +63,7 @@
     <form method="post" class="ticket-form">
         {% csrf_token %}
         {{ form.style1.label_tag }} {{ form.style1 }}<br>
+        {{ form.style2.label_tag }} {{ form.style2 }}<br>
         {{ form.occasion.label_tag }} {{ form.occasion }}<br>
         {{ form.condition.label_tag }} {{ form.condition }}<br>
         {{ form.price.label_tag }} {{ form.price }}<br>
