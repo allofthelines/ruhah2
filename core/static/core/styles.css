@@ -18,8 +18,12 @@ body {
   min-height: 100vh;
   margin: 0 20px;
   font-family: 'Roboto Mono';
-    font-weight: 200;
+    font-weight: 300;
   font-size: 14px;
+}
+
+h2 {
+    font-weight: 400;
 }
 
 select, option, button, input, textarea {
@@ -59,7 +63,7 @@ a:visited {
   font-family: 'Oswald', sans-serif;  /* Add the font-family */
   font-size: 2rem; /* LALALALA 2.5rem isws better*/
   font-weight: medium;
-  font-weight: 600;
+  font-weight: 200;
   line-height: 50%;
   letter-spacing: 0em;
   /*text-indent: 0.125em; /* diorthwnei to letter-spacing an exeis valei */
