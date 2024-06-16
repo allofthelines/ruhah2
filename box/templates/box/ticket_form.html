@@ -16,7 +16,7 @@
 
 
     {% if user.is_authenticated %}
-        {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk  %}
+        {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk %}
         <form method="post" class="ticket-form">
             {% csrf_token %}
             {{ form.style1.label_tag }} {{ form.style1 }}<br>
@@ -37,6 +37,7 @@
             {% endif %}
             {% if not user.customer.shoe_size_eu %}
             {{ form.size_shoe_eu.label_tag }} {{ form.size_shoe_eu }}<br>
+            {% endif %}
             {% if not user.customer.shoe_size_uk %}
             {{ form.size_shoe_uk.label_tag }} {{ form.size_shoe_uk }}<br>
             {% endif %}
