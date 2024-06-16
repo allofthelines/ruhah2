@@ -56,7 +56,7 @@ class Ticket(models.Model):
         return self.outfits_all.filter(maker_id=user).count() < max_outfits
 
     def __str__(self):
-        return f"Ticket {self.id} - Status: {self.status}"
+        return f"Ticket {self.id} - {self.status} - {self.creator_id}"
 
 class Order(models.Model):
     TYPE_CHOICES = [
