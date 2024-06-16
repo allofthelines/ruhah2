@@ -80,6 +80,7 @@ def profile(request):
     editing_settings = request.GET.get('edit_settings') == 'true'
 
     if request.method == 'POST':
+        print('BBBBBBBB\n\n\n', 'BBBBBBBBBB\n\n\n')
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
