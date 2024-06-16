@@ -9,10 +9,14 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 
 class CustomUser(AbstractUser):
-    VISIBILITY_CHOICES = [
+    PROFILE_VISIBILITY_CHOICES = [
         ('public', 'Public'),
         ('private', 'Private'),
         ('followers', 'Followers'),
+    ]
+    TRENDING_MODE_CHOICES = [
+        ('discover', 'Discover'),
+        ('following', 'Following'),
     ]
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_customer = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
@@ -23,7 +27,10 @@ class CustomUser(AbstractUser):
     pfp = models.ImageField(upload_to='pfps/', blank=True, null=True, default='pfps/default_img.jpg')
     credits = models.IntegerField(default=0)
 
-    profile_visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, default='public')
+    profile_visibility = models.CharField(max_length=20, choices=PROFILE_VISIBILITY_CHOICES, default='public')
+    trending_mode = models.CharField(max_length=10, choices=TRENDING_MODE_CHOICES, default='discover')
+    trending_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_trending_styles') # related name gia reverse relation
+    studio_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_studio_styles')
 
     followers_list = models.ManyToManyField(
         'self',
