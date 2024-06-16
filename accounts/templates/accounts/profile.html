@@ -191,7 +191,10 @@
                 <p style="margin-top: 15px; text-align: left;">
                     Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
-                    *Trending Styles: Indie Gorpcore Preppy<br>
+                    Trending Styles:
+                    {% for style in user.trending_styles.all %}
+                        {{ style.style_name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
                     Trending Mode: {{ user.get_trending_mode_display }}<br>
                     <br>
                     *Studio Location: London<br>
