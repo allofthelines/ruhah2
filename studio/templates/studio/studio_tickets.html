@@ -15,8 +15,8 @@
       </tr>
     </thead>
     <tbody>
-      {% for ticket in page_obj %}
-        {% if ticket.creator_id.id != user.id and ticket.has_submitted_outfits(user) %} <!-- ticket model method -->
+      {% for ticket in page_obj %} <!-- se view studio_tickets pernaw mesa to ticket (model) method has_submitted_outfits -->
+        {% if ticket.creator_id.id != user.id %}
           <!-- grafw creator_id.id giati creator_id=='eleni' an thes na to allakseis go @ customuser kai these __str__-->
           {% with ticket.creator_id.id as creator_id %}
             {% if creator_id in following_user_ids %}
