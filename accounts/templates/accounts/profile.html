@@ -145,26 +145,33 @@
 
 
 
-                        *Trending Styles: ☐Indie ☐Gorpcore ☐Preppy ☐Y2k ☐Preppy ☐Goth
                         <label for="id_trending_styles">Trending Styles: </label>
-                        <div style="display: flex;">
-                            <select id="id_trending_styles_from" multiple style="width: 80px;">
-                                {% for style in available_styles %}
-                                    <option value="{{ style.id }}">{{ style.style_name }}</option>
-                                {% endfor %}
-                            </select>
+                        <div style="display: flex; align-items: center;">
+                            <div style="text-align: center;">
+                                <p>Available</p>
+                                <select id="id_trending_styles_from" multiple style="width: 80px; height: 150px;">
+                                    {% for style in available_styles %}
+                                        <option value="{{ style.id }}">{{ style.style_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
-                            <div style="margin: 0 10px;">
-                                <button type="button" onclick="addTrendingStyle()"> &gt; </button><br>
+                            <div style="margin: 0 10px; text-align: center;">
+                                <button type="button" onclick="addTrendingStyle()"> &gt; </button><br><br>
                                 <button type="button" onclick="removeTrendingStyle()"> &lt; </button>
                             </div>
 
-                            <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 80px;">
-                                {% for style in user.trending_styles.all %}
-                                    <option value="{{ style.id }}">{{ style.style_name }}</option>
-                                {% endfor %}
-                            </select>
+                            <div style="text-align: center;">
+                                <p>Chosen</p>
+                                <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 80px; height: 150px;">
+                                    {% for style in user.trending_styles.all %}
+                                        <option value="{{ style.id }}">{{ style.style_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
+                        <br>
+
 
 
 
