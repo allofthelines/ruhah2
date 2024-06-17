@@ -143,7 +143,7 @@
                         {{ profile_settings_form.profile_visibility }}<br><br>
 
                         <label for="id_trending_styles">Trending Styles:</label>
-                        <div>
+                        <div style="margin-top: 0;">
                             {% for style in available_styles %}
                                 <label>
                                     <input type="checkbox" name="trending_styles" value="{{ style.id }}"
@@ -157,7 +157,7 @@
                         {{ profile_settings_form.trending_mode }}<br><br>
 
                         <label for="id_studio_styles">Studio Styles:</label>
-                        <div>
+                        <div style="margin-top: 0;">
                             {% for style in available_styles %}
                                 <label>
                                     <input type="checkbox" name="studio_styles" value="{{ style.id }}"
