@@ -261,3 +261,27 @@ def following_list(request, username):
         'following': following_list,
     }
     return render(request, 'accounts/following_list.html', context)
+
+
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
+from accounts.models import UserItemLikes
+from studio.models import Item
+
+@csrf_exempt
+def like_item(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, id=item_id)
+        user = request.user
+        if item.cat == 'top' and user.customer.top_size_xyz in item.sizes_xyz.all():
+            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            return JsonResponse({'success': True})
+        elif item.cat == 'bottom' and user.customer.bottom_size_xyz in item.sizes_xyz.all():
+            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False})
