@@ -79,6 +79,7 @@ def profile(request):
 
     available_styles = Style.objects.all()
     user_trending_styles = user.trending_styles.all()
+    user_studio_styles = user.studio_styles.all()
 
     editing = request.GET.get('edit') == 'true'
     editing_settings = request.GET.get('edit_settings') == 'true'
@@ -106,8 +107,10 @@ def profile(request):
             profile_settings_form = ProfileSettingsForm(request.POST, instance=user, user=user)
             if profile_settings_form.is_valid():
                 profile_settings_form.save(user=user)
-                selected_styles = request.POST.getlist('trending_styles')
-                user.trending_styles.set(selected_styles)
+                selected_trending_styles = request.POST.getlist('trending_styles')
+                selected_studio_styles = request.POST.getlist('studio_styles')
+                user.trending_styles.set(selected_trending_styles)
+                user.studio_styles.set(selected_studio_styles)
                 return redirect(f'{request.path}?edit_settings=false')
 
     return render(request, 'accounts/profile.html', {
@@ -118,6 +121,7 @@ def profile(request):
         'user': user,
         'available_styles': available_styles,
         'user_trending_styles': user_trending_styles,
+        'user_studio_styles': user_studio_styles,
         'editing': editing,
         'editing_settings': editing_settings
     })

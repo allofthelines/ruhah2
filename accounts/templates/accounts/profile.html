@@ -139,49 +139,52 @@
                 <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <p style="margin-top: 15px; text-align: left;">
-                        <label for="id_profile_visibility">Profile Visibility: </label>
-                        {{ profile_settings_form.profile_visibility }}<br>
-                        <br>
+                        <label for="id_profile_visibility"><span style="color: grey; text-decoration: underline;">Profile Visibility:</span></label>
+                        {{ profile_settings_form.profile_visibility }}<br><br>
 
-                        <label for="id_trending_mode">Trending Mode: </label>
-                        {{ profile_settings_form.trending_mode }}<br>
-                        <br>
-
-                        <label for="id_trending_styles">Trending Styles: </label><br>
+                        <label for="id_trending_styles"><span style="color: grey;">Trending Styles:</span></label>
                         <div>
                             {% for style in available_styles %}
                                 <label>
                                     <input type="checkbox" name="trending_styles" value="{{ style.id }}"
-                                           {% if style in user_trending_styles %}checked{% endif %}>
+                                        {% if style in user_trending_styles %} checked{% endif %}>
                                     {{ style.style_name }}
                                 </label><br>
                             {% endfor %}
-                        </div>
+                        </div><br>
 
-                        <br>
-                        *Studio Location: London<br>
-                        *Studio Style: Indie<br>
-                        <br>
+                        <label for="id_trending_mode"><span style="color: grey; text-decoration: underline;">Trending Mode:</span></label>
+                        {{ profile_settings_form.trending_mode }}<br><br>
+
+                        <label for="id_studio_styles"><span style="color: grey;">Studio Styles:</span></label>
+                        <div>
+                            {% for style in available_styles %}
+                                <label>
+                                    <input type="checkbox" name="studio_styles" value="{{ style.id }}"
+                                        {% if style in user_studio_styles %} checked{% endif %}>
+                                    {{ style.style_name }}
+                                </label><br>
+                            {% endfor %}
+                        </div><br>
+
+                        <!-- Add more fields here if needed -->
                     </p>
                     <input type="hidden" name="profile_settings_form" value="profile_settings_form">
                     <button type="submit">Save changes</button>
                 </form>
             {% else %}
                 <p style="margin-top: 15px; text-align: left;">
-                    Profile Visibility: <span style="color: grey;">{{ user.get_profile_visibility_display }}</span><br>
-                    <br>
-                    Trending Mode: <span style="color: grey;">{{ user.get_trending_mode_display }}</span><br>
-                    <br>
-                    Trending Styles:
-                    <span style="color: grey;">
-                    {% for style in user.trending_styles.all %}
-                        {{ style.style_name }}{% if not forloop.last %} {% endif %}
-                    {% endfor %}
-                    </span><br>
-                    <br>
-                    *Studio Location: London<br>
-                    *Studio Styles: Indie<br>
-                    <br>
+                    <span style="color: grey; text-decoration: underline;">Profile Visibility:</span> {{ user.get_profile_visibility_display }}<br><br>
+                    <span style="color: grey;">Trending Styles:</span>
+                    {% for style in user_trending_styles %}
+                        {{ style.style_name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}<br><br>
+                    <span style="color: grey; text-decoration: underline;">Trending Mode:</span> {{ user.get_trending_mode_display }}<br><br>
+                    <span style="color: grey;">Studio Styles:</span>
+                    {% for style in user_studio_styles %}
+                        {{ style.style_name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}<br><br>
+                    <!-- Add more fields here if needed -->
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit_settings" value="true">
@@ -189,6 +192,7 @@
                 </form>
             {% endif %}
         </div>
+
 
     </div>
 
