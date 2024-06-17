@@ -79,6 +79,7 @@
                                 <form id="like-form-{{ item.id }}" method="post" action="{% url 'accounts:like_item' item.id %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="item_id" value="{{ item.id }}">
+                                    <input type="hidden" name="styler_username" value="{{ profile_user.username }}">
                                     <button type="submit" class="like-button">Like</button>
                                 </form>
                                 <span class="like-status" style="display: none;"></span>
@@ -91,6 +92,7 @@
         {% endif %}
     </div>
 </div>
+
 
 
 

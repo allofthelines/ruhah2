@@ -278,29 +278,32 @@ def like_item(request, item_id):
         item = get_object_or_404(Item, id=item_id)
         user = request.user
         customer = user.customer
+        styler_username = request.POST.get('styler_username')
+        styler = get_object_or_404(User, username=styler_username)
 
         # Check for top category
         if item.cat == 'top' and item.sizes_xyz.filter(name=customer.top_size_xyz).exists():
-            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
+            print('XXXXXXXXXXXX\n\n\n\n\n\n', customer.top_size_xyz)
             return JsonResponse({'success': True})
 
         # Check for bottom category
         elif item.cat == 'bottom' and (
                 item.sizes_xyz.filter(name=customer.bottom_size_xyz).exists() or
                 item.sizes_waist_inches.filter(name=customer.size_waist_inches).exists()):
-            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
             return JsonResponse({'success': True})
 
         # Check for footwear category
         elif item.cat == 'footwear' and (
                 item.sizes_shoe_eu.filter(name=customer.shoe_size_eu).exists() or
                 item.sizes_shoe_uk.filter(name=customer.shoe_size_uk).exists()):
-            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
             return JsonResponse({'success': True})
 
         # Check for accessory category
         elif item.cat == 'accessory':
-            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
             return JsonResponse({'success': True})
 
         else:
