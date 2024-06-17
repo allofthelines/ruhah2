@@ -151,12 +151,12 @@
                                     {{ style.style_name }}
                                 </label>
                             {% endfor %}
-                        </div>
+                        </div><br>
 
                         <label for="id_trending_mode">Trending Mode:</label>
                         {{ profile_settings_form.trending_mode }}<br><br>
 
-                        <label for="id_studio_styles">Studio Styles:</label>
+                        <label for="id_studio_styles">Studio Styles:</label><br>
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                             {% for style in available_styles %}
                                 <label>
