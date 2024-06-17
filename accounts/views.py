@@ -280,7 +280,17 @@ def like_item(request, item_id):
         if item.cat == 'top' and user.customer.top_size_xyz in item.sizes_xyz.all():
             UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
             return JsonResponse({'success': True})
-        elif item.cat == 'bottom' and user.customer.bottom_size_xyz in item.sizes_xyz.all():
+        elif item.cat == 'bottom' and (
+                user.customer.bottom_size_xyz in item.sizes_xyz.all() or
+                user.customer.size_waist_inches in item.sizes_waist_inches.all()):
+            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            return JsonResponse({'success': True})
+        elif item.cat == 'footwear' and (
+                user.customer.shoe_size_eu in item.sizes_shoe_eu.all() or
+                user.customer.shoe_size_uk in item.sizes_shoe_uk.all()):
+            UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
+            return JsonResponse({'success': True})
+        elif item.cat == 'accessory':
             UserItemLikes.objects.create(buyer=user, item=item, styler=item.studio)
             return JsonResponse({'success': True})
         else:
