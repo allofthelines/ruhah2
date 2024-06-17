@@ -128,7 +128,8 @@ def api_tickets(request):
     tickets_data = [
         {
             "id": ticket.id,
-            "style1": ticket.style1,
+            # "style1": ticket.style1,
+            "style1": ticket.style1.style_name if ticket.style1 else 'None',
             "style2": ticket.style2.style_name if ticket.style2 else 'None', # SVHSE AN ERROR prepei na return as string gia to  studio_tickets.ja
             "occasion": ticket.occasion,
             "notes": ticket.notes
