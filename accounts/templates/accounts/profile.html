@@ -143,29 +143,30 @@
                         {{ profile_settings_form.profile_visibility }}<br><br>
 
                         <label for="id_trending_styles">Trending Styles:</label>
-                        <div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                             {% for style in available_styles %}
                                 <label>
                                     <input type="checkbox" name="trending_styles" value="{{ style.id }}"
                                         {% if style in user_trending_styles %} checked{% endif %}>
                                     {{ style.style_name }}
-                                </label><br>
+                                </label>
                             {% endfor %}
-                        </div><br>
+                        </div>
 
                         <label for="id_trending_mode">Trending Mode:</label>
                         {{ profile_settings_form.trending_mode }}<br><br>
 
                         <label for="id_studio_styles">Studio Styles:</label>
-                        <div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                             {% for style in available_styles %}
                                 <label>
                                     <input type="checkbox" name="studio_styles" value="{{ style.id }}"
                                         {% if style in user_studio_styles %} checked{% endif %}>
                                     {{ style.style_name }}
-                                </label><br>
+                                </label>
                             {% endfor %}
                         </div><br>
+
 
                         <!-- Add more fields here if needed -->
                     </p>
