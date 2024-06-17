@@ -81,8 +81,8 @@
                                     <input type="hidden" name="item_id" value="{{ item.id }}">
                                     <button type="submit" class="like-button">Like</button>
                                 </form>
-                                <span class="like-status">Liked</span>
-                                <span class="sold-out">Sold Out</span>
+                                <span class="like-status" style="display: none;">Liked</span>
+                                <span class="sold-out" style="display: none;">Sold Out</span>
                             </div>
                         {% endfor %}
                     </div>
@@ -442,10 +442,13 @@ document.querySelectorAll('.like-button').forEach(button => {
     }
 
     .liked, .sold-out {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: block;
         text-align: center;
         width: 100%; /* Ensure the text spans the full width */
         padding-top: 10px;
-        display: block;
         padding-bottom: 2px;
         font-size: 14px;
     }
