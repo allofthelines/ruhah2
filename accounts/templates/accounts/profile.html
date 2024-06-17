@@ -168,14 +168,16 @@
                 </form>
             {% else %}
                 <p style="margin-top: 15px; text-align: left;">
-                    <u>Profile Visibility</u>: {{ user.get_profile_visibility_display }}<br>
+                    Profile Visibility: <span style="color: grey;">{{ user.get_profile_visibility_display }}</span><br>
                     <br>
-                    <u>Trending Mode</u>: {{ user.get_trending_mode_display }}<br>
+                    Trending Mode: <span style="color: grey;">{{ user.get_trending_mode_display }}</span><br>
                     <br>
-                    <u>Trending Styles</u>:
+                    Trending Styles:
+                    <span style="color: grey;">
                     {% for style in user.trending_styles.all %}
                         {{ style.style_name }}{% if not forloop.last %} {% endif %}
-                    {% endfor %}<br>
+                    {% endfor %}
+                    </span><br>
                     <br>
                     *Studio Location: London<br>
                     *Studio Styles: Indie<br>
