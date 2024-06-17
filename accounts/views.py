@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import CustomUser, Customer
+from studio.models import Style
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
