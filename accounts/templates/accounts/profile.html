@@ -143,11 +143,10 @@
                         {{ profile_settings_form.profile_visibility }}<br>
                         <br>
 
-
-
-                        <label for="id_profile_visibility">Profile Visibility: </label>
-                        {{ profile_settings_form.profile_visibility }}<br>
+                        <label for="id_trending_mode">Trending Mode: </label>
+                        {{ profile_settings_form.trending_mode }}<br>
                         <br>
+
                         <label for="id_trending_styles">Trending Styles: </label><br>
                         <div>
                             {% for style in available_styles %}
@@ -158,14 +157,7 @@
                                 </label><br>
                             {% endfor %}
                         </div>
-
-
-
-
-
-                        <br>
-                        <label for="id_trending_mode">Trending Mode: </label>
-                        {{ profile_settings_form.trending_mode }}<br>
+                
                         <br>
                         *Studio Location: London<br>
                         *Studio Style: Indie<br>
@@ -178,11 +170,11 @@
                 <p style="margin-top: 15px; text-align: left;">
                     Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
+                    Trending Mode: {{ user.get_trending_mode_display }}<br>
                     Trending Styles:
                     {% for style in user.trending_styles.all %}
                         {{ style.style_name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                    Trending Mode: {{ user.get_trending_mode_display }}<br>
+                    {% endfor %}<br>
                     <br>
                     *Studio Location: London<br>
                     *Studio Styles: Indie<br>
@@ -240,29 +232,6 @@
     }
 </script>
 
-
-
-<script>
-function addTrendingStyle() {
-    var from = document.getElementById('id_trending_styles_from');
-    var to = document.getElementById('id_trending_styles_to');
-    moveSelectedOptions(from, to);
-}
-
-function removeTrendingStyle() {
-    var from = document.getElementById('id_trending_styles_to');
-    var to = document.getElementById('id_trending_styles_from');
-    moveSelectedOptions(from, to);
-}
-
-function moveSelectedOptions(from, to) {
-    var selectedOptions = Array.from(from.selectedOptions);
-    selectedOptions.forEach(function(option) {
-        to.appendChild(option);
-    });
-}
-
-</script>
 
 
 
