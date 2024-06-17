@@ -121,6 +121,7 @@ def profile(request):
         'user': user,
         'available_styles': available_styles,
         'user_trending_styles': user_trending_styles,
+        'user_studio_styles': user_studio_styles,
         'editing': editing,
         'editing_settings': editing_settings
     })
