@@ -64,36 +64,77 @@
 
 <!-- Display User's Outfits -->
 <div id="outfit-container">
+
+
     <div id="them-by-me-content" class="outfit-grid">
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
-                <div class="outfit-item" onclick="toggleImage(this)">
-                    {% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}
+                {% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}
+                    <div class="outfit-item" onclick="toggleImage(this)">
                         <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    {% endif %}
-                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="{% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}display: none;{% else %}display: block;{% endif %}">
-                    <div class="contBB" style="display: none;">
-                        {% for item in outfit.items.all %}
-                            <div class="contAA">
-                                <img src="{{ item.image.url }}" alt="Item Image">
-                                <form id="like-form-{{ item.id }}" method="post" action="{% url 'accounts:like_item' item.id %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="item_id" value="{{ item.id }}">
-                                    <input type="hidden" name="styler_username" value="{{ profile_user.username }}">
-                                    <button type="submit" class="like-button">Like</button>
-                                </form>
-                                <span class="like-status" style="display: none;"></span>
-                                <span class="sold-out" style="display: none;"></span>
-                            </div>
-                        {% endfor %}
+                        <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
                     </div>
-                </div>
+                {% else %}
+                    <div class="outfit-item">
+                        <img src="{{ outfit.image.url }}" alt="Outfit Image">
+                    </div>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>
-</div>
 
 
+
+    {% comment %}
+    <!-- Default content - 'Them by Me' -->
+    <div id="them-by-me-content" class="outfit-grid">
+        {% for outfit in profile_user.outfit_set.all %}
+            <!-- COMMENT OUT FOR NOW PROSWRINO
+            <div class="outfit-item">
+                <img src="{{ outfit.image.url }}" alt="Outfit Image">
+            </div>
+            -->
+            {% if 'default_img.jpg' not in outfit.portrait.url %}
+            <div class="outfit-item" onclick="toggleImage(this)">
+                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- 'Me by Them' content (initially hidden) -->
+    <div id="me-by-them-content" class="outfit-grid hidden">
+        {% for ticket in profile_user.ticket_set.all %}
+            {% if ticket.outfit1 %}
+                <!-- COMMENT OUT PROSWPINO
+                <div class="outfit-item">
+                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image">
+                </div>
+                -->
+                {% if 'default_img.jpg' not in ticket.outfit1.portrait.url %}
+                <div class="outfit-item" onclick="toggleImage(this)">
+                    <img src="{{ ticket.outfit1.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                </div>
+                {% endif %}
+            {% endif %}
+            {% if ticket.outfit2 %}
+                <!-- COMMENT OUT PROSWPINO
+                <div class="outfit-item">
+                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image">
+                </div>
+                -->
+                {% if 'default_img.jpg' not in ticket.outfit2.portrait.url %}
+                <div class="outfit-item" onclick="toggleImage(this)">
+                    <img src="{{ ticket.outfit2.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endcomment %}
 
 
 </div>
@@ -107,80 +148,18 @@
 
 
 <script>
- function toggleImage(element) {
-    const portrait = element.querySelector('.portrait');
-    const image = element.querySelector('.image');
-    const contBB = element.querySelector('.contBB');
+    function toggleImage(element) {
+        const portrait = element.querySelector('.portrait');
+        const image = element.querySelector('.image');
 
-    if (portrait) {
-        if (portrait.style.display === 'none' && image.style.display === 'none') {
+        if (portrait.style.display === 'none') {
             portrait.style.display = 'block';
-            contBB.style.display = 'none';
-        } else if (portrait.style.display === 'block') {
+            image.style.display = 'none';
+        } else {
             portrait.style.display = 'none';
-            image.style.display = 'block';
-        } else if (image.style.display === 'block') {
-            image.style.display = 'none';
-            contBB.style.display = 'grid';
-        } else {
-            contBB.style.display = 'none';
-            portrait.style.display = 'block';
-        }
-    } else {
-        if (image.style.display === 'none' && contBB.style.display === 'none') {
-            image.style.display = 'block';
-        } else if (image.style.display === 'block') {
-            image.style.display = 'none';
-            contBB.style.display = 'grid';
-        } else {
-            contBB.style.display = 'none';
             image.style.display = 'block';
         }
     }
-}
-
-</script>
-
-<script>
-document.querySelectorAll('.like-button').forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.preventDefault();
-        const form = button.closest('form');
-        const item_id = form.querySelector('input[name="item_id"]').value;
-        fetch(form.action, {
-            method: 'POST',
-            body: new URLSearchParams(new FormData(form))
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                button.style.display = 'none';
-                form.nextElementSibling.style.display = 'inline'; // Show "Liked"
-                form.closest('.contAA').style.display = 'block'; // Ensure contAA remains visible
-                const outfitItem = form.closest('.outfit-item');
-                const portrait = outfitItem.querySelector('.portrait');
-                const image = outfitItem.querySelector('.image');
-                const contBB = outfitItem.querySelector('.contBB');
-                portrait.style.display = 'none';
-                image.style.display = 'none';
-                contBB.style.display = 'grid'; // Ensure contBB remains visible
-            } else {
-                button.style.display = 'none';
-                form.nextElementSibling.nextElementSibling.style.display = 'inline'; // Show "Sold Out"
-                form.closest('.contAA').style.display = 'block'; // Ensure contAA remains visible
-                const outfitItem = form.closest('.outfit-item');
-                const portrait = outfitItem.querySelector('.portrait');
-                const image = outfitItem.querySelector('.image');
-                const contBB = outfitItem.querySelector('.contBB');
-                portrait.style.display = 'none';
-                image.style.display = 'none';
-                contBB.style.display = 'grid'; // Ensure contBB remains visible
-            }
-        });
-    });
-});
-
-
 </script>
 
 <script>
@@ -254,7 +233,7 @@ document.querySelectorAll('.like-button').forEach(button => {
     }
     .profile-username {
         font-size: 20px;
-        /*font-weight: bold;*/
+        font-weight: bold;
     }
     .profile-picture {
         width: 100px;
@@ -330,83 +309,4 @@ document.querySelectorAll('.like-button').forEach(button => {
     .hidden {
         display: none;
     }
-
-
-
-
-
-
-
-
-
-
-
-    .contBB {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 2-column layout */
-        grid-template-rows: repeat(2, 1fr); /* 2-row layout */
-        grid-gap: 0px;
-        width: 100%;
-        padding-bottom: 100%; /* Make it square */
-        position: relative;
-        height: 0;
-        box-sizing: border-box;
-    }
-
-    .contAA {
-        display: flex;
-        flex-direction: column;
-        /*border: 1px solid black;*/
-        justify-content: center; /* Center content vertically */
-        align-items: center; /* Center content horizontally */
-        text-align: center; /* Center text */
-        padding: 5px; /* Add padding to make space for the text */
-        width: 100%; /* Half the width of contBB */
-        height: 100%; /* Half the height of contBB */
-        box-sizing: border-box;
-        aspect-ratio: 1 / 1;
-    }
-
-
-    .outfit-item .contAA img {
-        width: 100%;
-        height: auto;
-        max-height: 70%; /* Limit the height to ensure space for the text */
-        object-fit: contain; /* Ensure the entire image is visible within the container */
-        flex-grow: 0; /* Adjust height to fit within the square */
-    }
-
-    .like-button {
-        background: none;
-        border: none;
-        color: blue;
-        text-decoration: underline;
-        cursor: pointer;
-        display: block;
-        text-align: center;
-        width: 100%; /* Ensure the text spans the full width */
-        padding-top: 10px;
-        padding-bottom: 2px;
-        font-size: 14px;
-        font-weight: 400;
-    }
-
-    .liked, .sold-out {
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: block;
-        text-align: center;
-        width: 100%; /* Ensure the text spans the full width */
-        padding-top: 10px;
-        padding-bottom: 2px;
-        font-size: 14px;
-        font-weight: 400;
-    }
-
-
-
-
-
-
 </style>

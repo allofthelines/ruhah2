@@ -121,7 +121,6 @@ def profile(request):
         'user': user,
         'available_styles': available_styles,
         'user_trending_styles': user_trending_styles,
-        'user_studio_styles': user_studio_styles,
         'editing': editing,
         'editing_settings': editing_settings
     })
@@ -261,52 +260,3 @@ def following_list(request, username):
         'following': following_list,
     }
     return render(request, 'accounts/following_list.html', context)
-
-
-from django.contrib.auth import get_user_model
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
-from accounts.models import UserItemLikes, Customer
-from studio.models import Item
-
-User = get_user_model()
-
-
-@csrf_exempt
-@login_required
-def like_item(request, item_id):
-    if request.method == 'POST':
-        item = get_object_or_404(Item, id=item_id)
-        user = request.user
-        customer = user.customer
-        styler_username = request.POST.get('styler_username')
-        styler = get_object_or_404(User, username=styler_username)
-
-        # Check for top category
-        if item.cat == 'top' and item.sizes_xyz.filter(name=customer.top_size_xyz).exists():
-            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
-            return JsonResponse({'success': True})
-
-        # Check for bottom category
-        elif item.cat == 'bottom' and (
-                item.sizes_xyz.filter(name=customer.bottom_size_xyz).exists() or
-                item.sizes_waist_inches.filter(name=customer.size_waist_inches).exists()):
-            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
-            return JsonResponse({'success': True})
-
-        # Check for footwear category
-        elif item.cat == 'footwear' and (
-                item.sizes_shoe_eu.filter(name=customer.shoe_size_eu).exists() or
-                item.sizes_shoe_uk.filter(name=customer.shoe_size_uk).exists()):
-            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
-            return JsonResponse({'success': True})
-
-        # Check for accessory category
-        elif item.cat == 'accessory':
-            UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
-            return JsonResponse({'success': True})
-
-        else:
-            return JsonResponse({'success': False})
