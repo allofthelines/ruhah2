@@ -53,12 +53,12 @@
                 </form>
             {% else %}
                 <p style="margin-top: 7px; text-align: left;">
-                    Username: @{{ user.username }}<br>
-                    Email: {{ user.email }}<br>
+                    Username: @<span style="color: grey;">{{ user.username }}</span><br>
+                    Email: <span style="color: grey;">{{ user.email }}</span><br>
                     <br>
-                    Profile Picture: {{ user.pfp.url|filename }}<br>
+                    Profile Picture: <span style="color: grey;">{{ user.pfp.url|filename }}</span><br>
                     <br>
-                    Bio: {{ user.bio }}<br>
+                    Bio: <span style="color: grey;">{{ user.bio }}</span><br>
                     <br>
                     Credits: {{ user.credits }}<br>
                     <br>
@@ -90,14 +90,14 @@
                 </form>
             {% else %}
                 <p style="margin-top: 15px;">
-                    Top: {{ user.customer.top_size_xyz }}<br>
-                    Bottom: {{ user.customer.bottom_size_xyz }}<br>
-                    Waist (inches): {{ user.customer.size_waist_inches }}<br>
-                    Shoe (EU): {{ user.customer.shoe_size_eu }}<br>
-                    Shoe (UK): {{ user.customer.shoe_size_uk }}<br>
+                    Top: <span style="color: grey;">{{ user.customer.top_size_xyz }}</span><br>
+                    Bottom: <span style="color: grey;">{{ user.customer.bottom_size_xyz }}</span><br>
+                    Waist (inches): <span style="color: grey;">{{ user.customer.size_waist_inches }}</span><br>
+                    Shoe (EU): <span style="color: grey;">{{ user.customer.shoe_size_eu }}</span><br>
+                    Shoe (UK): <span style="color: grey;">{{ user.customer.shoe_size_uk }}</span><br>
                     <br>
-                    Height: {{ user.customer.height }} cm<br>
-                    Weight: {{ user.customer.weight }} kg<br>
+                    Height: <span style="color: grey;">{{ user.customer.height }} cm<br>
+                    Weight: <span style="color: grey;">{{ user.customer.weight }} kg<br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit" value="customer">
