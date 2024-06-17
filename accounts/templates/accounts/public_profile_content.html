@@ -94,59 +94,6 @@
 
 
 
-
-    {% comment %}
-    <!-- Default content - 'Them by Me' -->
-    <div id="them-by-me-content" class="outfit-grid">
-        {% for outfit in profile_user.outfit_set.all %}
-            <!-- COMMENT OUT FOR NOW PROSWRINO
-            <div class="outfit-item">
-                <img src="{{ outfit.image.url }}" alt="Outfit Image">
-            </div>
-            -->
-            {% if 'default_img.jpg' not in outfit.portrait.url %}
-            <div class="outfit-item" onclick="toggleImage(this)">
-                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-            </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-
-    <!-- 'Me by Them' content (initially hidden) -->
-    <div id="me-by-them-content" class="outfit-grid hidden">
-        {% for ticket in profile_user.ticket_set.all %}
-            {% if ticket.outfit1 %}
-                <!-- COMMENT OUT PROSWPINO
-                <div class="outfit-item">
-                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image">
-                </div>
-                -->
-                {% if 'default_img.jpg' not in ticket.outfit1.portrait.url %}
-                <div class="outfit-item" onclick="toggleImage(this)">
-                    <img src="{{ ticket.outfit1.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-                </div>
-                {% endif %}
-            {% endif %}
-            {% if ticket.outfit2 %}
-                <!-- COMMENT OUT PROSWPINO
-                <div class="outfit-item">
-                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image">
-                </div>
-                -->
-                {% if 'default_img.jpg' not in ticket.outfit2.portrait.url %}
-                <div class="outfit-item" onclick="toggleImage(this)">
-                    <img src="{{ ticket.outfit2.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-                </div>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </div>
-    {% endcomment %}
-
-
 </div>
 
 
