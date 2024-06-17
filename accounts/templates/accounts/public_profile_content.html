@@ -364,11 +364,11 @@
 
 
     .contBB {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: 2px;
-    height: 100%; /* Adjust height to ensure it remains square */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+        grid-template-rows: repeat(2, 1fr); /* 2-row layout */
+        grid-gap: 2px;
+        height: 100%; /* Adjust height to ensure it remains square */
     }
 
     .contAA {
@@ -376,7 +376,11 @@
         flex-direction: column;
         border: 1px solid black;
         aspect-ratio: 1 / 1; /* Ensure contAA is square */
+        justify-content: center; /* Center content vertically */
+        align-items: center; /* Center content horizontally */
+        text-align: center; /* Center text */
     }
+
 
     .contAA img {
         width: 100%;
@@ -392,6 +396,7 @@
         cursor: pointer;
         display: block;
         text-align: center;
+        width: 100%; /* Ensure the text spans the full width */
         padding: 10px;
     }
 
