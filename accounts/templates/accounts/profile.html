@@ -96,8 +96,8 @@
                     Shoe (EU): <span style="color: grey;">{{ user.customer.shoe_size_eu }}</span><br>
                     Shoe (UK): <span style="color: grey;">{{ user.customer.shoe_size_uk }}</span><br>
                     <br>
-                    Height: <span style="color: grey;">{{ user.customer.height }} cm<br>
-                    Weight: <span style="color: grey;">{{ user.customer.weight }} kg<br>
+                    Height: <span style="color: grey;">{{ user.customer.height }}</span> cm<br>
+                    Weight: <span style="color: grey;">{{ user.customer.weight }}</span> kg<br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit" value="customer">
