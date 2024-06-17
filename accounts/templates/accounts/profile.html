@@ -139,10 +139,10 @@
                 <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <p style="margin-top: 15px; text-align: left;">
-                        <label for="id_profile_visibility"><span style="color: grey; text-decoration: underline;">Profile Visibility:</span></label>
+                        <label for="id_profile_visibility">Profile Visibility:</label>
                         {{ profile_settings_form.profile_visibility }}<br><br>
 
-                        <label for="id_trending_styles"><span style="color: grey;">Trending Styles:</span></label>
+                        <label for="id_trending_styles">Trending Styles:</label>
                         <div>
                             {% for style in available_styles %}
                                 <label>
@@ -153,10 +153,10 @@
                             {% endfor %}
                         </div><br>
 
-                        <label for="id_trending_mode"><span style="color: grey; text-decoration: underline;">Trending Mode:</span></label>
+                        <label for="id_trending_mode">Trending Mode:</label>
                         {{ profile_settings_form.trending_mode }}<br><br>
 
-                        <label for="id_studio_styles"><span style="color: grey;">Studio Styles:</span></label>
+                        <label for="id_studio_styles">Studio Styles:</label>
                         <div>
                             {% for style in available_styles %}
                                 <label>
@@ -174,16 +174,18 @@
                 </form>
             {% else %}
                 <p style="margin-top: 15px; text-align: left;">
-                    <span style="color: grey; text-decoration: underline;">Profile Visibility:</span> {{ user.get_profile_visibility_display }}<br><br>
-                    <span style="color: grey;">Trending Styles:</span>
+                    Profile Visibility: <span style="color: grey;">{{ user.get_profile_visibility_display }}</span><br><br>
+                    Trending Styles:
+                    <span style="color: grey;">
                     {% for style in user_trending_styles %}
                         {{ style.style_name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}<br><br>
-                    <span style="color: grey; text-decoration: underline;">Trending Mode:</span> {{ user.get_trending_mode_display }}<br><br>
-                    <span style="color: grey;">Studio Styles:</span>
+                    {% endfor %}</span><br><br>
+                    Trending Mode:</span> <span style="color: grey;">{{ user.get_trending_mode_display }}</span><br><br>
+                    Studio Styles:</span>
+                    <span style="color: grey;">
                     {% for style in user_studio_styles %}
                         {{ style.style_name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}<br><br>
+                    {% endfor %}</span><br><br>
                     <!-- Add more fields here if needed -->
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
