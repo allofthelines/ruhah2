@@ -133,6 +133,6 @@ class ProfileSettingsForm(forms.ModelForm):
         user = super().save(commit=False)
         user.profile_visibility = self.cleaned_data['profile_visibility']
         user.trending_mode = self.cleaned_data['trending_mode']
-        user.save()
         user.trending_styles.set(self.cleaned_data['trending_styles'])
+        user.save()
         return user
