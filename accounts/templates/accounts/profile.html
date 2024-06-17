@@ -157,7 +157,7 @@
                                 </label><br>
                             {% endfor %}
                         </div>
-                
+
                         <br>
                         *Studio Location: London<br>
                         *Studio Style: Indie<br>
@@ -171,9 +171,10 @@
                     Profile Visibility: {{ user.get_profile_visibility_display }}<br>
                     <br>
                     Trending Mode: {{ user.get_trending_mode_display }}<br>
+                    <br>
                     Trending Styles:
                     {% for style in user.trending_styles.all %}
-                        {{ style.style_name }}{% if not forloop.last %}, {% endif %}
+                        {{ style.style_name }}{% if not forloop.last %} {% endif %}
                     {% endfor %}<br>
                     <br>
                     *Studio Location: London<br>
