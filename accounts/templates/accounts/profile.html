@@ -145,34 +145,19 @@
 
 
 
-                        <label for="id_trending_styles">Trending Styles: </label>
-                        <div style="display: flex; align-items: center;">
-                            <div style="text-align: center;">
-                                <p>Available</p>
-                                <select id="id_trending_styles_from" multiple style="width: 80px; height: 150px;">
-                                    {% for style in available_styles %}
-                                        {% if style not in user_trending_styles %}
-                                            <option value="{{ style.id }}">{{ style.style_name }}</option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-                            <div style="margin: 0 10px; text-align: center;">
-                                <button type="button" onclick="addTrendingStyle()"> &gt; </button><br><br>
-                                <button type="button" onclick="removeTrendingStyle()"> &lt; </button>
-                            </div>
-
-                            <div style="text-align: center;">
-                                <p>Chosen</p>
-                                <select id="id_trending_styles_to" name="trending_styles" multiple style="width: 80px; height: 150px;">
-                                    {% for style in user_trending_styles %}
-                                        <option value="{{ style.id }}">{{ style.style_name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
+                        <label for="id_profile_visibility">Profile Visibility: </label>
+                        {{ profile_settings_form.profile_visibility }}<br>
                         <br>
+                        <label for="id_trending_styles">Trending Styles: </label><br>
+                        <div>
+                            {% for style in available_styles %}
+                                <label>
+                                    <input type="checkbox" name="trending_styles" value="{{ style.id }}"
+                                           {% if style in user_trending_styles %}checked{% endif %}>
+                                    {{ style.style_name }}
+                                </label><br>
+                            {% endfor %}
+                        </div>
 
 
 
