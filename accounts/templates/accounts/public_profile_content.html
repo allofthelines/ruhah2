@@ -367,6 +367,7 @@
         background-color: red;
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+        grid-template-rows: repeat(1, 2fr); /* 2-column layout */
         grid-gap: 2px;
         aspect-ratio: 1 / 1; /* Ensure contBB is square */
         height: 100%; /* Adjust height to ensure it remains square */
@@ -380,6 +381,14 @@
         justify-content: center; /* Center content vertically */
         align-items: center; /* Center content horizontally */
         text-align: center; /* Center text */
+    }
+
+    .contAA a {
+        text-align: center;
+        padding: 10px;
+        background: white;
+        border-top: 1px solid black; /* Thin border between image and link */
+        display: block;
     }
 
 
