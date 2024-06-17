@@ -262,14 +262,16 @@ def following_list(request, username):
     }
     return render(request, 'accounts/following_list.html', context)
 
-from django.contrib.auth.models import User
+
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from accounts.models import UserItemLikes
-from studio.models import Item
 from accounts.models import UserItemLikes, Customer
+from studio.models import Item
+
+User = get_user_model()
 
 
 @csrf_exempt
@@ -285,7 +287,6 @@ def like_item(request, item_id):
         # Check for top category
         if item.cat == 'top' and item.sizes_xyz.filter(name=customer.top_size_xyz).exists():
             UserItemLikes.objects.create(buyer=user, item=item, styler=styler)
-            print('XXXXXXXXXXXX\n\n\n\n\n\n', customer.top_size_xyz)
             return JsonResponse({'success': True})
 
         # Check for bottom category
