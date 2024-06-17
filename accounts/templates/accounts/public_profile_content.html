@@ -369,19 +369,24 @@
         grid-template-columns: repeat(2, 1fr); /* 2-column layout */
         grid-template-rows: repeat(2, 1fr); /* 2-row layout */
         grid-gap: 10px;
-        aspect-ratio: 1 / 1; /* Ensure contBB is square */
-        height: 100%; /* Adjust height to ensure it remains square */
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* Make it square */
+        height: 0;
     }
-
 
     .contAA {
         display: flex;
         flex-direction: column;
         border: 1px solid black;
-        aspect-ratio: 1 / 1; /* Ensure contAA is square */
         justify-content: center; /* Center content vertically */
         align-items: center; /* Center content horizontally */
         text-align: center; /* Center text */
+        padding: 5px; /* Add padding to make space for the text */
+        position: absolute;
+        width: 50%; /* Half the width of contBB */
+        height: 50%; /* Half the height of contBB */
+        box-sizing: border-box;
     }
 
 
