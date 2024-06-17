@@ -368,9 +368,8 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* 2-column layout */
         grid-template-rows: repeat(1, 2fr); /* 2-column layout */
-        grid-gap: 2px;
+        grid-gap: 10px;
         aspect-ratio: 1 / 1; /* Ensure contBB is square */
-        height: 100%; /* Adjust height to ensure it remains square */
     }
 
     .contAA {
@@ -383,19 +382,11 @@
         text-align: center; /* Center text */
     }
 
-    .contAA a {
-        text-align: center;
-        padding: 10px;
-        background: white;
-        border-top: 1px solid black; /* Thin border between image and link */
-        display: block;
-    }
-
 
     .outfit-item .contAA img {
         width: 100%;
         height: auto;
-        max-height: 50%; /* Limit the height to ensure space for the text */
+        max-height: 40%; /* Limit the height to ensure space for the text */
         object-fit: contain; /* Ensure the entire image is visible within the container */
         flex-grow: 0; /* Adjust height to fit within the square */
     }
@@ -410,11 +401,13 @@
         text-align: center;
         width: 100%; /* Ensure the text spans the full width */
         padding: 10px;
+        border-top: 1px solid black; /* Thin border between image and link */
     }
 
     .liked, .sold-out {
         text-align: center;
         padding: 10px;
+        border-top: 1px solid black; /* Thin border between image and link */
     }
 
 
