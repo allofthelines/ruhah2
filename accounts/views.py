@@ -262,13 +262,14 @@ def following_list(request, username):
     }
     return render(request, 'accounts/following_list.html', context)
 
-
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from accounts.models import UserItemLikes
 from studio.models import Item
+from accounts.models import UserItemLikes, Customer
 
 
 @csrf_exempt
