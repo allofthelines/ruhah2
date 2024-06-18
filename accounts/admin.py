@@ -58,8 +58,6 @@ class UserItemLikesAdmin(admin.ModelAdmin):
 
 admin.site.register(UserItemLikes, UserItemLikesAdmin)
 
-admin.site.register(UserItemLikes, UserItemLikesAdmin)
-
 
 class UserItemCartAdmin(admin.ModelAdmin):
     list_display = ('id', 'buyer_username', 'item', 'styler_username')
