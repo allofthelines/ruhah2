@@ -125,11 +125,10 @@
 
         <!-- Likes Profile Section -->
         <div id="likes" class="content-section" style="display: none;">
-        <p>oh hi mark</p>
             <div id="contBBB">
-                {% for like in user.useritemlikes_set.all %}
+                {% for like in user_likes %}
                     <div class="contAAA">
-                        <img src="{{ like.item.image.url }}" alt="Item Image">
+                        <img src="{{ like.item.image.url }}" alt="Liked Item Image">
                         <form action="{% url 'accounts:remove_like' like.id %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="link-style">Remove</button>
