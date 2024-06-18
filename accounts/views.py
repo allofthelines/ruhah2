@@ -326,4 +326,4 @@ def remove_like(request, like_id):
             pass  # Handle the case where the like doesn't exist if necessary
 
     next_url = request.GET.get('next', reverse('accounts:profile') + '#likes')  # Default to 'accounts:profile#likes' if 'next' not provided
-    return redirect(next_url)ofile', username=request.user.username)
+    return redirect(next_url)
