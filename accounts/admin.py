@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
 from django.utils.timezone import now
+from datetime import datetime, timezone
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
@@ -36,7 +37,7 @@ class UserFollowsAdmin(admin.ModelAdmin):
 admin.site.register(UserFollows, UserFollowsAdmin)
 
 class UserItemLikesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'liker_username', 'item', 'styler_username')
+    list_display = ('id', 'liker_username', 'item', 'styler_username', 'liked_at', 'days_alive')
     list_filter = ('liker', 'styler')
 
     def liker_username(self, obj):
@@ -48,6 +49,14 @@ class UserItemLikesAdmin(admin.ModelAdmin):
         return obj.styler.username if obj.styler else 'None'
     styler_username.admin_order_field = 'styler'
     styler_username.short_description = 'Styler'
+
+    def days_alive(self, obj):
+        now = datetime.now(timezone.utc)
+        delta = now - obj.liked_at
+        return delta.days
+    days_alive.short_description = 'Days Alive'
+
+admin.site.register(UserItemLikes, UserItemLikesAdmin)
 
 admin.site.register(UserItemLikes, UserItemLikesAdmin)
 
