@@ -175,30 +175,36 @@
 
 
 <script>
-    let clickTimer;
     let pressTimer;
+    let isLongPress = false;
 
-    function singleClickToggle(element) {
-        clickTimer = setTimeout(function() {
+    function handleClick(event, element) {
+        if (!isLongPress) {
             toggleImage(element);
-        }, 300);
+        }
     }
 
     function startPressTimer(outfitId) {
+        isLongPress = false;
         pressTimer = setTimeout(function() {
             likeOutfit(outfitId);
+            isLongPress = true;
         }, 300);
     }
 
-    function clearPressTimer(outfitId) {
+    function clearPressTimer(outfitId, isMouseLeave) {
         clearTimeout(pressTimer);
-        clearTimeout(clickTimer);
+        if (isMouseLeave && isLongPress) {
+            const outfitElement = document.getElementById(`outfit-${outfitId}`);
+            outfitElement.classList.remove('processing-long-press');
+        }
     }
 
     function likeOutfit(outfitId) {
         // Add thicker border
         const outfitElement = document.getElementById(`outfit-${outfitId}`);
         outfitElement.classList.add('liked-outfit');
+        outfitElement.classList.add('processing-long-press');
 
         // Make an AJAX request to like the outfit
         fetch(`{% url 'accounts:like_outfit' %}?outfit_id=${outfitId}`, {
@@ -211,12 +217,24 @@
         })
         .then(response => {
             if (response.ok) {
-                // Optionally, you can handle successful response here
+                // Optionally, you can handle a successful response here
             }
         });
 
         // Prevent default action
         return false;
+    }
+
+    function toggleImage(element) {
+        const portrait = element.querySelector('.portrait');
+        const image = element.querySelector('.image');
+        if (portrait.style.display === 'block') {
+            portrait.style.display = 'none';
+            image.style.display = 'block';
+        } else {
+            portrait.style.display = 'block';
+            image.style.display = 'none';
+        }
     }
 </script>
 
