@@ -275,6 +275,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .models import UserItemLikes
 from core.models import Outfit
+import json
 
 def like_outfit(request):
     outfit_id = request.POST.get('outfit_id')
