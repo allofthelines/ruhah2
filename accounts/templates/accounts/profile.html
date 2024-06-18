@@ -138,6 +138,59 @@
             </div>
         </div>
 
+    {% comment %}         LIKES SECTION GRID V        {% endcomment %}
+
+<style>
+    #contBBB {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 columns in desktop */
+        grid-gap: 2px;
+        border: 0px solid black; /* Border around the entire container */
+        margin: 0 0px; /* extra margins on the left and right (exei hdh 20px apo body) */
+    }
+
+    .contAAA {
+        display: flex;
+        flex-direction: column; /* Image on top, link on bottom */
+        border: 1px solid black; /* Thin borders as specified, like regular table lines */
+    }
+
+    .contAAA img {
+        width: 100%;
+        height: auto;
+        flex-grow: 1; /* Image takes up the available space */
+    }
+
+    .contAAA form {
+        text-align: center;
+        padding: 10px;
+        background: white;
+        border-top: 1px solid black; /* Thin border between image and link */
+        display: block;
+    }
+
+    .contAAA form button {
+        background: none;
+        border: none;
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        padding: 10px; /* Adjust padding to match 'Remove' link */
+        width: 100%;
+        font-family: inherit; /* Inherit the font family from parent elements */
+        font-size: inherit; /* Optionally ensure the font size is also inherited */
+        border-top: 1px solid black; /* kanonika einai sto contA a alla edw */
+    }
+
+    @media (max-width: 768px) {
+        #contBBB {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns in mobile */
+        }
+    }
+</style>
+
 
 
 
@@ -338,62 +391,4 @@
 
 
 
-
-
-
-
-
-
-
-
-<style>
-    #contBBB {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 4 columns in desktop */
-        grid-gap: 2px;
-        border: 0px solid black; /* Border around the entire container */
-        margin: 0 0px; /* extra margins on the left and right (exei hdh 20px apo body) */
-    }
-
-    .contAAA {
-        display: flex;
-        flex-direction: column; /* Image on top, link on bottom */
-        border: 1px solid black; /* Thin borders as specified, like regular table lines */
-    }
-
-    .contAAA img {
-        width: 100%;
-        height: auto;
-        flex-grow: 1; /* Image takes up the available space */
-    }
-
-    .contAAA form {
-        text-align: center;
-        padding: 10px;
-        background: white;
-        border-top: 1px solid black; /* Thin border between image and link */
-        display: block;
-    }
-
-    .contAAA form button {
-        background: none;
-        border: none;
-        color: blue;
-        text-decoration: underline;
-        cursor: pointer;
-        display: block;
-        text-align: center;
-        padding: 10px; /* Adjust padding to match 'Remove' link */
-        width: 100%;
-        font-family: inherit; /* Inherit the font family from parent elements */
-        font-size: inherit; /* Optionally ensure the font size is also inherited */
-        border-top: 1px solid black; /* kanonika einai sto contA a alla edw */
-    }
-
-    @media (max-width: 768px) {
-        #contBBB {
-            grid-template-columns: repeat(2, 1fr); /* 2 columns in mobile */
-        }
-    }
-</style>
 
