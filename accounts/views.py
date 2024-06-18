@@ -261,3 +261,32 @@ def following_list(request, username):
         'following': following_list,
     }
     return render(request, 'accounts/following_list.html', context)
+
+
+
+
+
+
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from .models import UserItemLikes, Outfit
+
+def like_outfit(request):
+    outfit_id = request.POST.get('outfit_id')
+    try:
+        outfit = Outfit.objects.get(id=outfit_id)
+        liker = request.user
+        styler = outfit.maker_id
+        for item in outfit.items.all():
+            UserItemLikes.objects.create(
+                outfit=item,
+                liker=liker,
+                styler=styler
+            )
+        return JsonResponse({'status': 'success'})
+    except Outfit.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Outfit not found'}, status=404)

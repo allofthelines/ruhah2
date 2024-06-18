@@ -129,6 +129,7 @@ class UserItemLikes(models.Model):
     liker = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='liker_likes', blank=True, null=True)
     item = models.ForeignKey('studio.Item', on_delete=models.CASCADE, blank=True, null=True)
     styler = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='styler_likes', blank=True, null=True)
+    liked_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Liker: {self.liker.username}, Item: {self.item}, Styler: {self.styler.username if self.styler else 'None'}"
