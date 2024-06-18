@@ -277,8 +277,9 @@ from .models import UserItemLikes
 from core.models import Outfit
 
 def like_outfit(request):
+    print('\n\n\n\nAAAAAAAAAAAAA\n', outfit_id, '\nAAAAAAAAAAAAAA\n\n\n\n')
     outfit_id = request.POST.get('outfit_id')
-    print('\n\n\n\n\n', outfit_id, '\n\n\n\n\n')
+    print('\n\n\n\nBBBBBBBBBBBBBBB\n', outfit_id, '\nBBBBBBBBBBBBB\n\n\n\n')
     try:
         outfit = Outfit.objects.get(id=outfit_id)
         liker = request.user
