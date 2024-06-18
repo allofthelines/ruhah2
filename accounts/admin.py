@@ -9,10 +9,10 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'id', 'email', 'is_superuser']
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('is_stylist', 'name', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'trending_styles', 'credits')}),
+        (None, {'fields': ('is_stylist', 'name', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'trending_styles', 'studio_styles', 'credits')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('is_stylist', 'name', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'trending_styles', 'credits')}),
+        (None, {'fields': ('is_stylist', 'name', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'trending_styles', 'studio_styles', 'credits')}),
     )
 admin.site.register(CustomUser, CustomUserAdmin)
 
