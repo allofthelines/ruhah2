@@ -72,6 +72,10 @@
             outfitElement.classList.remove('liked-outfit');
         }, 2000); // 1000ms = 1 second
 
+        // DEBUG DEBUG DEBUG DEBUG DEBUG
+        const likeOutfitUrl = `{% url 'accounts:like_outfit' %}`;
+        console.log('Resolved URL:', likeOutfitUrl);
+
         // Make an AJAX request to like the outfit
         fetch(`{% url 'accounts:like_outfit' %}`, {
             method: 'POST',
