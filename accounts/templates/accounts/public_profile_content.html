@@ -67,6 +67,11 @@
         const outfitElement = document.getElementById(`outfit-${outfitId}`);
         outfitElement.classList.add('liked-outfit');
 
+        // Remove the thicker border after 3 seconds
+        setTimeout(() => {
+            outfitElement.classList.remove('liked-outfit');
+        }, 3000); // 3000ms = 3 seconds
+
         // Make an AJAX request to like the outfit
         fetch(`{% url 'accounts:like_outfit' %}`, {
             method: 'POST',
@@ -296,5 +301,6 @@
 <style>
     .liked-outfit {
         border-width: 5px; /* Thicker border when liked */
+        border-color: red;
     }
 </style>
