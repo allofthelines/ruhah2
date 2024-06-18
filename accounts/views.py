@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer
-from studio.models import Style
+from accounts.models import CustomUser, Customer, UserItemLikes
+from studio.models import Style, Item
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -11,6 +11,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm
+import json
 
 def signup(request):
     if request.method == 'POST':
@@ -84,6 +85,9 @@ def profile(request):
     editing = request.GET.get('edit') == 'true'
     editing_settings = request.GET.get('edit_settings') == 'true'
 
+    # Query the UserItemLikes model for the logged-in user
+    user_likes = UserItemLikes.objects.filter(liker=user)
+
     if request.method == 'POST':
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
@@ -123,8 +127,10 @@ def profile(request):
         'user_trending_styles': user_trending_styles,
         'user_studio_styles': user_studio_styles,
         'editing': editing,
-        'editing_settings': editing_settings
+        'editing_settings': editing_settings,
+        'user_likes': user_likes  # Add user_likes to the context
     })
+
 
 
 @login_required
