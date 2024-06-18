@@ -319,10 +319,16 @@
         const editSection = urlParams.get('edit');
         const editSettings = urlParams.get('edit_settings');
 
+        // Check for the URL fragment (hash)
+        const urlHash = window.location.hash;
+
         if (editSection) {
             showContent(editSection, `Profile > ${editSection.charAt(0).toUpperCase() + editSection.slice(1)}`);
         } else if (editSettings) {
             showContent('settings', 'Profile > Settings');
+        } else if (urlHash) {
+            const sectionId = urlHash.substring(1);  // Remove the '#' from the hash
+            showContent(sectionId, `Profile > ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
         } else {
             showContent('user', 'Profile > User'); // Default section
         }
