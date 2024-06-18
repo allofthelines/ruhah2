@@ -7,6 +7,8 @@ app_name = 'accounts'
 print('\n\n\n DEBUG VIEWS DEBUG VIEWS DEBUG VIEWS\n\n\n')
 
 urlpatterns = [
+    path('like-outfit/', views.like_outfit, name='like_outfit'),
+
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html', next_page='core:home'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup/', views.signup, name='signup'),
@@ -26,6 +28,4 @@ urlpatterns = [
     path('unfollow/<str:username>/', views.unfollow, name='unfollow'),
     path('<str:username>/followers/', views.followers_list, name='followers_list'),
     path('<str:username>/following/', views.following_list, name='following_list'),
-
-    path('like-outfit/', views.like_outfit, name='like_outfit'),
 ]
