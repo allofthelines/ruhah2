@@ -64,80 +64,24 @@
 
 <!-- Display User's Outfits -->
 <div id="outfit-container">
-
-
     <div id="them-by-me-content" class="outfit-grid">
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
-                {% if outfit.portrait and 'default_img.jpg' not in outfit.portrait.url %}
-                    <div class="outfit-item" onclick="toggleImage(this)">
-                        <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                        <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                <div class="outfit-item" ondblclick="likeOutfit({{ outfit.id }})" onclick="singleClickToggle(this)">
+                    <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                    <div class="like-animation" id="like-animation-{{ outfit.id }}" style="display: none;">
+                        <video src="{% static 'core/fingerlol1.mp4' %}" autoplay muted loop></video>
                     </div>
-                {% else %}
-                    <div class="outfit-item">
-                        <img src="{{ outfit.image.url }}" alt="Outfit Image">
-                    </div>
-                {% endif %}
+                </div>
             {% endfor %}
         {% endif %}
     </div>
-
-
-
-    {% comment %}
-    <!-- Default content - 'Them by Me' -->
-    <div id="them-by-me-content" class="outfit-grid">
-        {% for outfit in profile_user.outfit_set.all %}
-            <!-- COMMENT OUT FOR NOW PROSWRINO
-            <div class="outfit-item">
-                <img src="{{ outfit.image.url }}" alt="Outfit Image">
-            </div>
-            -->
-            {% if 'default_img.jpg' not in outfit.portrait.url %}
-            <div class="outfit-item" onclick="toggleImage(this)">
-                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-            </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-
-    <!-- 'Me by Them' content (initially hidden) -->
-    <div id="me-by-them-content" class="outfit-grid hidden">
-        {% for ticket in profile_user.ticket_set.all %}
-            {% if ticket.outfit1 %}
-                <!-- COMMENT OUT PROSWPINO
-                <div class="outfit-item">
-                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image">
-                </div>
-                -->
-                {% if 'default_img.jpg' not in ticket.outfit1.portrait.url %}
-                <div class="outfit-item" onclick="toggleImage(this)">
-                    <img src="{{ ticket.outfit1.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-                </div>
-                {% endif %}
-            {% endif %}
-            {% if ticket.outfit2 %}
-                <!-- COMMENT OUT PROSWPINO
-                <div class="outfit-item">
-                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image">
-                </div>
-                -->
-                {% if 'default_img.jpg' not in ticket.outfit2.portrait.url %}
-                <div class="outfit-item" onclick="toggleImage(this)">
-                    <img src="{{ ticket.outfit2.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    <img src="{{ ticket.outfit2.image.url }}" alt="Outfit Image" class="image" style="display: none;">
-                </div>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </div>
-    {% endcomment %}
-
-
 </div>
+
+
+
+
 
 
 
@@ -199,6 +143,100 @@
         }
     }
 </script>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (localStorage.getItem('scrollPosition')) {
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+            localStorage.removeItem('scrollPosition');
+        }
+    });
+
+    window.addEventListener('beforeunload', function() {
+        localStorage.setItem('scrollPosition', window.scrollY);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    let clickTimer;
+
+    function singleClickToggle(element) {
+        clickTimer = setTimeout(function() {
+            toggleImage(element);
+        }, 300);
+    }
+
+    function likeOutfit(outfitId) {
+        clearTimeout(clickTimer);
+
+        // Show animation
+        const animationElement = document.getElementById(`like-animation-${outfitId}`);
+        animationElement.style.display = 'block';
+        setTimeout(() => {
+            animationElement.style.display = 'none';
+        }, 1000); // Hide animation after 1 second
+
+        // Make an AJAX request to like the outfit
+        fetch(`{% url 'accounts:like_outfit' %}?outfit_id=${outfitId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => {
+            if (response.ok) {
+                // Optionally, you can handle successful response here
+            }
+        });
+
+        // Prevent default action
+        return false;
+    }
+</script>
+
+<style>
+    .like-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .like-animation video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.7;
+    }
+</style>
+
+
+
+
+
 
 
 
