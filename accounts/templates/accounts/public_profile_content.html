@@ -68,7 +68,7 @@
     <div id="them-by-me-content" class="outfit-grid">
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
-                <div class="outfit-item" id="outfit-{{ outfit.id }}" onmousedown="startPressTimer({{ outfit.id }})" onmouseup="clearPressTimer({{ outfit.id }})" onmouseleave="clearPressTimer({{ outfit.id }})" onclick="singleClickToggle(this)">
+                <div class="outfit-item" id="outfit-{{ outfit.id }}" onmousedown="startPressTimer({{ outfit.id }})" onmouseup="clearPressTimer({{ outfit.id }})" onmouseleave="clearPressTimer({{ outfit.id }})" onclick="toggleImage(this)">
                     {% if 'default_img.jpg' not in outfit.portrait.url %}
                         <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                     {% endif %}
@@ -79,6 +79,72 @@
     </div>
 </div>
 
+<script>
+    let pressTimer;
+
+    function startPressTimer(outfitId) {
+        pressTimer = setTimeout(function() {
+            likeOutfit(outfitId);
+        }, 500); // 500ms for long press
+    }
+
+    function clearPressTimer(outfitId) {
+        clearTimeout(pressTimer);
+    }
+
+    function likeOutfit(outfitId) {
+        // Add thicker border
+        const outfitElement = document.getElementById(`outfit-${outfitId}`);
+        outfitElement.classList.add('liked-outfit');
+
+        // Make an AJAX request to like the outfit
+        fetch(`{% url 'accounts:like_outfit' %}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ outfit_id: outfitId })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Optionally, handle successful response here
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        // Prevent default action
+        return false;
+    }
+
+    function toggleImage(element) {
+        const portrait = element.querySelector('.portrait');
+        const image = element.querySelector('.image');
+        if (portrait.style.display === 'block') {
+            portrait.style.display = 'none';
+            image.style.display = 'block';
+        } else {
+            portrait.style.display = 'block';
+            image.style.display = 'none';
+        }
+    }
+</script>
+
+<style>
+    .outfit-item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        overflow: hidden;
+        position: relative; /* Ensure it contains the absolutely positioned elements */
+    }
+
+    .liked-outfit {
+        border-width: 5px; /* Thicker border when liked */
+    }
+</style>
 
 
 
@@ -91,6 +157,26 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
 <script>
     function toggleImage(element) {
         const portrait = element.querySelector('.portrait');
@@ -105,6 +191,7 @@
         }
     }
 </script>
+{% endcomment %}
 
 <script>
     function showThemByMe() {
@@ -174,83 +261,6 @@
 
 
 
-<script>
-    let pressTimer;
-    let isLongPress = false;
-
-    function handleClick(event, element) {
-        if (!isLongPress) {
-            toggleImage(element);
-        }
-    }
-
-    function startPressTimer(outfitId) {
-        isLongPress = false;
-        pressTimer = setTimeout(function() {
-            likeOutfit(outfitId);
-            isLongPress = true;
-        }, 300);
-    }
-
-    function clearPressTimer(outfitId, isMouseLeave) {
-        clearTimeout(pressTimer);
-        if (isMouseLeave && isLongPress) {
-            const outfitElement = document.getElementById(`outfit-${outfitId}`);
-            outfitElement.classList.remove('processing-long-press');
-        }
-    }
-
-    function likeOutfit(outfitId) {
-        // Add thicker border
-        const outfitElement = document.getElementById(`outfit-${outfitId}`);
-        outfitElement.classList.add('liked-outfit');
-        outfitElement.classList.add('processing-long-press');
-
-        // Make an AJAX request to like the outfit
-        fetch(`{% url 'accounts:like_outfit' %}?outfit_id=${outfitId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({})
-        })
-        .then(response => {
-            if (response.ok) {
-                // Optionally, you can handle a successful response here
-            }
-        });
-
-        // Prevent default action
-        return false;
-    }
-
-    function toggleImage(element) {
-        const portrait = element.querySelector('.portrait');
-        const image = element.querySelector('.image');
-        if (portrait.style.display === 'block') {
-            portrait.style.display = 'none';
-            image.style.display = 'block';
-        } else {
-            portrait.style.display = 'block';
-            image.style.display = 'none';
-        }
-    }
-</script>
-
-<style>
-    .outfit-item {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid black;
-        overflow: hidden;
-        position: relative; /* Ensure it contains the absolutely positioned elements */
-    }
-
-    .liked-outfit {
-        border-width: 5px; /* Thicker border when liked */
-    }
-</style>
 
 
 
