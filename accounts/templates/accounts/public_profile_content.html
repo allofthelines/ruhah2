@@ -68,14 +68,11 @@
     <div id="them-by-me-content" class="outfit-grid">
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
-                <div class="outfit-item" ondblclick="likeOutfit({{ outfit.id }})" onclick="singleClickToggle(this)">
+                <div class="outfit-item" id="outfit-{{ outfit.id }}" onmousedown="startPressTimer({{ outfit.id }})" onmouseup="clearPressTimer({{ outfit.id }})" onmouseleave="clearPressTimer({{ outfit.id }})" onclick="singleClickToggle(this)">
                     {% if 'default_img.jpg' not in outfit.portrait.url %}
                         <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                     {% endif %}
                     <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
-                    <div class="like-animation" id="like-animation-{{ outfit.id }}" style="display: none;">
-                        <video src="{% static 'core/your_animation_video.webm' %}" autoplay muted loop></video>
-                    </div>
                 </div>
             {% endfor %}
         {% endif %}
@@ -179,22 +176,29 @@
 
 <script>
     let clickTimer;
+    let pressTimer;
 
     function singleClickToggle(element) {
         clickTimer = setTimeout(function() {
             toggleImage(element);
-        }, 500);
+        }, 300);
+    }
+
+    function startPressTimer(outfitId) {
+        pressTimer = setTimeout(function() {
+            likeOutfit(outfitId);
+        }, 300);
+    }
+
+    function clearPressTimer(outfitId) {
+        clearTimeout(pressTimer);
+        clearTimeout(clickTimer);
     }
 
     function likeOutfit(outfitId) {
-        clearTimeout(clickTimer);
-
-        // Show animation
-        const animationElement = document.getElementById(`like-animation-${outfitId}`);
-        animationElement.style.display = 'block';
-        setTimeout(() => {
-            animationElement.style.display = 'none';
-        }, 1000); // Hide animation after 1 second
+        // Add thicker border
+        const outfitElement = document.getElementById(`outfit-${outfitId}`);
+        outfitElement.classList.add('liked-outfit');
 
         // Make an AJAX request to like the outfit
         fetch(`{% url 'accounts:like_outfit' %}?outfit_id=${outfitId}`, {
@@ -217,29 +221,17 @@
 </script>
 
 <style>
-.outfit-item {
-    position: relative; /* Add relative positioning to parent */
-}
+    .outfit-item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        overflow: hidden;
+        position: relative; /* Ensure it contains the absolutely positioned elements */
+    }
 
-.like-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none; /* Ensure the animation doesn't interfere with clicks */
-}
-
-.like-animation video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.7;
-}
-
+    .liked-outfit {
+        border-width: 5px; /* Thicker border when liked */
+    }
 </style>
 
 
