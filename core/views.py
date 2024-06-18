@@ -39,6 +39,7 @@ def home(request):
 
     return render(request, "core/home.html", {"outfits": outfits})
 
+
 class TrendingView(ListView):
     template_name = "core/trending.html"
     model = Outfit
@@ -53,6 +54,11 @@ class TrendingView(ListView):
             if user.trending_mode == 'following':
                 following_ids = UserFollows.objects.filter(user_from=user).values_list('user_to_id', flat=True)
                 queryset = queryset.filter(maker_id__in=following_ids)
+
+            # Filter outfits based on the user's trending_styles
+            user_styles = set(user.trending_styles.values_list('id', flat=True))
+            queryset = queryset.filter(ticket_id__style1__id__in=user_styles)
+
         return queryset
 
     def get_context_data(self, **kwargs):
