@@ -45,30 +45,12 @@
 
 
 
-<!-- New Row with Buttons -->
-{% comment %}
-<div class="button-row">
-    <div id="button-them-by-me" class="button-left active-button" onclick="showThemByMe()">Them by Me</div>
-    <div id="button-me-by-them" class="button-right" onclick="showMeByThem()">Me by Them</div>
-</div>
-{% endcomment %}
-
-
-
-
-
-
-
-
-
-
-
 <!-- Display User's Outfits -->
 <div id="outfit-container">
     <div id="them-by-me-content" class="outfit-grid">
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
-                <div class="outfit-item" id="outfit-{{ outfit.id }}" onmousedown="startPressTimer({{ outfit.id }})" onmouseup="clearPressTimer({{ outfit.id }})" onmouseleave="clearPressTimer({{ outfit.id }})" onclick="toggleImage(this)">
+                <div class="outfit-item" id="outfit-{{ outfit.id }}" ondblclick="likeOutfit({{ outfit.id }})" onclick="toggleImage(this)">
                     {% if 'default_img.jpg' not in outfit.portrait.url %}
                         <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                     {% endif %}
@@ -80,18 +62,6 @@
 </div>
 
 <script>
-    let pressTimer;
-
-    function startPressTimer(outfitId) {
-        pressTimer = setTimeout(function() {
-            likeOutfit(outfitId);
-        }, 500); // 500ms for long press
-    }
-
-    function clearPressTimer(outfitId) {
-        clearTimeout(pressTimer);
-    }
-
     function likeOutfit(outfitId) {
         // Add thicker border
         const outfitElement = document.getElementById(`outfit-${outfitId}`);
@@ -118,33 +88,8 @@
         // Prevent default action
         return false;
     }
-
-    function toggleImage(element) {
-        const portrait = element.querySelector('.portrait');
-        const image = element.querySelector('.image');
-        if (portrait.style.display === 'block') {
-            portrait.style.display = 'none';
-            image.style.display = 'block';
-        } else {
-            portrait.style.display = 'block';
-            image.style.display = 'none';
-        }
-    }
 </script>
 
-<style>
-    .outfit-item {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid black;
-        overflow: hidden;
-        position: relative; /* Ensure it contains the absolutely positioned elements */
-    }
-
-    .liked-outfit {
-        border-width: 5px; /* Thicker border when liked */
-    }
-</style>
 
 
 
@@ -176,7 +121,7 @@
 
 
 
-{% comment %}
+
 <script>
     function toggleImage(element) {
         const portrait = element.querySelector('.portrait');
@@ -191,23 +136,8 @@
         }
     }
 </script>
-{% endcomment %}
 
-<script>
-    function showThemByMe() {
-        document.getElementById('them-by-me-content').classList.remove('hidden');
-        document.getElementById('me-by-them-content').classList.add('hidden');
-        document.getElementById('button-them-by-me').classList.add('active-button');
-        document.getElementById('button-me-by-them').classList.remove('active-button');
-    }
 
-    function showMeByThem() {
-        document.getElementById('them-by-me-content').classList.add('hidden');
-        document.getElementById('me-by-them-content').classList.remove('hidden');
-        document.getElementById('button-them-by-me').classList.remove('active-button');
-        document.getElementById('button-me-by-them').classList.add('active-button');
-    }
-</script>
 
 <script>
     function submitFollowForm(username) {
@@ -246,21 +176,6 @@
         localStorage.setItem('scrollPosition', window.scrollY);
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -375,5 +290,11 @@
 
     .hidden {
         display: none;
+    }
+</style>
+
+<style>
+    .liked-outfit {
+        border-width: 5px; /* Thicker border when liked */
     }
 </style>
