@@ -283,7 +283,8 @@ from .models import UserItemLikes
 from core.models import Outfit
 import json
 
-
+@login_required
+@require_POST
 def like_outfit(request):
     try:
         data = json.loads(request.body)
@@ -298,11 +299,13 @@ def like_outfit(request):
         styler = outfit.maker_id
 
         for item in outfit.items.all():
-            UserItemLikes.objects.create(
-                item=item,  # Use 'item' instead of 'outfit'
-                liker=liker,
-                styler=styler
-            )
+            # Check if a UserItemLikes instance already exists
+            if not UserItemLikes.objects.filter(liker=liker, item=item).exists():
+                UserItemLikes.objects.create(
+                    item=item,  # Use 'item' instead of 'outfit'
+                    liker=liker,
+                    styler=styler
+                )
 
         print('DEBUG: Successfully added likes')
         return JsonResponse({'status': 'success'})
