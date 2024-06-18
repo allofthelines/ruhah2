@@ -275,21 +275,36 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .models import UserItemLikes
 from core.models import Outfit
-import json
+
 
 def like_outfit(request):
-    outfit_id = request.POST.get('outfit_id')
-    print('\n\n\n\nBBBBBBBBBBBBBBB\n', outfit_id, '\nBBBBBBBBBBBBB\n\n\n\n')
     try:
+        data = json.loads(request.body)
+        outfit_id = data.get('outfit_id')
+        print('BBBBBBBBBBBBBBB\n', outfit_id, '\nBBBBBBBBBBBBBB')
+
+        if not outfit_id:
+            return JsonResponse({'status': 'error', 'message': 'No outfit ID provided'}, status=400)
+
         outfit = Outfit.objects.get(id=outfit_id)
         liker = request.user
         styler = outfit.maker_id
+
         for item in outfit.items.all():
             UserItemLikes.objects.create(
                 outfit=item,
                 liker=liker,
                 styler=styler
             )
+
+        print('DEBUG: Successfully added likes')
         return JsonResponse({'status': 'success'})
     except Outfit.DoesNotExist:
+        print('DEBUG: Outfit not found')
         return JsonResponse({'status': 'error', 'message': 'Outfit not found'}, status=404)
+    except json.JSONDecodeError:
+        print('DEBUG: JSON decode error')
+        return JsonResponse({'status': 'error', 'message': 'Invalid JSON data'}, status=400)
+    except Exception as e:
+        print('DEBUG: Unexpected error', str(e))
+        return JsonResponse({'status': 'error', 'message': 'An unexpected error occurred'}, status=500)
