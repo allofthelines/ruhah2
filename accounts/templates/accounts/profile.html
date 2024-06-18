@@ -349,6 +349,357 @@
 LIKES SECTION GRID V
 {% endcomment %}
 
+{% extends "core/base.html" %}
+{% load custom_filters %}
+
+{% block page-header %}
+  User Profile
+{% endblock %}
+
+{% block content %}
+
+<div id="profile-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
+
+    <!-- Navigation Menu -->
+    <div id="profile-menu" style="width: 15%;">
+        <a href="#" onclick="showContent('user', 'Profile > Data')" style="text-decoration-line: underline; color: blue;">Data</a>
+        <a href="#" onclick="showContent('customer', 'Profile > Sizes')" style="text-decoration-line: underline; color: blue;">Sizes</a>
+        <a href="#" onclick="showContent('likes', 'Profile > Likes')" style="text-decoration-line: underline; color: blue;">Likes</a>
+        <br>
+        <a href="#" onclick="showContent('upload', 'Profile > Upload')" style="text-decoration-line: underline; color: blue;">Upload</a>
+        <a href="#" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
+        <a href="#" onclick="showContent('cart', 'Profile > Cart')" style="text-decoration-line: underline; color: blue;">Cart</a>
+        <br>
+        <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="nav-link logout-button">Logout</button>
+        </form>
+    </div>
+
+    <!-- Content Area -->
+    <div id="content" style="width: 70%; padding-left: 5px; margin-top: -16px; text-align: left; display: flex; align-items: flex-start;">
+        <!-- Default Welcome Message -->
+        <div id="default" class="content-section" style="display: block; margin-top: 40px;">
+            {% include "accounts/public_profile_content.html" with profile_user=user is_own_profile=True is_following=False %}
+        </div>
+
+
+
+
+
+        <!-- User Profile Section -->
+        <div id="user" class="content-section" style="display: none; padding: 10px;">
+            {% if editing %}
+                <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p style="margin-top: 7px; text-align: left;">
+                        Username: @{{ user_form.username }}<br>
+                        Email: {{ user_form.email }}<br>
+                        <br>
+                        <label for="id_pfp">Profile Picture: </label>
+                        <input type="file" name="pfp" id="id_pfp"><br><br>
+                        Bio: {{ user_form.bio }}<br>
+                        <br>
+                        Credits: {{ user.credits }}<br>
+                        <br>
+                    </p>
+                    <input type="hidden" name="user_form" value="user_form">
+                    <button type="submit">Save changes</button>
+                </form>
+            {% else %}
+                <p style="margin-top: 7px; text-align: left;">
+                    Username: @<span style="color: grey;">{{ user.username }}</span><br>
+                    Email: <span style="color: grey;">{{ user.email }}</span><br>
+                    <br>
+                    Profile Picture: <span style="color: grey;">{{ user.pfp.url|filename }}</span><br>
+                    <br>
+                    Bio: <span style="color: grey;">{{ user.bio }}</span><br>
+                    <br>
+                    Credits: {{ user.credits }}<br>
+                    <br>
+                </p>
+                <form method="get" action="{% url 'accounts:profile' %}">
+                    <input type="hidden" name="edit" value="user">
+                    <button type="submit" name="edit" value="true">Edit</button>
+                </form>
+            {% endif %}
+        </div>
+
+
+
+
+
+
+
+
+        <!-- Customer Profile Section -->
+        <div id="customer" class="content-section" style="display: none;">
+            {% if editing %}
+                <form method="post" action="{% url 'accounts:profile' %}">
+                    {% csrf_token %}
+                    <p>
+                        Top: {{ customer_form.top_size_xyz }}<br>
+                        Bottom: {{ customer_form.bottom_size_xyz }}<br>
+                        Waist (inches): {{ customer_form.size_waist_inches }}<br>
+                        Shoe (EU): {{ customer_form.shoe_size_eu }}<br>
+                        Shoe (UK): {{ customer_form.shoe_size_uk }}<br>
+                        <br>
+                        {{ customer_form.height.label_tag }} {{ customer_form.height }}<br>
+                        {{ customer_form.weight.label_tag }} {{ customer_form.weight }}<br>
+                    </p>
+                    <input type="hidden" name="customer_form" value="customer_form">
+                    <button type="submit">Save changes</button>
+                </form>
+            {% else %}
+                <p style="margin-top: 15px;">
+                    Top: <span style="color: grey;">{{ user.customer.top_size_xyz }}</span><br>
+                    Bottom: <span style="color: grey;">{{ user.customer.bottom_size_xyz }}</span><br>
+                    Waist (inches): <span style="color: grey;">{{ user.customer.size_waist_inches }}</span><br>
+                    Shoe (EU): <span style="color: grey;">{{ user.customer.shoe_size_eu }}</span><br>
+                    Shoe (UK): <span style="color: grey;">{{ user.customer.shoe_size_uk }}</span><br>
+                    <br>
+                    Height: <span style="color: grey;">{{ user.customer.height }}</span> cm<br>
+                    Weight: <span style="color: grey;">{{ user.customer.weight }}</span> kg<br>
+                </p>
+                <form method="get" action="{% url 'accounts:profile' %}">
+                    <input type="hidden" name="edit" value="customer">
+                    <button type="submit" name="edit" value="true">Edit</button>
+                </form>
+            {% endif %}
+        </div>
+
+
+
+
+
+
+
+        <!-- Likes Profile Section -->
+        <div id="likes" class="content-section" style="display: none;">
+            <div id="contBBB">
+                {% for like in user_likes %}
+                    <div class="contAAA">
+                        <img src="{{ like.item.image.url }}" alt="Liked Item Image">
+                        <form action="{% url 'accounts:remove_like' like.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Remove</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- Cart Profile Section -->
+        <div id="cart" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+                Empty
+            </p>
+        </div>
+
+
+
+
+
+
+
+
+        <!-- Upload Profile Section -->
+        <div id="upload" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+            Share a picture of you wearing a Ruhah outfit.<br>
+            Earn 10 credits if we use it on instagram.
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ portrait_upload_form.as_p }}
+                    <button type="submit" name="portrait_upload_form">Submit</button>
+                </form>
+            </p>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- Settings Section -->
+        <div id="settings" class="content-section" style="display: none;">
+            {% if editing_settings %}
+                <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p style="margin-top: 15px; text-align: left;">
+                        <label for="id_profile_visibility">Profile Visibility:</label>
+                        {{ profile_settings_form.profile_visibility }}<br><br>
+
+                        <label for="id_trending_styles">Trending Styles:</label>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                            {% for style in available_styles %}
+                                <label>
+                                    <input type="checkbox" name="trending_styles" value="{{ style.id }}"
+                                        {% if style in user_trending_styles %} checked{% endif %}>
+                                    {{ style.style_name }}
+                                </label>
+                            {% endfor %}
+                        </div><br>
+
+                        <label for="id_trending_mode">Trending Mode:</label>
+                        {{ profile_settings_form.trending_mode }}<br><br>
+
+                        <label for="id_studio_styles">Studio Styles:</label><br><br>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                            {% for style in available_styles %}
+                                <label>
+                                    <input type="checkbox" name="studio_styles" value="{{ style.id }}"
+                                        {% if style in user_studio_styles %} checked{% endif %}>
+                                    {{ style.style_name }}
+                                </label>
+                            {% endfor %}
+                        </div><br>
+
+                        <!-- Add more fields here if needed -->
+                    </p>
+                    <input type="hidden" name="profile_settings_form" value="profile_settings_form">
+                    <button type="submit">Save changes</button>
+                </form>
+            {% else %}
+                <p style="margin-top: 15px; text-align: left;">
+                    Profile Visibility: <span style="color: grey;">{{ user.get_profile_visibility_display }}</span><br><br>
+                    Trending Styles:
+                    <span style="color: grey;">
+                    {% for style in user_trending_styles %}
+                        {{ style.style_name }}{% if not forloop.last %} {% endif %}
+                    {% endfor %}</span><br><br>
+                    Trending Mode:</span> <span style="color: grey;">{{ user.get_trending_mode_display }}</span><br><br>
+                    Studio Styles:</span>
+                    <span style="color: grey;">
+                    {% for style in user_studio_styles %}
+                        {{ style.style_name }}{% if not forloop.last %} {% endif %}
+                    {% endfor %}</span><br><br>
+                    <!-- Add more fields here if needed -->
+                </p>
+                <form method="get" action="{% url 'accounts:profile' %}">
+                    <input type="hidden" name="edit_settings" value="true">
+                    <button type="submit" name="edit_settings" value="true">Edit</button>
+                </form>
+            {% endif %}
+        </div>
+
+
+    </div>
+
+    <div id="empty-area" style="width: 15%;">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const editSection = urlParams.get('edit');
+        const editSettings = urlParams.get('edit_settings');
+
+        if (editSection) {
+            showContent(editSection, `Profile > ${editSection.charAt(0).toUpperCase() + editSection.slice(1)}`);
+        } else if (editSettings) {
+            showContent('settings', 'Profile > Settings');
+        } else {
+            showContent('user', 'Profile > User'); // Default section
+        }
+    });
+
+    function showContent(sectionId, headerText) {
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        var section = document.getElementById(sectionId);
+        if (section) {
+            section.style.display = 'block';
+            document.getElementById('page-header').textContent = headerText;
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+<style>
+    #profile-menu a {
+        display: block;
+        margin-bottom: 5px; /* Ensure each link is on its own line */
+        text-align: left;
+    }
+
+    @media (max-width: 768px) {
+        #empty-area {
+            width: 5% !important;
+        }
+
+        #profile-menu {
+            width: 15%;
+            flex-direction: row;
+            overflow-x: auto;
+            margin-right: 15px;
+            padding-right: 17px;
+            margin-top: 0px;
+        }
+        #profile-menu a {
+            flex: 1;
+            border-bottom: none;
+        }
+        #content {
+            width: 100%;
+            padding-left: 0px;
+            margin-top: 0;
+        }
+
+        #profile-menu-content {
+            margin-left:-15px
+            width: 115%
+        }
+    }
+</style>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
+LIKES SECTION GRID V
+{% endcomment %}
+
 <style>
     #contBBB {
         display: grid;
@@ -399,4 +750,6 @@ LIKES SECTION GRID V
         }
     }
 </style>
+
+
 
