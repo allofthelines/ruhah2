@@ -87,10 +87,6 @@ def profile(request):
 
     # Query the UserItemLikes model for the logged-in user
     user_likes = UserItemLikes.objects.filter(liker=user)
-    # Add debug prints
-    print(f"DEBUG: user_likes count = {user_likes.count()}")
-    for like in user_likes:
-        print(f"DEBUG: Liked item id = {like.item.id}, Liked item image url = {like.item.image.url}")
 
     if request.method == 'POST':
         if 'user_form' in request.POST:
