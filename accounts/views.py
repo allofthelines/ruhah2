@@ -273,7 +273,8 @@ def following_list(request, username):
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
-from .models import UserItemLikes, Outfit
+from .models import UserItemLikes
+from core.models import Outfit
 
 def like_outfit(request):
     outfit_id = request.POST.get('outfit_id')
