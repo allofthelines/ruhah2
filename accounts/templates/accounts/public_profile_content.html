@@ -69,8 +69,10 @@
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
                 <div class="outfit-item" ondblclick="likeOutfit({{ outfit.id }})" onclick="singleClickToggle(this)">
-                    <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: none;">
+                    {% if 'default_img.jpg' not in outfit.portrait.url %}
+                        <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    {% endif %}
+                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
                     <div class="like-animation" id="like-animation-{{ outfit.id }}" style="display: none;">
                         <video src="{% static 'core/your_animation_video.webm' %}" autoplay muted loop></video>
                     </div>
