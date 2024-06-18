@@ -67,10 +67,10 @@
         const outfitElement = document.getElementById(`outfit-${outfitId}`);
         outfitElement.classList.add('liked-outfit');
 
-        // Remove the thicker border after 3 seconds
+        // Remove the thicker border after x seconds
         setTimeout(() => {
             outfitElement.classList.remove('liked-outfit');
-        }, 2000); // 1000ms = 1 second
+        }, 1000); // 1000ms = 1 second
 
         // DEBUG DEBUG DEBUG DEBUG DEBUG
         const likeOutfitUrl = `{% url 'accounts:like_outfit' %}`;
@@ -284,7 +284,7 @@
         flex-direction: column;
         border: 1px solid black;
         overflow: hidden;
-        transition: border-width 1s ease, border-color 1s ease; /* Slow transition for both thickening and thinning */
+        transition: border-width 0.7s ease, border-color 0.7s ease; /* Slow transition for both thickening and thinning */
         box-sizing: border-box; /* Include border in the element's size */
     }
     .outfit-item img {
@@ -306,8 +306,8 @@
 
 <style>
     .liked-outfit {
-        border-width: 5px; /* Thicker border when liked */
+        border-width: 10px; /* Thicker border when liked */
         border-color: red;
-        transition: border-width 1s ease;
+        transition: border-width 0.7s ease;
     }
 </style>
