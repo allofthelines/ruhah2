@@ -198,7 +198,7 @@ li, dt, dd {
 }
 
 dt {
-    font-weight: bold;
+    /*font-weight: bold;*/
     margin-top: 4px;
 }
 
