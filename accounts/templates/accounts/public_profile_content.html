@@ -70,7 +70,7 @@
         // Remove the thicker border after 3 seconds
         setTimeout(() => {
             outfitElement.classList.remove('liked-outfit');
-        }, 3000); // 3000ms = 3 seconds
+        }, 2000); // 3000ms = 3 seconds
 
         // Make an AJAX request to like the outfit
         fetch(`{% url 'accounts:like_outfit' %}`, {
@@ -280,7 +280,7 @@
         flex-direction: column;
         border: 1px solid black;
         overflow: hidden;
-        transition: border-width 1s ease, border-color 1.5s ease; /* Slow transition for both thickening and thinning */
+        transition: border-width 1s ease, border-color 1s ease; /* Slow transition for both thickening and thinning */
         box-sizing: border-box; /* Include border in the element's size */
     }
     .outfit-item img {
