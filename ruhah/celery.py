@@ -1,5 +1,3 @@
-'''
-
 from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
@@ -16,4 +14,3 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 def debug_task(self):
     print(f'Request: {self.request!r}')
 
-'''

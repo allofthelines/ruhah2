@@ -22,15 +22,22 @@ DOMAIN_NAME = config('DOMAIN_NAME', default='http://localhost:8000')
 
 # CELERY DEN DOULEVEI IDK GIATI
 # TO EVALA GIA NA KATHARIZEI ITEMUSERCART KATHE 6 WRES
-CELERY_BROKER_URL = config('REDIS_URL', default='redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = config('REDIS_URL', default='redis://localhost:6379/0')
-CELERY_BEAT_SCHEDULE = {
-    'clear_user_item_cart': {
-        'task': 'accounts.tasks.clear_user_item_cart',
-        'schedule': 21600.0,  # 6 hours in seconds
-    },
-}
-CELERY_TIMEZONE = 'UTC'
+CELERY_ENABLED = config('CELERY_ENABLED', default='True', cast=bool)
+
+# CELERY settings
+if CELERY_ENABLED:
+    CELERY_BROKER_URL = config('REDIS_URL', default='redis://localhost:6379/0')
+    CELERY_RESULT_BACKEND = config('REDIS_URL', default='redis://localhost:6379/0')
+    CELERY_BEAT_SCHEDULE = {
+        'clear_user_item_cart': {
+            'task': 'accounts.tasks.clear_user_item_cart',
+            'schedule': 21600.0,  # 6 hours in seconds
+        },
+    }
+    CELERY_TIMEZONE = 'UTC'
+else:
+    CELERY_BROKER_URL = None
+    CELERY_RESULT_BACKEND = None
 
 
 ALLOWED_HOSTS = [
