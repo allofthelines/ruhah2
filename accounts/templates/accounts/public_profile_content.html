@@ -280,7 +280,8 @@
         flex-direction: column;
         border: 1px solid black;
         overflow: hidden;
-        transition: border-width 1s ease, border-color 1s ease; /* Slow transition for both thickening and thinning */
+        transition: border-width 1s ease, border-color 1.5s ease; /* Slow transition for both thickening and thinning */
+        box-sizing: border-box; /* Include border in the element's size */
     }
     .outfit-item img {
         width: 100%;
