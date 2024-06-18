@@ -3,6 +3,35 @@ from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
 from django.utils.timezone import now
 from datetime import datetime, timezone
+from django.utils.html import mark_safe
+
+class UserItemLikesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'thumbnail', 'liker_username', 'item', 'styler_username', 'liked_at', 'days_alive')
+    list_filter = ('liker', 'styler')
+
+    def liker_username(self, obj):
+        return obj.liker.username
+    liker_username.admin_order_field = 'liker'  # Allows column order sorting
+    liker_username.short_description = 'Liker'  # Renames column head
+
+    def styler_username(self, obj):
+        return obj.styler.username if obj.styler else 'None'
+    styler_username.admin_order_field = 'styler'
+    styler_username.short_description = 'Styler'
+
+    def days_alive(self, obj):
+        now = datetime.now(timezone.utc)
+        delta = now - obj.liked_at
+        return delta.days
+    days_alive.short_description = 'Days Alive'
+
+    def thumbnail(self, obj):
+        if obj.item and obj.item.image:
+            return mark_safe(f'<img src="{obj.item.image.url}" width="50" height="50" />')
+        return 'No Image'
+    thumbnail.short_description = 'Thumbnail'
+
+admin.site.register(UserItemLikes, UserItemLikesAdmin)
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
