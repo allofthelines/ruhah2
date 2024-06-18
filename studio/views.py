@@ -30,13 +30,16 @@ def studio_tickets(request):
     page_obj = paginator.get_page(page_number)
 
     if request.user.is_authenticated:
+        user_styles = set(request.user.studio_styles.values_list('id', flat=True))
         following_user_ids = list(request.user.following_list.values_list('id', flat=True))
-        # Filter tickets based on the has_submitted_outfits method
+        # Filter tickets based on...
         filtered_tickets = [ticket for ticket in page_obj if
-                            ticket.creator_id.id != request.user.id and ticket.has_submitted_outfits(request.user)]
+                            ticket.creator_id.id != request.user.id and # ...if its the same guy
+                            ticket.has_submitted_outfits(request.user) and
+                            ticket.style1.id in user_styles] # ...user's studio_styles
     else:
         following_user_ids = []
-        filtered_tickets = []
+        filtered_tickets = page_obj  # Show all tickets for guests
 
     # Create a new paginator for the filtered tickets
     paginator = Paginator(filtered_tickets, 20)
@@ -46,7 +49,6 @@ def studio_tickets(request):
         'page_obj': page_obj,
         'following_user_ids': following_user_ids,
     }
-    print('TEST TEST TEST', following_user_ids)
     return render(request, 'studio/studio_tickets.html', context)
 
 
