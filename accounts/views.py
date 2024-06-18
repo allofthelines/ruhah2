@@ -293,7 +293,7 @@ def like_outfit(request):
 
         for item in outfit.items.all():
             UserItemLikes.objects.create(
-                outfit=item,
+                item=item,  # Use 'item' instead of 'outfit'
                 liker=liker,
                 styler=styler
             )
