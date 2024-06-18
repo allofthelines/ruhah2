@@ -30,7 +30,7 @@ class CustomUser(AbstractUser):
 
     profile_visibility = models.CharField(max_length=20, choices=PROFILE_VISIBILITY_CHOICES, default='public')
     trending_mode = models.CharField(max_length=10, choices=TRENDING_MODE_CHOICES, default='discover')
-    trending_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_trending_styles') # related name gia reverse relation
+    trending_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_trending_styles')
     studio_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_studio_styles')
 
     followers_list = models.ManyToManyField(
@@ -42,12 +42,10 @@ class CustomUser(AbstractUser):
 
     @property
     def followers_num(self):
-        # return self.followers_list.count()
         return UserFollows.objects.filter(user_to=self).count()
 
     @property
     def following_num(self):
-        # return self.following_list.count()
         return UserFollows.objects.filter(user_from=self).count()
 
     def save(self, *args, **kwargs):
@@ -56,13 +54,18 @@ class CustomUser(AbstractUser):
         for the profile picture (pfp). The image is cropped to a square
         and resized to 300x300 pixels before being saved.
         """
+        new_user = self.pk is None
         super().save(*args, **kwargs)
+
+        if new_user:
+            all_styles = Style.objects.all()
+            self.trending_styles.set(all_styles)
+            self.studio_styles.set(all_styles)
 
         if self.pfp:
             img = Image.open(self.pfp)
 
             # Rotate image based on EXIF orientation
-            # lynei to provlhma sto mobile sideways upload
             try:
                 for orientation in ExifTags.TAGS.keys():
                     if ExifTags.TAGS[orientation] == 'Orientation':
@@ -96,10 +99,9 @@ class CustomUser(AbstractUser):
             # Save the processed image to a BytesIO object
             img_io = BytesIO()
             img.save(img_io, format='JPEG')
-            img_content = ContentFile(img_io.getvalue(), os.path.basename(self.pfp.name)) # path apofevgei pfps/pfps bug
+            img_content = ContentFile(img_io.getvalue(), os.path.basename(self.pfp.name))  # path apofevgei pfps/pfps bug
 
             # Save the processed image back to the model field
-            # to apo katw htan etsi kai isws einai to error otan ftaixneis superuser
             self.pfp.save(os.path.basename(self.pfp.name), img_content, save=False)
 
         super().save(*args, **kwargs)
