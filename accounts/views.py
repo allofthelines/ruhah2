@@ -318,6 +318,12 @@ def like_outfit(request):
 
 
 def remove_like(request, like_id):
-    like = get_object_or_404(UserItemLikes, id=like_id, liker=request.user)
-    like.delete()
-    return redirect('accounts:public_profile', username=request.user.username)
+    if request.method == "POST":
+        try:
+            like = UserItemLikes.objects.get(id=like_id, liker=request.user)
+            like.delete()
+        except UserItemLikes.DoesNotExist:
+            pass  # Handle the case where the like doesn't exist if necessary
+
+    next_url = request.GET.get('next', reverse('accounts:profile') + '#likes')  # Default to 'accounts:profile#likes' if 'next' not provided
+    return redirect(next_url)ofile', username=request.user.username)
