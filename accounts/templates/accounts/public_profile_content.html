@@ -70,7 +70,7 @@
         // Remove the thicker border after 3 seconds
         setTimeout(() => {
             outfitElement.classList.remove('liked-outfit');
-        }, 2000); // 3000ms = 3 seconds
+        }, 2000); // 1000ms = 1 second
 
         // Make an AJAX request to like the outfit
         fetch(`{% url 'accounts:like_outfit' %}`, {
@@ -83,11 +83,11 @@
         })
         .then(response => {
             if (response.ok) {
-                // Optionally, handle successful response here
+                console.log('\n\n\nOUTFIT ADDED TO LIKES\n\n\n');
             }
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('\n\n\nERROR:', error, '\n\n\n');
         });
 
         // Prevent default action
