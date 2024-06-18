@@ -309,3 +309,9 @@ def like_outfit(request):
     except Exception as e:
         print('DEBUG: Unexpected error', str(e))
         return JsonResponse({'status': 'error', 'message': 'An unexpected error occurred'}, status=500)
+
+
+def remove_like(request, like_id):
+    like = get_object_or_404(UserItemLikes, id=like_id, liker=request.user)
+    like.delete()
+    return redirect('accounts:public_profile', username=request.user.username)
