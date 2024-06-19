@@ -358,13 +358,10 @@
 
             document.getElementById('page-header').textContent = headerText;
 
-            // Clear the hash in the URL to prevent default scroll behavior
-            history.replaceState(null, null, ' ');
-
             // Scroll to the top of the section when clicking links
             setTimeout(function() {
                 window.scrollTo(0, 0);
-            }, 1);
+            }, 1); // to 1 einai pou to phgainei paaaanw panw kai oxi sto #likes
         }
     }
 </script>
