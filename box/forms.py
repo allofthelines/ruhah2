@@ -50,12 +50,12 @@ class TicketForm(forms.Form):
     style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2', required=False)
     type = forms.ChoiceField(choices=TYPE_CHOICES, label='Type')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion', required=False)
-    condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
+    condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition')
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $60', 'max $60'), ('max $100', 'max $100')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 20,
-        'placeholder': '"play with layering"\n"pastel palette"\n"emphasize my shoulders"\n"for a trip to greece"'}), required=False)
+        'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
 
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
     size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size')
