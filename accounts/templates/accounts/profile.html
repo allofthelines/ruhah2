@@ -330,7 +330,7 @@
         } else if (urlHash) {
             const sectionId = urlHash.substring(1);  // Remove the '#' from the hash
             showContent(sectionId, `Profile > ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
-
+            window.scrollTo(0, 0); // // Scroll to the very top after showing the content
 
 
 
@@ -351,7 +351,7 @@
             section.style.display = 'block';
             document.getElementById('page-header').textContent = headerText;
 
-            // Scroll to the top of the section
+            // Scroll to the top of the section otan patas slick 'data' 'settings' etc
             window.scrollTo({
                 top: 0,
                 //top: section.offsetTop,
