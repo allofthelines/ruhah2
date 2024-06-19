@@ -329,6 +329,9 @@
             showContent('settings', 'Profile > Settings');
         } else if (urlHash) {
             const sectionId = urlHash.substring(1);  // Remove the '#' from the hash
+
+            shouldScrollToTop = false; // Don't scroll to the top for URL hash navigation
+            
             showContent(sectionId, `Profile > ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
 
 
@@ -354,16 +357,26 @@
         var section = document.getElementById(sectionId);
         if (section) {
             section.style.display = 'block';
-
-
             document.getElementById('page-header').textContent = headerText;
 
-            // Scroll to the top of the section when clicking links
-            setTimeout(function() {
-                window.scrollTo(0, 0);
-            }, 1); // to 1 einai pou to phgainei paaaanw panw kai oxi sto #likes
+
+             if (shouldScrollToTop) {
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 1); // to 1 einai pou to phgainei paaaanw panw kai oxi sto #likes
+            }
+            // Reset the flag to ensure the next click behaves correctly
+            shouldScrollToTop = true;
+
+
         }
     }
+
+    document.addEventListener('click', function(event) {
+        if (event.target.matches('.link-style')) { // Adjust the selector to match your remove button
+            shouldScrollToTop = false;
+        }
+    });
 </script>
 
 
