@@ -5,8 +5,8 @@ from .models import Ticket, Order, Return
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Ticket._meta.get_fields()]
-    list_display = ['id', 'status', 'type' 'creator_id', 'short_notes', 'outfit1', 'outfit2']
-    list_filter = ['status', 'type', 'occasion', 'style1', 'style2']
+    list_display = ['id', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2']
+    list_filter = ['status', 'occasion', 'style1', 'style2']
 
     def short_notes(self, obj):
         if obj.notes:
