@@ -17,20 +17,17 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0 20px;
-  /*font-family: 'Roboto Mono';*/
-  /*font-weight: 400;*/
-  font-family: 'Montserrat';
-  font-weight: 300;
-  font-size: 16px;
+  font-family: 'Roboto Mono';
+  font-weight: 400;
+  font-size: 14px;
 }
 
 h2, h3, h4 {
-    font-weight: 300;
+    font-weight: 400;
 }
 
 select, option, button, input, textarea {
-    /*font-family: 'Roboto Mono';*/
-    font-family: 'Montserrat';
+    font-family: 'Roboto Mono';
 }
 
 textarea {
