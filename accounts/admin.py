@@ -43,12 +43,6 @@ class UserItemLikesAdmin(admin.ModelAdmin):
     list_filter = ('liker', 'styler')
     readonly_fields = ('id', 'liked_at')
 
-    fieldsets = (
-        (None, {
-            'fields': ('id', 'thumbnail', 'liker', 'item', 'styler', 'liked_at', 'days_alive')
-        }),
-    )
-
     def liker_username(self, obj):
         return obj.liker.username
     liker_username.admin_order_field = 'liker'  # Allows column order sorting

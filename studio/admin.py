@@ -3,6 +3,7 @@ from .models import Item, Tag, StudioOutfitTemp, EcommerceStore, SizeCategory, S
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
 from .forms import EcommerceStoreForm
+from django import forms
 
 class SizesFilter(SimpleListFilter):
     title = 'sizes'
@@ -17,10 +18,19 @@ class SizesFilter(SimpleListFilter):
             return queryset.filter(sizes_xyz__id__exact=self.value())
         return queryset
 
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = '__all__'
+        widgets = {
+            'tags': forms.Textarea(attrs={'rows': 3}),
+        }
+
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'itemid', 'thumbnail', 'image', 'ecommerce_store'] # vale alliws kapws to sizes_xyz oxi directly giati error
+    form = ItemForm
+    list_display = ['id', 'itemid', 'thumbnail', 'image', 'ecommerce_store']
     search_fields = ['name', 'itemid', 'location', 'tags']
-    list_filter = [SizesFilter, 'condition', 'location', 'cat', 'ecommerce_store'] # eftiaksa custom filter
+    list_filter = [SizesFilter, 'condition', 'location', 'cat', 'ecommerce_store']
     ordering = ['itemid']
     fields = [
         'image', 'itemid', 'tags',
@@ -37,7 +47,6 @@ class ItemAdmin(admin.ModelAdmin):
 
     def display_sizes(self, obj):
         return ", ".join([size.name for size in obj.sizes_xyz.all()])
-
     display_sizes.short_description = 'Sizes'
 
     def display_tags(self, obj):
