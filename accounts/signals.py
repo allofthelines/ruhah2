@@ -30,4 +30,5 @@ def set_default_styles(sender, instance, created, **kwargs):
         all_styles = Style.objects.all()
         instance.trending_styles.set(all_styles)
         instance.studio_styles.set(all_styles)
-        print('\n\n\n\n\n\n', '444444444444', '\n\n\n\n\n\n')
+        print('\n\n\n\n\n\n44444444444ALL_STYLES', all_styles, '\n\n\n\n\n\n')
+        print('\n\n\n\n\n\n44444444444instance.trending_styles.set(all_styles)', instance.trending_styles.set(all_styles), '\n\n\n\n\n\n')
