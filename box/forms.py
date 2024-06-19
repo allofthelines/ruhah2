@@ -40,8 +40,13 @@ class TicketForm(forms.Form):
     SHOE_SIZE_UK_CHOICES = [(str(size), str(size)) for size in range(2, 14)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(2, 13)]
 
+    try:
+        casual_style = Style.objects.get(style_name='casual')
+    except Style.DoesNotExist:
+        casual_style = None
+
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
-    style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style')
+    style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
     style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2', required=False)
     type = forms.ChoiceField(choices=TYPE_CHOICES, label='Type')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion', required=False)
