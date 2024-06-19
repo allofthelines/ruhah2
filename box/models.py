@@ -26,9 +26,17 @@ class Ticket(models.Model):
         ('closed', 'closed'),
         ('boxed', 'boxed'),
     ]
-    COLORTYPE_CHOICES = [('white', 'white'), ('golden', 'golden')]
+    TYPE_CHOICES = [
+        ('styled_outfits', 'styled outfits'),
+        ('liked_items', 'liked items'),
+    ]
+    COLORTYPE_CHOICES = [
+        ('white', 'white'),
+        ('golden', 'golden')
+    ]
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='notpaid')
+    type = models.CharField(max_length=30, choices=TYPE_CHOICES, default='styled_outfits')
     colortype = models.CharField(max_length=10, choices=COLORTYPE_CHOICES, default='white')
     timestamp = models.DateTimeField(default=timezone.now)
     creator_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
