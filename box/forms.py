@@ -31,7 +31,7 @@ class TicketForm(forms.Form):
 
     TYPE_CHOICES = [
         ('styled_outfits', 'styled outfits'),
-        ('liked_outfits', 'liked outfits'),
+        ('liked_items', 'liked items'),
     ]
 
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
