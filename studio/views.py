@@ -130,7 +130,7 @@ def studio_items(request, ticket_id):
     })
 
 
-def studio_items_guest(request, ticket_id):
+"""def studio_items_guest(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
     search_query = request.GET.get('search_query', '')
 
@@ -141,6 +141,44 @@ def studio_items_guest(request, ticket_id):
         items = Item.objects.filter(query).distinct()[:20]  # Limit to first 20 search results
     else:
         items = Item.objects.all()[:20]  # Limit to first 20 items
+
+    image_urls = []  # No pre-loaded images for guests
+
+    if not request.user.is_authenticated:
+        user = CustomUser(username='guest')
+        messages.error(request, 'Only registered users can submit outfits.')
+    else:
+        user = request.user
+
+    context = {
+        'ticket': ticket,
+        'items': items,
+        'image_urls': image_urls,
+        'user': user,
+        'MEDIA_URL': settings.MEDIA_URL,
+    }
+
+    return render(request, 'studio/studio_items_guest.html', context)"""
+
+def studio_items_guest(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    search_query = request.GET.get('search_query', '')
+    category = request.GET.get('category', 'all')
+
+    items = Item.objects.all()
+
+    if search_query:
+        query = Q()
+        for term in search_query.split():
+            query &= Q(tags__icontains=term)
+        items = items.filter(query).distinct()
+
+    # Apply category filter only if a specific category is selected
+    if category and category != 'all':
+        items = items.filter(cat=category)
+
+    # Limit to first 20 items
+    items = items[:20]
 
     image_urls = []  # No pre-loaded images for guests
 
