@@ -29,6 +29,11 @@ class TicketForm(forms.Form):
         ('XL', 'XL'),
     ]
 
+    TYPE_CHOICES = [
+        ('styled_outfits', 'styled_outfits'),
+        ('liked_outfits', 'styled_outfits'),
+    ]
+
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
     SIZE_WAIST_INCHES_CHOICES = [(str(size), str(size)) for size in range(23, 37)]
@@ -38,6 +43,7 @@ class TicketForm(forms.Form):
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 1')
     style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2')
+    type = forms.ModelChoiceField(queryset=Style.objects.all(), label='Type')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion')
     condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
     price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('under 40', 'under 40'), ('under 80', 'under 80')], label='Price')
