@@ -62,10 +62,10 @@ class CustomUser(AbstractUser):
 
         if new_user:
             Style = apps.get_model('studio', 'Style')
-            print('\n\n\nSTYLE=', Style, '\n\n\n')
             all_styles = Style.objects.all()
             self.trending_styles.set(all_styles)
             self.studio_styles.set(all_styles)
+            print('\n\n\nSTYLE=', all_styles, '\n\n\n')
             print('\n\n\nself.studio_styles=', self.studio_styles, '\n\n\n')
             super().save(*args, **kwargs)
 
