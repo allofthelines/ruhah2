@@ -8,6 +8,9 @@ from django.core.files.storage import default_storage
 from io import BytesIO
 from django.core.files.base import ContentFile
 from django.utils import timezone
+# an kanw import apo studio.Style tha exw CYCLIC IMPORT ERROR
+# solution grapsto san studio.Style kai kane to apo katw gia to new_user
+from django.apps import apps
 
 class CustomUser(AbstractUser):
     PROFILE_VISIBILITY_CHOICES = [
@@ -58,6 +61,7 @@ class CustomUser(AbstractUser):
         super().save(*args, **kwargs)
 
         if new_user:
+            Style = apps.get_model('studio', 'Style')
             all_styles = Style.objects.all()
             self.trending_styles.set(all_styles)
             self.studio_styles.set(all_styles)
