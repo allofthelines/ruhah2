@@ -330,8 +330,8 @@
         } else if (urlHash) {
             const sectionId = urlHash.substring(1);  // Remove the '#' from the hash
 
-            shouldScrollToTop = false; // Don't scroll to the top for URL hash navigation
-            
+            // shouldScrollToTop = false; // Don't scroll to the top for URL hash navigation
+
             showContent(sectionId, `Profile > ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
 
 
