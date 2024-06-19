@@ -41,12 +41,12 @@ class TicketForm(forms.Form):
                            [(str(size + 0.5), str(size + 0.5)) for size in range(2, 13)]
 
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
-    style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 1')
-    style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2')
+    style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style')
+    style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2', required=False)
     type = forms.ChoiceField(choices=TYPE_CHOICES, label='Type')
-    occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion')
+    occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion', required=False)
     condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
-    price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('under 40', 'under 40'), ('under 80', 'under 80')], label='Price')
+    price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('$60 max', '$60 max'), ('$100 max', '$100 max')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 20,
