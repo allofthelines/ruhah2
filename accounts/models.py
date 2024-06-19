@@ -62,11 +62,10 @@ class CustomUser(AbstractUser):
 
         if new_user:
             Style = apps.get_model('studio', 'Style')
-            print('\n\n\nSTYLE=', Style, '\n\n\n')
             all_styles = Style.objects.all()
-            print('\n\n\nALL_STYLES=', all_styles, '\n\n\n')
             self.trending_styles.set(all_styles)
             self.studio_styles.set(all_styles)
+            super().save(*args, **kwargs)
 
         if self.pfp:
             img = Image.open(self.pfp)
