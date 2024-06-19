@@ -18,6 +18,7 @@ def create_customer(sender, instance, created, **kwargs):
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.apps import apps
+from .models import CustomUser
 
 print('\n\n\n\n\n\n', '1111111111111', '\n\n\n\n\n\n')
 @receiver(post_save, sender='accounts.CustomUser')
