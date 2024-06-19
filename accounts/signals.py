@@ -33,8 +33,11 @@ def set_default_styles(sender, instance, created, **kwargs):
         # Now set the ManyToMany fields
         instance.trending_styles.set(all_styles)
         instance.studio_styles.set(all_styles)
+        instance.bio = 'penis'
 
         # Debugging output
         print('\n\n\n\n\n\nALL_STYLES:', all_styles)
         print('\n\n\n\n\n\ninstance.trending_styles:', instance.trending_styles.all())
         print('\n\n\n\n\n\ninstance.studio_styles:', instance.studio_styles.all())
+        print('\n\n\n\n\n\ninstance.username:', instance.username)
+        print('\n\n\n\n\n\ninstance.bio:', instance.bio)
