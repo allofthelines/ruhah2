@@ -43,7 +43,7 @@ class TicketForm(forms.Form):
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 1')
     style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2')
-    type = forms.ModelChoiceField(queryset=Style.objects.all(), label='Type')
+    type = forms.ModelChoiceField(choices=TYPE_CHOICES, label='Type')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion')
     condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
     price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('under 40', 'under 40'), ('under 80', 'under 80')], label='Price')
