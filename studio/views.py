@@ -89,7 +89,7 @@ def studio_items(request, ticket_id):
 """
 
 
-def item_search(request, ticket_id):
+def studio_items(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
     user = request.user
     outfit_temp, created = StudioOutfitTemp.objects.get_or_create(ticket=ticket, user=user)
