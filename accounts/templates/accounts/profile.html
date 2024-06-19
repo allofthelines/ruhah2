@@ -355,7 +355,8 @@
         if (section) {
             section.style.display = 'block';
 
-
+            // Clear the hash in the URL to prevent default scroll behavior
+            history.replaceState(null, null, ' ');
 
             document.getElementById('page-header').textContent = headerText;
 
