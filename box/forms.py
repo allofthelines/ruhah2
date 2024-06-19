@@ -51,7 +51,7 @@ class TicketForm(forms.Form):
     type = forms.ChoiceField(choices=TYPE_CHOICES, label='Type')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion', required=False)
     condition = forms.ChoiceField(choices=[('whatever', 'whatever'), ('new', 'new'), ('pre-owned', 'pre-owned')], label='Condition')
-    price = forms.ChoiceField(choices=[('whatever', 'whatever'), ('$60 max', '$60 max'), ('$100 max', '$100 max')], label='Price')
+    price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $60', 'max $60'), ('max $100', 'max $100')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 20,
