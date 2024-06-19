@@ -1,8 +1,7 @@
-from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import CustomUser, Customer, UserItemLikes
 from studio.models import Style, Item
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
@@ -20,8 +19,17 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False  # Deactivate account till it is confirmed
             user.save()
+
+            # Fetch all styles and assign to the user
+            all_styles = Style.objects.all()
+            user.trending_styles.set(all_styles)
+            user.studio_styles.set(all_styles)
+
+            # Save the user again to ensure ManyToMany fields are saved
+            user.save()
+
             send_confirmation_email(user)  # Send confirmation email
-            return redirect('accounts:account_activation_sent')  # Redirect to a page indicating that an activation email has been sent
+            return redirect('accounts:account_activation_sent')
     else:
         form = SignUpForm()  # Use the custom SignUpForm
     return render(request, 'accounts/signup.html', {'form': form})
