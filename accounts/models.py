@@ -11,7 +11,6 @@ from django.utils import timezone
 # an kanw import apo studio.Style tha exw CYCLIC IMPORT ERROR
 # solution grapsto san studio.Style kai kane to apo katw gia to new_user
 from django.apps import apps
-from .signals import set_default_styles # gia trending_styles kai studio_styles na mhn einai empty sthn arxh
 
 class CustomUser(AbstractUser):
     PROFILE_VISIBILITY_CHOICES = [
