@@ -20,12 +20,12 @@ body {
   /*font-family: 'Roboto Mono';*/
   /*font-weight: 400;*/
   font-family: 'Montserrat';
-  font-weight: 200;
-  font-size: 14px;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 h2, h3, h4 {
-    font-weight: 200;
+    font-weight: 300;
 }
 
 select, option, button, input, textarea {
