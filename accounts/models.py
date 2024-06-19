@@ -11,6 +11,7 @@ from django.utils import timezone
 # an kanw import apo studio.Style tha exw CYCLIC IMPORT ERROR
 # solution grapsto san studio.Style kai kane to apo katw gia to new_user
 from django.apps import apps
+from .signals import set_default_styles # gia trending_styles kai studio_styles na mhn einai empty sthn arxh
 
 class CustomUser(AbstractUser):
     PROFILE_VISIBILITY_CHOICES = [
@@ -60,14 +61,13 @@ class CustomUser(AbstractUser):
         new_user = self.pk is None
         super().save(*args, **kwargs)
 
+
+        """ thaprepe na doulevei alla den doulevei, lysh me signal
         if new_user:
             Style = apps.get_model('studio', 'Style')
             all_styles = Style.objects.all()
             self.trending_styles.set(all_styles)
-            self.studio_styles.set(all_styles)
-            print('\n\n\nSTYLE=', all_styles, '\n\n\n')
-            print('\n\n\nself.studio_styles=', self.studio_styles, '\n\n\n')
-            super().save(*args, **kwargs)
+            self.studio_styles.set(all_styles)"""
 
         if self.pfp:
             img = Image.open(self.pfp)
