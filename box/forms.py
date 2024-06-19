@@ -30,8 +30,8 @@ class TicketForm(forms.Form):
     ]
 
     TYPE_CHOICES = [
-        ('styled_outfits', 'styled outfits'),
-        ('liked_items', 'liked items'),
+        ('styled_outfits', '2 styled outfits'),
+        ('liked_items', '7 liked items'),
     ]
 
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
