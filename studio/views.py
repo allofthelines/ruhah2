@@ -54,7 +54,7 @@ def studio_tickets(request):
 
 
 
-@login_required
+"""@login_required
 def studio_items(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
     user = request.user
@@ -86,7 +86,48 @@ def studio_items(request, ticket_id):
         'image_urls': image_urls
     }
     return render(request, 'studio/studio_items.html', context)
+"""
 
+
+def item_search(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    user = request.user
+    outfit_temp, created = StudioOutfitTemp.objects.get_or_create(ticket=ticket, user=user)
+
+    # Prepare image URLs in a list or dictionary
+    image_urls = [outfit_temp.get_image_url(i) for i in range(1, 5)]
+
+    search_query = request.GET.get('search_query', '')
+    category = request.GET.get('category', '')
+    items = Item.objects.all()
+
+    if search_query:
+        words = search_query.split()
+        query = Q()
+        for word in words:
+            query &= Q(tags__icontains=word)
+        items = items.filter(query)
+
+    if category:
+        items = items.filter(cat=category)
+
+    # Filter items based on the ticket's sizes
+    items = items.filter(
+        Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
+        Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
+        Q(cat='footwear') & (
+                Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
+        ) |
+        Q(cat='accessory') |
+        Q(cat='dress')
+    ).distinct()  # Adding distinct to avoid duplicates
+
+    return render(request, 'studio/studio_items.html', {
+        'ticket': ticket,
+        'outfit_temp': outfit_temp,
+        'items': items,
+        'image_urls': image_urls
+    })
 
 
 def studio_items_guest(request, ticket_id):

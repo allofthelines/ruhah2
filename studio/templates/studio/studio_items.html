@@ -66,8 +66,16 @@
 
 <!-- SEARCH FORM -->
 <form method="GET" action="{% url 'studio:item_search' ticket.id %}">
+    <select name="category">
+            <option value="">All</option>
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="dress">Dress</option>
+            <option value="footwear">Footwear</option>
+            <option value="accessory">Accessory</option>
+    </select>
     <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
-    <button type="submit">Search Clothes</button>
+    <button type="submit">Search Items</button>
 </form>
 
 <p></p>
