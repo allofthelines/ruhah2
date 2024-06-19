@@ -42,6 +42,7 @@ class UserItemLikesAdmin(admin.ModelAdmin):
     list_display = ('id', 'thumbnail', 'liker_username', 'item', 'styler_username', 'liked_at', 'days_alive')
     list_filter = ('liker', 'styler')
     readonly_fields = ('id', 'liked_at')
+    search_fields = ('liker__username', 'styler__username', 'item__itemid')
 
     def liker_username(self, obj):
         return obj.liker.username
