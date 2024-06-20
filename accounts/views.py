@@ -256,13 +256,32 @@ def unfollow(request, username):
         UserFollows.objects.filter(user_from=request.user, user_to=profile_user).delete()
     return redirect('accounts:public_profile', username=username)
 
-def followers_list(request, username):
+"""def followers_list(request, username):
     profile_user = get_object_or_404(CustomUser, username=username)
     followers = UserFollows.objects.filter(user_to=profile_user).select_related('user_from')
     followers_list = [relation.user_from for relation in followers]
     context = {
         'profile_user': profile_user,
         'followers': followers_list,
+    }
+    return render(request, 'accounts/followers_list.html', context)"""
+
+
+def followers_list(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    followers = UserFollows.objects.filter(user_to=profile_user).select_related('user_from')
+    followers_list = [relation.user_from for relation in followers]
+
+    # Add logic to check if the logged-in user is following each user in the followers list
+    if request.user.is_authenticated:
+        followed_users = UserFollows.objects.filter(user_from=request.user).values_list('user_to_id', flat=True)
+    else:
+        followed_users = []
+
+    context = {
+        'profile_user': profile_user,
+        'followers': followers_list,
+        'followed_users': followed_users,
     }
     return render(request, 'accounts/followers_list.html', context)
 
