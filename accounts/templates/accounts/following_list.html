@@ -19,10 +19,18 @@
                         </div>
                         <div>
                             {% if request.user.is_authenticated and user != request.user %}
+                                <!--
                                 {% if user.id in followed_users %}
                                     <button style="color: red;" onclick="submitUnfollowForm('{{ user.username }}')">Unfollow</button>
                                 {% else %}
                                     <button onclick="submitFollowForm('{{ user.username }}')">Follow</button>
+                                 -->
+                                {% if user.id in followed_users %}
+                                    <button id="follow-unfollow-button-{{ user.username }}" onclick="toggleFollowUnfollow('{{ user.username }}', true)">Following</button>
+                                {% else %}
+                                    <button onclick="submitFollowForm('{{ user.username }}')">Follow</button>
+                                {% endif %}
+
                                 {% endif %}
                                 <form id="follow-form-{{ user.username }}" method="post" action="{% url 'accounts:follow' user.username %}" style="display: none;">
                                     {% csrf_token %}
@@ -38,6 +46,32 @@
         {% endfor %}
     </ul>
 </div>
+
+
+<script>
+function toggleFollowUnfollow(username, isFollowing) {
+    const button = document.getElementById('follow-unfollow-button-' + username);
+    if (button.dataset.toggled === "true") {
+        // Second click, submit the form
+        if (isFollowing) {
+            document.getElementById('unfollow-form-' + username).submit();
+        } else {
+            document.getElementById('follow-form-' + username).submit();
+        }
+    } else {
+        // First click, change the button text and style
+        button.dataset.toggled = "true";
+        if (isFollowing) {
+            button.textContent = "Unfollow";
+            button.style.color = "red";  // Change color to indicate confirmation step
+        } else {
+            button.textContent = "Follow";
+            button.style.color = "blue";  // Change color to indicate confirmation step
+        }
+    }
+}
+</script>
+
 
 <script>
     function submitFollowForm(username) {
