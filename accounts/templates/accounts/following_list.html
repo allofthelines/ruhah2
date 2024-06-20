@@ -58,12 +58,31 @@ function toggleFollowUnfollow(username, isFollowing) {
         if (isFollowing) {
             button.textContent = "Unfollow";
             button.style.color = "red";  // Change color to indicate confirmation step
+
+            // Change back to "Following" after 3 seconds
+            setTimeout(() => {
+                if (button.dataset.toggled === "true") {
+                    button.textContent = "Following";
+                    button.style.color = "";  // Reset color
+                    button.dataset.toggled = "false";
+                }
+            }, 3000);
         } else {
             button.textContent = "Follow";
             button.style.color = "blue";  // Change color to indicate confirmation step
+
+            // Change back to "Follow" after 3 seconds
+            setTimeout(() => {
+                if (button.dataset.toggled === "true") {
+                    button.textContent = "Follow";
+                    button.style.color = "";  // Reset color
+                    button.dataset.toggled = "false";
+                }
+            }, 3000);
         }
     }
 }
+
 </script>
 
 
