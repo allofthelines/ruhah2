@@ -15,7 +15,7 @@ class Ticket(models.Model):
     # style1 = models.CharField(max_length=100)
     style1 = models.ForeignKey('studio.Style', on_delete=models.SET_NULL, null=True, related_name='style1_tickets',blank=True)
     style2 = models.ForeignKey('studio.Style', on_delete=models.SET_NULL, null=True, related_name='style2_tickets', blank=True)
-    occasion = models.CharField(max_length=100)
+    occasion = models.CharField(max_length=100, null=True, blank=True)
     condition = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
     notes = models.TextField(blank=True, default='')
