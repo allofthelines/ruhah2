@@ -17,7 +17,6 @@
         <br>
         <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="text-decoration-line: underline; color: blue;">Upload</a>
         <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
-        <a href="#" onclick="showContent('cart', 'Profile > Cart')" style="text-decoration-line: underline; color: blue;">Cart</a>
         <br>
         <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
         {% csrf_token %}
