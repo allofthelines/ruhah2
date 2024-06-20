@@ -267,7 +267,7 @@ def followers_list(request, username):
     return render(request, 'accounts/followers_list.html', context)
 
 
-def following_list(request, username):
+"""def following_list(request, username):
     profile_user = get_object_or_404(CustomUser, username=username)
     following = UserFollows.objects.filter(user_from=profile_user).select_related('user_to')
     following_list = [relation.user_to for relation in following]
@@ -275,14 +275,25 @@ def following_list(request, username):
         'profile_user': profile_user,
         'following': following_list,
     }
+    return render(request, 'accounts/following_list.html', context)"""
+
+def following_list(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    following = UserFollows.objects.filter(user_from=profile_user).select_related('user_to')
+    following_list = [relation.user_to for relation in following]
+
+    # Add logic to check if the logged-in user is following each user in the following list
+    if request.user.is_authenticated:
+        followed_users = UserFollows.objects.filter(user_from=request.user).values_list('user_to_id', flat=True)
+    else:
+        followed_users = []
+
+    context = {
+        'profile_user': profile_user,
+        'following': following_list,
+        'followed_users': followed_users,
+    }
     return render(request, 'accounts/following_list.html', context)
-
-
-
-
-
-
-
 
 
 from django.http import JsonResponse
