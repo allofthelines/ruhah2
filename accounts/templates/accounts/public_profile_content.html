@@ -41,7 +41,9 @@
     </div>
 </div>
 
+
 <script>
+{% comment %}
 function toggleFollowUnfollow(username, isFollowing) {
     const button = document.getElementById('unfollow-button');
     if (button.dataset.toggled === "true") {
@@ -63,7 +65,49 @@ function toggleFollowUnfollow(username, isFollowing) {
         }
     }
 }
+{% endcomment %}
+function toggleFollowUnfollow(username, isFollowing) {
+    const button = document.getElementById('follow-unfollow-button-' + username);
+    if (button.dataset.toggled === "true") {
+        // Second click, submit the form
+        if (isFollowing) {
+            document.getElementById('unfollow-form-' + username).submit();
+        } else {
+            document.getElementById('follow-form-' + username).submit();
+        }
+    } else {
+        // First click, change the button text and style
+        button.dataset.toggled = "true";
+        if (isFollowing) {
+            button.textContent = "Unfollow";
+            button.style.color = "red";  // Change color to indicate confirmation step
+
+            // Change back to "Following" after 3 seconds
+            setTimeout(() => {
+                if (button.dataset.toggled === "true") {
+                    button.textContent = "Following";
+                    button.style.color = "";  // Reset color
+                    button.dataset.toggled = "false";
+                }
+            }, 3000);
+        } else {
+            button.textContent = "Follow";
+            button.style.color = "blue";  // Change color to indicate confirmation step
+
+            // Change back to "Follow" after 3 seconds
+            setTimeout(() => {
+                if (button.dataset.toggled === "true") {
+                    button.textContent = "Follow";
+                    button.style.color = "";  // Reset color
+                    button.dataset.toggled = "false";
+                }
+            }, 3000);
+        }
+    }
+}
+
 </script>
+
 
 
 
