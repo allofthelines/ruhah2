@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
     list_display = ['username', 'lifeform', 'id', 'email', 'is_superuser']
-    list_filter = ('lifeform')
+    list_filter = ('lifeform',)
 
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('is_stylist', 'name', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'trending_styles', 'studio_styles', 'credits')}),
