@@ -17,8 +17,9 @@
                         <a href="#" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</a>-->
                         <!--
                         <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</button>
-                        -->
                         <button id="unfollow-button" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)">Following</button>
+                        -->
+                        <button id="follow-unfollow-button-{{ profile_user.username }}" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)">Following</button>
                     {% else %}
                         <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')">Follow</button>
                     {% endif %}
