@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from box.models import Ticket
 from core.models import Outfit
 from accounts.models import CustomUser
+from accounts.models import UserItemLikes
 from .models import StudioOutfitTemp, Item, SizeCategory
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -125,6 +126,13 @@ def studio_items(request, ticket_id):
             Q(cat='accessory') |
             Q(cat='dress')
         ).distinct()  # Adding distinct to avoid duplicates
+
+        # Additional filter if ticket.type is 'liked_items'
+        if ticket.type == 'liked_items':
+            liked_item_ids = UserItemLikes.objects.filter(
+                liker=ticket.creator_id
+            ).values_list('item', flat=True)
+            items = items.filter(id__in=liked_item_ids)
 
     return render(request, 'studio/studio_items.html', {
         'ticket': ticket,
@@ -302,6 +310,13 @@ def item_search(request, ticket_id):
             ) |
             Q(cat='accessory')
         ).distinct()  # Adding distinct to avoid duplicates
+
+        # Additional filter if ticket.type is 'liked_items'
+        if ticket.type == 'liked_items':
+            liked_item_ids = UserItemLikes.objects.filter(
+                liker=ticket.creator_id
+            ).values_list('item', flat=True)
+            items = items.filter(id__in=liked_item_ids)
 
     return render(request, 'studio/studio_items.html', {
         'ticket': ticket,
