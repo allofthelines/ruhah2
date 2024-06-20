@@ -125,6 +125,7 @@ class Item(models.Model):
     ecommerce_store = models.ForeignKey(EcommerceStore, on_delete=models.SET_NULL, blank=True, null=True)
     ecommerce_product_id = models.CharField(max_length=255, blank=True, null=True)
     cat = models.CharField(max_length=20, choices=CAT_CHOICES, blank=True)
+    formtype = models.CharField(max_length=20, choices=[('physical', 'physical'), ('virtual', 'virtual')], blank=True)
     taglist = models.ManyToManyField('studio.Tag', blank=True)
     condition = models.CharField(max_length=10, choices=CONDITION_CHOICES, blank=True, null=True)
 
