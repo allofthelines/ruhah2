@@ -44,7 +44,7 @@ class TrendingView(ListView):
     template_name = "core/trending.html"
     model = Outfit
     ordering = "-rating"
-    paginate_by = 5
+    paginate_by = 20
 
     def get_queryset(self):
         user = self.request.user
