@@ -15,7 +15,10 @@
                     {% if is_following %}
                         <!--<button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Following</button>
                         <a href="#" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</a>-->
+                        <!--
                         <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</button>
+                        -->
+                        <button id="unfollow-button" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)">Following</button>
                     {% else %}
                         <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')">Follow</button>
                     {% endif %}
@@ -37,6 +40,31 @@
         </div>
     </div>
 </div>
+
+<script>
+function toggleFollowUnfollow(username, isFollowing) {
+    const button = document.getElementById('unfollow-button');
+    if (button.dataset.toggled === "true") {
+        // Second click, submit the form
+        if (isFollowing) {
+            document.getElementById('unfollow-form-' + username).submit();
+        } else {
+            document.getElementById('follow-form-' + username).submit();
+        }
+    } else {
+        // First click, change the button text and style
+        button.dataset.toggled = "true";
+        if (isFollowing) {
+            button.textContent = "Unfollow";
+            button.style.color = "red";  // Change color to indicate confirmation step
+        } else {
+            button.textContent = "Follow";
+            button.style.color = "blue";  // Change color to indicate confirmation step
+        }
+    }
+}
+</script>
+
 
 
 
