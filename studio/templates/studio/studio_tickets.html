@@ -21,9 +21,9 @@
           {% with ticket.creator_id.id as creator_id %}
             {% with ticket.creator_id.lifeform as creator_lifeform %}
               {% if creator_id in following_user_ids %}
-              <tr style="background-color: #FDFD96;">
+              <tr style="background-color: #FDFD96;"> <!--light yellow-->
               {% elif creator_lifeform != 'human' %}
-              <tr style="background-color: lightgrey;">
+              <tr style="background-color: gainsboro;"> <!--light grey-->
               {% else %}
               <tr>
               {% endif %}
