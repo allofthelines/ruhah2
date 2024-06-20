@@ -15,6 +15,41 @@
     </div>
 {% endif %}
 
+{% comment %}
+
+AN THES NA VALEIS XRWMA KAI EDW TOTE
+VALE AFTO ALLA PREPEI STO VIEW
+NA SERVIREI FOLLOWING_USER_IDS
+
+<!-- TICKET LINE -->
+<table id="studio-tickets-table">
+    <thead>
+        <tr>
+            <th>Style</th>
+            <!-- <th>Occasion</th> -->
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% with ticket.creator_id.id as creator_id %}
+            {% with ticket.creator_id.lifeform as creator_lifeform %}
+                {% if creator_id in following_user_ids %}
+                <tr style="background-color: #FDFD96;">
+                {% elif creator_lifeform != 'human' %}
+                <tr style="background-color: #F5F5F5;">  <!-- Light grey shade -->
+                {% else %}
+                <tr>
+                {% endif %}
+                    <td>{{ ticket.style1.style_name }}</td>
+                    <!-- <td>{{ ticket.occasion }}</td> -->
+                    <td>{{ ticket.notes }}</td>
+                </tr>
+            {% endwith %}
+        {% endwith %}
+    </tbody>
+</table>
+{% endcomment %}
+
 <!-- TICKET LINE -->
 <table id="studio-tickets-table">
     <thead>
@@ -32,6 +67,11 @@
         </tr>
     </tbody>
 </table>
+
+
+
+
+
 
 <p>Your <strong>Outfit</strong> for Ticket #{{ ticket.id }}</p>
 
