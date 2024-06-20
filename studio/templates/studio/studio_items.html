@@ -65,18 +65,20 @@
 <p></p>
 
 <!-- SEARCH FORM -->
-<form method="GET" action="{% url 'studio:item_search' ticket.id %}">
+<form method="GET" action="{% url 'studio:studio_items' ticket.id %}">
     <select name="category">
-            <option value="">All</option>
-            <option value="top">Top</option>
-            <option value="bottom">Bottom</option>
-            <option value="dress">Dress</option>
-            <option value="footwear">Footwear</option>
-            <option value="accessory">Accessory</option>
+        <option value="all">All Categories</option>
+        <option value="top">Top</option>
+        <option value="bottom">Bottom</option>
+        <option value="dress">Dress</option>
+        <option value="footwear">Footwear</option>
+        <option value="accessory">Accessory</option>
     </select>
     <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
+    <input type="hidden" name="search" value="1">
     <button type="submit">Search</button>
 </form>
+
 
 <p></p>
 

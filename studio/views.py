@@ -89,6 +89,7 @@ def studio_items(request, ticket_id):
 """
 
 
+@login_required
 def studio_items(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
     user = request.user
@@ -97,30 +98,35 @@ def studio_items(request, ticket_id):
     # Prepare image URLs in a list or dictionary
     image_urls = [outfit_temp.get_image_url(i) for i in range(1, 5)]
 
-    search_query = request.GET.get('search_query', '')
-    category = request.GET.get('category', 'all')
     items = Item.objects.none()  # Start with an empty QuerySet
 
-    if search_query:
-        words = search_query.split()
-        query = Q()
-        for word in words:
-            query &= Q(tags__icontains=word)
-        items = Item.objects.filter(query)
+    if 'search' in request.GET:
+        search_query = request.GET.get('search_query', '')
+        category = request.GET.get('category', 'all')
 
-        if category and category != 'all':
-            items = items.filter(cat=category)
+        if search_query or category != 'all':
+            items = Item.objects.all()
 
-        # Filter items based on the ticket's sizes
-        items = items.filter(
-            Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
-            Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
-            Q(cat='footwear') & (
+            if search_query:
+                words = search_query.split()
+                query = Q()
+                for word in words:
+                    query &= Q(tags__icontains=word)
+                items = items.filter(query)
+
+            if category and category != 'all':
+                items = items.filter(cat=category)
+
+            # Filter items based on the ticket's sizes
+            items = items.filter(
+                Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
+                Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
+                Q(cat='footwear') & (
                     Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
-            ) |
-            Q(cat='accessory') |
-            Q(cat='dress')
-        ).distinct()  # Adding distinct to avoid duplicates
+                ) |
+                Q(cat='accessory') |
+                Q(cat='dress')
+            ).distinct()  # Adding distinct to avoid duplicates
 
     return render(request, 'studio/studio_items.html', {
         'ticket': ticket,
@@ -128,6 +134,7 @@ def studio_items(request, ticket_id):
         'items': items,
         'image_urls': image_urls
     })
+
 
 
 """def studio_items_guest(request, ticket_id):
@@ -306,7 +313,7 @@ def item_search(request, ticket_id):
 
 
 
-def add_item_to_temp(request):
+"""def add_item_to_temp(request):
     # edw to item_itemid = kwdikos rouxou
     # sto URL PREPEI '/MEDIA/STUDIOOUTFITTEMPS/IMAGE.JPG'
     item_itemid = request.POST.get('item_itemid')
@@ -372,7 +379,73 @@ def add_item_to_temp(request):
         messages.error(request, error_msg)
 
     temp.save()
+    return redirect('studio:studio_items', ticket_id=ticket_id)  # Redirect back to the item selection page"""
+
+@login_required
+def add_item_to_temp(request):
+    item_itemid = request.POST.get('item_itemid')
+    item_cat = request.POST.get('item_cat')
+    ticket_id = request.POST.get('ticket_id')
+    user = request.user
+    temp = StudioOutfitTemp.objects.get(ticket_id=ticket_id, user=user)
+    error_msg = ''
+
+    item = Item.objects.get(itemid=item_itemid)
+
+    default_img1_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img1.jpg'
+    default_img2_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img2.jpg'
+    default_img3_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img3.jpg'
+    default_img4_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img4.jpg'
+
+    if item_cat == 'top':
+        if temp.item1img.url == default_img1_url:
+            temp.item1img = item.image
+            temp.item1id = item.itemid
+        else:
+            if temp.item4img.url == default_img4_url:
+                temp.item4img = item.image
+                temp.item4id = item.itemid
+            else:
+                error_msg = 'Cannot have more than 2 tops.'
+    elif item_cat == 'bottom':
+        if temp.item2img.url == default_img2_url:
+            temp.item2img = item.image
+            temp.item2id = item.itemid
+        else:
+            if temp.item4img.url == default_img4_url:
+                temp.item4img = item.image
+                temp.item4id = item.itemid
+            else:
+                error_msg = 'Cannot have more than 2 bottoms.'
+    elif item_cat == 'dress':
+        if temp.item2img.url == default_img2_url:
+            temp.item2img = item.image
+            temp.item2id = item.itemid
+        else:
+            error_msg = 'Remove the 2nd item and try again.'
+    elif item_cat == 'accessory':
+        if temp.item3img.url == default_img3_url:
+            temp.item3img = item.image
+            temp.item3id = item.itemid
+        else:
+            if temp.item4img.url == default_img4_url:
+                temp.item4img = item.image
+                temp.item4id = item.itemid
+            else:
+                error_msg = 'Cannot have more than 2 accessories.'
+    elif item_cat == 'footwear':
+        if temp.item4img.url == default_img4_url:
+            temp.item4img = item.image
+            temp.item4id = item.itemid
+        else:
+            error_msg = 'Remove the 4th item and try again.'
+
+    if error_msg:
+        messages.error(request, error_msg)
+
+    temp.save()
     return redirect('studio:studio_items', ticket_id=ticket_id)  # Redirect back to the item selection page
+
 
 
 
