@@ -97,9 +97,9 @@ def search(request):
     query = request.GET.get('q')
     if query:
         if query.lower() == 'all':
-            users = CustomUser.objects.all()
+            users = CustomUser.objects.all().order_by('username')
         else:
-            users = CustomUser.objects.filter(username__icontains=query)
+            users = CustomUser.objects.filter(username__icontains=query).order_by('username')
     else:
         users = CustomUser.objects.none()
 
