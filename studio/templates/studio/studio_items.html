@@ -81,6 +81,7 @@
 <p></p>
 
 <!-- DISPLAY SEARCH RESULTS -->
+{% if items %}
 <div id="contB">
     {% for item in items %}
     <div class="contA">
@@ -95,6 +96,8 @@
     </div>
     {% endfor %}
 </div>
+{% endif %}
+
 
 
 
