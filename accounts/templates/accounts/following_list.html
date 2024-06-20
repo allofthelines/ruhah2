@@ -20,7 +20,8 @@
                         <div>
                             {% if request.user.is_authenticated and user != request.user %}
                                 {% if user in request.user.following.all %}
-                                    <button style="color: red;" onclick="submitUnfollowForm('{{ user.username }}')">Unfollow</button>
+                                    <button onclick="submitUnfollowForm('{{ user.username }}')">Unfollow</button>
+                                    {{ request.user.following.all }}
                                 {% else %}
                                     <button onclick="submitFollowForm('{{ user.username }}')">Follow</button>
                                 {% endif %}
