@@ -33,8 +33,8 @@
             {% endif %}
         </div>
         <div class="profile-row">
-            <a href="{% url 'accounts:followers_list' profile_user.username %}">Followers</a>: {{ profile_user.followers_num }}
-            <a href="{% url 'accounts:following_list' profile_user.username %}">Following</a>: {{ profile_user.following_num }}
+            {{ profile_user.followers_num }} <a href="{% url 'accounts:followers_list' profile_user.username %}">Followers</a>
+            {{ profile_user.following_num }} <a href="{% url 'accounts:following_list' profile_user.username %}">Following</a>
         </div>
         <div class="profile-row">
             {% if profile_user.bio %} {{ profile_user.bio }} {% endif %}
