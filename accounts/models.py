@@ -22,9 +22,17 @@ class CustomUser(AbstractUser):
         ('discover', 'Discover'),
         ('following', 'Following'),
     ]
+    LIFEFORM_CHOICES = [
+        ('angel', 'angel'),
+        ('human', 'human'),
+        ('bot', 'bot'),
+    ]
+    # delete these
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_customer = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_seller = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
+
+    lifeform = models.CharField(max_length=10, choices=LIFEFORM_CHOICES, default='human')
 
     bio = models.CharField(max_length=150, blank=True, null=True)
     name = models.CharField(max_length=30, blank=True, null=True)
