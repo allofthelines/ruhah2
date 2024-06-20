@@ -98,35 +98,33 @@ def studio_items(request, ticket_id):
     # Prepare image URLs in a list or dictionary
     image_urls = [outfit_temp.get_image_url(i) for i in range(1, 5)]
 
+    search_query = request.GET.get('search_query', '')
+    category = request.GET.get('category', 'all')
     items = Item.objects.none()  # Start with an empty QuerySet
 
     if 'search' in request.GET:
-        search_query = request.GET.get('search_query', '')
-        category = request.GET.get('category', 'all')
+        items = Item.objects.all()
 
-        if search_query or category != 'all':
-            items = Item.objects.all()
+        if search_query:
+            words = search_query.split()
+            query = Q()
+            for word in words:
+                query &= Q(tags__icontains=word)
+            items = items.filter(query)
 
-            if search_query:
-                words = search_query.split()
-                query = Q()
-                for word in words:
-                    query &= Q(tags__icontains=word)
-                items = items.filter(query)
+        if category and category != 'all':
+            items = items.filter(cat=category)
 
-            if category and category != 'all':
-                items = items.filter(cat=category)
-
-            # Filter items based on the ticket's sizes
-            items = items.filter(
-                Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
-                Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
-                Q(cat='footwear') & (
-                    Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
-                ) |
-                Q(cat='accessory') |
-                Q(cat='dress')
-            ).distinct()  # Adding distinct to avoid duplicates
+        # Filter items based on the ticket's sizes
+        items = items.filter(
+            Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
+            Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
+            Q(cat='footwear') & (
+                Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
+            ) |
+            Q(cat='accessory') |
+            Q(cat='dress')
+        ).distinct()  # Adding distinct to avoid duplicates
 
     return render(request, 'studio/studio_items.html', {
         'ticket': ticket,
@@ -134,6 +132,7 @@ def studio_items(request, ticket_id):
         'items': items,
         'image_urls': image_urls
     })
+
 
 
 
@@ -281,14 +280,16 @@ def item_search(request, ticket_id):
     category = request.GET.get('category', 'all')
     items = Item.objects.none()  # Start with an empty QuerySet
 
-    if search_query:
-        words = search_query.split()
-        query = Q()
-        for word in words:
-            query &= Q(tags__icontains=word)
-        items = Item.objects.filter(query)
+    if 'search' in request.GET:
+        items = Item.objects.all()
 
-        # Apply category filter only if a specific category is selected
+        if search_query:
+            words = search_query.split()
+            query = Q()
+            for word in words:
+                query &= Q(tags__icontains=word)
+            items = items.filter(query)
+
         if category and category != 'all':
             items = items.filter(cat=category)
 
@@ -297,7 +298,7 @@ def item_search(request, ticket_id):
             Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
             Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
             Q(cat='footwear') & (
-                    Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
+                Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
             ) |
             Q(cat='accessory')
         ).distinct()  # Adding distinct to avoid duplicates
@@ -308,6 +309,7 @@ def item_search(request, ticket_id):
         'items': items,
         'image_urls': image_urls
     })
+
 
 
 
