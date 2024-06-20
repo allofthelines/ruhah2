@@ -96,7 +96,10 @@ class SocialView(TemplateView):
 def search(request):
     query = request.GET.get('q')
     if query:
-        users = CustomUser.objects.filter(username__icontains=query)
+        if query.lower() == 'all':
+            users = CustomUser.objects.all()
+        else:
+            users = CustomUser.objects.filter(username__icontains=query)
     else:
         users = CustomUser.objects.none()
 
