@@ -1,7 +1,11 @@
 {% extends "core/base.html" %}
 
 {% block page-header %}
-  <a href="{% url 'accounts:public_profile' profile_user.username %}">@{{ profile_user.username }}</a> Followers
+  {% if profile_user.lifeform == 'human' %}
+    <a href="{% url 'accounts:public_profile' profile_user.username %}">@{{ profile_user.username }}</a> Followers
+  {% else %}
+    <a href="{% url 'accounts:public_profile' profile_user.username %}">#{{ profile_user.username }}</a> Followers
+  {% endif %}
 {% endblock %}
 
 {% block content %}
