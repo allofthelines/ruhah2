@@ -31,7 +31,6 @@ select, option, button, input, textarea {
 }
 
 a {
-  color: black;
   text-decoration: none; /* Removes underline */
 }
 
