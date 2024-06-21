@@ -7,7 +7,12 @@
     </div>
     <div class="profile-right">
         <div class="profile-row">
-            <span class="profile-username">@{{ profile_user.username }}</span>
+            {% if profile_user.lifeform == 'human' %}
+              <span class="profile-username">@{{ profile_user.username }}</span>
+            {% else %}
+              <span class="profile-username">#{{ profile_user.username }}</span>
+            {% endif %}
+
             {% if is_own_profile %}
                 <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'">Edit</button>
             {% else %}
