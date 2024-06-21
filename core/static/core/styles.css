@@ -30,6 +30,10 @@ select, option, button, input, textarea {
     font-family: 'Roboto Mono';
 }
 
+a {
+  color: darkblue;
+}
+
 textarea {
     font-size: 14px;
 }
