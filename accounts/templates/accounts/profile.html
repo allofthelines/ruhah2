@@ -36,7 +36,7 @@
 
 
         <!-- User Profile Section -->
-        <div id="user" class="content-section" style="display: none; padding: 10px;">
+        <div id="user" class="content-section" style="display: none;">
             {% if editing %}
                 <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
                     {% csrf_token %}
