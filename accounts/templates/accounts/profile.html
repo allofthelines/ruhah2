@@ -11,16 +11,16 @@
 
     <!-- Navigation Menu -->
     <div id="profile-menu" style="width: 15%;">
-        <a href="#" onclick="showContent('user', 'profile > data')" style="text-decoration-line: underline; color: blue;">data</a>
-        <a href="#" onclick="showContent('customer', 'profile > sizes')" style="text-decoration-line: underline; color: blue;">sizes</a>
-        <a href="#likes" onclick="showContent('likes', 'profile > likes')" style="text-decoration-line: underline; color: blue;">likes</a>
+        <a href="#" onclick="showContent('user', 'Profile > Data')" style="text-decoration-line: underline; color: blue;">Data</a>
+        <a href="#" onclick="showContent('customer', 'Profile > Sizes')" style="text-decoration-line: underline; color: blue;">Sizes</a>
+        <a href="#likes" onclick="showContent('likes', 'Profile > Likes')" style="text-decoration-line: underline; color: blue;">Likes</a>
         <br>
-        <a href="#upload" onclick="showContent('upload', 'profile > upload')" style="text-decoration-line: underline; color: blue;">upload</a>
-        <a href="#settings" onclick="showContent('settings', 'Profile > settings')" style="text-decoration-line: underline; color: blue;">settings</a>
+        <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="text-decoration-line: underline; color: blue;">Upload</a>
+        <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="text-decoration-line: underline; color: blue;">Settings</a>
         <br>
         <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
         {% csrf_token %}
-        <button type="submit" class="nav-link logout-button">logout</button>
+        <button type="submit" class="nav-link logout-button">Logout</button>
         </form>
     </div>
 
