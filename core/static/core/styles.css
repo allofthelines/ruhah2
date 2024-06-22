@@ -24,6 +24,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 16px;
+  transform: scaleY(1.1);
 }
 
 a {
@@ -53,10 +54,12 @@ textarea {
 /* Additional styling to enforce font on dropdown options */
 select {
     font-family: 'Roboto Mono', monospace; /* Ensure select element itself is styled */
+    font-family: 'Montserrat', sans-serif;
 }
 
 option {
     font-family: 'Roboto Mono', monospace !important; /* Use !important to enforce the font style */
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 
