@@ -6,14 +6,14 @@ class TicketForm(forms.Form):
     # Multiple choice fields
 
     STYLE_CHOICES = [
-        ('casual', 'casual'),
-        ('boho', 'boho'),
-        ('gorpcore', 'gorpcore'),
-        ('indie', 'indie'),
-        ('loungewear', 'loungewear'),
-        ('preppy', 'preppy'),
-        ('streetwear', 'streetwear'),
-        ('y2k', 'y2k'),
+        ('casual', 'Casual'),
+        ('boho', 'Boho'),
+        ('gorpcore', 'Gorpcore'),
+        ('indie', 'Indie'),
+        ('loungewear', 'Loungewear'),
+        ('preppy', 'Preppy'),
+        ('streetwear', 'Streetwear'),
+        ('y2k', 'Y2K'),
     ]
 
     OCCASION_CHOICES = [
