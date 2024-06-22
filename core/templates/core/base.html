@@ -20,19 +20,19 @@
   <!-- <h1 id="header-title"><a href="{% url 'core:home' %}" style="text-decoration: none; color: inherit;">RUHAH</a></h1> -->
   <h1 id="header-title">RUHAH</h1>
   <nav>
-    <a class="nav-link" href="{% url 'core:home' %}">Home</a>
-    <a class="nav-link" href="{% url 'box:ticket_form' %}">Box</a>
-    <a class="nav-link" href="{% url 'core:trending' %}">Trending</a>
-    <a class="nav-link" href="{% url 'studio:studio_tickets' %}">Studio</a>
+    <a class="nav-link" href="{% url 'core:home' %}">HOME</a>
+    <a class="nav-link" href="{% url 'box:ticket_form' %}">BOX</a>
+    <a class="nav-link" href="{% url 'core:trending' %}">TRENDING</a>
+    <a class="nav-link" href="{% url 'studio:studio_tickets' %}">STUDIO</a>
 
     {% if user.is_authenticated %}
         {% if user.username == "guest" %}
-            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+            <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
         {% else %}
-            <a class="nav-link" href="{% url 'accounts:public_profile' user.username %}">Profile</a>
+            <a class="nav-link" href="{% url 'accounts:public_profile' user.username %}">PROFILE</a>
         {% endif %}
     {% else %}
-        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+        <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
     {% endif %}
 
   </nav>
@@ -48,11 +48,11 @@
 <footer id="footer" style="text-align:center; padding:20px; font-family:inherit;">
     <br><br><br>
     <div>
-    <span><a class="nav-link" href="{% url 'core:terms' %}">Terms</a></span>
-    <span><a class="nav-link" href="{% url 'core:privacy' %}">Privacy</a></span>
-    <span><a class="nav-link" href="{% url 'core:help' %}">Help</a></span>
-    <span><a class="nav-link" href="{% url 'core:social' %}">Social</a></span>
-    <span><a class="nav-link" href="{% url 'core:search' %}">Search</a></span>
+    <span><a class="nav-link" href="{% url 'core:terms' %}">TERMS</a></span>
+    <span><a class="nav-link" href="{% url 'core:privacy' %}">PRIVACY</a></span>
+    <span><a class="nav-link" href="{% url 'core:help' %}">HELP</a></span>
+    <span><a class="nav-link" href="{% url 'core:social' %}">SOCIAL</a></span>
+    <span><a class="nav-link" href="{% url 'core:search' %}">SEARCH</a></span>
   </div>
   <div>
     © 2024 RUHAH
