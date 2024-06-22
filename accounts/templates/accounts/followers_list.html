@@ -2,9 +2,9 @@
 
 {% block page-header %}
   {% if profile_user.lifeform == 'human' %}
-    <a href="{% url 'accounts:public_profile' profile_user.username %}">@{{ profile_user.username }}</a> Followers
+    <a href="{% url 'accounts:public_profile' profile_user.username %}">@{{ profile_user.username }}</a> followers
   {% else %}
-    <a href="{% url 'accounts:public_profile' profile_user.username %}">#{{ profile_user.username }}</a> Followers
+    <a href="{% url 'accounts:public_profile' profile_user.username %}">#{{ profile_user.username }}</a> followers
   {% endif %}
 {% endblock %}
 
