@@ -20,19 +20,19 @@
   <!-- <h1 id="header-title"><a href="{% url 'core:home' %}" style="text-decoration: none; color: inherit;">RUHAH</a></h1> -->
   <h1 id="header-title">RUHAH</h1>
   <nav>
-    <a class="nav-link" href="{% url 'core:home' %}">HOME</a>
-    <a class="nav-link" href="{% url 'box:ticket_form' %}">BOX</a>
-    <a class="nav-link" href="{% url 'core:trending' %}">TRENDING</a>
-    <a class="nav-link" href="{% url 'studio:studio_tickets' %}">STUDIO</a>
+    <a class="nav-link" href="{% url 'core:home' %}">home</a>
+    <a class="nav-link" href="{% url 'box:ticket_form' %}">box</a>
+    <a class="nav-link" href="{% url 'core:trending' %}">trending</a>
+    <a class="nav-link" href="{% url 'studio:studio_tickets' %}">studio</a>
 
     {% if user.is_authenticated %}
         {% if user.username == "guest" %}
-            <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
+            <a class="nav-link" href="{% url 'accounts:login' %}">login</a>
         {% else %}
-            <a class="nav-link" href="{% url 'accounts:public_profile' user.username %}">PROFILE</a>
+            <a class="nav-link" href="{% url 'accounts:public_profile' user.username %}">profile</a>
         {% endif %}
     {% else %}
-        <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
+        <a class="nav-link" href="{% url 'accounts:login' %}">login</a>
     {% endif %}
 
   </nav>
