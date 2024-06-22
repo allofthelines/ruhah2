@@ -104,12 +104,12 @@ a:visited {
     font-family: inherit;   /* Inherits font from the parent element */
     font-size: inherit;     /* Inherits font size from the parent element */
     cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
-    text-decoration: underline;  /* No underline */
+    /*text-decoration: underline;  /* No underline */
     font-weight: normal;
 }
 
 #page-header {
-  margin-bottom: 2.1rem;
+  margin-bottom: 1.8rem;
   text-align: center;
 }
 
