@@ -31,7 +31,7 @@ a {
 }
 
 a:hover, a:active {
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 
 h2, h3, h4 {
