@@ -15,7 +15,7 @@
         <!--<th>Action</th>-->
       </tr>
     </thead>
-    <tbody style="padding: 2px;">
+    <tbody>
       {% for ticket in page_obj %} <!-- se view studio_tickets pernaw mesa to ticket (model) method has_submitted_outfits -->
         {% if ticket.creator_id.id != user.id %}
           <!-- grafw creator_id.id giati creator_id=='eleni' an thes na to allakseis go @ customuser kai these __str__-->
@@ -66,6 +66,11 @@
     max-width: 800px;
     margin: 0 auto;
   }
+
+  #studio-tickets-table td {
+    padding: 3px;
+  }
+
 </style>
 
 {% endblock %}
