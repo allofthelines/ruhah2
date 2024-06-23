@@ -15,7 +15,7 @@
         <!--<th>Action</th>-->
       </tr>
     </thead>
-    <tbody>
+    <tbody style="padding: 2px;">
       {% for ticket in page_obj %} <!-- se view studio_tickets pernaw mesa to ticket (model) method has_submitted_outfits -->
         {% if ticket.creator_id.id != user.id %}
           <!-- grafw creator_id.id giati creator_id=='eleni' an thes na to allakseis go @ customuser kai these __str__-->
