@@ -1,5 +1,8 @@
 import json
 import os
+import boto3
+import csv
+from botocore.exceptions import NoCredentialsError
 from django.core.management.base import BaseCommand
 from studio.models import Item, SizeCategory, SizeShoeUkCategory, SizeShoeEuCategory, SizeWaistInchCategory, EcommerceStore
 from django.conf import settings
@@ -7,11 +10,44 @@ from django.conf import settings
 class Command(BaseCommand):
     help = 'Upload items from JSON file to the Item model'
 
-    def handle(self, *args, **kwargs):
+    AWS_ACCESS_KEY = 'AKIA3FLD37VQC5XLDFVV'
+    AWS_SECRET_KEY = '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'
+    BUCKET_NAME = 'ruhahbucket'
+    FILE_NAME = 'itemids.csv'
+    LOCAL_FILE_NAME = 'local_itemids.csv'
 
+    def download_csv_from_s3(self):
+        s3 = boto3.client('s3', aws_access_key_id=self.AWS_ACCESS_KEY, aws_secret_access_key=self.AWS_SECRET_KEY)
+        try:
+            s3.download_file(self.BUCKET_NAME, self.FILE_NAME, self.LOCAL_FILE_NAME)
+            print("Download Successful")
+        except FileNotFoundError:
+            print("The file was not found")
+        except NoCredentialsError:
+            print("Credentials not available")
+
+    def upload_csv_to_s3(self):
+        s3 = boto3.client('s3', aws_access_key_id=self.AWS_ACCESS_KEY, aws_secret_access_key=self.AWS_SECRET_KEY)
+        try:
+            s3.upload_file(self.LOCAL_FILE_NAME, self.BUCKET_NAME, self.FILE_NAME)
+            print("Upload Successful")
+        except FileNotFoundError:
+            print("The file was not found")
+        except NoCredentialsError:
+            print("Credentials not available")
+
+    def append_item_id_to_csv(self, item_id):
+        with open(self.LOCAL_FILE_NAME, mode='a', newline='') as file:
+            csv_writer = csv.writer(file)
+            csv_writer.writerow([item_id])
+
+    def handle(self, *args, **kwargs):
         print(f"Database settings: {settings.DATABASES['default']}")
 
         json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
+
+        # Download the current CSV file from S3
+        self.download_csv_from_s3()
 
         with open(json_file_path, 'r') as file:
             data = json.load(file)
@@ -64,5 +100,11 @@ class Command(BaseCommand):
 
                 item.save()
                 self.stdout.write(self.style.SUCCESS(f"Successfully added item '{item.name}' with ID {item.id}."))
+
+                # Append the item ID to the local CSV file
+                self.append_item_id_to_csv(item.itemid)
+
+        # Upload the updated CSV file back to S3
+        self.upload_csv_to_s3()
 
         self.stdout.write(self.style.SUCCESS('Finished uploading new items from JSON file.'))
