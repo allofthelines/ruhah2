@@ -9,13 +9,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
-        print(f"Reading JSON file from: {json_file_path}")
+
+        environment = settings.ENVIRONMENT
+        print(f"Running in environment: {environment}")
 
         with open(json_file_path, 'r') as file:
             data = json.load(file)
-            print(f"Number of items to process: {len(data)}")
             for item_data in data:
-                print(f"Processing item: {item_data.get('name')}")
                 item = Item(
                     name=item_data.get('name'),
                     price=item_data.get('price'),
@@ -28,7 +28,6 @@ class Command(BaseCommand):
                     itemid=item_data.get('itemid'),
                 )
                 print(item)
-                print(f"Created Item instance for: {item.name}")
 
                 # Set foreign key for EcommerceStore if exists
                 if item_data.get('ecommerce_store'):
