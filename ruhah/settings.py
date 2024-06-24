@@ -20,6 +20,8 @@ ENVIRONMENT = config('ENVIRONMENT', default='development')
 DEBUG = config('DEBUG', default=True, cast=bool)
 DOMAIN_NAME = config('DOMAIN_NAME', default='http://localhost:8000')
 
+print('AT SETTINGS ENVIRONMENT IS', ENVIRONMENT)
+
 # CELERY DEN DOULEVEI IDK GIATI
 # TO EVALA GIA NA KATHARIZEI ITEMUSERCART KATHE 6 WRES
 CELERY_ENABLED = config('CELERY_ENABLED', default='True', cast=bool)
