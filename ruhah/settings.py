@@ -115,6 +115,8 @@ WSGI_APPLICATION = "ruhah.wsgi.application"
 # DATABASE
 # DATABASE
 # DATABASE
+print(f"Environment: {ENVIRONMENT}")
+
 if ENVIRONMENT == 'production':
     DATABASES = {
         'default': dj_database_url.config(default=config('DATABASE_URL'))
