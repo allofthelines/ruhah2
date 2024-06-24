@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
         if 'ENVIRONMENT' not in os.environ:
             os.environ['ENVIRONMENT'] = 'production'
-
+        os.environ['ENVIRONMENT'] = 'production'
         print(f"Database settings: {settings.DATABASES['default']}")
 
         json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
