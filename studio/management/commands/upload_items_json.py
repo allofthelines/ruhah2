@@ -9,16 +9,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        environment = 'production'
+        if 'ENVIRONMENT' not in os.environ:
+            os.environ['ENVIRONMENT'] = 'production'
 
-        if environment != 'production':
-            json_file_path = '/app/studio/static/studio/new_items.json'  # Heroku's filesystem root is /app
-        else:
-            # ta pairnei apto local kai ta paei sto heroku postgres
-            json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
-
-        print(f"Running in environment: {environment}")
         print(f"Database settings: {settings.DATABASES['default']}")
+
+        json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
 
         with open(json_file_path, 'r') as file:
             data = json.load(file)
