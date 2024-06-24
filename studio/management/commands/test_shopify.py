@@ -1,34 +1,7 @@
-'''
-import os
-from django.core.management.base import BaseCommand
-import shopify
-
-class Command(BaseCommand):
-    help = 'Test Shopify API connection'
-
-    def handle(self, *args, **kwargs):
-        api_key = os.getenv('SHOPIFY_API_KEY_DEV')
-        api_secret = os.getenv('SHOPIFY_API_SECRET_DEV')
-        api_access_token = os.getenv('SHOPIFY_ACCESS_TOKEN_DEV')
-        shop_url = f"https://{api_key}:{api_secret}@fumioxyz.myshopify.com/admin"
-
-        shopify.ShopifyResource.set_site(shop_url)
-        session = shopify.Session(shop_url, version="2023-04", token=api_access_token)
-        shopify.ShopifyResource.activate_session(session)
-
-        # Fetch Products from Shopify
-        products = shopify.Product.find()
-        for product in products:
-            title = product.title
-            availability = sum(variant.inventory_quantity for variant in product.variants)
-            self.stdout.write(self.style.SUCCESS(f"Product: {title}, Availability: {availability}"))
-'''
-
 import os
 from django.core.management.base import BaseCommand
 import shopify
 from studio.models import EcommerceStore
-
 
 class Command(BaseCommand):
     help = 'Test Shopify API connection and display product details'
