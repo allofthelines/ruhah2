@@ -25,6 +25,7 @@ class Command(BaseCommand):
                     formtype=item_data.get('formtype'),
                     condition=item_data.get('condition'),
                     tags=item_data.get('tags'),
+                    image=item_data.get('image'),
                     itemid=item_data.get('itemid'),
                 )
                 print(item)
