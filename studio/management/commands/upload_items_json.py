@@ -24,6 +24,7 @@ class Command(BaseCommand):
                     tags=item_data.get('tags'),
                     itemid=item_data.get('itemid'),
                 )
+                print(item)
 
                 # Set foreign key for EcommerceStore if exists
                 if item_data.get('ecommerce_store'):
