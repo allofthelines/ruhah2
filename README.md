@@ -15,7 +15,7 @@ django.ITEM.FIELD = EXCEL.ITEMS.FIELD<br>
 
 ###**`2_item_image.py`**
 
-Write images to Item instances from media/items-new folder and move them to media/items folder.
+Write images to Item instances from media/items-temp folder and move them to media/items folder.
 
 ###**`3_item_tags.py`**
 

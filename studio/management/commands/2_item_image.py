@@ -7,22 +7,22 @@ from django.core.files.base import ContentFile
 
 
 class Command(BaseCommand):
-    help = 'Write images to Item instances from media/items-new folder and move them to media/items folder'
+    help = 'Write images to Item instances from media/items-temp folder and move them to media/items folder'
 
     def handle(self, *args, **kwargs):
         # Define the path to the media/items-new and media/items directories
-        media_items_new_path = 'items-new/'
+        media_items_new_path = 'items-temp/'
         media_items_path = 'items/'
 
-        # Check if the items-new directory exists
+        # Check if the items-temp directory exists
         if not default_storage.exists(media_items_new_path):
             self.stdout.write(self.style.ERROR(f'The directory {media_items_new_path} does not exist.'))
             return
 
-        # List files in the items-new directory
+        # List files in the items-temp directory
         files = default_storage.listdir(media_items_new_path)[1]
 
-        # Iterate over the files in the media/items-new directory
+        # Iterate over the files in the media/items-temp directory
         for filename in files:
             if filename.endswith('.png'):
                 # Extract the item_id from the filename (assuming the format is <item_id>.png)
@@ -43,7 +43,7 @@ class Command(BaseCommand):
                     else:
                         self.stdout.write(self.style.WARNING(f'Item with id {item_id} already has a custom image'))
 
-                    # Move the file from items-new to items directory
+                    # Move the file from items-temp to items directory
                     src = os.path.join(media_items_new_path, filename)
                     dst = os.path.join(media_items_path, filename)
                     file_content = default_storage.open(src).read()

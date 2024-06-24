@@ -8,10 +8,17 @@ class Command(BaseCommand):
     help = 'Upload items from JSON file to the Item model'
 
     def handle(self, *args, **kwargs):
-        json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
 
-        environment = settings.ENVIRONMENT
+        environment = 'production'
+
+        if environment != 'production':
+            json_file_path = '/app/studio/static/studio/new_items.json'  # Heroku's filesystem root is /app
+        else:
+            # ta pairnei apto local kai ta paei sto heroku postgres
+            json_file_path = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
+
         print(f"Running in environment: {environment}")
+        print(f"Database settings: {settings.DATABASES['default']}")
 
         with open(json_file_path, 'r') as file:
             data = json.load(file)
