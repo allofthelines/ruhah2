@@ -1,6 +1,7 @@
 import os
 import boto3
 from botocore.exceptions import NoCredentialsError
+from django.core.management.base import BaseCommand
 from django.conf import settings
 import django
 
@@ -14,22 +15,25 @@ BUCKET_NAME = settings.AWS_STORAGE_BUCKET_NAME
 LOCAL_DIRECTORY = os.path.join(settings.BASE_DIR, 'media', 'items-temp')
 S3_FOLDER = 'items/'
 
-def upload_files(directory, bucket, s3_folder):
-    s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY)
+class Command(BaseCommand):
+    help = 'Upload all .png files from local directory to AWS S3'
 
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file.endswith('.png'):
-                local_path = os.path.join(root, file)
-                s3_path = os.path.join(s3_folder, file)
+    def upload_files(self, directory, bucket, s3_folder):
+        s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY)
 
-                try:
-                    s3.upload_file(local_path, bucket, s3_path)
-                    print(f"Upload Successful: {s3_path}")
-                except FileNotFoundError:
-                    print(f"The file was not found: {local_path}")
-                except NoCredentialsError:
-                    print("Credentials not available")
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.png'):
+                    local_path = os.path.join(root, file)
+                    s3_path = os.path.join(s3_folder, file)
 
-if __name__ == "__main__":
-    upload_files(LOCAL_DIRECTORY, BUCKET_NAME, S3_FOLDER)
+                    try:
+                        s3.upload_file(local_path, bucket, s3_path)
+                        print(f"Upload Successful: {s3_path}")
+                    except FileNotFoundError:
+                        print(f"The file was not found: {local_path}")
+                    except NoCredentialsError:
+                        print("Credentials not available")
+
+    def handle(self, *args, **kwargs):
+        self.upload_files(LOCAL_DIRECTORY, BUCKET_NAME, S3_FOLDER)
