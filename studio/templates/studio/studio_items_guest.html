@@ -62,8 +62,17 @@
 
 <!-- SEARCH FORM -->
 <form method="GET" action="{% url 'studio:studio_items_guest' ticket.id %}" id="search-form">
+    <select name="category">
+        <option value="all">All</option>
+        <option value="top">Top</option>
+        <option value="bottom">Bottom</option>
+        <option value="dress">Dress</option>
+        <option value="footwear">Footwear</option>
+        <option value="accessory">Accessory</option>
+    </select>
     <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
-    <button type="submit">Search Clothes</button>
+    <input type="hidden" name="search" value="1"> <!-- den kserw ti kanei afto -->
+    <button type="submit">Search</button>
 </form>
 
 <p></p>
