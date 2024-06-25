@@ -180,6 +180,9 @@ def studio_items_guest(request, ticket_id):
     category = request.GET.get('category', 'all')
     items = Item.objects.none()  # Start with an empty QuerySet
 
+    if 'search' in request.GET:
+        items = Item.objects.all()
+
     if search_query:
         query = Q()
         for term in search_query.split():
