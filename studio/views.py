@@ -202,8 +202,8 @@ def studio_items_guest(request, ticket_id):
             Q(cat='dress')
         ).distinct()  # Adding distinct to avoid duplicates
 
-        # Limit to first 20 items
-        items = items[:20]
+    # Limit to first 20 items
+    items = items[:20]
 
     image_urls = []  # No pre-loaded images for guests
 
