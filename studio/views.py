@@ -189,18 +189,18 @@ def studio_items_guest(request, ticket_id):
             query &= Q(tags__icontains=term)
         items = Item.objects.filter(query).distinct()
 
-        # Apply category filter only if a specific category is selected
-        if category and category != 'all':
-            items = items.filter(cat=category)
+    # Apply category filter only if a specific category is selected
+    if category and category != 'all':
+        items = items.filter(cat=category)
 
-        # Filter items based on the ticket's sizes
-        items = items.filter(
-            Q(cat='top') |
-            Q(cat='bottom') |
-            Q(cat='footwear') |
-            Q(cat='accessory') |
-            Q(cat='dress')
-        ).distinct()  # Adding distinct to avoid duplicates
+    # Filter items based on the ticket's sizes
+    items = items.filter(
+        Q(cat='top') |
+        Q(cat='bottom') |
+        Q(cat='footwear') |
+        Q(cat='accessory') |
+        Q(cat='dress')
+    ).distinct()  # Adding distinct to avoid duplicates
 
     # Limit to first 20 items
     items = items[:20]
