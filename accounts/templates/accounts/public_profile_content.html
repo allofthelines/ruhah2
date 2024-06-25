@@ -130,7 +130,7 @@ function toggleFollowUnfollow(username, isFollowing) {
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
             {% for outfit in profile_user.outfit_set.all %}
                 {% if outfit.maker_grid_visibility == 'show' %}
-                <div class="outfit-item" id="outfit-{{ outfit.id }}" ondblclick="likeOutfit({{ outfit.id }})" onclick="toggleImage(this)">
+                <div class="outfit-item" id="outfit-{{ outfit.id }}" {% if not is_own_profile %}ondblclick="likeOutfit({{ outfit.id }})"{% endif %} onclick="toggleImage(this)">
                     {% if 'default_img.jpg' not in outfit.portrait.url %}
                         <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                     {% endif %}
