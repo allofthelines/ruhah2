@@ -192,8 +192,8 @@ def studio_items_guest(request, ticket_id):
 
         # Filter items based on the ticket's sizes
         items = items.filter(
-            Q(cat='top' |
-            Q(cat='bottom', |
+            Q(cat='top') |
+            Q(cat='bottom') |
             Q(cat='footwear') |
             Q(cat='accessory') |
             Q(cat='dress')
