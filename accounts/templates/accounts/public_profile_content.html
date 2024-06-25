@@ -123,7 +123,7 @@ function toggleFollowUnfollow(username, isFollowing) {
 
 
 
-
+{% comment %}
 <!-- Display User's Outfits -->
 <div id="outfit-container">
     <div id="them-by-me-content" class="outfit-grid">
@@ -135,6 +135,25 @@ function toggleFollowUnfollow(username, isFollowing) {
                     {% endif %}
                     <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
                 </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endcomment %}
+
+<!-- Display User's Outfits -->
+<div id="outfit-container">
+    <div id="them-by-me-content" class="outfit-grid">
+        {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
+            {% for outfit in profile_user.outfit_set.all %}
+                {% if outfit.maker_grid_visibility == 'show' %}
+                    <div class="outfit-item" id="outfit-{{ outfit.id }}" ondblclick="{% if request.user == profile_user %}handleDoubleClick({{ outfit.id }}){% else %}likeOutfit({{ outfit.id }}){% endif %}" onclick="toggleImage(this)">
+                        {% if 'default_img.jpg' not in outfit.portrait.url %}
+                            <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                        {% endif %}
+                        <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
+                    </div>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>
@@ -176,6 +195,60 @@ function toggleFollowUnfollow(username, isFollowing) {
         // Prevent default action
         return false;
     }
+
+
+
+    function handleDoubleClick(outfitId) {
+    const outfitElement = document.getElementById(`outfit-${outfitId}`);
+
+    // Add thicker blue border and Delete button
+    outfitElement.classList.add('selected-outfit');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'delete-button';
+    deleteButton.onclick = function() {
+        deleteOutfit(outfitId);
+    };
+    outfitElement.appendChild(deleteButton);
+
+    // Revert back after 3 seconds if the Delete button is not clicked
+    setTimeout(() => {
+        outfitElement.classList.remove('selected-outfit');
+        if (outfitElement.contains(deleteButton)) {
+            outfitElement.removeChild(deleteButton);
+        }
+    }, 3000);
+}
+
+function deleteOutfit(outfitId) {
+    // AJAX request to set maker_grid_visibility to 'hide'
+    fetch(`{% url 'accounts:hide_outfit' %}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({ outfit_id: outfitId })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Refresh the page
+            window.location.reload();
+        } else {
+            console.error('Failed to hide the outfit.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
+
+
+
+
 </script>
 
 
@@ -389,4 +462,34 @@ function toggleFollowUnfollow(username, isFollowing) {
         border-color: red;
         transition: border-width 0.7s ease;
     }
+
+
+
+
+
+
+    .selected-outfit {
+    border-width: 3px;
+    border-color: blue;
+    transition: border-width 0.7s ease, border-color 3s ease;
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
 </style>
