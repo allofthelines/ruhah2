@@ -54,7 +54,8 @@ def pack_images(images, canvas):
     canvas_width, canvas_height = canvas.size
     positions = []
     top_images = [img for img in images if img['category'] == 'top']
-    bottom_images = [img for img in images if img['category'] == 'bottom']
+    # bottom_images = [img for img in images if img['category'] == 'bottom']
+    bottom_images = [img for img in images if img['category'] == 'bottom' or img['category'] == 'dress']
     footwear_images = [img for img in images if img['category'] == 'footwear']
     other_images = [img for img in images if img['category'] not in ['top', 'bottom', 'footwear']]
 
