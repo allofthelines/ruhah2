@@ -5,13 +5,17 @@ from .models import Ticket, Order, Return
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Ticket._meta.get_fields()]
-    list_display = ['id', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'current_outfits', 'maximum_outfits']
+    list_display = ['id', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'occupancy']
     list_filter = ['status', 'occasion', 'style1', 'style2']
 
     def short_notes(self, obj):
         if obj.notes:
             return obj.notes[:15] + '...' if len(obj.notes) > 15 else obj.notes
         return ""
+
+    def occupancy(self, obj):
+        return f"{obj.current_outfits} / {obj.maximum_outfits}"
+    occupancy.short_description = 'Current / Max Outfits'
 
     short_notes.short_description = 'Notes'
 
