@@ -15,7 +15,7 @@ class TicketAdmin(admin.ModelAdmin):
 
     def occupancy(self, obj):
         return f"{obj.current_outfits} / {obj.maximum_outfits}"
-    occupancy.short_description = 'Current / Max Outfits'
+    occupancy.short_description = 'Occupancy'
 
     short_notes.short_description = 'Notes'
 
