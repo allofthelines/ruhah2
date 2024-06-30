@@ -54,7 +54,7 @@ class TicketForm(forms.Form):
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 35,
+        'cols': 40,
         'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
 
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
@@ -80,7 +80,7 @@ class AskFitForm(forms.Form):
     filter_liked = forms.ChoiceField(choices=FILTER_LIKED_CHOICES, label='Filter')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 20,
+        'cols': 40,
         'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
 
 
@@ -117,7 +117,7 @@ class AskBoxForm(forms.Form):
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 20,
+        'cols': 35,
         'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
 
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
