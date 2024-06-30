@@ -30,7 +30,7 @@ endpoint_secret = 'whsec_2vr6jDZBVHSF0WJ3uC180K1iFKFllyb7' # sto webhook # TO KS
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AskFitForm, AskBoxForm
-from .models import Ticket, Customer
+from .models import Ticket
 
 def ask_fit_view(request):
     if request.method == 'POST':
