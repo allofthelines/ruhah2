@@ -11,9 +11,9 @@
 <p style="color: red;">Please complete the size fields</p>
 {% endif %}
 
-<div>
-    <button id="fitTab" onclick="showFitForm()">FIT</button>
-    <button id="boxTab" onclick="showBoxForm()">BOX</button>
+<div class="tab-container">
+    <a class="tab-link active-tab" id="fitTab" onclick="showFitForm()">FIT</a>
+    <a class="tab-link" id="boxTab" onclick="showBoxForm()">BOX</a>
 </div>
 
 <div style="border: 1px solid black; padding: 15px;">
@@ -26,7 +26,7 @@
             <br>
             {{ fit_form.notes.label_tag }} <br> {{ fit_form.notes }}<br>
             <br>
-            <button type="submit">Submit</button>
+            <button type="submit" name="fit_form">Submit</button>
         </form>
     </div>
 
@@ -69,7 +69,7 @@
             <!-- Additional fields specific to AskBoxForm -->
             {{ box_form.extra_field.label_tag }} {{ box_form.extra_field }}<br>
             <br>
-            <button type="submit">Proceed</button>
+            <button type="submit" name="box_form">Proceed</button>
         </form>
     </div>
 
@@ -92,15 +92,50 @@
     function showFitForm() {
         document.getElementById('fitForm').style.display = 'block';
         document.getElementById('boxForm').style.display = 'none';
+        document.getElementById('fitTab').classList.add('active-tab');
+        document.getElementById('boxTab').classList.remove('active-tab');
     }
 
     function showBoxForm() {
         document.getElementById('fitForm').style.display = 'none';
         document.getElementById('boxForm').style.display = 'block';
+        document.getElementById('boxTab').classList.add('active-tab');
+        document.getElementById('fitTab').classList.remove('active-tab');
     }
 </script>
 
+<style>
 
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+
+.tab-link {
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000; /* Change to your preferred color */
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+}
+
+.active-tab {
+    border-bottom: 2px solid black;
+}
+
+.content-box {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+
+</style>
 
 
 
