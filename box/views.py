@@ -76,7 +76,7 @@ def ticket_view(request):
             ticket = Ticket(
                 style1=form.cleaned_data['style1'],
                 style2=form.cleaned_data['style2'],
-                type = form.cleaned_data['type'],
+                filter_liked = form.cleaned_data['filter_liked'],
                 occasion=form.cleaned_data['occasion'],
                 condition=form.cleaned_data['condition'],
                 price=form.cleaned_data['price'],
