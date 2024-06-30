@@ -44,6 +44,11 @@ h2 {
     font-family: 'Homemade Apple', cursive;
 }
 
+span.profile-username{
+  font-family: 'Roboto Mono';
+  font-weight: 200;
+}
+
 select, option, button, input, textarea {
     font-family: 'Roboto Mono';
 
