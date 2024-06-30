@@ -21,7 +21,7 @@ body {
   font-weight: 400;
   font-size: 14px;
 
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 15px;
 }
@@ -43,7 +43,7 @@ h2, h3, h4 {
 select, option, button, input, textarea {
     font-family: 'Roboto Mono';
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 textarea {
@@ -53,12 +53,12 @@ textarea {
 /* Additional styling to enforce font on dropdown options */
 select {
     font-family: 'Roboto Mono', monospace; /* Ensure select element itself is styled */
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 option {
     font-family: 'Roboto Mono', monospace !important; /* Use !important to enforce the font style */
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 
