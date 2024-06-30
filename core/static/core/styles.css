@@ -22,7 +22,7 @@ body {
   font-weight: 400;
   font-size: 14px;
 
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 200;
   font-size: 15px;
 }
@@ -47,7 +47,7 @@ h2 {
 select, option, button, input, textarea {
     font-family: 'Roboto Mono';
 
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 textarea {
@@ -57,12 +57,12 @@ textarea {
 /* Additional styling to enforce font on dropdown options */
 select {
     font-family: 'Roboto Mono', monospace; /* Ensure select element itself is styled */
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 option {
     font-family: 'Roboto Mono', monospace !important; /* Use !important to enforce the font style */
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 
@@ -98,6 +98,8 @@ a:visited {
 
 .nav-link {
     /* kanto black an thes menu mavra */
+   font-family: 'Poppins', sans-serif;
+   font-weight: 200;
 }
 
 .logout-button {
