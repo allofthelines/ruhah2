@@ -1,5 +1,4 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
 {% block page-header %}
@@ -12,70 +11,67 @@
 <p style="color: red;">Please complete the size fields</p>
 {% endif %}
 
+<div>
+    <button id="fitTab" onclick="showFitForm()">FIT</button>
+    <button id="boxTab" onclick="showBoxForm()">BOX</button>
+</div>
+
 <div style="border: 1px solid black; padding: 15px;">
-
-
-    {% if user.is_authenticated %}
-        {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk %}
-        <form method="post" class="ticket-form">
+    <!-- FIT FORM -->
+    <div id="fitForm" style="display: block;">
+        <form method="post" action="{% url 'box:ask_fit' %}">
             {% csrf_token %}
-            {{ form.style1.label_tag }} {{ form.style1 }}<br>
-            {{ form.condition.label_tag }} {{ form.condition }}<br>
-            {{ form.price.label_tag }} {{ form.price }}<br>
-            {{ form.filter_liked.label_tag }} {{ form.filter_liked }}<br>
+            {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
+            {{ fit_form.filter_liked.label_tag }} {{ fit_form.filter_liked }}<br>
             <br>
-            {{ form.notes.label_tag }} {{ form.notes }}<br>
+            {{ fit_form.notes.label_tag }} {{ fit_form.notes }}<br>
             <br>
-            {% if not user.customer.top_size_xyz %}
-            {{ form.size_top_xyz.label_tag }} {{ form.size_top_xyz }}<br>
-            {% endif %}
-            {% if not user.customer.bottom_size_xyz %}
-            {{ form.size_bottom_xyz.label_tag }} {{ form.size_bottom_xyz }}<br>
-            {% endif %}
-            {% if not user.customer.size_waist_inches %}
-            {{ form.size_waist_inches.label_tag }} {{ form.size_waist_inches }}<br>
-            {% endif %}
-            {% if not user.customer.shoe_size_eu %}
-            {{ form.size_shoe_eu.label_tag }} {{ form.size_shoe_eu }}<br>
-            {% endif %}
-            {% if not user.customer.shoe_size_uk %}
-            {{ form.size_shoe_uk.label_tag }} {{ form.size_shoe_uk }}<br>
-            {% endif %}
-            <br>
-            <button style='align-items: center; justify-content: center;' type="submit">Proceed</button>
+            <button type="submit">Submit</button>
         </form>
-        {% else %}
-        <form method="post" class="ticket-form">
+    </div>
+
+    <!-- BOX FORM -->
+    <div id="boxForm" style="display: none;">
+        <form method="post" action="{% url 'box:ask_box' %}">
             {% csrf_token %}
-            {{ form.style1.label_tag }} {{ form.style1 }}<br>
-            {{ form.condition.label_tag }} {{ form.condition }}<br>
-            {{ form.price.label_tag }} {{ form.price }}<br>
-            {{ form.filter_liked.label_tag }} {{ form.filter_liked }}<br>
+            {{ box_form.style1.label_tag }} {{ box_form.style1 }}<br>
+            {{ box_form.condition.label_tag }} {{ box_form.condition }}<br>
+            {{ box_form.price.label_tag }} {{ box_form.price }}<br>
+            {{ box_form.filter_liked.label_tag }} {{ box_form.filter_liked }}<br>
             <br>
-            {{ form.notes.label_tag }} {{ form.notes }}<br>
+            {{ box_form.notes.label_tag }} {{ box_form.notes }}<br>
             <br>
-            <button style='align-items: center; justify-content: center;' type="submit">Proceed</button>
+            {% if user.is_authenticated %}
+                {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk %}
+                    {% if not user.customer.top_size_xyz %}
+                        {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
+                    {% endif %}
+                    {% if not user.customer.bottom_size_xyz %}
+                        {{ box_form.size_bottom_xyz.label_tag }} {{ box_form.size_bottom_xyz }}<br>
+                    {% endif %}
+                    {% if not user.customer.size_waist_inches %}
+                        {{ box_form.size_waist_inches.label_tag }} {{ box_form.size_waist_inches }}<br>
+                    {% endif %}
+                    {% if not user.customer.shoe_size_eu %}
+                        {{ box_form.size_shoe_eu.label_tag }} {{ box_form.size_shoe_eu }}<br>
+                    {% endif %}
+                    {% if not user.customer.shoe_size_uk %}
+                        {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
+                {{ box_form.size_bottom_xyz.label_tag }} {{ box_form.size_bottom_xyz }}<br>
+                {{ box_form.size_waist_inches.label_tag }} {{ box_form.size_waist_inches }}<br>
+                {{ box_form.size_shoe_eu.label_tag }} {{ box_form.size_shoe_eu }}<br>
+                {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
+            {% endif %}
+            <!-- Additional fields specific to AskBoxForm -->
+            {{ box_form.extra_field.label_tag }} {{ box_form.extra_field }}<br>
+            <br>
+            <button type="submit">Proceed</button>
         </form>
-        {% endif %}
-    {% else %}
-    <form method="post" class="ticket-form">
-        {% csrf_token %}
-        {{ form.style1.label_tag }} {{ form.style1 }}<br>
-        {{ form.condition.label_tag }} {{ form.condition }}<br>
-        {{ form.price.label_tag }} {{ form.price }}<br>
-        {{ form.filter_liked.label_tag }} {{ form.filter_liked }}<br>
-        <br>
-        {{ form.notes.label_tag }} {{ form.notes }}<br>
-        <br>
-        {{ form.size_top_xyz.label_tag }} {{ form.size_top_xyz }}<br>
-        {{ form.size_bottom_xyz.label_tag }} {{ form.size_bottom_xyz }}<br>
-        {{ form.size_waist_inches.label_tag }} {{ form.size_waist_inches }}<br>
-        {{ form.size_shoe_eu.label_tag }} {{ form.size_shoe_eu }}<br>
-        {{ form.size_shoe_uk.label_tag }} {{ form.size_shoe_uk }}<br>
-        <br>
-        <button style='align-items: center; justify-content: center;' type="submit">Proceed</button>
-    </form>
-    {% endif %}
+    </div>
 
     {% if form.errors %}
     <p style="color: red;">Please complete the size fields</p>
@@ -83,9 +79,4 @@
     {% for field in form %}
         {% if field.errors %}
         {{ field.errors }}
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-</div>
-
-{% endblock %}
+        {% endif

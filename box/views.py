@@ -19,6 +19,131 @@ from django.views.decorators.csrf import csrf_exempt
 stripe.api_key = "sk_test_51HjtkWHCAjs916uo0avrWzOy7rb2tImrjRVgFKdWeXye6zFbn6sZrQafC2QTkpcsaGWPMgiTfIqigXA5lCFfDOFV00gJ5e6ekt"
 endpoint_secret = 'whsec_2vr6jDZBVHSF0WJ3uC180K1iFKFllyb7' # sto webhook # TO KSANAVAZW KATW KANE SEARCH ENDPOINT
 
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import AskFitForm, AskBoxForm
+from .models import Ticket, Customer
+
+def ask_fit_view(request):
+    if request.method == 'POST':
+        fit_form = AskFitForm(request.POST)
+        if fit_form.is_valid():
+            ticket = Ticket(
+                asktype='fit',
+                style1=fit_form.cleaned_data['style1'],
+                condition=fit_form.cleaned_data['condition'],
+                price=fit_form.cleaned_data['price'],
+                filter_liked=fit_form.cleaned_data['filter_liked'],
+                notes=fit_form.cleaned_data['notes'],
+                creator_id=request.user if request.user.is_authenticated else None,
+            )
+            ticket.save()
+            return redirect('box:ask_fit_success', ticket_id=ticket.id)
+    else:
+        fit_form = AskFitForm()
+
+    box_form = AskBoxForm()
+    return render(request, 'ticket_form.html', {'fit_form': fit_form, 'box_form': box_form})
+
+
+def ask_box_view(request):
+    if request.method == 'POST':
+        box_form = AskBoxForm(request.POST)
+        if box_form.is_valid():
+            size_top_xyz = None
+            size_bottom_xyz = None
+            size_waist_inches = None
+            shoe_size_eu = None
+            shoe_size_uk = None
+
+            if request.user.is_authenticated:
+                customer = get_object_or_404(Customer, user=request.user)
+                size_top_xyz = customer.top_size_xyz or box_form.cleaned_data.get('size_top_xyz')
+                size_bottom_xyz = customer.bottom_size_xyz or box_form.cleaned_data.get('size_bottom_xyz')
+                size_waist_inches = customer.size_waist_inches or box_form.cleaned_data.get('size_waist_inches')
+                shoe_size_eu = customer.shoe_size_eu or box_form.cleaned_data.get('size_shoe_eu')
+                shoe_size_uk = customer.shoe_size_uk or box_form.cleaned_data.get('size_shoe_uk')
+
+                customer.top_size_xyz = customer.top_size_xyz or size_top_xyz
+                customer.bottom_size_xyz = customer.bottom_size_xyz or size_bottom_xyz
+                customer.size_waist_inches = customer.size_waist_inches or size_waist_inches
+                customer.shoe_size_eu = customer.shoe_size_eu or shoe_size_eu
+                customer.shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
+                customer.save()
+
+            else:
+                size_top_xyz = box_form.cleaned_data['size_top_xyz']
+                size_bottom_xyz = box_form.cleaned_data['size_bottom_xyz']
+                size_waist_inches = box_form.cleaned_data['size_waist_inches']
+                shoe_size_eu = box_form.cleaned_data['size_shoe_eu']
+                shoe_size_uk = box_form.cleaned_data['size_shoe_uk']
+
+            if not (size_top_xyz and size_bottom_xyz and size_waist_inches and shoe_size_eu and shoe_size_uk):
+                return render(request, 'ticket_form.html', {'fit_form': AskFitForm(), 'box_form': box_form, 'size_fields_required': True})
+
+            ticket = Ticket(
+                asktype='box',
+                style1=box_form.cleaned_data['style1'],
+                condition=box_form.cleaned_data['condition'],
+                price=box_form.cleaned_data['price'],
+                filter_liked=box_form.cleaned_data['filter_liked'],
+                notes=box_form.cleaned_data['notes'],
+                size_top_xyz=size_top_xyz,
+                size_bottom_xyz=size_bottom_xyz,
+                size_waist_inches=size_waist_inches,
+                size_shoe_eu=shoe_size_eu,
+                size_shoe_uk=shoe_size_uk,
+                creator_id=request.user if request.user.is_authenticated else None,
+            )
+            ticket.save()
+            request.session['ticket_id'] = ticket.id
+            return redirect('box:success', ticket_id=ticket.id)
+    else:
+        initial_data = {}
+        if request.user.is_authenticated:
+            customer = get_object_or_404(Customer, user=request.user)
+            initial_data = {
+                'size_top_xyz': customer.top_size_xyz,
+                'size_bottom_xyz': customer.bottom_size_xyz,
+                'size_waist_inches': customer.size_waist_inches,
+                'size_shoe_eu': customer.shoe_size_eu,
+                'size_shoe_uk': customer.shoe_size_uk,
+            }
+
+        box_form = AskBoxForm(initial=initial_data)
+    fit_form = AskFitForm()
+    return render(request, 'ticket_form.html', {'fit_form': fit_form, 'box_form': box_form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def ticket_view(request):
     if request.method == 'POST':
         form = TicketForm(request.POST)
