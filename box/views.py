@@ -123,6 +123,16 @@ def ask_box_view(request):
     return render(request, 'ticket_form.html', {'fit_form': fit_form, 'box_form': box_form})
 
 
+def ask_fit_success(request, ticket_id):
+
+    return render(request, 'box/ask_fit_success.html', {'ticket_id': ticket_id})
+
+
+"""def success_view(request):
+    ticket_id = request.session.get('ticket_id', 'Unknown Ticket ID')
+    return render(request, 'box/success.html', {'ticket_id': ticket_id})"""
+
+
 
 
 
