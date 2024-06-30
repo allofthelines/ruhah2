@@ -13,8 +13,8 @@ urlpatterns = [
     path('payment-successful/', payment_successful, name='payment_successful'),
     path('payment-rejected/', payment_rejected, name='payment_rejected'),
 
-    path('ask/fit/', views.ask_fit_view, name='ask_fit'),
-    path('ask/box/', views.ask_box_view, name='ask_box'),
-    path('ask/fit/success/<int:ticket_id>/', views.ask_fit_success, name='ask_fit_success'),
-    path('success/<int:ticket_id>/', views.success_view, name='success'),
+    path('ask/fit/', ask_fit_view, name='ask_fit'),
+    path('ask/box/', ask_box_view, name='ask_box'),
+    path('ask/fit/success/<int:ticket_id>/', ask_fit_success, name='ask_fit_success'),
+    path('success/<int:ticket_id>/', success_view, name='success'),
 ]
