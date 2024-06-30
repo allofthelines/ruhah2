@@ -74,9 +74,15 @@
     </div>
 
     {% if form.errors %}
-    <p style="color: red;">Please complete the size fields</p>
-    {{ form.non_field_errors }}
-    {% for field in form %}
-        {% if field.errors %}
-        {{ field.errors }}
-        {% endif
+        <p style="color: red;">Please complete the size fields</p>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            {% if field.errors %}
+                {{ field.errors }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+{% endblock %}
