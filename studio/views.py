@@ -323,8 +323,8 @@ def item_search(request, ticket_id):
             Q(cat='accessory')
         ).distinct()  # Adding distinct to avoid duplicates
 
-        # Additional filter if ticket.type is 'liked_items'
-        if ticket.type == 'liked_items':
+        # Additional filter if ticket.filter_liked is 'liked_only'
+        if ticket.filter_liked == 'liked_only':
             liked_item_ids = UserItemLikes.objects.filter(
                 liker=ticket.creator_id
             ).values_list('item', flat=True)
