@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
 
 
 
@@ -34,10 +35,13 @@ a:hover, a:active {
   /*text-decoration: underline;*/
 }
 
-h2, h3, h4 {
+h3, h4 {
     font-weight: 400;
+}
 
+h2 {
     font-weight: 400;
+    font-family: 'Homemade Apple', cursive;
 }
 
 select, option, button, input, textarea {
