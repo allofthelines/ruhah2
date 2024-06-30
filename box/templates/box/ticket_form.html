@@ -24,7 +24,7 @@
             {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
             {{ fit_form.filter_liked.label_tag }} {{ fit_form.filter_liked }}<br>
             <br>
-            {{ fit_form.notes.label_tag }} {{ fit_form.notes }}<br>
+            {{ fit_form.notes.label_tag }} <br> {{ fit_form.notes }}<br>
             <br>
             <button type="submit">Submit</button>
         </form>
@@ -39,7 +39,7 @@
             {{ box_form.price.label_tag }} {{ box_form.price }}<br>
             {{ box_form.filter_liked.label_tag }} {{ box_form.filter_liked }}<br>
             <br>
-            {{ box_form.notes.label_tag }} {{ box_form.notes }}<br>
+            {{ box_form.notes.label_tag }} <br> {{ box_form.notes }}<br>
             <br>
             {% if user.is_authenticated %}
                 {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk %}
