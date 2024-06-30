@@ -26,7 +26,7 @@ class Ticket(models.Model):
         ('closed', 'closed'),
         ('boxed', 'boxed'),
     ]
-    
+
     TYPE_CHOICES = [
         ('styled_outfits', 'styled outfits'),
         ('liked_items', 'liked items'),
