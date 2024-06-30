@@ -31,8 +31,14 @@ class Ticket(models.Model):
         ('liked_items', 'liked items'),
     ]
 
+    FILTER_LIKED_CHOICES = [
+        ('no_filter','no filter'),
+        ('liked_only', 'liked only'),
+    ]
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='notpaid')
     type = models.CharField(max_length=30, choices=TYPE_CHOICES, default='styled_outfits')
+    filter_liked = models.CharField(max_length=30, choices=FILTER_LIKED_CHOICES, default='no_filter')
     timestamp = models.DateTimeField(default=timezone.now)
     creator_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     outfit1 = models.ForeignKey(Outfit, on_delete=models.SET_NULL, null=True, blank=True, related_name='ticket_outfit1')
