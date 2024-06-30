@@ -19,7 +19,7 @@
 <div style="border: 1px solid black; padding: 15px;">
     <!-- FIT FORM -->
     <div id="fitForm" style="display: block;">
-        <form method="post" action="{% url 'box:ask_fit' %}">
+        <form method="post" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
             {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
             {{ fit_form.filter_liked.label_tag }} {{ fit_form.filter_liked }}<br>
@@ -32,7 +32,7 @@
 
     <!-- BOX FORM -->
     <div id="boxForm" style="display: none;">
-        <form method="post" action="{% url 'box:ask_box' %}">
+        <form method="post" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
             {{ box_form.style1.label_tag }} {{ box_form.style1 }}<br>
             {{ box_form.condition.label_tag }} {{ box_form.condition }}<br>
