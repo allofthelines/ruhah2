@@ -2,7 +2,7 @@
     {
         "itemid": "12910041",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "Navy Blue Puff Sleeve Blouse",
         "image": "items/12910041.png",
         "cat": "top",
@@ -11,7 +11,7 @@
     {
         "itemid": "24912581",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "White Strapless Top",
         "image": "items/24912581.png",
         "cat": "top",
@@ -20,7 +20,7 @@
     {
         "itemid": "35297338",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "White Buttoned Top",
         "image": "items/35297338.png",
         "cat": "top",
@@ -29,7 +29,7 @@
     {
         "itemid": "39713684",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "Yellow Floral Puff Sleeve Blouse",
         "image": "items/39713684.png",
         "cat": "top",
@@ -38,7 +38,7 @@
     {
         "itemid": "53145870",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "Pink Pleated Top",
         "image": "items/53145870.png",
         "cat": "top",
@@ -47,7 +47,7 @@
     {
         "itemid": "53162306",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "Striped Knit Top",
         "image": "items/53162306.png",
         "cat": "top",
@@ -56,7 +56,7 @@
     {
         "itemid": "62734844",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "Multicolor Blouse",
         "image": "items/62734844.png",
         "cat": "top",
@@ -65,7 +65,7 @@
     {
         "itemid": "79149108",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "White Floral Puff Sleeve Top",
         "image": "items/79149108.png",
         "cat": "top",
@@ -74,7 +74,7 @@
     {
         "itemid": "92307886",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "Grey Graphic T-Shirt",
         "image": "items/92307886.png",
         "cat": "top",
@@ -83,7 +83,7 @@
     {
         "itemid": "94903946",
         "ecommerce_product_id": "",
-        "formtype": "virtual",
+        "modality": "virtual",
         "name": "White Tied Waist Top",
         "image": "items/94903946.png",
         "cat": "top",

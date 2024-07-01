@@ -58,7 +58,7 @@ class Command(BaseCommand):
                     location=item_data.get('location'),
                     ecommerce_product_id=item_data.get('ecommerce_product_id'),
                     cat=item_data.get('cat'),
-                    formtype=item_data.get('formtype'),
+                    modality=item_data.get('modality'),
                     condition=item_data.get('condition'),
                     tags=item_data.get('tags'),
                     image=item_data.get('image'),

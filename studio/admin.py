@@ -28,13 +28,13 @@ class ItemForm(forms.ModelForm):
 
 class ItemAdmin(admin.ModelAdmin):
     form = ItemForm
-    list_display = ['id', 'itemid', 'thumbnail', 'image', 'formtype', 'ecommerce_store']
+    list_display = ['id', 'itemid', 'thumbnail', 'image', 'modality', 'ecommerce_store']
     search_fields = ['name', 'itemid', 'location', 'tags']
-    list_filter = [SizesFilter, 'condition', 'location', 'cat', 'formtype', 'ecommerce_store']
+    list_filter = [SizesFilter, 'condition', 'location', 'cat', 'modality', 'ecommerce_store']
     ordering = ['itemid']
     fields = [
         'image', 'itemid', 'tags',
-        'ecommerce_product_id', 'ecommerce_store', 'formtype', 'cat', 'taglist', 'condition',
+        'ecommerce_product_id', 'ecommerce_store', 'modality', 'cat', 'taglist', 'condition',
         'name', 'price', 'sizes_xyz', 'sizes_shoe_uk', 'sizes_shoe_eu', 'sizes_waist_inches',
         'location'
     ]
