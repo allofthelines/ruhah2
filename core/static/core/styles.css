@@ -78,6 +78,7 @@ option {
 
 a:visited {
     color: blue; /* Visited link color */
+    color: black;
 }
 
 #header {
