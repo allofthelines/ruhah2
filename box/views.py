@@ -82,7 +82,7 @@ def ticket_view(request):
             shoe_size_eu = customer.shoe_size_eu or box_form.cleaned_data.get('size_shoe_eu')
             shoe_size_uk = customer.shoe_size_uk or box_form.cleaned_data.get('size_shoe_uk')
 
-            print('\n\nBBBBBBBBBBB\n\n')
+            print('\n\nBBBBBBBBBBB\n\n', customer.top_size_xyz)
 
             """if customer.top_size_xyz is None:
                 size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
