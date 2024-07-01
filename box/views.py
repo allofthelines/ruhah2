@@ -372,8 +372,14 @@ def ask_fit_success(request, ticket_id):
 
 
 
+"""palio view se palio url
+
 def success_view(request):
     ticket_id = request.session.get('ticket_id', 'Unknown Ticket ID')
+    return render(request, 'box/success.html', {'ticket_id': ticket_id})
+"""
+
+def success_view(request, ticket_id):
     return render(request, 'box/success.html', {'ticket_id': ticket_id})
 
 

@@ -6,7 +6,7 @@ from .views import ask_fit_success, success_view
 
 urlpatterns = [
     path('ticket/', ticket_view, name='ticket_form'),
-    path('ticket/success/', success_view, name='success_url'),
+    # path('ticket/success/', success_view, name='success_url'),
     path('api/tickets/', api_tickets, name='api-tickets'),
     path('webhook/stripe/', stripe_webhook, name='stripe-webhook'),
     path('create-checkout-session/<int:ticket_id>/', create_checkout_session, name='create-checkout-session'),
