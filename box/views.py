@@ -41,6 +41,7 @@ def ticket_view(request):
         if fit_form.is_valid():
             ticket = Ticket(
                 asktype='fit',
+                status='open',
                 style1=fit_form.cleaned_data['style1'],
                 filter_liked=fit_form.cleaned_data['filter_liked'],
                 notes=fit_form.cleaned_data['notes'],
