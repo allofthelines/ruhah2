@@ -42,6 +42,7 @@ def ticket_view(request):
 
 
         if fit_form.is_valid():
+            print('\n\nXXXXXXXXXX\n\n')
             ticket = Ticket(
                 asktype='fit',
                 status='open',
@@ -116,7 +117,7 @@ def ticket_view(request):
                 return render(request, 'box/ticket_form.html', {'fit_form': fit_form, 'box_form': box_form, 'size_fields_required': True})
 
             print('\n\nDDDDDDDDDDDD\n\n')
-            
+
             ticket = Ticket(
                 asktype='box',
                 style1=box_form.cleaned_data['style1'],
