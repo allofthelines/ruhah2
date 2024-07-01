@@ -76,15 +76,15 @@ def ticket_view(request):
                 shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
 
                 if customer.top_size_xyz is None:
-                    size_top_xyz = form.cleaned_data.get('size_top_xyz')
+                    size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
                 if customer.bottom_size_xyz is None:
-                    size_bottom_xyz = form.cleaned_data.get('size_bottom_xyz')
+                    size_bottom_xyz = box_form.cleaned_data.get('size_bottom_xyz')
                 if customer.size_waist_inches is None:
-                    size_waist_inches = form.cleaned_data.get('size_waist_inches')
+                    size_waist_inches = box_form.cleaned_data.get('size_waist_inches')
                 if customer.shoe_size_eu is None:
-                    shoe_size_eu = form.cleaned_data.get('size_shoe_eu')
+                    shoe_size_eu = box_form.cleaned_data.get('size_shoe_eu')
                 if customer.shoe_size_uk is None:
-                    shoe_size_uk = form.cleaned_data.get('size_shoe_uk')
+                    shoe_size_uk = box_form.cleaned_data.get('size_shoe_uk')
 
                 if not customer.top_size_xyz:
                     customer.top_size_xyz = size_top_xyz
@@ -108,7 +108,7 @@ def ticket_view(request):
 
             # den kserw ti kanei
             if not (size_top_xyz and size_bottom_xyz and size_waist_inches and shoe_size_eu and shoe_size_uk):
-                return render(request, 'box/ticket_form.html', {'form': form, 'size_fields_required': True})
+                return render(request, 'box/ticket_form.html', {'fit_form': fit_form, 'box_form': box_form, 'size_fields_required': True})
 
 
             ticket = Ticket(
