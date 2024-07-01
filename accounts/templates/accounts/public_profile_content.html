@@ -13,6 +13,8 @@
               <span class="profile-username">#{{ profile_user.username }}</span>
             {% endif %}
 
+            &nbsp;
+
             {% if is_own_profile %}
                 <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'">Edit</button>
             {% else %}
