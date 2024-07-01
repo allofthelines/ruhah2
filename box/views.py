@@ -68,8 +68,9 @@ def ticket_view(request):
 
             if request.user.is_authenticated:
                 customer = get_object_or_404(Customer, user=request.user)
-                top_size_xyz = customer.top_size_xyz or size_top_xyz
-                bottom_size_xyz = customer.bottom_size_xyz or size_bottom_xyz
+                # htan top_size_xyz kai bottom_size_xyz prin to allakse
+                size_top_xyz = customer.top_size_xyz or size_top_xyz # an to prwto==None tote assign alliws to deftero
+                size_bottom_xyz = customer.bottom_size_xyz or size_bottom_xyz
                 size_waist_inches = customer.size_waist_inches or size_waist_inches
                 shoe_size_eu = customer.shoe_size_eu or shoe_size_eu
                 shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
