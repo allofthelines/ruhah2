@@ -122,6 +122,13 @@ def ticket_view(request):
 
         print('\n\nDDDDDDDDDDDD\n\n')
 
+        print('DEBUG\n\n\n')
+        print('\n\nBox Form Data:\n')
+        for field in box_form:
+            print(f"{field.name}: {field.value()}")
+        print('\n\nBox Form Errors:\n', box_form.errors)
+        print('\n\n\nDEBUG')
+
         if box_form.is_valid():
             ticket = Ticket(
                 asktype='box',
