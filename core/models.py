@@ -34,7 +34,7 @@ class Outfit(models.Model):
     portrait = models.ImageField(upload_to="portraits/", default="portraits/default_img.jpg", blank=True, null=True)
     ticket_id = models.ForeignKey('box.Ticket', on_delete=models.SET_NULL, null=True, blank=True)
     maker_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-    maker_grid_visibility = models.CharField(max_length=10, choices=[('show', 'Show'), ('hide', 'Side')], default='show', blank=True, null=True)
+    maker_grid_visibility = models.CharField(max_length=10, choices=[('show', 'Show'), ('hide', 'Hide')], default='show', blank=True, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
     items = models.ManyToManyField('studio.Item', blank=True)
 
