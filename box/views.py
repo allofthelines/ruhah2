@@ -76,15 +76,15 @@ def ticket_view(request):
         if request.user.is_authenticated:
             customer = get_object_or_404(Customer, user=request.user)
             # htan top_size_xyz kai bottom_size_xyz prin to allakse
-            size_top_xyz = customer.top_size_xyz or size_top_xyz # an to prwto==None tote assign alliws to deftero
-            size_bottom_xyz = customer.bottom_size_xyz or size_bottom_xyz
-            size_waist_inches = customer.size_waist_inches or size_waist_inches
-            shoe_size_eu = customer.shoe_size_eu or shoe_size_eu
-            shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
+            size_top_xyz = customer.top_size_xyz or box_form.cleaned_data.get('size_top_xyz')
+            size_bottom_xyz = customer.bottom_size_xyz or box_form.cleaned_data.get('size_bottom_xyz')
+            size_waist_inches = customer.size_waist_inches or box_form.cleaned_data.get('size_waist_inches')
+            shoe_size_eu = customer.shoe_size_eu or box_form.cleaned_data.get('size_shoe_eu')
+            shoe_size_uk = customer.shoe_size_uk or box_form.cleaned_data.get('size_shoe_uk')
 
             print('\n\nBBBBBBBBBBB\n\n')
 
-            if customer.top_size_xyz is None:
+            """if customer.top_size_xyz is None:
                 size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
             if customer.bottom_size_xyz is None:
                 size_bottom_xyz = box_form.cleaned_data.get('size_bottom_xyz')
@@ -93,7 +93,7 @@ def ticket_view(request):
             if customer.shoe_size_eu is None:
                 shoe_size_eu = box_form.cleaned_data.get('size_shoe_eu')
             if customer.shoe_size_uk is None:
-                shoe_size_uk = box_form.cleaned_data.get('size_shoe_uk')
+                shoe_size_uk = box_form.cleaned_data.get('size_shoe_uk')"""
 
             if not customer.top_size_xyz:
                 customer.top_size_xyz = size_top_xyz
