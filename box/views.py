@@ -66,6 +66,8 @@ def ticket_view(request):
             shoe_size_eu = None
             shoe_size_uk = None
 
+            print('\n\nAAAAAAAAAAAA\n\n')
+
             if request.user.is_authenticated:
                 customer = get_object_or_404(Customer, user=request.user)
                 # htan top_size_xyz kai bottom_size_xyz prin to allakse
@@ -74,6 +76,8 @@ def ticket_view(request):
                 size_waist_inches = customer.size_waist_inches or size_waist_inches
                 shoe_size_eu = customer.shoe_size_eu or shoe_size_eu
                 shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
+
+                print('\n\nBBBBBBBBBBB\n\n')
 
                 if customer.top_size_xyz is None:
                     size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
@@ -100,6 +104,7 @@ def ticket_view(request):
                 customer.save()
 
             else:
+                print('\n\nCCCCCCCCCCCC\n\n')
                 size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
                 size_bottom_xyz = box_form.cleaned_data.get('size_bottom_xyz')
                 size_waist_inches = box_form.cleaned_data.get('size_waist_inches')
@@ -110,7 +115,8 @@ def ticket_view(request):
             if not (size_top_xyz and size_bottom_xyz and size_waist_inches and shoe_size_eu and shoe_size_uk):
                 return render(request, 'box/ticket_form.html', {'fit_form': fit_form, 'box_form': box_form, 'size_fields_required': True})
 
-
+            print('\n\nDDDDDDDDDDDD\n\n')
+            
             ticket = Ticket(
                 asktype='box',
                 style1=box_form.cleaned_data['style1'],
