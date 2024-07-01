@@ -120,8 +120,8 @@ class AskBoxForm(forms.Form):
         'cols': 30,
         'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
 
-    size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
-    size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size')
-    size_waist_inches = forms.ChoiceField(choices=SIZE_WAIST_INCHES_CHOICES, label='Waist (inches)')
-    size_shoe_eu = forms.ChoiceField(choices=SHOE_SIZE_EU_CHOICES, label='Shoe Size (EU)')
-    size_shoe_uk = forms.ChoiceField(choices=SHOE_SIZE_UK_CHOICES, label='Shoe Size (UK)')
+    size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size', required=False)
+    size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size', required=False)
+    size_waist_inches = forms.ChoiceField(choices=SIZE_WAIST_INCHES_CHOICES, label='Waist (inches)', required=False)
+    size_shoe_eu = forms.ChoiceField(choices=SHOE_SIZE_EU_CHOICES, label='Shoe Size (EU)', required=False)
+    size_shoe_uk = forms.ChoiceField(choices=SHOE_SIZE_UK_CHOICES, label='Shoe Size (UK)', required=False)
