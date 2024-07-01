@@ -129,24 +129,24 @@ def ticket_view(request):
         print('\n\nBox Form Errors:\n', box_form.errors)
         print('\n\n\nDEBUG')
 
-        if box_form.is_valid():
-            ticket = Ticket(
-                asktype='box',
-                style1=box_form.cleaned_data['style1'],
-                condition=box_form.cleaned_data['condition'],
-                price=box_form.cleaned_data['price'],
-                filter_liked=box_form.cleaned_data['filter_liked'],
-                notes=box_form.cleaned_data['notes'],
-                size_top_xyz=size_top_xyz,
-                size_bottom_xyz=size_bottom_xyz,
-                size_waist_inches=size_waist_inches,
-                size_shoe_eu=shoe_size_eu,
-                size_shoe_uk=shoe_size_uk,
-                creator_id=request.user if request.user.is_authenticated else None,
-            )
-            ticket.save()
-            request.session['ticket_id'] = ticket.id
-            return redirect('box:success', ticket_id=ticket.id)
+        # if box_form.is_valid():
+        ticket = Ticket(
+            asktype='box',
+            style1=box_form.cleaned_data['style1'],
+            condition=box_form.cleaned_data['condition'],
+            price=box_form.cleaned_data['price'],
+            filter_liked=box_form.cleaned_data['filter_liked'],
+            notes=box_form.cleaned_data['notes'],
+            size_top_xyz=size_top_xyz,
+            size_bottom_xyz=size_bottom_xyz,
+            size_waist_inches=size_waist_inches,
+            size_shoe_eu=shoe_size_eu,
+            size_shoe_uk=shoe_size_uk,
+            creator_id=request.user if request.user.is_authenticated else None,
+        )
+        ticket.save()
+        request.session['ticket_id'] = ticket.id
+        return redirect('box:success', ticket_id=ticket.id)
 
 
     # an oxi POST
