@@ -56,8 +56,9 @@ def ticket_view(request):
 
 
 
-
-
+        print('DEBUG')
+        print('\n\n\n', box_form.is_valid(), '\n\n\n')
+        print('DEBUG')
 
         if box_form.is_valid():
 
