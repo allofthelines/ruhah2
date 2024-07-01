@@ -42,8 +42,6 @@ def ticket_view(request):
             ticket = Ticket(
                 asktype='fit',
                 style1=fit_form.cleaned_data['style1'],
-                condition=fit_form.cleaned_data['condition'],
-                price=fit_form.cleaned_data['price'],
                 filter_liked=fit_form.cleaned_data['filter_liked'],
                 notes=fit_form.cleaned_data['notes'],
                 creator_id=request.user if request.user.is_authenticated else None,
