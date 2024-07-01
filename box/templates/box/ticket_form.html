@@ -28,7 +28,7 @@
             <br>
             {{ fit_form.notes.label_tag }} <br> {{ fit_form.notes }}<br>
             <br>
-            <button type="submit" name="fit_form">Submit Ask</button>
+            <button type="submit" name="fit_form">Submit Outfit Ask</button>
         </form>
     </div>
 
@@ -60,6 +60,7 @@
                     {% if not user.customer.shoe_size_uk %}
                         {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
                     {% endif %}
+                    <br>
                 {% endif %}
             {% else %}
                 {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
