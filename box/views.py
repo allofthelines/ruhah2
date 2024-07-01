@@ -38,6 +38,9 @@ def ticket_view(request):
         fit_form = AskFitForm(request.POST, prefix='fit')
         box_form = AskBoxForm(request.POST, prefix='box')
 
+
+
+
         if fit_form.is_valid():
             ticket = Ticket(
                 asktype='fit',
@@ -50,21 +53,62 @@ def ticket_view(request):
             ticket.save()
             return redirect('box:ask_fit_success', ticket_id=ticket.id)
 
-        elif box_form.is_valid():
-            size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
-            size_bottom_xyz = box_form.cleaned_data.get('size_bottom_xyz')
-            size_waist_inches = box_form.cleaned_data.get('size_waist_inches')
-            shoe_size_eu = box_form.cleaned_data.get('size_shoe_eu')
-            shoe_size_uk = box_form.cleaned_data.get('size_shoe_uk')
+
+
+
+
+
+        if box_form.is_valid():
+
+            size_top_xyz = None
+            size_bottom_xyz = None
+            size_waist_inches = None
+            shoe_size_eu = None
+            shoe_size_uk = None
 
             if request.user.is_authenticated:
                 customer = get_object_or_404(Customer, user=request.user)
-                customer.top_size_xyz = customer.top_size_xyz or size_top_xyz
-                customer.bottom_size_xyz = customer.bottom_size_xyz or size_bottom_xyz
-                customer.size_waist_inches = customer.size_waist_inches or size_waist_inches
-                customer.shoe_size_eu = customer.shoe_size_eu or shoe_size_eu
-                customer.shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
+                top_size_xyz = customer.top_size_xyz or size_top_xyz
+                bottom_size_xyz = customer.bottom_size_xyz or size_bottom_xyz
+                size_waist_inches = customer.size_waist_inches or size_waist_inches
+                shoe_size_eu = customer.shoe_size_eu or shoe_size_eu
+                shoe_size_uk = customer.shoe_size_uk or shoe_size_uk
+
+                if customer.top_size_xyz is None:
+                    size_top_xyz = form.cleaned_data.get('size_top_xyz')
+                if customer.bottom_size_xyz is None:
+                    size_bottom_xyz = form.cleaned_data.get('size_bottom_xyz')
+                if customer.size_waist_inches is None:
+                    size_waist_inches = form.cleaned_data.get('size_waist_inches')
+                if customer.shoe_size_eu is None:
+                    shoe_size_eu = form.cleaned_data.get('size_shoe_eu')
+                if customer.shoe_size_uk is None:
+                    shoe_size_uk = form.cleaned_data.get('size_shoe_uk')
+
+                if not customer.top_size_xyz:
+                    customer.top_size_xyz = size_top_xyz
+                if not customer.bottom_size_xyz:
+                    customer.bottom_size_xyz = size_bottom_xyz
+                if not customer.size_waist_inches:
+                    customer.size_waist_inches = size_waist_inches
+                if not customer.shoe_size_eu:
+                    customer.shoe_size_eu = shoe_size_eu
+                if not customer.shoe_size_uk:
+                    customer.shoe_size_uk = shoe_size_uk
+
                 customer.save()
+
+            else:
+                size_top_xyz = box_form.cleaned_data.get('size_top_xyz')
+                size_bottom_xyz = box_form.cleaned_data.get('size_bottom_xyz')
+                size_waist_inches = box_form.cleaned_data.get('size_waist_inches')
+                shoe_size_eu = box_form.cleaned_data.get('size_shoe_eu')
+                shoe_size_uk = box_form.cleaned_data.get('size_shoe_uk')
+
+            # den kserw ti kanei
+            if not (size_top_xyz and size_bottom_xyz and size_waist_inches and shoe_size_eu and shoe_size_uk):
+                return render(request, 'box/ticket_form.html', {'form': form, 'size_fields_required': True})
+
 
             ticket = Ticket(
                 asktype='box',
@@ -81,7 +125,11 @@ def ticket_view(request):
                 creator_id=request.user if request.user.is_authenticated else None,
             )
             ticket.save()
+            request.session['ticket_id'] = ticket.id
             return redirect('box:success', ticket_id=ticket.id)
+
+
+    # an oxi POST
     else:
         fit_form = AskFitForm(prefix='fit')
         initial_data = {}
