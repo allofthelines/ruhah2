@@ -24,7 +24,7 @@
         <tr>
             <td>{{ ticket.style1.style_name }}</td>
             <!-- <td>{{ ticket.occasion }}</td> -->
-            <td>{{ ticket.notes }}</td>
+            <td style="word-break: break-word;">{{ ticket.notes }}</td>
         </tr>
     </tbody>
 </table>
@@ -233,8 +233,8 @@
   #studio-tickets-table td {
     max-width: 800px;
     padding: 4px;
-    word-break: break-word; /* Ensures long words break and wrap */
-      /* margin: 0 auto; */
+    /* word-break: break-word; /* Ensures long words break and wrap mono se notes td des to exw valei*/
+    /* margin: 0 auto; */
   }
 </style>
 
