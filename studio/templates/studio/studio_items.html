@@ -63,7 +63,7 @@ NA SERVIREI FOLLOWING_USER_IDS
         <tr>
             <td>{{ ticket.style1.style_name }}</td>
             <!-- <td>{{ ticket.occasion }}</td> -->
-            <td>{{ ticket.notes }}</td>
+            <td style="word-break: break-word;">{{ ticket.notes }}</td>
         </tr>
     </tbody>
 </table>
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
   #studio-tickets-table td {
     max-width: 800px;
     padding: 4px;
-    word-break: break-word; /* Ensures long words break and wrap */
+    /* word-break: break-word; /* Ensures long words break and wrap to evala sto notes td mono */
       /* margin: 0 auto; */
   }
 </style>
