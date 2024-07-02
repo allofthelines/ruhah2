@@ -7,6 +7,9 @@ app_name = 'accounts'
 print('\n\n\n DEBUG VIEWS DEBUG VIEWS DEBUG VIEWS\n\n\n')
 
 urlpatterns = [
+
+    path('remove_ask/<int:ticket_id>/', views.remove_ask, name='remove_ask'),
+
     path('like-outfit/', views.like_outfit, name='like_outfit'),
     path('remove-like/<int:like_id>/', views.remove_like, name='remove_like'),
 

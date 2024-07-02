@@ -369,3 +369,12 @@ def remove_like(request, like_id):
 
     next_url = request.GET.get('next', reverse('accounts:profile') + '#likes')  # Default to 'accounts:profile#likes' if 'next' not provided
     return redirect(next_url)
+
+
+
+def remove_ask(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if ticket.creator_id == request.user.id:
+        ticket.creator_profile_visibility = 'hide'
+        ticket.save()
+    return redirect('accounts:profile')

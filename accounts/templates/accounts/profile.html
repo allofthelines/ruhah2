@@ -200,6 +200,111 @@
 
 
 
+
+
+
+
+
+        <!-- Asks Profile Section -->
+        <div id="asks" class="content-section" style="display: none; padding-top: 15px;">
+            <div id="contBBBB">
+                {% for ticket in user_tickets %}
+                    <div class="contAAAA" id="ask-{{ ticket.id }}">
+                        <div class="toggle">
+                            {% if ticket.outfit1 %}
+                                <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image">
+                            {% else %}
+                                <div class="contNOTE">
+                                    <p>{{ ticket.style1 }}</p>
+                                    <p>{{ ticket.notes }}</p>
+                                    <p>{{ ticket.creator_id }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="contLLRR">
+                            <form action="{% url 'accounts:remove_ask' ticket.id %}?next={% url 'accounts:profile' %}#asks" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="link-style">Remove</button>
+                            </form>
+                            <button type="button" class="link-style">Order Box</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const note = this.querySelector('.contNOTE');
+                if (img) {
+                    img.style.display = img.style.display === 'none' ? 'block' : 'none';
+                    note.style.display = note.style.display === 'none' ? 'block' : 'none';
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    #contBBBB {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2px;
+        border: 0px solid black;
+        margin: 0 0px;
+    }
+
+    .contAAAA {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+    }
+
+    .contAAAA img, .contAAAA .contNOTE {
+        width: 100%;
+        height: auto;
+        flex-grow: 1;
+    }
+
+    .contLLRR {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .link-style {
+        background: none;
+        border: none;
+        color: blue;
+        cursor: pointer;
+        padding: 5px;
+        text-align: center;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        #contBBBB {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Cart Profile Section -->
         <div id="cart" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
@@ -335,7 +440,7 @@
 
            // window.scrollTo(0, 0); // // Scroll to the very top after showing the content
            // history.replaceState(null, null, ' '); // Remove the hash from the URL
-            
+
         } else {
             showContent('user', 'Profile > User'); // Default section
         }
