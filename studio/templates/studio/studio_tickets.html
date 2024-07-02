@@ -30,7 +30,7 @@
               {% endif %}
                 <td>{{ ticket.style1.style_name }}</td>
                 <!-- <td>{{ ticket.occasion }}</td> -->
-                <td>{{ ticket.notes }}</td>
+                <td style="min-width: 100px;">{{ ticket.notes }}</td>
                 <td>
                   {% if user.is_authenticated %}
                     <a href="{% url 'studio:studio_items' ticket.id %}">Choose</a>
