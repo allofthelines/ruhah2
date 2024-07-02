@@ -333,16 +333,9 @@
             const sectionId = urlHash.substring(1);  // Remove the '#' from the hash
             showContent(sectionId, `Profile > ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`);
 
-
-
-
            // window.scrollTo(0, 0); // // Scroll to the very top after showing the content
            // history.replaceState(null, null, ' '); // Remove the hash from the URL
-
-
-
-
-
+            
         } else {
             showContent('user', 'Profile > User'); // Default section
         }
@@ -372,6 +365,12 @@
         }
     });
 </script>
+
+
+
+
+
+
 
 
 
