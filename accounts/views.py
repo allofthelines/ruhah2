@@ -97,6 +97,12 @@ def profile(request):
     # Query the UserItemLikes model for the logged-in user
     user_likes = UserItemLikes.objects.filter(liker=user)
 
+    user_tickets = Ticket.objects.filter(
+        creator_id=request.user.id,
+        asktype='fit',
+        creator_profile_visibility='show'
+    )
+
     if request.method == 'POST':
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
@@ -137,7 +143,8 @@ def profile(request):
         'user_studio_styles': user_studio_styles,
         'editing': editing,
         'editing_settings': editing_settings,
-        'user_likes': user_likes  # Add user_likes to the context
+        'user_likes': user_likes,
+        'user_tickets': user_tickets
     })
 
 
