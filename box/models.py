@@ -48,6 +48,8 @@ class Ticket(models.Model):
     filter_liked = models.CharField(max_length=30, choices=FILTER_LIKED_CHOICES, default='no_filter')
     timestamp = models.DateTimeField(default=timezone.now)
     creator_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    creator_profile_visibility = models.CharField(max_length=10, choices=[('show', 'Show'), ('hide', 'Hide')],
+                                             default='show', blank=True, null=True)
     outfit1 = models.ForeignKey(Outfit, on_delete=models.SET_NULL, null=True, blank=True, related_name='ticket_outfit1')
     outfit2 = models.ForeignKey(Outfit, on_delete=models.SET_NULL, null=True, blank=True, related_name='ticket_outfit2')
     outfits_all = models.ManyToManyField('core.Outfit', blank=True)
