@@ -227,9 +227,13 @@
                             {% if ticket.outfit1 %}
                                 <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="outfit-image" style="display: block;">
                                 <div class="contNOTE" style="display: none;">
-                                    <p>{{ ticket.style1 }}</p>
-                                    <p>{{ ticket.notes }}</p>
-                                    <p>{{ ticket.creator_id }}</p>
+                                    <p>
+                                        {{ ticket.style1 }}
+                                        <br><br>
+                                        {{ ticket.notes }}
+                                        <br><br>
+                                        {{ ticket.creator_id }}
+                                    </p>
                                 </div>
                             {% else %}
                                 <div class="contNOTE" style="display: block;">
