@@ -240,11 +240,15 @@
                             {% endif %}
                         </div>
                         <div class="contLLRR">
+                            <div class="LLRR-button-container">
                             <form action="{% url 'accounts:remove_ask' ticket.id %}?next={% url 'accounts:profile' %}#asks" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="link-style">Remove</button>
                             </form>
-                            <button type="button" class="link-style">Order Box</button>
+                            </div>
+                            <div class="LLRR-button-container">
+                                <button type="button" class="link-style">Order Box</button>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
@@ -309,6 +313,12 @@
         font-family: inherit; /* Inherit the font family from parent elements */
         font-size: inherit; /* Optionally ensure the font size is also inherited */
         font-weight:400;
+    }
+
+    .LLRR-button-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
     }
 
 
