@@ -237,9 +237,13 @@
                                 </div>
                             {% else %}
                                 <div class="contNOTE" style="display: block;">
-                                    <p>{{ ticket.style1 }}</p>
-                                    <p>{{ ticket.notes }}</p>
-                                    <p>{{ ticket.creator_id }}</p>
+                                    <p>
+                                        {{ ticket.style1 }}
+                                        <br><br>
+                                        {{ ticket.notes }}
+                                        <br><br>
+                                        {{ ticket.creator_id }}
+                                    </p>
                                 </div>
                             {% endif %}
                         </div>
