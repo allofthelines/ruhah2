@@ -330,6 +330,7 @@
     .contLLRR {
         display: flex;
         justify-content: space-between;
+        margin-top: auto; /* Pushes the container to the bottom */
     }
 
     .contLLRR .link-style {
@@ -345,6 +346,24 @@
         display: flex;
         justify-content: center;
     }
+
+
+    .contNOTE {
+        width: 100%;
+        padding-top: 100%; /* This makes the height equal to the width, maintaining a square aspect ratio */
+        position: relative; /* To position the content inside */
+    }
+
+    .contNOTE p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        text-align: center;
+    }
+
+
 
     @media (max-width: 768px) {
         #contBBBB {
