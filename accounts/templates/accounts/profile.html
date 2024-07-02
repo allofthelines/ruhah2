@@ -223,11 +223,16 @@
             <div id="contBBBB">
                 {% for ticket in user_tickets %}
                     <div class="contAAAA" id="ask-{{ ticket.id }}">
-                        <div class="toggle">
+                        <div class="toggle" onclick="toggleImage(this)">
                             {% if ticket.outfit1 %}
-                                <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image">
+                                <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="outfit-image" style="display: block;">
+                                <div class="contNOTE" style="display: none;">
+                                    <p>{{ ticket.style1 }}</p>
+                                    <p>{{ ticket.notes }}</p>
+                                    <p>{{ ticket.creator_id }}</p>
+                                </div>
                             {% else %}
-                                <div class="contNOTE">
+                                <div class="contNOTE" style="display: block;">
                                     <p>{{ ticket.style1 }}</p>
                                     <p>{{ ticket.notes }}</p>
                                     <p>{{ ticket.creator_id }}</p>
@@ -247,19 +252,18 @@
         </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const toggles = document.querySelectorAll('.toggle');
-        toggles.forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const img = this.querySelector('img');
-                const note = this.querySelector('.contNOTE');
-                if (img) {
-                    img.style.display = img.style.display === 'none' ? 'block' : 'none';
-                    note.style.display = note.style.display === 'none' ? 'block' : 'none';
-                }
-            });
-        });
-    });
+    function toggleImage(element) {
+        const outfitImage = element.querySelector('.outfit-image');
+        const note = element.querySelector('.contNOTE');
+
+        if (outfitImage.style.display === 'none') {
+            outfitImage.style.display = 'block';
+            note.style.display = 'none';
+        } else {
+            outfitImage.style.display = 'none';
+            note.style.display = 'block';
+        }
+    }
 </script>
 
 <style>
