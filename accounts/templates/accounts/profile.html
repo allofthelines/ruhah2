@@ -439,8 +439,8 @@
         <!-- Upload Profile Section -->
         <div id="upload" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
-                Images uploaded here appear on your wall.<br>
-                Review and upload may take a few hours.<br>
+                Images uploaded here<br>appear on your wall.<br>
+                Allow some time for review.<br>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ portrait_upload_form.as_p }}
