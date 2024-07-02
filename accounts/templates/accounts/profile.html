@@ -244,7 +244,9 @@
                                         <br><br>
                                         {{ ticket.notes }}
                                         <br><br>
-                                        {{ ticket.creator_id }}
+                                        {% if ticket.outfit1 %}
+                                            Styled by: {{ ticket.outfit1.maker_id }}
+                                        {% endif %}
                                     </p>
                                 </div>
                             {% endif %}
