@@ -6,6 +6,8 @@
 
 {% block content %}
 
+<div id="studio-items-all-content">
+
 <!-- ERROR MESSAGE -->
 {% if messages %}
     <div class="error-messages" style="color: red; margin-top: -25px; text-align: center;">
@@ -142,6 +144,9 @@ NA SERVIREI FOLLOWING_USER_IDS
 
 
 
+</div>
+
+
 
 
 
@@ -252,6 +257,12 @@ document.addEventListener('DOMContentLoaded', function () {
     /* word-break: break-word; /* Ensures long words break and wrap to evala sto notes td mono */
       /* margin: 0 auto; */
   }
+
+  #studio-items-all-content {
+    width: 80%; /* Set width to 80% */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
 </style>
 
 {% endblock %}
