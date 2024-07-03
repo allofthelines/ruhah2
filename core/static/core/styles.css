@@ -5,7 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
 
 
 
@@ -99,6 +101,9 @@ a:visited {
   letter-spacing: 0em;
   /*text-indent: 0.125em; /* diorthwnei to letter-spacing an exeis valei */
   margin-top: 25px;
+
+  font-family: 'Italiana', sans-serif;  /* Add the font-family */
+  font-weight: 400;
 }
 
 #main-menu {
