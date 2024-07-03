@@ -75,7 +75,7 @@ NA SERVIREI FOLLOWING_USER_IDS
 
 
 
-<p>Your <strong>Outfit</strong> for Ticket #{{ ticket.id }}</p>
+<p div="ticket-number-message">Your <strong>Outfit</strong> for Ticket #{{ ticket.id }}</p>
 
 <!-- FINAL OUTFIT IMAGES (TEMP) -->
 <div id="contB">
@@ -258,15 +258,17 @@ document.addEventListener('DOMContentLoaded', function () {
       /* margin: 0 auto; */
   }
 
-  #studio-items-all-content {
-    width: 80%; /* Set width to 80% */
+  #studio-items-all-content, #studio-tickets-table, #submit-outfit-form, #ticket-number-message {
+    width: 80%;
     margin-left: auto; /* Center horizontally */
     margin-right: auto; /* Center horizontally */
   }
 
   @media (max-width: 768px) {
-    #studio-items-all-content {
-        width: 100%; /* Full width on mobile */
+    #studio-items-all-content, #studio-tickets-table, #submit-outfit-form, #ticket-number-message {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
   }
 
