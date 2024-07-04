@@ -377,7 +377,7 @@ footer {
         font-family: inherit;   /* Inherits font from the parent element */
         font-size: inherit;     /* Inherits font size from the parent element */
         cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
-        text-decoration: underline;  /* No underline */
+        /* text-decoration: underline;  */
         /* font-weight: normal; */
     }
 }
