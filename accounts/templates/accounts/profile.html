@@ -11,19 +11,19 @@
 
     <!-- Navigation Menu -->
     <div id="profile-menu" style="width: 15%;">
-        <a href="#" onclick="showContent('user', 'Profile > Data')" style="/*text-decoration-line: underline;*/ color: blue;">Data</a>
-        <a href="#" onclick="showContent('customer', 'Profile > Sizes')" style=" color: blue;">Sizes</a>
+        <a href="#" onclick="showContent('user', 'Profile > Data')" style="/*text-decoration-line: underline; color: blue;*/">DATA</a>
+        <a href="#" onclick="showContent('customer', 'Profile > Sizes')" style=" /*color: blue;*/">SIZES</a>
         <br>
-        <a href="#likes" onclick="showContent('likes', 'Profile > Likes')" style="color: blue;">My Likes</a>
-        <a href="#asks" onclick="showContent('asks', 'Profile > Asks')" style="color: blue;">My Asks</a>
-        <a href="#wall" onclick="showContent('wall', 'Profile > Wall')" style="color: blue;">My Wall</a>
-        <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="color: blue;">Upload</a>
+        <a href="#likes" onclick="showContent('likes', 'Profile > Likes')" style="/*color: blue;*/">LIKES</a>
+        <a href="#asks" onclick="showContent('asks', 'Profile > Asks')" style="/*color: blue;*/">ASKS</a>
+        <a href="#wall" onclick="showContent('wall', 'Profile > Wall')" style="/*color: blue;*/">WALL</a>
+        <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a>
         <br>
-        <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="color: blue;">Settings</a>
+        <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="/*color: blue;*/">SETTINGS</a>
         <br>
-        <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
+        <form method="post" action="{% url 'accounts:logout' %}" style="/*display: inline;*/">
         {% csrf_token %}
-        <button type="submit" class="nav-link logout-button">Logout</button>
+        <button type="submit" class="nav-link logout-button">LOGOUT</button>
         </form>
     </div>
 
