@@ -119,13 +119,14 @@ a:visited {
 .logout-button {
     background: none;       /* No background color */
     color: blue;           /* Text color - set this to black as you requested */
+    color: black;
     border: none;           /* No border */
     padding: 0;             /* Remove padding to align with other links */
     font-family: inherit;   /* Inherits font from the parent element */
     font-size: inherit;     /* Inherits font size from the parent element */
     cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
     /*text-decoration: underline;  /* No underline */
-    font-weight: normal;
+    /* font-weight: normal; */
 }
 
 #page-header {
