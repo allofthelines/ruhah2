@@ -34,6 +34,7 @@ class SignUpForm(UserCreationForm):
             'username': None,
             'password1': None,
             'password2': None,
+            'email': None,
         }
         labels = {
             'email': 'Email',  # This will ensure the label doesn't say "Required"
