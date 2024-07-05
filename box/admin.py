@@ -7,7 +7,7 @@ class TicketAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Ticket._meta.get_fields()]
     list_display = ['id', 'asktype', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'occupancy']
     list_filter = ['asktype', 'status', 'occasion', 'style1', 'style2']
-    search_fields = ['notes', 'creator_id']
+    search_fields = ['notes']
 
     def short_notes(self, obj):
         if obj.notes:
