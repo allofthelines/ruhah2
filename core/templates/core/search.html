@@ -10,13 +10,6 @@
     <button type="submit">Search</button>
   </form>
 
-    <!--
-  {% if query %}
-    <p>Results for "{{ query }}":</p>
-  {% else %}
-    <p>Please enter a search query to find users.</p>
-  {% endif %}
-  -->
   <p><br></p>
 
   <div style="margin-top: -25px;">
@@ -37,11 +30,10 @@
                         </div>
                         <div>
                             {% if request.user.is_authenticated and user != request.user %}
-                                {% if user in request.user.following.all %}
-                                    <button onclick="submitUnfollowForm('{{ user.username }}')">Following</button>
-                                    <a href="#" onclick="submitUnfollowForm('{{ user.username }}')">Unfollow</a>
+                                {% if user.id in followed_users %}
+                                    <button id="follow-unfollow-button-{{ user.username }}" onclick="toggleFollowUnfollow('{{ user.username }}', true)">Following</button>
                                 {% else %}
-                                    <button onclick="submitFollowForm('{{ user.username }}')">Follow</button>
+                                    <button id="follow-unfollow-button-{{ user.username }}" onclick="toggleFollowUnfollow('{{ user.username }}', false)">Follow</button>
                                 {% endif %}
                                 <form id="follow-form-{{ user.username }}" method="post" action="{% url 'accounts:follow' user.username %}" style="display: none;">
                                     {% csrf_token %}
@@ -59,10 +51,54 @@
   </div>
 
   <script>
+    function toggleFollowUnfollow(username, isFollowing) {
+        const button = document.getElementById('follow-unfollow-button-' + username);
+        if (button.dataset.toggled === "true") {
+            // Second click, submit the form
+            if (isFollowing) {
+                document.getElementById('unfollow-form-' + username).submit();
+            } else {
+                document.getElementById('follow-form-' + username).submit();
+            }
+        } else {
+            // First click, change the button text and style
+            button.dataset.toggled = "true";
+            if (isFollowing) {
+                button.textContent = "Unfollow";
+                button.style.color = "red";  // Change color to indicate confirmation step
+
+                // Change back to "Following" after 3 seconds
+                setTimeout(() => {
+                    if (button.dataset.toggled === "true") {
+                        button.textContent = "Following";
+                        button.style.color = "";  // Reset color
+                        button.dataset.toggled = "false";
+                    }
+                }, 2000);
+            } else {
+                button.textContent = "Follow";
+                button.style.color = "blue";  // Change color to indicate confirmation step
+
+                // Change back to "Follow" after 3 seconds
+                setTimeout(() => {
+                    if (button.dataset.toggled === "true") {
+                        button.textContent = "Follow";
+                        button.style.color = "";  // Reset color
+                        button.dataset.toggled = "false";
+                    }
+                }, 2000);
+            }
+        }
+    }
+  </script>
+
+  <script>
     function submitFollowForm(username) {
+        console.log('Following:', username); // Debugging
         document.getElementById('follow-form-' + username).submit();
     }
     function submitUnfollowForm(username) {
+        console.log('Unfollowing:', username); // Debugging
         document.getElementById('unfollow-form-' + username).submit();
     }
   </script>

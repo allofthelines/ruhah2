@@ -103,8 +103,11 @@ def search(request):
     else:
         users = CustomUser.objects.none()
 
+    followed_users = request.user.following.values_list('user_to_id', flat=True)  # Fetch followed user IDs
+
     context = {
         'users': users,
         'query': query,
+        'followed_users': followed_users,
     }
     return render(request, 'core/search.html', context)
