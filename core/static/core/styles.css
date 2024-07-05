@@ -64,7 +64,7 @@ select, option, button, input, textarea {
 
 
 
-button {
+button, option {
     background: none;       /* No background color */
     color: inherit;         /* Inherit text color from parent element */
     border: none;           /* No border */
