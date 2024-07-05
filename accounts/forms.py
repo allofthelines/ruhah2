@@ -30,6 +30,25 @@ class SignUpForm(UserCreationForm):
         if settings.INVITE_CODE_REQUIRED:
             self.fields['invite_code'] = forms.CharField(max_length=20, required=True, help_text='Enter your invite code')
 
+        # Customize username field
+        self.fields['username'].validators[0].limit_value = 30
+        self.fields['username'].help_text = None
+        self.fields['username'].error_messages = {
+            'invalid': 'Username can only contain letters digits _ . -',
+        }
+
+        # Remove 'Enter the same password as before, for verification.' text
+        self.fields['password2'].label = 'Password confirmation'
+        self.fields['password2'].help_text = None
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if len(username) > 30:
+            raise forms.ValidationError('Username must be 30 characters or fewer.')
+        if not re.match(r'^[\w.-]+$', username):
+            raise forms.ValidationError('Username can only contain letters, digits, _ . -')
+        return username
+
     def clean_invite_code(self):
         if settings.INVITE_CODE_REQUIRED:
             code = self.cleaned_data.get('invite_code')
