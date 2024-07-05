@@ -82,7 +82,8 @@ button {
 /* Remove default styling for the select element */
 select {
     background: none;
-    border: 1px solid black;
+    border: 1px solid grey;
+    border-radius: 1px;
     color: inherit;
     font: inherit;
     cursor: pointer;
