@@ -93,6 +93,7 @@ select option {
     color: inherit;
     font: inherit;
     padding: 0;
+    content: '▼';
 }
 
 /* Add custom styling to make the dropdown look like regular text */
