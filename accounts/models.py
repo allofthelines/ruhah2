@@ -226,3 +226,26 @@ class Customer(models.Model):
     class Meta:
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
+
+
+
+
+import random
+
+class InviteCode(models.Model):
+    invide_code = models.CharField(max_length=20, unique=True, blank=True)
+    is_used = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    inviter = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='invite_codes_given', on_delete=models.SET_NULL, null=True, blank=True)
+    invitee = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='invite_code_used', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.code:
+            self.code = self.generate_unique_code()
+        super().save(*args, **kwargs)
+
+    def generate_unique_code(self):
+        while True:
+            code = ''.join(random.choices('0123456789', k=10))
+            if not InviteCode.objects.filter(code=code).exists():
+                return code
