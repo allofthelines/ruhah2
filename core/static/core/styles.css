@@ -64,7 +64,7 @@ select, option, button, input, textarea {
 
 
 
-button, option {
+button {
     background: none;       /* No background color */
     color: inherit;         /* Inherit text color from parent element */
     border: none;           /* No border */
@@ -72,6 +72,36 @@ button, option {
     font-family: inherit;   /* Inherit font from the body */
     font-size: inherit;     /* Inherit font size from the body */
     cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
+}
+
+/* Remove default styling for the select element */
+select {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0;
+}
+
+/* Remove the default styling for options */
+select option {
+    background: white; /* Make the background white or transparent */
+    color: inherit;
+    font: inherit;
+    padding: 0;
+}
+
+/* Add custom styling to make the dropdown look like regular text */
+select::after {
+    content: '▼'; /* Add a custom arrow indicator */
+    padding-left: 5px;
+    pointer-events: none;
+    font-size: inherit;
+    color: inherit;
 }
 
 
