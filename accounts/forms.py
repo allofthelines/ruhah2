@@ -18,19 +18,27 @@ class SignUpForm(UserCreationForm):
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
-    invite_code = forms.CharField(max_length=20, required=settings.INVITE_CODE_REQUIRED, help_text='Enter your invite code')
+    # invite_code = forms.CharField(max_length=20, required=settings.INVITE_CODE_REQUIRED, help_text='Enter your invite code')
+    # to evala pio katw sto __init__ wste otan einai false na mhn fainetai kan san pedio.
 
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'password1', 'password2', 'invite_code')
 
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        if settings.INVITE_CODE_REQUIRED:
+            self.fields['invite_code'] = forms.CharField(max_length=20, required=True, help_text='Enter your invite code')
+
     def clean_invite_code(self):
-        code = self.cleaned_data.get('invite_code')
-        if settings.INVITE_CODE_REQUIRED and not code:
-            raise forms.ValidationError('Invite code is required.')
-        if code and not InviteCode.objects.filter(invite_code=code, is_used=False).exists():
-            raise forms.ValidationError('Invalid or already used invite code.')
-        return code
+        if settings.INVITE_CODE_REQUIRED:
+            code = self.cleaned_data.get('invite_code')
+            if not code:
+                raise forms.ValidationError('Invite code is required.')
+            if not InviteCode.objects.filter(invite_code=code, is_used=False).exists():
+                raise forms.ValidationError('Invalid or already used invite code.')
+            return code
+        return None
 
 
 
