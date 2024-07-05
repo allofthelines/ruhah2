@@ -27,6 +27,10 @@ class CustomUser(AbstractUser):
         ('human', 'human'),
         ('bot', 'bot'),
     ]
+    STUDIO_VISIBILITY_CHOICES = [
+        ('discover', 'Discover'),
+        ('following', 'Following'),
+    ]
     # delete these
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_customer = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
@@ -43,6 +47,7 @@ class CustomUser(AbstractUser):
     trending_mode = models.CharField(max_length=10, choices=TRENDING_MODE_CHOICES, default='discover')
     trending_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_trending_styles')
     studio_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_studio_styles')
+    studio_visibility = models.CharField(max_length=15, choices=STUDIO_VISIBILITY_CHOICES, default='discover')
 
     followers_list = models.ManyToManyField(
         'self',
