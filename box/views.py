@@ -44,7 +44,7 @@ def ticket_view(request):
         if fit_form.is_valid():
             print('\n\nXXXXXXXXXX\n\n')
             ticket = Ticket(
-                asktype='fit',
+                asktype='outfit',
                 status='open',
                 style1=fit_form.cleaned_data['style1'],
                 filter_liked=fit_form.cleaned_data['filter_liked'],
@@ -180,7 +180,7 @@ def ticket_view(request):
         fit_form = AskFitForm(request.POST)
         if fit_form.is_valid():
             ticket = Ticket(
-                asktype='fit',
+                asktype='outfit',
                 style1=fit_form.cleaned_data['style1'],
                 condition=fit_form.cleaned_data['condition'],
                 price=fit_form.cleaned_data['price'],

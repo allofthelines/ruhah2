@@ -114,7 +114,7 @@ def profile(request):
 
     user_tickets = Ticket.objects.filter(
         creator_id=request.user.id,
-        asktype='fit',
+        asktype='outfit',
         creator_profile_visibility='show'
     )
 

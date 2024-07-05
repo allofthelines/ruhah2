@@ -33,7 +33,7 @@ class Ticket(models.Model):
     ]
 
     ASKTYPE_CHOICES = [
-        ('fit', 'fit'),
+        ('outfit', 'outfit'),
         ('box', 'box'),
     ]
 
