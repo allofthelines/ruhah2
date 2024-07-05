@@ -33,12 +33,13 @@ def signup(request):
 
             # Handle the invite code
             # TO EKANA ADD STO TELOS
-            invite_code = form.cleaned_data.get('invite_code')
-            if invite_code:
-                invite_code_obj = InviteCode.objects.get(invite_code=invite_code)
-                invite_code_obj.is_used = True
-                invite_code_obj.invitee = user
-                invite_code_obj.save()
+            if settings.INVITE_CODE_REQUIRED:
+                invite_code = form.cleaned_data.get('invite_code')
+                if invite_code:
+                    invite_code_obj = InviteCode.objects.get(invite_code=invite_code)
+                    invite_code_obj.is_used = True
+                    invite_code_obj.invitee = user
+                    invite_code_obj.save()
 
 
 

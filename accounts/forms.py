@@ -18,7 +18,7 @@ class SignUpForm(UserCreationForm):
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
-    invite_code = forms.CharField(max_length=20, required=False, help_text='Enter your invite code')
+    invite_code = forms.CharField(max_length=20, required=settings.INVITE_CODE_REQUIRED, help_text='Enter your invite code')
 
     class Meta:
         model = CustomUser
@@ -26,9 +26,9 @@ class SignUpForm(UserCreationForm):
 
     def clean_invite_code(self):
         code = self.cleaned_data.get('invite_code')
-        if not code:
-            return code
-        if not InviteCode.objects.filter(invite_code=code, is_used=False).exists():
+        if settings.INVITE_CODE_REQUIRED and not code:
+            raise forms.ValidationError('Invite code is required.')
+        if code and not InviteCode.objects.filter(invite_code=code, is_used=False).exists():
             raise forms.ValidationError('Invalid or already used invite code.')
         return code
 

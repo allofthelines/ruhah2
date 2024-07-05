@@ -338,6 +338,8 @@ if ENVIRONMENT == 'production':
 
 
 
+INVITE_CODE_REQUIRED = True
+
 
 '''
 # tha borousa na ta valw etsi edw
