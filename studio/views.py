@@ -33,11 +33,18 @@ def studio_tickets(request):
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
         following_user_ids = list(request.user.following_list.values_list('id', flat=True))
+
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in page_obj if
                             ticket.creator_id.id != request.user.id and # ...if its the same guy
                             ticket.has_submitted_outfits(request.user) and
                             ticket.style1.id in user_styles] # ...user's studio_styles
+
+        # Additional filtering based on studio_visibility
+        if request.user.studio_visibility == 'following':
+            filtered_tickets = [ticket for ticket in filtered_tickets if
+                                ticket.creator_id.id in following_user_ids]
+
     else:
         following_user_ids = []
         filtered_tickets = page_obj  # Show all tickets for guests
