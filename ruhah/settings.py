@@ -338,7 +338,7 @@ if ENVIRONMENT == 'production':
 
 
 
-INVITE_CODE_REQUIRED = False
+INVITE_CODE_REQUIRED = True
 
 
 '''
