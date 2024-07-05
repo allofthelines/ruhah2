@@ -85,6 +85,7 @@ select {
     -moz-appearance: none;
     appearance: none;
     padding: 0;
+    content: '▼';
 }
 
 /* Remove the default styling for options */
@@ -93,7 +94,6 @@ select option {
     color: inherit;
     font: inherit;
     padding: 0;
-    content: '▼';
 }
 
 /* Add custom styling to make the dropdown look like regular text */
