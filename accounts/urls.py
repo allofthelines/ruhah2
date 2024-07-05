@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('remove_ask/<int:ticket_id>/', views.remove_ask, name='remove_ask'),
 
+    path('remove_outfit/<int:outfit_id>/', views.remove_outfit, name='remove_outfit'),
+
     path('like-outfit/', views.like_outfit, name='like_outfit'),
     path('remove-like/<int:like_id>/', views.remove_like, name='remove_like'),
 
