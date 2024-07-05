@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer, UserItemLikes
+from accounts.models import CustomUser, Customer, UserItemLikes, InviteCode
 from studio.models import Style, Item
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
@@ -28,6 +28,19 @@ def signup(request):
 
             # Save the user again to ensure ManyToMany fields are saved
             user.save()
+
+
+
+            # Handle the invite code
+            # TO EKANA ADD STO TELOS
+            invite_code = form.cleaned_data.get('invite_code')
+            if invite_code:
+                invite_code_obj = InviteCode.objects.get(invite_code=invite_code)
+                invite_code_obj.is_used = True
+                invite_code_obj.invitee = user
+                invite_code_obj.save()
+
+
 
             send_confirmation_email(user)  # Send confirmation email
             return redirect('accounts:account_activation_sent')
