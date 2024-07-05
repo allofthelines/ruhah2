@@ -83,7 +83,6 @@ button {
 select {
     background: none;
     border: 1px solid black;
-    border: none;
     color: inherit;
     font: inherit;
     cursor: pointer;
