@@ -43,7 +43,7 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
         if settings.INVITE_CODE_REQUIRED:
-            self.fields['invite_code'] = forms.CharField(max_length=20, required=True, help_text='Enter your invite code')
+            self.fields['invite_code'] = forms.CharField(max_length=20, required=True, help_text='')
 
         # Customize username field
         self.fields['username'].validators[0].limit_value = 30
