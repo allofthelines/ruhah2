@@ -409,28 +409,108 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Cart Profile Section -->
         <div id="cart" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
                 Empty
             </p>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Add this section for Wall Profile Section -->
+        <div id="wall" class="content-section" style="display: none; padding-top: 15px;">
+            <div id="contBBBBB">
+                {% for outfit in user.outfit_set.all %}
+                    {% if outfit.maker_grid_visibility == 'show' %}
+                        <div class="contAAAAA" id="outfit-{{ outfit.id }}">
+                            {% if 'default_img.jpg' not in outfit.portrait.url %}
+                                <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                            {% endif %}
+                            <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
+                            <form action="{% url 'accounts:remove_outfit' outfit.id %}?next={% url 'accounts:profile' %}#wall" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="link-style">Remove</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+<style>
+
+    #contBBBBB {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns in desktop */
+    grid-gap: 2px;
+    border: 0px solid black; /* Border around the entire container */
+    margin: 0 0px; /* extra margins on the left and right (exei hdh 20px apo body) */
+}
+
+.contAAAAA {
+    display: flex;
+    flex-direction: column; /* Image on top, link on bottom */
+    border: 1px solid black; /* Thin borders as specified, like regular table lines */
+}
+
+.contAAAAA img {
+    width: 100%;
+    height: auto;
+    flex-grow: 1; /* Image takes up the available space */
+}
+
+.contAAAAA form {
+    text-align: center;
+    padding: 5px;
+    background: white;
+    border-top: 1px solid black; /* Thin border between image and link */
+    display: block;
+}
+
+.contAAAAA form button {
+    background: none;
+    border: none;
+    color: blue;
+    color: black;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 5px; /* Adjust padding to match 'Remove' link */
+    width: 100%;
+    font-family: inherit; /* Inherit the font family from parent elements */
+    font-size: inherit; /* Optionally ensure the font size is also inherited */
+    font-weight:400;
+}
+
+@media (max-width: 768px) {
+    #contBBBBB {
+        grid-template-columns: 1fr; /* 1 column in mobile */
+    }
+}
+
+</style>
+
+
+
+
+
+
+
+
 
 
 

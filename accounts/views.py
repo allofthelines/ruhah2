@@ -400,3 +400,13 @@ def remove_ask(request, ticket_id):
         ticket.creator_profile_visibility = 'hide'
         ticket.save()
     return redirect('accounts:profile')
+
+
+def remove_outfit(request, outfit_id):
+    outfit = get_object_or_404(Outfit, id=outfit_id)
+    if request.method == 'POST' and request.user == outfit.maker:
+        outfit.maker_grid_visibility = 'hide'
+        outfit.save()
+        next_url = request.GET.get('next', 'accounts:profile')
+        return redirect(next_url)
+    return redirect('accounts:profile')
