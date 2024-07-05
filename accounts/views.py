@@ -396,7 +396,7 @@ def remove_like(request, like_id):
 
 def remove_ask(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
-    if ticket.creator_id == request.user.id:
+    if ticket.creator_id.id == request.user.id:
         ticket.creator_profile_visibility = 'hide'
         ticket.save()
     return redirect('accounts:profile')
