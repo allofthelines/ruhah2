@@ -82,7 +82,7 @@ button {
 /* Remove default styling for the select element */
 select {
     background: none;
-    border: 1px solid #d3d3d3;
+    border: 1px solid #808080;
     border-radius: 2px;
     color: inherit;
     font: inherit;
@@ -115,6 +115,7 @@ select::after {
 /* Add padding for the arrow */
 select {
     padding-left: 5px;
+    padding-right: 5px;
     margin: 5px;
     background-color: transparent; /* Ensure background is transparent */
     position: relative;
