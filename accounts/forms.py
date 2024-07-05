@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer, PortraitUpload
+from accounts.models import CustomUser, Customer, PortraitUpload, InviteCode
 from django.contrib.auth.models import User
 
 
@@ -13,6 +13,24 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'password1', 'password2')
+
+
+
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(max_length=200, help_text='Required')
+    invite_code = forms.CharField(max_length=20, required=False, help_text='Enter your invite code')
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email', 'password1', 'password2', 'invite_code')
+
+    def clean_invite_code(self):
+        code = self.cleaned_data.get('invite_code')
+        if not code:
+            return code
+        if not InviteCode.objects.filter(invite_code=code, is_used=False).exists():
+            raise forms.ValidationError('Invalid or already used invite code.')
+        return code
 
 
 
@@ -138,3 +156,6 @@ class ProfileSettingsForm(forms.ModelForm):
         user.studio_styles.set(self.cleaned_data['studio_styles'])
         user.save()
         return user
+
+
+
