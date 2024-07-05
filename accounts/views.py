@@ -404,7 +404,7 @@ def remove_ask(request, ticket_id):
 
 def remove_outfit(request, outfit_id):
     outfit = get_object_or_404(Outfit, id=outfit_id)
-    if request.method == 'POST' and request.user == outfit.maker:
+    if request.method == 'POST' and request.user == outfit.maker_id:
         outfit.maker_grid_visibility = 'hide'
         outfit.save()
         next_url = request.GET.get('next', 'accounts:profile')
