@@ -16,7 +16,7 @@
         <br>
         <a href="#likes" onclick="showContent('likes', 'Profile > Likes')" style="/*color: blue;*/">LIKES</a>
         <a href="#asks" onclick="showContent('asks', 'Profile > Asks')" style="/*color: blue;*/">ASKS</a>
-        <a href="#wall" onclick="showContent('wall', 'Profile > Wall')" style="/*color: blue;*/">WALL</a>
+        <a href="#grid" onclick="showContent('grid', 'Profile > Grid')" style="/*color: blue;*/">GRID</a>
         <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a>
         <br>
         <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="/*color: blue;*/">STNGS</a>
@@ -436,8 +436,8 @@
 
 
 
-        <!-- Add this section for Wall Profile Section -->
-        <div id="wall" class="content-section" style="display: none; padding-top: 15px;">
+        <!-- Add this section for Grid Profile Section -->
+        <div id="grid" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBBBB">
                 {% for outfit in user.outfit_set.all %}
                     {% if outfit.maker_grid_visibility == 'show' %}
@@ -446,7 +446,7 @@
                                 <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                             {% endif %}
                             <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
-                            <form action="{% url 'accounts:remove_outfit' outfit.id %}?next={% url 'accounts:profile' %}#wall" method="POST">
+                            <form action="{% url 'accounts:remove_outfit' outfit.id %}?next={% url 'accounts:profile' %}#grid" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="link-style">Remove</button>
                             </form>
@@ -528,7 +528,7 @@
         <div id="upload" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
                 Images uploaded here<br>
-                appear on your wall.<br>
+                appear on your grid.<br>
                 <br>
                 Please allow<br>
                 some time for review.<br>
