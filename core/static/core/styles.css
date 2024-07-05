@@ -61,6 +61,22 @@ select, option, button, input, textarea {
     font-family: 'Montserrat', sans-serif;
 }
 
+
+
+
+button {
+    background: none;       /* No background color */
+    color: inherit;         /* Inherit text color from parent element */
+    border: none;           /* No border */
+    padding: 0;             /* Remove padding */
+    font-family: inherit;   /* Inherit font from the body */
+    font-size: inherit;     /* Inherit font size from the body */
+    cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
+}
+
+
+
+
 textarea {
     font-size: 14px;
 }
