@@ -139,7 +139,9 @@
         background: none;
         border: none;
         color: blue;
+        color: black
         text-decoration: underline;
+        text-decoration: none;
         cursor: pointer;
         display: block;
         text-align: center;
@@ -236,6 +238,23 @@
     /* word-break: break-word; /* Ensures long words break and wrap mono se notes td des to exw valei*/
     /* margin: 0 auto; */
   }
+
+  /* Update page width */
+    #studio-items-all-content, #studio-tickets-table, #search-form, #submit-outfit-guest {
+        width: 80%; /* Set width to 80% in desktop mode */
+        margin-left: auto; /* Center horizontally */
+        margin-right: auto; /* Center horizontally */
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        #studio-items-all-content, #studio-tickets-table, #search-form, #submit-outfit-guest {
+            width: 100%; /* Full width on mobile */
+        }
+    }
+
+
+
 </style>
 
 {% endblock %}
