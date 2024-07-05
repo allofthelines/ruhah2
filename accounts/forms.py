@@ -57,6 +57,7 @@ class SignUpForm(UserCreationForm):
 
         # Remove "required" label from email field
         self.fields['email'].label = 'Email'
+        self.fields['email'].help_text = None
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
