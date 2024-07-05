@@ -369,11 +369,13 @@
 
     .contNOTE {
         width: 100%;
+        height: 100%
         padding-top: 100%; /* This makes the height equal to the width, maintaining a square aspect ratio */
         position: relative; /* To position the content inside */
     }
 
     .contNOTE p {
+        width: 100%;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -381,8 +383,29 @@
         margin: 0;
         text-align: center;
         max-width: 90%; /* Adjust this value to control the width of the text block */
+        max-height: 100%;
         word-wrap: break-word; /* Ensure long words are wrapped */
     }
+
+    .contNOTE {
+    width: 100%;
+    height: 100%; /* Ensure the height of the container is used */
+    position: relative; /* To position the content inside */
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 10px; /* Add some padding for better spacing */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+
+.contNOTE p {
+    width: 100%; /* Take full width of the container */
+    margin: 0;
+    text-align: center;
+    word-wrap: break-word; /* Ensure long words are wrapped */
+    max-height: 100%; /* Ensure the text does not overflow vertically */
+    overflow: hidden; /* Hide overflow if any */
+}
 
 
 
