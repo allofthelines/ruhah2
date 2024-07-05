@@ -11,7 +11,7 @@ class TicketAdmin(admin.ModelAdmin):
 
     def short_notes(self, obj):
         if obj.notes:
-            return obj.notes[:15] + '...' if len(obj.notes) > 15 else obj.notes
+            return obj.notes[:25] + '...' if len(obj.notes) > 25 else obj.notes
         return ""
 
     def occupancy(self, obj):
