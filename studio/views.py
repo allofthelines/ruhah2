@@ -33,8 +33,7 @@ def studio_tickets(request):
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
         following_user_ids = list(request.user.following_list.values_list('id', flat=True)) # gia to palio kitrinisma eksw
-        # user_following_ids = list(UserFollows.objects.filter(user_from=request.user).values_list('user_to_id', flat=True))
-        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))  # Users the logged-in user is following
+        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
 
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in page_obj if
