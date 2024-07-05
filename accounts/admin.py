@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart
+from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart, InviteCode
 from django.utils.timezone import now
 from datetime import datetime, timezone
 from django.utils.html import mark_safe
@@ -98,5 +98,11 @@ class PortraitUploadAdmin(admin.ModelAdmin):
 
     age_in_hours.short_description = 'Age in Hours'  # Set a readable column name
 
-
 admin.site.register(PortraitUpload, PortraitUploadAdmin)
+
+class InviteCodeAdmin(admin.ModelAdmin):
+    list_display = ('invite_code', 'is_used', 'created_at', 'inviter', 'invitee')
+    search_fields = ('invite_code', 'inviter__username', 'invitee__username')
+    list_filter = ('is_used', 'created_at')
+
+admin.site.register(InviteCode, InviteCodeAdmin)
