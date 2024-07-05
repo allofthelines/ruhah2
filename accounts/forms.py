@@ -25,6 +25,20 @@ class SignUpForm(UserCreationForm):
         model = CustomUser
         fields = ('username', 'email', 'password1', 'password2')
 
+        widgets = {
+            'username': forms.TextInput(attrs={'maxlength': 30}),
+            'password1': forms.PasswordInput(),
+            'password2': forms.PasswordInput(),
+        }
+        help_texts = {
+            'username': None,
+            'password1': None,
+            'password2': None,
+        }
+        labels = {
+            'email': 'Email',  # This will ensure the label doesn't say "Required"
+        }
+
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
         if settings.INVITE_CODE_REQUIRED:
@@ -40,6 +54,9 @@ class SignUpForm(UserCreationForm):
         # Remove 'Enter the same password as before, for verification.' text
         self.fields['password2'].label = 'Password confirmation'
         self.fields['password2'].help_text = None
+
+        # Remove "required" label from email field
+        self.fields['email'].label = 'Email'
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
