@@ -112,14 +112,12 @@ select::after {
 
 /* Add padding for the arrow */
 select {
-    padding: 8px 30px 8px 10px;
     background-color: transparent; /* Ensure background is transparent */
     position: relative;
 }
 
 /* Add custom arrow indicator */
 select::after {
-    content: '▼'; /* Custom arrow */
     position: absolute;
     top: 50%;
     right: 10px;
