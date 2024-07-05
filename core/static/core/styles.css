@@ -74,6 +74,11 @@ button {
     cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
 }
 
+
+
+
+
+
 /* Remove default styling for the select element */
 select {
     background: none;
@@ -104,6 +109,33 @@ select::after {
     font-size: inherit;
     color: inherit;
 }
+
+/* Add padding for the arrow */
+select {
+    padding: 8px 30px 8px 10px;
+    background-color: transparent; /* Ensure background is transparent */
+    position: relative;
+}
+
+/* Add custom arrow indicator */
+select::after {
+    content: '▼'; /* Custom arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Remove default arrow in IE and Edge */
+select::-ms-expand {
+    display: none;
+}
+
+
+
 
 
 
