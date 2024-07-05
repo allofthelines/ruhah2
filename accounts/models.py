@@ -115,6 +115,10 @@ class CustomUser(AbstractUser):
             img = img.crop((left, top, right, bottom))
             img = img.resize((300, 300), Image.ANTIALIAS)
 
+            # Convert image to RGB if it's in RGBA mode
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
             # Save the processed image to a BytesIO object
             img_io = BytesIO()
             img.save(img_io, format='JPEG')
