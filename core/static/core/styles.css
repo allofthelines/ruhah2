@@ -71,6 +71,7 @@ button {
     padding: 0;             /* Remove padding */
     font-family: inherit;   /* Inherit font from the body */
     font-size: inherit;     /* Inherit font size from the body */
+    font-weight: normal;
     cursor: pointer;        /* Keeps the pointer cursor to indicate it's clickable */
 }
 
