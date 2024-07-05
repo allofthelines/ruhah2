@@ -19,7 +19,7 @@
         <a href="#wall" onclick="showContent('wall', 'Profile > Wall')" style="/*color: blue;*/">WALL</a>
         <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a>
         <br>
-        <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="/*color: blue;*/">SETTINGS</a>
+        <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="/*color: blue;*/">STNGS</a>
         <br>
         <form method="post" action="{% url 'accounts:logout' %}" style="/*display: inline;*/">
         {% csrf_token %}
@@ -708,7 +708,7 @@
             width: 15%;
             flex-direction: row;
             overflow-x: auto;
-            margin-right: 17px;
+            margin-right: 15px;
             padding-right: 17px;
             margin-top: 0px;
         }
