@@ -20,7 +20,7 @@ class OutfitAdmin(admin.ModelAdmin):
 
     def maker_wall(self, obj):
         return obj.maker_grid_visibility
-    grid.short_description = 'Maker Wall'
+    maker_wall.short_description = 'Maker Wall'
 
     portrait_thumbnail.short_description = 'Portrait'
 
