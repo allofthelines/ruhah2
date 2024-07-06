@@ -141,6 +141,26 @@ def pack_images(images, canvas):
     return canvas
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def create_composite_image(outfit):
     items = outfit.items.all()
     images = []
