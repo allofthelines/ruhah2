@@ -565,7 +565,7 @@ def submit_outfit(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     temp = get_object_or_404(StudioOutfitTemp, user=user, ticket=ticket)
 
-    # musthave 1
+    # musthave
     if not(
             (temp.item1id and temp.item2id and temp.item3id) or
             (temp.item1id and temp.item2id and temp.item4id) or
@@ -575,13 +575,13 @@ def submit_outfit(request, ticket_id):
         messages.error(request, 'Submission failed.\nPlease include at least 3 items.')
         return redirect('studio:studio_items', ticket_id=ticket_id)
 
-    # musthave 2
+    # musthave
     if not temp.item2id:
         messages.error(request, 'Submission failed.\nPlease include a bottom or a dress.')
         return redirect('studio:studio_items', ticket_id=ticket_id)
 
-    # musthave 3 Fetch the items to check their categories
-    item1 = Item.objects.get(id=temp.item1id) if temp.item1id else None
+    # musthave Fetch the items to check their categories
+    item1 = Item.objects.get(id=int(temp.item1id)) if temp.item1id else None
     item2 = Item.objects.get(id=temp.item2id) if temp.item2id else None
     item3 = Item.objects.get(id=temp.item3id) if temp.item3id else None
     item4 = Item.objects.get(id=temp.item4id) if temp.item4id else None
