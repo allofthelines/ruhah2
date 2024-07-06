@@ -582,9 +582,9 @@ def submit_outfit(request, ticket_id):
 
     # musthave Fetch the items to check their categories
     item1 = Item.objects.get(itemid=temp.item1id) if temp.item1id else None
-    item2 = Item.objects.get(id=temp.item2id) if temp.item2id else None
-    item3 = Item.objects.get(id=temp.item3id) if temp.item3id else None
-    item4 = Item.objects.get(id=temp.item4id) if temp.item4id else None
+    item2 = Item.objects.get(itemid=temp.item2id) if temp.item2id else None
+    item3 = Item.objects.get(itemid=temp.item3id) if temp.item3id else None
+    item4 = Item.objects.get(itemid=temp.item4id) if temp.item4id else None
     # Check if item2 is a bottom and if there is no top in item1, item3, or item4
     if item2 and item2.cat == 'bottom':
         if not ((item1 and item1.cat == 'top') or (item3 and item3.cat == 'top') or (item4 and item4.cat == 'top')):
