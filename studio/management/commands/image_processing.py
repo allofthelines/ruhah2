@@ -58,6 +58,7 @@ def pack_images(images, canvas):
 
     top_images = []
     other_images = []
+    top_count = 0
     for img in images:
         if img['category'] == 'top':
             if top_count == 0:
