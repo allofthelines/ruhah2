@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Ticket, Order, Return
+from core.models import Outfit
 
 # Register your models here.
 @admin.register(Ticket)
