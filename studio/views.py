@@ -491,8 +491,15 @@ def add_item_to_temp(request):
         else:
             error_msg = 'Please clear one of the last 2 spaces and try again.'
 
+
     elif item_cat == 'accessory':
-        if temp.item3img.url == default_img3_url:
+        if 'bag' in item.tags.lower():
+            if ((item3 and 'bag' in item3.tags.lower()) or (item4 and 'bag' in item4.tags.lower())):
+                error_msg = 'Cannot have more than 1 bag.'
+        elif 'glasses' in item.tags.lower():
+            if ((item3 and 'glasses' in item3.tags.lower()) or (item4 and 'glasses' in item4.tags.lower())):
+                error_msg = 'Cannot have more than 1 pair of glasses.'
+        elif temp.item3img.url == default_img3_url:
             temp.item3img = item.image
             temp.item3id = item.itemid
         elif temp.item4img.url == default_img4_url:
@@ -500,9 +507,6 @@ def add_item_to_temp(request):
             temp.item4id = item.itemid
         else:
             error_msg = 'Please clear one of the last 2 spaces and try again.'
-
-
-
 
     """if item_cat == 'top':
         if temp.item1img.url == default_img1_url:
