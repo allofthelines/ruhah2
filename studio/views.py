@@ -350,73 +350,6 @@ def item_search(request, ticket_id):
 
 
 
-"""def add_item_to_temp(request):
-    # edw to item_itemid = kwdikos rouxou
-    # sto URL PREPEI '/MEDIA/STUDIOOUTFITTEMPS/IMAGE.JPG'
-    item_itemid = request.POST.get('item_itemid')
-    item_cat = request.POST.get('item_cat')
-    ticket_id = request.POST.get('ticket_id')
-    user = request.user
-    temp = StudioOutfitTemp.objects.get(ticket_id=ticket_id, user=user)
-    error_msg =''
-
-    item = Item.objects.get(itemid=item_itemid)
-
-    default_img1_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img1.jpg'
-    default_img2_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img2.jpg'
-    default_img3_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img3.jpg'
-    default_img4_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img4.jpg'
-
-    if item_cat == 'top':
-        if temp.item1img.url == default_img1_url:
-            temp.item1img = item.image
-            temp.item1id = item.itemid
-        else:
-            if temp.item4img.url == default_img4_url:
-                temp.item4img = item.image
-                temp.item4id = item.itemid
-            else:
-                error_msg = 'Cannot have more than 2 tops.'
-    if item_cat == 'bottom':
-        if temp.item2img.url == default_img2_url:
-            temp.item2img = item.image
-            temp.item2id = item.itemid
-        else:
-            if temp.item4img.url == default_img4_url:
-                temp.item4img = item.image
-                temp.item4id = item.itemid
-            else:
-                error_msg = 'Cannot have more than 2 bottoms.'
-    if item_cat == 'dress':
-        if temp.item2img.url == default_img2_url:
-            temp.item2img = item.image
-            temp.item2id = item.itemid
-        else:
-            error_msg = 'Remove the 2nd item and try again.'
-    if item_cat == 'accessory':
-        if temp.item3img.url == default_img3_url:
-            temp.item3img = item.image
-            temp.item3id = item.itemid
-        else:
-            if temp.item4img.url == default_img4_url:
-                temp.item4img = item.image
-                temp.item4id = item.itemid
-            else:
-                error_msg = 'Cannot have more than 2 accessories.'
-    if item_cat == 'footwear':
-        if temp.item4img.url == default_img4_url:
-            temp.item4img = item.image
-            temp.item4id = item.itemid
-        else:
-            error_msg = 'Remove the 4th item and try again.'
-
-
-    # ERROR MESSAGE STO HTML SE PERIPTWSH POU PAEI NA VALEI 3 TOPS PX
-    if error_msg != '':
-        messages.error(request, error_msg)
-
-    temp.save()
-    return redirect('studio:studio_items', ticket_id=ticket_id)  # Redirect back to the item selection page"""
 
 @login_required
 def add_item_to_temp(request):
@@ -506,48 +439,6 @@ def add_item_to_temp(request):
         else:
             error_msg = 'Please clear one of the last 2 spaces and try again.'
 
-    """if item_cat == 'top':
-        if temp.item1img.url == default_img1_url:
-            temp.item1img = item.image
-            temp.item1id = item.itemid
-        else:
-            if temp.item4img.url == default_img4_url:
-                temp.item4img = item.image
-                temp.item4id = item.itemid
-            else:
-                error_msg = 'Cannot have more than 2 tops.'
-    elif item_cat == 'bottom':
-        if temp.item2img.url == default_img2_url:
-            temp.item2img = item.image
-            temp.item2id = item.itemid
-        else:
-            if temp.item4img.url == default_img4_url:
-                temp.item4img = item.image
-                temp.item4id = item.itemid
-            else:
-                error_msg = 'Cannot have more than 2 bottoms.'
-    elif item_cat == 'dress':
-        if temp.item2img.url == default_img2_url:
-            temp.item2img = item.image
-            temp.item2id = item.itemid
-        else:
-            error_msg = 'Remove the 2nd item and try again.'
-    elif item_cat == 'accessory':
-        if temp.item3img.url == default_img3_url:
-            temp.item3img = item.image
-            temp.item3id = item.itemid
-        else:
-            if temp.item4img.url == default_img4_url:
-                temp.item4img = item.image
-                temp.item4id = item.itemid
-            else:
-                error_msg = 'Cannot have more than 2 accessories.'
-    elif item_cat == 'footwear':
-        if temp.item4img.url == default_img4_url:
-            temp.item4img = item.image
-            temp.item4id = item.itemid
-        else:
-            error_msg = 'Remove the 4th item and try again.'"""
 
     if error_msg:
         messages.error(request, error_msg)
