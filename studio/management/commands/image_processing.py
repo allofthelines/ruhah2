@@ -53,11 +53,21 @@ def resize_image_to_non_empty_area(image, target_non_empty_area):
 def pack_images(images, canvas):
     canvas_width, canvas_height = canvas.size
     positions = []
-    top_images = [img for img in images if img['category'] == 'top']
+    # top_images = [img for img in images if img['category'] == 'top']
     # bottom_images = [img for img in images if img['category'] == 'bottom']
+
+    top_images = []
+    other_images = []
+    for img in images:
+        if img['category'] == 'top':
+            if top_count == 0:
+                top_images.append(img)
+                top_count += 1
+            else:
+                other_images.append(img)
     bottom_images = [img for img in images if img['category'] == 'bottom' or img['category'] == 'dress']
     footwear_images = [img for img in images if img['category'] == 'footwear']
-    other_images = [img for img in images if img['category'] not in ['bottom', 'footwear', 'dress']]
+    other_images.extend([img for img in images if img['category'] not in ['top', 'bottom', 'footwear', 'dress']])
 
     # Resize top and bottom images to have the same height equal to half the height of the canvas
     if top_images:
