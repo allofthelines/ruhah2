@@ -435,6 +435,74 @@ def add_item_to_temp(request):
     default_img4_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/studiooutfittemps/default_img4.jpg'
 
     if item_cat == 'top':
+        tops_count = sum(1 for img in [temp.item1img, temp.item3img, temp.item4img] if
+                         img.url != default_img1_url and img.url != default_img3_url and img.url != default_img4_url)
+        dresses_count = 1 if temp.item2img.url != default_img2_url and temp.item2cat == 'dress' else 0
+
+        if tops_count >= 2:
+            error_msg = 'Cannot have more than 2 tops.'
+        elif tops_count == 1 and dresses_count == 1:
+            error_msg = 'Cannot have 1 dress and 2 tops.'
+        elif temp.item1img.url == default_img1_url:
+            temp.item1img = item.image
+            temp.item1id = item.itemid
+        elif temp.item3img.url == default_img3_url:
+            temp.item3img = item.image
+            temp.item3id = item.itemid
+        elif temp.item4img.url == default_img4_url:
+            temp.item4img = item.image
+            temp.item4id = item.itemid
+        else:
+            error_msg = 'Please remove an item and try again. Remember you cannot have more than 2 tops.'
+
+    elif item_cat == 'dress':
+        tops_count = sum(1 for img in [temp.item1img, temp.item3img, temp.item4img] if
+                         img.url != default_img1_url and img.url != default_img3_url and img.url != default_img4_url)
+
+        if tops_count >= 2:
+            error_msg = 'Cannot have 2 tops and a dress.'
+        elif temp.item2img.url != default_img2_url and temp.item2cat in ['bottom', 'dress']:
+            error_msg = 'Cannot have a bottom and a dress.' if temp.item2cat == 'bottom' else 'Cannot have more than 1 dress.'
+        elif temp.item2img.url == default_img2_url:
+            temp.item2img = item.image
+            temp.item2id = item.itemid
+
+    elif item_cat == 'bottom':
+        if temp.item2img.url != default_img2_url and temp.item2cat in ['bottom', 'dress']:
+            error_msg = 'Cannot have more than 1 bottom.' if temp.item2cat == 'bottom' else 'Cannot have a bottom and a dress.'
+        elif temp.item2img.url == default_img2_url:
+            temp.item2img = item.image
+            temp.item2id = item.itemid
+
+    elif item_cat == 'footwear':
+        footwear_count = sum(
+            1 for img in [temp.item3img, temp.item4img] if img.url != default_img3_url and img.url != default_img4_url)
+
+        if footwear_count >= 1:
+            error_msg = 'Cannot have more than 1 footwear.'
+        elif temp.item3img.url == default_img3_url:
+            temp.item3img = item.image
+            temp.item3id = item.itemid
+        elif temp.item4img.url == default_img4_url:
+            temp.item4img = item.image
+            temp.item4id = item.itemid
+        else:
+            error_msg = 'Please clear one of the last 2 spaces and try again.'
+
+    elif item_cat == 'accessory':
+        if temp.item3img.url == default_img3_url:
+            temp.item3img = item.image
+            temp.item3id = item.itemid
+        elif temp.item4img.url == default_img4_url:
+            temp.item4img = item.image
+            temp.item4id = item.itemid
+        else:
+            error_msg = 'Please clear one of the last 2 spaces and try again.'
+
+
+
+
+    """if item_cat == 'top':
         if temp.item1img.url == default_img1_url:
             temp.item1img = item.image
             temp.item1id = item.itemid
@@ -475,7 +543,7 @@ def add_item_to_temp(request):
             temp.item4img = item.image
             temp.item4id = item.itemid
         else:
-            error_msg = 'Remove the 4th item and try again.'
+            error_msg = 'Remove the 4th item and try again.'"""
 
     if error_msg:
         messages.error(request, error_msg)
