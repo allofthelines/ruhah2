@@ -495,7 +495,7 @@ def add_item_to_temp(request):
     elif item_cat == 'accessory':
         if 'bag' in item.tags.lower() and ((item3 and 'bag' in item3.tags.lower()) or (item4 and 'bag' in item4.tags.lower())):
                 error_msg = 'Cannot have more than 1 bag.'
-        elif 'glasses' in item.tags.lower() and if ((item3 and 'glasses' in item3.tags.lower()) or (item4 and 'glasses' in item4.tags.lower())):
+        elif 'glasses' in item.tags.lower() and ((item3 and 'glasses' in item3.tags.lower()) or (item4 and 'glasses' in item4.tags.lower())):
                 error_msg = 'Cannot have more than 1 pair of glasses.'
         elif temp.item3img.url == default_img3_url:
             temp.item3img = item.image
