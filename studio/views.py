@@ -497,7 +497,12 @@ def submit_outfit(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     temp = get_object_or_404(StudioOutfitTemp, user=user, ticket=ticket)
 
-    if not (temp.item1id and temp.item2id and temp.item3id):
+    if (
+            (temp.item1id and temp.item2id and temp.item3id) or
+            (temp.item1id and temp.item2id and temp.item4id) or
+            (temp.item1id and temp.item3id and temp.item4id) or
+            (temp.item2id and temp.item3id and temp.item4id)
+    ):
         messages.error(request, 'Submission failed.\nPlease include at least 3 items.')
         return redirect('studio:studio_items', ticket_id=ticket_id)
 
@@ -529,7 +534,7 @@ def submit_outfit(request, ticket_id):
     ticket.save()
 
     # Add a delay to give time for the outfit to be fully created
-    time.sleep(2)
+    time.sleep(1)
 
     # Process the outfit's items to create a composite image
     image_path = create_composite_image(new_outfit)
