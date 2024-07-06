@@ -19,9 +19,9 @@ class TicketAdmin(admin.ModelAdmin):
         return f"{obj.current_outfits} / {obj.maximum_outfits}"
     occupancy.short_description = 'Occupancy'
 
-    # Customizing the formfield for outfit1
+    # Customizing the formfield for outfit1 and outfit2
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'outfit1':
+        if db_field.name == 'outfit1' or db_field.name == 'outfit2':
             kwargs['queryset'] = Outfit.objects.order_by('pk')
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
