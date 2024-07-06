@@ -581,7 +581,7 @@ def submit_outfit(request, ticket_id):
         return redirect('studio:studio_items', ticket_id=ticket_id)
 
     # musthave Fetch the items to check their categories
-    item1 = Item.objects.get(id=int(temp.item1id)) if temp.item1id else None
+    item1 = Item.objects.get(itemid=temp.item1id) if temp.item1id else None
     item2 = Item.objects.get(id=temp.item2id) if temp.item2id else None
     item3 = Item.objects.get(id=temp.item3id) if temp.item3id else None
     item4 = Item.objects.get(id=temp.item4id) if temp.item4id else None
