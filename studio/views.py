@@ -498,10 +498,10 @@ def submit_outfit(request, ticket_id):
     temp = get_object_or_404(StudioOutfitTemp, user=user, ticket=ticket)
 
     if (
-            (temp.item1id and temp.item2id and temp.item3id) or
-            (temp.item1id and temp.item2id and temp.item4id) or
-            (temp.item1id and temp.item3id and temp.item4id) or
-            (temp.item2id and temp.item3id and temp.item4id)
+            not(temp.item1id and temp.item2id and temp.item3id) or
+            not(temp.item1id and temp.item2id and temp.item4id) or
+            not(temp.item1id and temp.item3id and temp.item4id) or
+            not(temp.item2id and temp.item3id and temp.item4id)
     ):
         messages.error(request, 'Submission failed.\nPlease include at least 3 items.')
         return redirect('studio:studio_items', ticket_id=ticket_id)
