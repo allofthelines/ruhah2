@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Outfit
+from box.models import Ticket
 
 class OutfitAdmin(admin.ModelAdmin):
     list_display = ('id', 'thumbnail', 'maker_id', 'maker_grid', 'image', 'rating', 'ticket_id', 'portrait_thumbnail')
@@ -23,6 +24,12 @@ class OutfitAdmin(admin.ModelAdmin):
     maker_grid.short_description = 'Maker Grid'
 
     portrait_thumbnail.short_description = 'Portrait'
+
+    # Customizing the formfield for ticket_id
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'ticket_id':
+            kwargs['queryset'] = Ticket.objects.order_by('pk')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 # Register the Outfit model with the OutfitAdmin options
