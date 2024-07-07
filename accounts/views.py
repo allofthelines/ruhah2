@@ -48,6 +48,11 @@ def signup(request):
             return redirect('accounts:account_activation_sent')
     else:
         form = SignUpForm()  # Use the custom SignUpForm
+
+    # Print CSRF token for debugging
+    print("CSRF Token in session: ", request.session.get('csrf_token'))
+    print("CSRF Token in request: ", get_token(request))
+
     return render(request, 'accounts/signup.html', {'form': form})
 
 def send_confirmation_email(user):
