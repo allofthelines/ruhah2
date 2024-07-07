@@ -28,7 +28,11 @@
             <br>
             {{ fit_form.notes.label_tag }} <br> {{ fit_form.notes }}<br>
             <br>
-            <button type="submit" name="fit_form">Submit Outfit Ask</button>
+            {% if user.is_authenticated %}
+                <button type="submit" name="fit_form">Submit Outfit Ask</button>
+            {% else %}
+                <button name="fit_form">Login to Submit</button>
+            {% endif %}
         </form>
     </div>
 
