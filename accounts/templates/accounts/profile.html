@@ -260,9 +260,13 @@
                             </form>
                             </div>
                             <div class="LLRR-button-container">
-                            <form>
-                                <button type="button" class="link-style">Order Box</button>
-                            </form>
+                                {% if ticket.outfit1 %}
+                                    <form>
+                                        <button type="button" class="link-style">Order Box</button>
+                                    </form>
+                                {% else %}
+                                    <button type="button" class="link-style">Preparing</button>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
