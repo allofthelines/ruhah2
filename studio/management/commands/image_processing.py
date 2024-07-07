@@ -56,6 +56,8 @@ def pack_images(images, canvas):
     # top_images = [img for img in images if img['category'] == 'top']
     # bottom_images = [img for img in images if img['category'] == 'bottom']
 
+    # EDW PRWTH FORA DIALEGW TIS EIKONES POU THA XRHSIMOPOIHSW
+    # EXW HDH FTIAKSEI TO IMAGES DICTIONARY STHN ARXH TOU CREATE_COMPOSITE_IMAGE
     top_images = []
     other_images = []
     top_count = 0
