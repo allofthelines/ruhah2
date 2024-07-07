@@ -31,7 +31,7 @@
             {% if user.is_authenticated %}
                 <button type="submit" name="fit_form">Submit Outfit Ask</button>
             {% else %}
-                <button name="fit_form">Login to Submit</button>
+                <button type="submit" name="fit_form" disabled>Login to Submit</button>
             {% endif %}
         </form>
     </div>
