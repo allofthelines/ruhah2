@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm
 import json
 from django.urls import reverse
+from django.middleware.csrf import get_token
+
 
 def signup(request):
     if request.method == 'POST':
