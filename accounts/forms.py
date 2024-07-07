@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import CustomUser, Customer, PortraitUpload, InviteCode
 from django.contrib.auth.models import User
+import re
+
 
 
 
