@@ -23,7 +23,7 @@
             {% with ticket.creator_id.lifeform as creator_lifeform %}
               {% if creator_id in following_user_ids %}
                 <tr style="background-color: #FDFD96;"> <!--light yellow-->
-              {% elif creator_lifeform != 'human' %}
+              {% elif creator_lifeform == 'human' %}
                 <tr style="background-color: #F5F5F5;"> <!--light grey-->
               {% else %}
                 <tr>

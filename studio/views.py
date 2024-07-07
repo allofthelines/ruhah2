@@ -38,7 +38,7 @@ def studio_tickets(request):
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in page_obj if
                             ticket.creator_id.id != request.user.id and # ...if its the same guy
-                            ticket.has_submitted_outfits(request.user) and
+                            ticket.has_submitted_outfits(request.user) and # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles] # ...user's studio_styles
 
         # Additional filtering based on studio_visibility
