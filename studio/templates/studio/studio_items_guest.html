@@ -23,7 +23,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        {% if ticket.asktype == 'box' %}
+        <tr style="background-color: #FDFD96;"> <!--light yellow-->
+        {% elif ticket.asktype == 'outfit' %}
+        <tr style="background-color: #F5F5F5;"> <!--light grey-->
+        {% endif %}
             <td>{{ ticket.style1.style_name }}</td>
             <!-- <td>{{ ticket.occasion }}</td> -->
             <td style="word-break: break-word;">{{ ticket.notes }}</td>
