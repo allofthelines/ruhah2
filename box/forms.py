@@ -29,7 +29,7 @@ class TicketForm(forms.Form):
         ('XL', 'XL'),
     ]
 
-    FILTER_LIKED_CHOICES = [
+    CATALOGUE_CHOICES = [
         ('no_filter', 'no filter'),
         ('liked_only', 'liked items only'),
     ]
@@ -48,7 +48,7 @@ class TicketForm(forms.Form):
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
     style2 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style 2', required=False)
-    filter_liked = forms.ChoiceField(choices=FILTER_LIKED_CHOICES, label='Filter')
+    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue')
     occasion = forms.ChoiceField(choices=OCCASION_CHOICES, label='Occasion', required=False)
     condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition')
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')
@@ -66,7 +66,7 @@ class TicketForm(forms.Form):
 
 class AskFitForm(forms.Form):
 
-    FILTER_LIKED_CHOICES = [
+    CATALOGUE_CHOICES = [
         ('no_filter', 'no filter'),
         ('liked_only', 'liked items only'),
     ]
@@ -77,7 +77,7 @@ class AskFitForm(forms.Form):
         casual_style = None
 
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
-    filter_liked = forms.ChoiceField(choices=FILTER_LIKED_CHOICES, label='Filter')
+    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 30,
@@ -94,7 +94,7 @@ class AskBoxForm(forms.Form):
         ('XL', 'XL'),
     ]
 
-    FILTER_LIKED_CHOICES = [
+    CATALOGUE_CHOICES = [
         ('no_filter', 'no filter'),
         ('liked_only', 'liked items only'),
     ]
@@ -112,7 +112,7 @@ class AskBoxForm(forms.Form):
 
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
-    filter_liked = forms.ChoiceField(choices=FILTER_LIKED_CHOICES, label='Filter')
+    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue')
     condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition')
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={

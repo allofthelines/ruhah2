@@ -38,7 +38,7 @@ class Ticket(models.Model):
         ('box', 'box'),
     ]
 
-    FILTER_LIKED_CHOICES = [
+    CATALOGUE_CHOICES = [
         ('no_filter','no filter'),
         ('liked_only', 'liked only'),
     ]
@@ -46,7 +46,7 @@ class Ticket(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='notpaid')
     # type = models.CharField(max_length=30, choices=TYPE_CHOICES, default='styled_outfits')
     asktype = models.CharField(max_length=30, choices=ASKTYPE_CHOICES, default='outfit')
-    filter_liked = models.CharField(max_length=30, choices=FILTER_LIKED_CHOICES, default='no_filter')
+    catalogue = models.CharField(max_length=30, choices=CATALOGUE_CHOICES, default='no_filter')
     timestamp = models.DateTimeField(default=timezone.now)
     creator_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     creator_profile_visibility = models.CharField(max_length=10, choices=[('show', 'Show'), ('hide', 'Hide')],

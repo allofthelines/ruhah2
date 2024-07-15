@@ -135,8 +135,8 @@ def studio_items(request, ticket_id):
             Q(cat='dress')
         ).distinct()  # Adding distinct to avoid duplicates
 
-        # Additional filter if ticket.filter_liked is 'liked_only'
-        if ticket.filter_liked == 'liked_only':
+        # Additional filter if ticket.catalogue is 'liked_only'
+        if ticket.catalogue == 'liked_only':
             liked_item_ids = UserItemLikes.objects.filter(
                 liker=ticket.creator_id
             ).values_list('item', flat=True)
@@ -331,8 +331,8 @@ def item_search(request, ticket_id):
             Q(cat='accessory')
         ).distinct()  # Adding distinct to avoid duplicates
 
-        # Additional filter if ticket.filter_liked is 'liked_only'
-        if ticket.filter_liked == 'liked_only':
+        # Additional filter if ticket.catalogue is 'liked_only'
+        if ticket.catalogue == 'liked_only':
             liked_item_ids = UserItemLikes.objects.filter(
                 liker=ticket.creator_id
             ).values_list('item', flat=True)
