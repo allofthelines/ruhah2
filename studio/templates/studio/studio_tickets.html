@@ -25,12 +25,10 @@
                 <tr style="background-color: #FDFD96;"> <!--light yellow-->
               {% elif ticket.asktype == 'outfit' %}
                 <tr style="background-color: #F5F5F5;"> <!--light grey-->
-              <!-- commented out alla krataw to logic
               {% elif creator_id in following_user_ids %}
-                <tr style="background-color: #FDFD96;"> light yellow
+                <tr style="background-color: #F69697;"> <!--light red-->
               {% elif creator_lifeform == 'human' %}
-                <tr style="background-color: #F5F5F5;"> light grey
-              -->
+                <tr style="background-color: #F69697;"> <!--light red-->
               {% else %}
                 <tr>
               {% endif %}
