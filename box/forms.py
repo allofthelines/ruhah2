@@ -30,7 +30,7 @@ class TicketForm(forms.Form):
     ]
 
     CATALOGUE_CHOICES = [
-        ('full_catalogue', 'full catalogue'),
+        ('all_items', 'all items'),
         ('liked_only', 'liked items only'),
     ]
 
@@ -67,7 +67,7 @@ class TicketForm(forms.Form):
 class AskFitForm(forms.Form):
 
     CATALOGUE_CHOICES = [
-        ('full_catalogue', 'full catalogue'),
+        ('all_items', 'all items'),
         ('liked_only', 'liked items only'),
     ]
 
@@ -95,7 +95,7 @@ class AskBoxForm(forms.Form):
     ]
 
     CATALOGUE_CHOICES = [
-        ('full_catalogue', 'full catalogue'),
+        ('all_items', 'all items'),
         ('liked_only', 'liked items only'),
     ]
 
