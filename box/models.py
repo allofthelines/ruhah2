@@ -72,7 +72,7 @@ class Ticket(models.Model):
     maximum_outfits = models.IntegerField(default=5)
     current_outfits = models.IntegerField(default=0)
 
-    def has_submitted_outfits(self, user, max_outfits=2):
+    def has_submitted_outfits(self, user, max_outfits=1):
         return self.outfits_all.filter(maker_id=user).count() < max_outfits
 
     def __str__(self):
