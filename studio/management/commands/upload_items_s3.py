@@ -5,6 +5,12 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 import django
 
+"""
+vale eikones photoshoparismenes ston LOCAL fakelo /media/items-temp
+me onomata 1.png 2.png 3.png etc
+apla anevazei aftes tis fwtografies sto s3 me afta ta onomata
+"""
+
 # Initialize Django settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ruhah.settings')
 django.setup()
