@@ -13,26 +13,28 @@
     </tr>
 
     {% for outfit in page_obj.object_list %}
-      <tr>
-        <!--<td>{{ outfit.rank }}</td>-->
-        <!-- <td>{{ outfit.rating }}</td> -->
-        <td>
-          <img src="{{ outfit.image.url }}" class="outfit-image">
-          <br>
-          <span>
-            {% if outfit.maker_id %}
-              {% if outfit.maker_id.lifeform == 'human' %}
-                <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
-              {% else %}
-                <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">#{{ outfit.maker_id.username }}</a>
-              {% endif %}
-            {% else %}
-              @Unknown
-            {% endif %}
-          </span>
-          <br><br>
-        </td>
-      </tr>
+        {% if outfit.timestamp >= now|date:"Y-m-d H:i:s"|add:"-7 days" %}
+          <tr>
+            <!--<td>{{ outfit.rank }}</td>-->
+            <!-- <td>{{ outfit.rating }}</td> -->
+            <td>
+              <img src="{{ outfit.image.url }}" class="outfit-image">
+              <br>
+              <span>
+                {% if outfit.maker_id %}
+                  {% if outfit.maker_id.lifeform == 'human' %}
+                    <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
+                  {% else %}
+                    <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">#{{ outfit.maker_id.username }}</a>
+                  {% endif %}
+                {% else %}
+                  @Unknown
+                {% endif %}
+              </span>
+              <br><br>
+            </td>
+          </tr>
+        {% endif %}
     {% endfor %}
   </table>
 
