@@ -60,7 +60,7 @@ class Command(BaseCommand):
             temp_upload_id = item.get('temp_upload_id')
             if temp_upload_id and f"{temp_upload_id}.png" in new_names:
                 new_image_name = new_names[f"{temp_upload_id}.png"]
-                item['temp_upload_id'] = new_image_name.split('.')[0]
+                item['itemid'] = new_image_name.split('.')[0]
                 item['image'] = f'items/{new_image_name}'
 
         with open(json_file_path, 'w') as file:
