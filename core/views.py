@@ -53,7 +53,7 @@ class TrendingView(ListView):
         queryset = super().get_queryset()
 
         # Filter outfits created within the last week
-        one_week_ago = timezone.now() - timedelta(days=7)
+        one_week_ago = timezone.now() - timedelta(days=10)
         queryset = queryset.filter(timestamp__gte=one_week_ago)
 
         if user.is_authenticated:
