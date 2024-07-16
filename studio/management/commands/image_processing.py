@@ -114,7 +114,7 @@ def pack_images(images, canvas):
     if bottom_images:
         bottom_image = bottom_images[0]['image']
         if 'dress' in bottom_images[0]['category']:
-            target_height = int(canvas_height * 0.6)
+            target_height = int(canvas_height * 0.8)
         else:
             target_height = canvas_height // 2
 
