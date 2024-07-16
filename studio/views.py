@@ -121,6 +121,7 @@ def studio_items(request, ticket_id):
                 query &= Q(tags__icontains=word)
             items = items.filter(query)
 
+        # edw filtrarei gia kathe kathgoria opote borw na kanw skip to epomeno
         if category and category != 'all':
             items = items.filter(cat=category)
 
