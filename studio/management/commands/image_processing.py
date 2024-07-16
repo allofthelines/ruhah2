@@ -123,17 +123,13 @@ def pack_images(images, canvas):
         new_height = int(bottom_image.height * scale_factor)
         bottom_image = bottom_image.resize((new_width, new_height), Image.ANTIALIAS)
 
-        if 'dress' in bottom_images[0]['category']:
-            x = (canvas_width - bottom_image.width) // 2
-            y = (canvas_height - bottom_image.height) // 2
-        else:
-            # Center the image and apply a random shift
-            x_center = (canvas_width - bottom_image.width) // 2
-            x_shift = random.randint(-int(canvas_width * 0.1), int(canvas_width * 0.1))
-            x = x_center + x_shift
+        # Center the image and apply a random shift
+        x_center = (canvas_width - bottom_image.width) // 2
+        x_shift = random.randint(-int(canvas_width * 0.1), int(canvas_width * 0.1))
+        x = x_center + x_shift
 
-            # Allow placement in the bottom 60% of the canvas height
-            y = random.randint(int(canvas_height * 0.4), canvas_height - new_height)
+        # Allow placement in the bottom 60% of the canvas height
+        y = random.randint(int(canvas_height * 0.4), canvas_height - new_height)
 
         canvas.paste(bottom_image, (x, y), bottom_image)
         positions.append((x, y, bottom_image.width, bottom_image.height))
