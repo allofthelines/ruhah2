@@ -1,92 +1,92 @@
 [
     {
-        "itemid": "12910041",
+        "temp_upload_id": "1",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "Navy Blue Puff Sleeve Blouse",
-        "image": "items/12910041.png",
-        "cat": "top",
-        "tags": "navy blue puff sleeve blouse"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "24912581",
+        "temp_upload_id": "2",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "White Strapless Top",
-        "image": "items/24912581.png",
-        "cat": "top",
-        "tags": "white strapless top"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "35297338",
+        "temp_upload_id": "3",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "White Buttoned Top",
-        "image": "items/35297338.png",
-        "cat": "top",
-        "tags": "white short sleeve buttoned top"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "39713684",
+        "temp_upload_id": "4",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "Yellow Floral Puff Sleeve Blouse",
-        "image": "items/39713684.png",
-        "cat": "top",
-        "tags": "yellow floral puff sleeve blouse"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "53145870",
+        "temp_upload_id": "5",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "Pink Pleated Top",
-        "image": "items/53145870.png",
-        "cat": "top",
-        "tags": "pink pleated sleeveless top"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "53162306",
+        "temp_upload_id": "6",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "Striped Knit Top",
-        "image": "items/53162306.png",
-        "cat": "top",
-        "tags": "white and blue striped knit top"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "62734844",
+        "temp_upload_id": "7",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "Multicolor Blouse",
-        "image": "items/62734844.png",
-        "cat": "top",
-        "tags": "multicolor long sleeve blouse"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "79149108",
+        "temp_upload_id": "8",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "White Floral Puff Sleeve Top",
-        "image": "items/79149108.png",
-        "cat": "top",
-        "tags": "white floral puff sleeve top"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     },
     {
-        "itemid": "92307886",
+        "temp_upload_id": "9",
+        "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "Grey Graphic T-Shirt",
-        "image": "items/92307886.png",
-        "cat": "top",
-        "tags": "grey graphic t-shirt"
-    },
-    {
-        "itemid": "94903946",
-        "ecommerce_product_id": "",
-        "modality": "virtual",
-        "name": "White Tied Waist Top",
-        "image": "items/94903946.png",
-        "cat": "top",
-        "tags": "white short sleeve tied waist top"
+        "modality": "",
+        "name": "",
+        "image": "items/xxxxxxxx.png",
+        "cat": "",
+        "tags": ""
     }
 ]
