@@ -22,9 +22,6 @@ def home(request):
             form.save()
         return redirect("core:home")
 
-    # Fetch ticket IDs that have at least two outfits associated with them
-    ticket_ids_with_at_least_two_outfits = Outfit.objects.values('ticket_id').annotate(outfit_count=Count('id')).filter(
-        outfit_count__gte=2)
     # Fetch ticket IDs that have at least two outfits associated with them and are not 'open' or 'closed'
     ticket_ids_with_at_least_two_outfits = Outfit.objects.values('ticket_id').annotate(outfit_count=Count('id')).filter(
         outfit_count__gte=2, # condition 1
