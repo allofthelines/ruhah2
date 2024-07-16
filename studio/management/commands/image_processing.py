@@ -137,7 +137,7 @@ def pack_images(images, canvas):
 
             y_center = (canvas_height - bottom_image.height) // 2
             y_shift = random.randint(0, int(canvas_height * 0.1))
-            y = y_center + y_shift - int(canvas_height * 0.2)  # Position slightly below the center
+            y = y_center + y_shift + int(canvas_height * 0.2)  # Position slightly below the center
         else:
             # Center the image and apply a random shift
             x_center = (canvas_width - bottom_image.width) // 2
