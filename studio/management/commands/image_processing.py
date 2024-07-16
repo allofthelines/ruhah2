@@ -72,13 +72,6 @@ def pack_images(images, canvas):
     footwear_images = [img for img in images if img['category'] == 'footwear']
     other_images.extend([img for img in images if img['category'] not in ['top', 'bottom', 'footwear', 'dress']])
 
-    # Check if there is a dress in bottom_images
-    # afto ginetai gia na mpei to top sta deksia/aristera kai oxi panw apo to dress
-    # dhladh na exei syberifora san other
-    if any(img['category'] == 'dress' for img in bottom_images):
-        if top_images:
-            other_images.append(top_images.pop())
-
     # Resize top and bottom images to have the same height equal to half the height of the canvas
     if top_images:
         top_image = top_images[0]['image']
@@ -121,7 +114,7 @@ def pack_images(images, canvas):
     if bottom_images:
         bottom_image = bottom_images[0]['image']
         if 'dress' in bottom_images[0]['category']:
-            target_height = int(canvas_height * 0.7)
+            target_height = int(canvas_height * 0.6)
         else:
             target_height = canvas_height // 2
 
@@ -131,13 +124,8 @@ def pack_images(images, canvas):
         bottom_image = bottom_image.resize((new_width, new_height), Image.ANTIALIAS)
 
         if 'dress' in bottom_images[0]['category']:
-            x_center = (canvas_width - bottom_image.width) // 2
-            x_shift = random.randint(-int(canvas_width * 0.1), int(canvas_width * 0.1))
-            x = x_center + x_shift
-
-            y_center = (canvas_height - bottom_image.height) // 2
-            y_shift = random.randint(0, +int(canvas_height * 0.1))
-            y = y_center + y_shift + int(canvas_height * 0.1)  # Position slightly below the center
+            x = (canvas_width - bottom_image.width) // 2
+            y = (canvas_height - bottom_image.height) // 2
         else:
             # Center the image and apply a random shift
             x_center = (canvas_width - bottom_image.width) // 2
