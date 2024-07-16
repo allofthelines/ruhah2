@@ -124,16 +124,17 @@ def studio_items(request, ticket_id):
         if category and category != 'all':
             items = items.filter(cat=category)
 
-        # Filter items based on the ticket's sizes
-        items = items.filter(
-            Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
-            Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
-            Q(cat='footwear') & (
-                Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
-            ) |
-            Q(cat='accessory') |
-            Q(cat='dress')
-        ).distinct()  # Adding distinct to avoid duplicates
+        if ticket.asktype != 'outfit':
+            # Filter items based on the ticket's sizes
+            items = items.filter(
+                Q(cat='top', sizes_xyz__name=ticket.size_top_xyz) |
+                Q(cat='bottom', sizes_xyz__name=ticket.size_bottom_xyz) |
+                Q(cat='footwear') & (
+                    Q(sizes_shoe_eu__size=ticket.size_shoe_eu) | Q(sizes_shoe_uk__size=ticket.size_shoe_uk)
+                ) |
+                Q(cat='accessory') |
+                Q(cat='dress')
+            ).distinct()  # Adding distinct to avoid duplicates
 
         # Additional filter if ticket.catalogue is 'liked_only'
         if ticket.catalogue == 'liked_only':
