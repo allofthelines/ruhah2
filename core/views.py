@@ -31,6 +31,10 @@ def home(request):
         chosen_ticket_id = random.choice(ticket_ids_with_at_least_two_outfits)['ticket_id']
         # Get all outfits with the chosen ticket ID
         outfits_with_ticket_id = list(Outfit.objects.filter(ticket_id=chosen_ticket_id))
+
+        # New condition: Filter out outfits with tickets having status 'open' or 'closed'
+        outfits_with_ticket_id = [outfit for outfit in outfits_with_ticket_id if outfit.ticket.status not in ['open', 'closed']]
+
         # Randomly select two outfits
         outfits = random.sample(outfits_with_ticket_id, k=2)
     else:
