@@ -50,6 +50,10 @@ class TrendingView(ListView):
         user = self.request.user
         queryset = super().get_queryset()
 
+        # Filter outfits created within the last week
+        one_week_ago = timezone.now() - timedelta(days=7)
+        queryset = queryset.filter(timestamp__gte=one_week_ago)
+
         if user.is_authenticated:
             if user.trending_mode == 'following':
                 following_ids = UserFollows.objects.filter(user_from=user).values_list('user_to_id', flat=True)
