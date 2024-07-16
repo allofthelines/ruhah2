@@ -72,6 +72,13 @@ def pack_images(images, canvas):
     footwear_images = [img for img in images if img['category'] == 'footwear']
     other_images.extend([img for img in images if img['category'] not in ['top', 'bottom', 'footwear', 'dress']])
 
+    # Check if there is a dress in bottom_images
+    # afto ginetai gia na mpei to top sta deksia/aristera kai oxi panw apo to dress
+    # dhladh na exei syberifora san other
+    if any(img['category'] == 'dress' for img in bottom_images):
+        if top_images:
+            other_images.append(top_images.pop())
+
     # Resize top and bottom images to have the same height equal to half the height of the canvas
     if top_images:
         top_image = top_images[0]['image']
