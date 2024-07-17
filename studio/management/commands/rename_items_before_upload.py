@@ -30,8 +30,8 @@ JSON_FILE_PATH = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', '
 class Command(BaseCommand):
     help = 'Rename images to unique 8-digit numbers and update the JSON file'
 
-    AWS_ACCESS_KEY = 'YOUR_AWS_ACCESS_KEY'
-    AWS_SECRET_KEY = 'YOUR_AWS_SECRET_KEY'
+    AWS_ACCESS_KEY = 'AKIA3FLD37VQC5XLDFVV'
+    AWS_SECRET_KEY = '+UrGJhTOKYzqQR6FmtCWHxIk9AN7UESnno30rVB6'
     BUCKET_NAME = 'ruhahbucket'
 
     def download_csv(self):
