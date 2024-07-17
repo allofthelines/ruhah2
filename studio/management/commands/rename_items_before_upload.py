@@ -5,6 +5,8 @@ import random
 from django.core.management.base import BaseCommand
 from django.conf import settings
 import django
+import boto3
+from botocore.exceptions import NoCredentialsError
 
 """
 1.png 2.png klp se /media/item-temps
