@@ -60,12 +60,13 @@ class Command(BaseCommand):
         for root, _, files in os.walk(directory):
             for file in files:
                 if file.endswith('.png'):
+                    temp_upload_id = os.path.splitext(file)[0]  # Get the part before .png
                     new_name = self.generate_unique_id(existing_ids)
                     old_path = os.path.join(root, file)
                     new_path = os.path.join(root, f"{new_name}.png")
                     os.rename(old_path, new_path)
                     existing_ids.add(new_name)  # Add new name to existing_ids
-                    new_names[file] = f"{new_name}.png"
+                    new_names[temp_upload_id] = f"{new_name}.png"
                     print(f"Renamed {old_path} to {new_path}")
 
         return new_names
@@ -77,13 +78,20 @@ class Command(BaseCommand):
                 return new_id
 
     def update_json_file(self, json_file_path, new_names):
-        with open(json_file_path, 'r') as file:
-            data = json.load(file)
+        try:
+            with open(json_file_path, 'r') as file:
+                content = file.read().strip()
+                if not content:
+                    raise ValueError("The JSON file is empty.")
+                data = json.loads(content)
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+            return
 
         for item in data:
             temp_upload_id = item.get('temp_upload_id')
-            if temp_upload_id and f"{temp_upload_id}.png" in new_names:
-                new_image_name = new_names[f"{temp_upload_id}.png"]
+            if temp_upload_id in new_names:
+                new_image_name = new_names[temp_upload_id]
                 item['itemid'] = new_image_name.split('.')[0]
                 item['image'] = f'items/{new_image_name}'
 
