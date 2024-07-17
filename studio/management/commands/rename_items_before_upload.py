@@ -23,12 +23,34 @@ CSV_FILE_NAME = 'itemids.csv'
 LOCAL_CSV_FILE = 'local_itemids.csv'
 JSON_FILE_PATH = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
 
+
+
 class Command(BaseCommand):
     help = 'Rename images to unique 8-digit numbers and update the JSON file'
 
+    AWS_ACCESS_KEY = 'YOUR_AWS_ACCESS_KEY'
+    AWS_SECRET_KEY = 'YOUR_AWS_SECRET_KEY'
+    BUCKET_NAME = 'ruhahbucket'
+
     def download_csv(self):
-        # In this implementation, the CSV is assumed to be local and already present as LOCAL_CSV_FILE.
-        pass
+        s3 = boto3.client('s3', aws_access_key_id=self.AWS_ACCESS_KEY, aws_secret_access_key=self.AWS_SECRET_KEY)
+        try:
+            s3.download_file(self.BUCKET_NAME, CSV_FILE_NAME, LOCAL_CSV_FILE)
+            print("Download Successful")
+        except FileNotFoundError:
+            print("The file was not found")
+        except NoCredentialsError:
+            print("Credentials not available")
+
+    def upload_csv(self):
+        s3 = boto3.client('s3', aws_access_key_id=self.AWS_ACCESS_KEY, aws_secret_access_key=self.AWS_SECRET_KEY)
+        try:
+            s3.upload_file(LOCAL_CSV_FILE, self.BUCKET_NAME, CSV_FILE_NAME)
+            print("Upload Successful")
+        except FileNotFoundError:
+            print("The file was not found")
+        except NoCredentialsError:
+            print("Credentials not available")
 
     def rename_files(self, directory, existing_ids):
         new_names = {}
@@ -93,5 +115,8 @@ class Command(BaseCommand):
         # Append new item IDs to the CSV
         for new_name in new_names.values():
             self.append_item_id_to_csv(new_name.split('.')[0])
+
+        # Upload the updated CSV file back to S3
+        self.upload_csv()
 
         self.stdout.write(self.style.SUCCESS('Finished renaming images and updating JSON file.'))
