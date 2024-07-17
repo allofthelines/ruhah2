@@ -188,7 +188,8 @@ a:visited {
   margin-top: 25px;
 
   font-family: 'Michroma';
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
 }
 
 #main-menu {
