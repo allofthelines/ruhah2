@@ -11,9 +11,9 @@ NEW IMAGE UPLOAD PIPELINE se S3 KAI POSTGRES (BULK)
 5. manually rename 1.png 2.png
 6. manually update /studio/static/studio/new_items.json
 
-7. python manage.py rename_items_before_upload.py
-8. python manage.py upload_items_s3.py
-9. python manage.py upload_items_json.py
+7. python manage.py rename_items_before_upload
+8. python manage.py upload_items_s3
+9. heroku run python manage.py upload_items_json
 
 
 """
