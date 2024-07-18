@@ -111,6 +111,7 @@
                         <br>
                         {{ customer_form.height.label_tag }} {{ customer_form.height }}<br>
                         {{ customer_form.weight.label_tag }} {{ customer_form.weight }}<br>
+                        <br>
                     </p>
                     <input type="hidden" name="customer_form" value="customer_form">
                     <button type="submit">Save changes</button>
@@ -125,6 +126,7 @@
                     <br>
                     Height: <span style="color: grey;">{{ user.customer.height }}</span> cm<br>
                     Weight: <span style="color: grey;">{{ user.customer.weight }}</span> kg<br>
+                    <br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit" value="customer">
