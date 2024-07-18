@@ -73,6 +73,11 @@ class CustomUser(AbstractUser):
         new_user = self.pk is None
         super().save(*args, **kwargs)
 
+        # Create 3 invite codes for new users
+        if new_user:
+            for _ in range(3):
+                InviteCode.objects.create(inviter=self)
+
 
         """ thaprepe na doulevei alla den doulevei, lysh me signal
         if new_user:
