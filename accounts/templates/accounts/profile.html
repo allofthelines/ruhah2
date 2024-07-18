@@ -61,8 +61,6 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-                        <br>
-                        <br>
                     </p>
                     <input type="hidden" name="user_form" value="user_form">
                     <button type="submit">Save changes</button>
@@ -86,8 +84,6 @@
                             {% endfor %}
                         </div>
                     {% endif %}
-                    <br>
-                    <br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
                     <input type="hidden" name="edit" value="user">
