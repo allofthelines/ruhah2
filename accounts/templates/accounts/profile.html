@@ -143,7 +143,7 @@
 
 
 
-
+        {% comment %}
         <!-- Likes Profile Section -->
         <div id="likes" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBB">
@@ -158,6 +158,32 @@
                 {% endfor %}
             </div>
         </div>
+        {% endcomment %}
+
+        <!-- Likes Profile Section -->
+        <div id="likes" class="content-section" style="display: none; padding-top: 15px;">
+            <div id="contBBB">
+                {% for like in user_likes %}
+                    <div class="contAAA" id="like-{{ like.id }}">
+                        <img src="{{ like.item.image.url }}" alt="Liked Item Image">
+                        <form action="{% url 'accounts:remove_like' like.id %}?next={% url 'accounts:profile' %}#likes" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Remove</button>
+                        </form>
+                    </div>
+                {% endfor %}
+                {% if user_likes %}
+                    <div class="contAAA" id="like-all">
+                        ALL LIKES
+                        <form action="{% url 'accounts:remove_all_likes' %}?next={% url 'accounts:profile' %}#likes" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Remove All</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
 
 
     {% comment %}         LIKES SECTION GRID V        {% endcomment %}

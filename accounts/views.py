@@ -404,6 +404,12 @@ def remove_like(request, like_id):
     next_url = request.GET.get('next', reverse('accounts:profile') + '#likes')  # Default to 'accounts:profile#likes' if 'next' not provided
     return redirect(next_url)
 
+@login_required
+def remove_all_likes(request):
+    if request.method == "POST":
+        UserItemLikes.objects.filter(liker=request.user).delete()
+    next_url = request.GET.get('next', reverse('accounts:profile') + '#likes')  # Default to 'accounts:profile#likes' if 'next' not provided
+    return redirect(next_url)
 
 
 def remove_ask(request, ticket_id):

@@ -14,6 +14,7 @@ urlpatterns = [
 
     path('like-outfit/', views.like_outfit, name='like_outfit'),
     path('remove-like/<int:like_id>/', views.remove_like, name='remove_like'),
+    path('remove-all-likes/', views.remove_all_likes, name='remove_all_likes'),
 
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html', next_page='core:home'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
