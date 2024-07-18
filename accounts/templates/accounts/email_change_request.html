@@ -1,7 +1,10 @@
 {% extends "core/base.html" %}
 
+{% block page-header %}
+    Change Email
+{% endblock %}
+
 {% block content %}
-  <h1>Change Email</h1>
   <p>Current Email: {{ user.email }}</p>
   <form method="post">
     {% csrf_token %}

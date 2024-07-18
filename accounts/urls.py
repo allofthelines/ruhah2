@@ -35,7 +35,7 @@ urlpatterns = [
     path('<str:username>/followers/', views.followers_list, name='followers_list'),
     path('<str:username>/following/', views.following_list, name='following_list'),
 
-    path('change-email/', email_change_request, name='change_email'),
-    path('email-change-requested/', email_change_requested, name='email_change_requested'),
-    path('confirm-email/<str:uidb64>/<str:token>/', confirm_email, name='confirm_email'),
+    path('change-email/', views.email_change_request, name='change_email'),
+    path('email-change-requested/', views.email_change_requested, name='email_change_requested'),
+    path('confirm-email/<str:uidb64>/<str:token>/', views.confirm_email, name='confirm_email'),
 ]
