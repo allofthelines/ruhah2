@@ -172,13 +172,18 @@
                         </form>
                     </div>
                 {% endfor %}
+                {% if user_likes %}
+                    <div class="contAAA" id="like-all">
+                        <div class="all-likes-box">
+                            ALL LIKES
+                        </div>
+                        <form action="{% url 'accounts:remove_all_likes' %}?next={% url 'accounts:profile' %}#likes" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Remove All</button>
+                        </form>
+                    </div>
+                {% endif %}
             </div>
-            {% if user_likes %}
-                    <form action="{% url 'accounts:remove_all_likes' %}?next={% url 'accounts:profile' %}#likes" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="link-style">Remove All</button>
-                    </form>
-            {% endif %}
         </div>
 
 
@@ -228,6 +233,17 @@
         font-family: inherit; /* Inherit the font family from parent elements */
         font-size: inherit; /* Optionally ensure the font size is also inherited */
         font-weight:400;
+    }
+
+    .all-likes-box {
+        width: 100%;
+        height: 0;
+        padding-top: 100%; /* This makes the height equal to the width, maintaining a square aspect ratio */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0; /* Optional: Add background color for visibility */
+        border-bottom: 1px solid black; /* Ensure it matches the border style of the images */
     }
 
     @media (max-width: 768px) {
