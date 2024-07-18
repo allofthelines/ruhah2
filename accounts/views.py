@@ -450,20 +450,20 @@ def email_change_request(request):
     return render(request, 'accounts/email_change_request.html', {'form': form})
 
 def send_confirmation_email(user):
-    token = default_token_generator.make_token(user)
-    uid = urlsafe_base64_encode(force_bytes(user.pk))
-    confirm_url = f"{settings.EMAIL_DOMAIN}/accounts/confirm-email/{uid}/{token}/"
-    message = render_to_string('accounts/email_change_confirmation.html', {
-        'user': user,
-        'confirm_url': confirm_url
-    })
-    send_mail(
-        'Confirm your email address',
-        message,
-        'noreply@yourdomain.com',
-        [user.new_email],
-        fail_silently=False,
-    )
+    subject = "Confirm Your Email Address"
+    from_email = 'RUHAH <fumioxyz1@gmail.com>'
+    email_template_name = "accounts/email_change_confirmation.html"
+    c = {
+        "email": user.new_email,
+        'domain': settings.EMAIL_DOMAIN,
+        'protocol': settings.EMAIL_PROTOCOL,
+        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+        "user": user,
+        'token': default_token_generator.make_token(user),
+    }
+    email = render_to_string(email_template_name, c)
+    send_mail(subject, email, from_email, [user.new_email], fail_silently=False)
+
 
 def email_change_requested(request):
     return render(request, 'accounts/email_change_requested.html')

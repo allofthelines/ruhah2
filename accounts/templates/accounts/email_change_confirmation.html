@@ -1,4 +1,8 @@
-<p>Hi {{ user.username }},</p>
-<p>To confirm your email change, please click the following link:</p>
-<p><a href="{{ confirm_url }}">{{ confirm_url }}</a></p>
-<p>If you did not request this change, please ignore this email.</p>
+{% autoescape off %}
+Hello {{ user.username }},
+
+Click the link below to confirm your email change:
+{{ protocol }}://{{ domain }}{% url 'accounts:confirm_email' uidb64=uid token=token %}
+
+Thanks
+{% endautoescape %}

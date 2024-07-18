@@ -45,7 +45,7 @@
                     {% csrf_token %}
                     <p style="margin-top: 7px; text-align: left;">
                         Username: @{{ user_form.username }}<br>
-                        Old Email Field (Ignore): {{ user_form.email }}<br>
+                        <!--Old Email Field (Ignore): {{ user_form.email }}<br>-->
                         Email: <span style="color: grey;">{{ user.email }}</span> <a href="{% url 'accounts:change_email' %}">Change</a><br>
                         <br>
                         <label for="id_pfp">Profile Picture: </label>
