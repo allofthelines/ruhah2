@@ -80,7 +80,6 @@
                         {% for invite_code in invite_codes %}
                             <span style="color: grey;">{{ invite_code.invite_code }}</span><br>
                         {% endfor %}
-                        <br>
                     {% endif %}
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
