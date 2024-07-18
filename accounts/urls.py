@@ -29,13 +29,13 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', views.CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'), name='password_reset_complete'),
 
+    path('change-email/', views.email_change_request, name='change_email'),
+    path('email-change-requested/', views.email_change_requested, name='email_change_requested'),
+    path('confirm-email/<str:uidb64>/<str:token>/', views.confirm_email, name='confirm_email'),
+
     path('<str:username>/', views.public_profile, name='public_profile'),
     path('follow/<str:username>/', views.follow, name='follow'),
     path('unfollow/<str:username>/', views.unfollow, name='unfollow'),
     path('<str:username>/followers/', views.followers_list, name='followers_list'),
     path('<str:username>/following/', views.following_list, name='following_list'),
-
-    path('change-email/', views.email_change_request, name='change_email'),
-    path('email-change-requested/', views.email_change_requested, name='email_change_requested'),
-    path('confirm-email/<str:uidb64>/<str:token>/', views.confirm_email, name='confirm_email'),
 ]
