@@ -54,12 +54,10 @@
                         Credits: {{ user.credits }}<br>
                         <br>
                         {% if invite_codes %}
-                            <div>
-                                Invite Codes:<br>
-                                {% for invite_code in invite_codes %}
-                                    ({{ invite_code.invite_code }})<br>
-                                {% endfor %}
-                            </div>
+                            Invite Codes:<br>
+                            {% for invite_code in invite_codes %}
+                                {{ invite_code.invite_code }}<br>
+                            {% endfor %}
                             <br>
                         {% endif %}
                     </p>
@@ -78,12 +76,10 @@
                     Credits: {{ user.credits }}<br>
                     <br>
                     {% if invite_codes %}
-                        <div>
-                            Invite Codes:<br>
-                            {% for invite_code in invite_codes %}
-                                ({{ invite_code.invite_code }})<br>
-                            {% endfor %}
-                        </div>
+                        Invite Codes:<br>
+                        {% for invite_code in invite_codes %}
+                            {{ invite_code.invite_code }}<br>
+                        {% endfor %}
                         <br>
                     {% endif %}
                 </p>
