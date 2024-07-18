@@ -20,6 +20,12 @@ def home(request):
         form = OutfitRatingForm(request.POST)
         if form.is_valid():
             form.save()
+
+            # Increment the user's credits if they are logged in
+            if request.user.is_authenticated:
+                request.user.credits += 1
+                request.user.save()
+
         return redirect("core:home")
 
     # Fetch ticket IDs that have at least two outfits associated with them and are not 'open' or 'closed'
