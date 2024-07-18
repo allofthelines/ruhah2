@@ -13,10 +13,10 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ('lifeform',)
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('is_stylist', 'name', 'lifeform', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'studio_visibility', 'trending_styles', 'studio_styles', 'credits')}),
+        (None, {'fields': ('is_stylist', 'name', 'lifeform', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'studio_visibility', 'trending_styles', 'studio_styles', 'credits', 'new_email', 'email_change_requested_at')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('is_stylist', 'name', 'lifeform', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'studio_visibility', 'trending_styles', 'studio_styles', 'credits')}),
+        (None, {'fields': ('is_stylist', 'name', 'lifeform', 'bio', 'pfp', 'profile_visibility', 'trending_mode', 'studio_visibility', 'trending_styles', 'studio_styles', 'credits', 'new_email', 'email_change_requested_at')}),
     )
 admin.site.register(CustomUser, CustomUserAdmin)
 
