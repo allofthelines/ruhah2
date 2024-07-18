@@ -14,6 +14,8 @@ from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm
 import json
 from django.urls import reverse
 from django.middleware.csrf import get_token
+from django.utils import timezone
+
 
 
 def signup(request):
