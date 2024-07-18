@@ -116,6 +116,8 @@ def profile(request):
     editing = request.GET.get('edit') == 'true'
     editing_settings = request.GET.get('edit_settings') == 'true'
 
+    invite_codes = InviteCode.objects.filter(inviter=user, is_used=False)
+
     # Query the UserItemLikes model for the logged-in user
     user_likes = UserItemLikes.objects.filter(liker=user)
 
@@ -166,7 +168,8 @@ def profile(request):
         'editing': editing,
         'editing_settings': editing_settings,
         'user_likes': user_likes,
-        'user_tickets': user_tickets
+        'user_tickets': user_tickets,
+        'invite_codes': invite_codes,
     })
 
 

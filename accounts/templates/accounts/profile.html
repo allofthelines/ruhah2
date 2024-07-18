@@ -53,6 +53,16 @@
                         <br>
                         Credits: {{ user.credits }}<br>
                         <br>
+                        {% if invite_codes %}
+                            <div>
+                                <strong>Invite Codes:</strong><br>
+                                {% for invite_code in invite_codes %}
+                                    ({{ invite_code.invite_code }})<br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <br>
+                        <br>
                     </p>
                     <input type="hidden" name="user_form" value="user_form">
                     <button type="submit">Save changes</button>
@@ -67,6 +77,16 @@
                     Bio: <span style="color: grey;">{{ user.bio }}</span><br>
                     <br>
                     Credits: {{ user.credits }}<br>
+                    <br>
+                    {% if invite_codes %}
+                        <div>
+                            <strong>Invite Codes:</strong><br>
+                            {% for invite_code in invite_codes %}
+                                ({{ invite_code.invite_code }})<br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <br>
                     <br>
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
