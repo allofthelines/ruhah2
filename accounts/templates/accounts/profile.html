@@ -174,12 +174,10 @@
                 {% endfor %}
             </div>
             {% if user_likes %}
-                <div class="contAAA" id="like-all" style="margin-top: 2px;">
                     <form action="{% url 'accounts:remove_all_likes' %}?next={% url 'accounts:profile' %}#likes" method="POST">
                         {% csrf_token %}
                         <button type="submit" class="link-style">Remove All</button>
                     </form>
-                </div>
             {% endif %}
         </div>
 
