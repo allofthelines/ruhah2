@@ -56,7 +56,7 @@
                         {% if invite_codes %}
                             Invite Codes:<br>
                             {% for invite_code in invite_codes %}
-                                {{ invite_code.invite_code }}<br>
+                                <span style="color: grey;">{{ invite_code.invite_code }}</span><<br>
                             {% endfor %}
                             <br>
                         {% endif %}
@@ -78,7 +78,7 @@
                     {% if invite_codes %}
                         Invite Codes:<br>
                         {% for invite_code in invite_codes %}
-                            {{ invite_code.invite_code }}<br>
+                            <span style="color: grey;">{{ invite_code.invite_code }}</span><<br>
                         {% endfor %}
                         <br>
                     {% endif %}
