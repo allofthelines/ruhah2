@@ -175,7 +175,6 @@
                 {% if user_likes %}
                     <div class="contAAA" id="like-all">
                         <div class="all-likes-box">
-                            ALL LIKES
                         </div>
                         <form action="{% url 'accounts:remove_all_likes' %}?next={% url 'accounts:profile' %}#likes" method="POST">
                             {% csrf_token %}
@@ -242,7 +241,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #f0f0f0; /* Optional: Add background color for visibility */
+        /* background-color: #f0f0f0; /* Optional: Add background color for visibility */
         border-bottom: 1px solid black; /* Ensure it matches the border style of the images */
     }
 
