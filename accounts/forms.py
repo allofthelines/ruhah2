@@ -209,3 +209,9 @@ class ProfileSettingsForm(forms.ModelForm):
 
 
 
+class EmailChangeForm(forms.ModelForm):
+    new_email = forms.EmailField(label='New Email', required=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['new_email']

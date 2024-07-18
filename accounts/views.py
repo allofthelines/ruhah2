@@ -10,7 +10,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import login
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm
+from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm, EmailChangeForm
 import json
 from django.urls import reverse
 from django.middleware.csrf import get_token
@@ -420,3 +420,64 @@ def remove_outfit(request, outfit_id):
         next_url = request.GET.get('next', 'accounts:profile')
         return redirect(next_url)
     return redirect('accounts:profile')
+
+
+
+
+
+
+
+
+
+
+
+
+
+def email_change_request(request):
+    if request.method == 'POST':
+        form = EmailChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.new_email = form.cleaned_data['new_email']
+            user.email_change_requested_at = timezone.now()
+            user.save()
+            send_confirmation_email(user)
+            return redirect('accounts:email_change_requested')
+    else:
+        form = EmailChangeForm(instance=request.user)
+    return render(request, 'accounts/email_change_request.html', {'form': form})
+
+def send_confirmation_email(user):
+    token = default_token_generator.make_token(user)
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    confirm_url = f"{settings.EMAIL_DOMAIN}/accounts/confirm-email/{uid}/{token}/"
+    message = render_to_string('accounts/email_change_confirmation.html', {
+        'user': user,
+        'confirm_url': confirm_url
+    })
+    send_mail(
+        'Confirm your email address',
+        message,
+        'noreply@yourdomain.com',
+        [user.new_email],
+        fail_silently=False,
+    )
+
+def email_change_requested(request):
+    return render(request, 'accounts/email_change_requested.html')
+
+def confirm_email(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.email = user.new_email
+        user.new_email = None
+        user.email_change_requested_at = None
+        user.save()
+        return render(request, 'accounts/email_confirmed.html')
+    else:
+        return render(request, 'accounts/email_confirmation_failed.html')
