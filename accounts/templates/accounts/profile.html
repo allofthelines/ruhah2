@@ -55,11 +55,12 @@
                         <br>
                         {% if invite_codes %}
                             <div>
-                                <strong>Invite Codes:</strong><br>
+                                Invite Codes:<br>
                                 {% for invite_code in invite_codes %}
                                     ({{ invite_code.invite_code }})<br>
                                 {% endfor %}
                             </div>
+                            <br>
                         {% endif %}
                     </p>
                     <input type="hidden" name="user_form" value="user_form">
@@ -78,11 +79,12 @@
                     <br>
                     {% if invite_codes %}
                         <div>
-                            <strong>Invite Codes:</strong><br>
+                            Invite Codes:<br>
                             {% for invite_code in invite_codes %}
                                 ({{ invite_code.invite_code }})<br>
                             {% endfor %}
                         </div>
+                        <br>
                     {% endif %}
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">
