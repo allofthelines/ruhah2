@@ -11,6 +11,7 @@ from django.utils import timezone
 # an kanw import apo studio.Style tha exw CYCLIC IMPORT ERROR
 # solution grapsto san studio.Style kai kane to apo katw gia to new_user
 from django.apps import apps
+from django.utils.translation import gettext_lazy as _
 
 class CustomUser(AbstractUser):
     PROFILE_VISIBILITY_CHOICES = [
@@ -42,6 +43,10 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=30, blank=True, null=True)
     pfp = models.ImageField(upload_to='pfps/', blank=True, null=True, default='pfps/default_img.jpg')
     credits = models.IntegerField(default=0)
+
+    is_email_confirmed = models.BooleanField(default=False)
+    new_email = models.EmailField(_('new email address'), blank=True, null=True)
+    email_change_requested_at = models.DateTimeField(_('email change requested at'), blank=True, null=True)
 
     profile_visibility = models.CharField(max_length=20, choices=PROFILE_VISIBILITY_CHOICES, default='public')
     trending_mode = models.CharField(max_length=10, choices=TRENDING_MODE_CHOICES, default='discover')
