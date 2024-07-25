@@ -23,7 +23,7 @@
     <div id="fitForm" style="display: block;">
         <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
-            {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
+            <!-- {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br> -->
             {{ fit_form.catalogue.label_tag }} {{ fit_form.catalogue }}<br>
             <br>
             {{ fit_form.notes.label_tag }} <br> {{ fit_form.notes }}<br>
