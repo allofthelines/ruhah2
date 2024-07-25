@@ -8,8 +8,12 @@ class TicketForm(forms.Form):
     STYLE_CHOICES = [
         ('casual', 'Casual'),
         ('boho', 'Boho'),
+        ('gorpcore', 'Gorpcore'),
+        ('indie', 'Indie'),
+        ('loungewear', 'Loungewear'),
         ('preppy', 'Preppy'),
         ('streetwear', 'Streetwear'),
+        ('y2k', 'Y2K'),
     ]
 
     OCCASION_CHOICES = [
