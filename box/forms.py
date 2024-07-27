@@ -44,7 +44,7 @@ class TicketForm(forms.Form):
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 40,
-        'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
+        'placeholder': '"for a birthday party"\n"use a neutral palette"\n"make it extra comfy"\n"do not include footwear"'}), required=False)
 
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size')
     size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size')

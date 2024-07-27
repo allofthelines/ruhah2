@@ -24,7 +24,7 @@
         <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
             {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
-            {{ fit_form.catalogue.label_tag }} {{ fit_form.catalogue }}<br>
+            <!-- {{ fit_form.catalogue.label_tag }} {{ fit_form.catalogue }}<br> -->
             <br>
             {{ fit_form.notes.label_tag }} <br> {{ fit_form.notes }}<br>
             <br>
@@ -41,7 +41,7 @@
         <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
             {{ box_form.style1.label_tag }} {{ box_form.style1 }}<br>
-            {{ box_form.catalogue.label_tag }} {{ box_form.catalogue }}<br>
+            <!-- {{ box_form.catalogue.label_tag }} {{ box_form.catalogue }}<br> -->
             <!-- {{ box_form.condition.label_tag }} {{ box_form.condition }}<br> -->
             <!-- {{ box_form.price.label_tag }} {{ box_form.price }}<br> -->
             <br>
