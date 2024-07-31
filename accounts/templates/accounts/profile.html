@@ -267,51 +267,6 @@
 
 
 
-        <!-- Likesingle Profile Section -->
-        <div id="likesingle" class="content-section" style="display: none; padding-top: 15px;">
-            <div id="likesingle-image-container">
-                <!-- Main image will be displayed here -->
-                <img id="likesingle-main-image" src="" alt="Item Image">
-            </div>
-            <div id="likesingle-details">
-                <!-- Item details will be displayed here -->
-                <h3 id="likesingle-name">{{ item.name }}</h3>
-                <p id="likesingle-price">{{ item.price }}</p>
-        <!-- More details can be added here -->
-            </div>
-            <!-- Add to cart form will be added here later -->
-            <form id="add-to-cart-form" method="post" action="{% url 'accounts:add_liked_item_to_cart' %}">
-                {% csrf_token %}
-                <input type="hidden" id="cart-item-id" name="item_id" value="">
-                <input type="hidden" id="cart-item-price" name="price" value="">
-                <label for="cart-item-size">Size:</label>
-                <select id="cart-item-size" name="size">
-                    <!-- Size options will be populated dynamically -->
-                </select>
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <!-- Asks Profile Section -->
@@ -783,47 +738,6 @@
             shouldScrollToTop = false;
         }
     });
-
-
-
-    function showLikedItemDetails(itemId) {
-        // Hide all sections
-        document.querySelectorAll('.content-section').forEach(section => {
-            section.style.display = 'none';
-        });
-
-        // Show likesingle section
-        document.getElementById('likesingle').style.display = 'block';
-
-        // Fetch item details
-        fetch(`/accounts/get-liked-item-details/${itemId}/`)
-            .then(response => response.json())
-            .then(data => {
-                // Populate likesingle section with item details
-                document.getElementById('likesingle-main-image').src = data.image;
-                document.getElementById('likesingle-name').textContent = data.name;
-                document.getElementById('likesingle-price').textContent = `$${data.price.toFixed(2)}`;
-
-                // Populate size options
-                const sizeSelect = document.getElementById('cart-item-size');
-                sizeSelect.innerHTML = ''; // Clear existing options
-                data.sizes.split(',').forEach(size => {
-                    const option = document.createElement('option');
-                    option.value = size.trim();
-                    option.textContent = size.trim();
-                    sizeSelect.appendChild(option);
-                });
-
-                // Reset and update the form
-                const form = document.getElementById('add-to-cart-form');
-                form.reset();
-                document.getElementById('cart-item-id').value = data.id;
-                document.getElementById('cart-item-price').value = data.price;
-
-                // Store extra images for toggling
-                window.extraImages = [data.image, data.image_extra_1, data.image_extra_2, data.image_extra_3, data.image_extra_4].filter(Boolean);
-            });
-    }
 
 
 </script>
