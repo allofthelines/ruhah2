@@ -280,7 +280,7 @@
         <!-- More details can be added here -->
             </div>
             <!-- Add to cart form will be added here later -->
-            <form id="add-to-cart-form" method="post" action="{% url 'accounts:add_to_cart' %}">
+            <form id="add-to-cart-form" method="post" action="{% url 'accounts:add_liked_item_to_cart' %}">
                 {% csrf_token %}
                 <input type="hidden" id="cart-item-id" name="item_id" value="">
                 <input type="hidden" id="cart-item-price" name="price" value="">
@@ -814,7 +814,9 @@
                     sizeSelect.appendChild(option);
                 });
 
-                // Set hidden input values
+                // Reset and update the form
+                const form = document.getElementById('add-to-cart-form');
+                form.reset();
                 document.getElementById('cart-item-id').value = data.id;
                 document.getElementById('cart-item-price').value = data.price;
 
