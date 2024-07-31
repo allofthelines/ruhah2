@@ -489,3 +489,25 @@ def confirm_email(request, uidb64, token):
         return render(request, 'accounts/email_confirmed.html')
     else:
         return render(request, 'accounts/email_confirmation_failed.html')
+
+
+from django.http import JsonResponse
+from studio.models import Item
+from django.shortcuts import get_object_or_404
+
+def get_liked_item_details(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+
+    item_details = {
+        'id': item.id,
+        'name': item.name,
+        'price': item.price,
+        'image': item.image.url,
+        'image_extra_1': item.image_extra_1.url if item.image_extra_1 else None,
+        'image_extra_2': item.image_extra_2.url if item.image_extra_2 else None,
+        'image_extra_3': item.image_extra_3.url if item.image_extra_3 else None,
+        'image_extra_4': item.image_extra_4.url if item.image_extra_4 else None,
+        'sizes': item.sizes_xyz,  # Adjust field name if necessary
+    }
+
+    return JsonResponse(item_details)
