@@ -179,6 +179,8 @@ class UserItemCart(models.Model):
     buyer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='buyer_cart', blank=True, null=True)
     item = models.ForeignKey('studio.Item', on_delete=models.CASCADE, blank=True, null=True)
     styler = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='styler_cart', blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)  # New field
+    size = models.CharField(max_length=10, blank=True, null=True)  # New field
 
     def __str__(self):
         return f"Buyer: {self.buyer.username if self.buyer else 'None'}, Item: {self.item}, Styler: {self.styler.username if self.styler else 'None'}"

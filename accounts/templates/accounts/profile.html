@@ -165,7 +165,7 @@
             <div id="contBBB">
                 {% for like in user_likes %}
                     <div class="contAAA" id="like-{{ like.id }}">
-                        <img src="{{ like.item.image.url }}" alt="Liked Item Image">
+                        <img src="{{ like.item.image.url }}" alt="Liked Item Image" onclick="showLikedItemDetails({{ like.item.id }})">
                         <form action="{% url 'accounts:remove_like' like.id %}?next={% url 'accounts:profile' %}#likes" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="link-style">Remove</button>
@@ -253,6 +253,44 @@
 </style>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Likesingle Profile Section -->
+        <div id="likesingle" class="content-section" style="display: none; padding-top: 15px;">
+            <div id="likesingle-image-container">
+                <!-- Main image will be displayed here -->
+                <img id="likesingle-main-image" src="" alt="Item Image" onclick="toggleLikeSingleImage(this)">
+            </div>
+            <div id="likesingle-details">
+                <!-- Item details will be displayed here -->
+                <h3 id="likesingle-name"></h3>
+                <p id="likesingle-price"></p>
+        <!-- More details can be added here -->
+            </div>
+            <!-- Add to cart form will be added here later -->
+            <form id="add-to-cart-form" method="post" action="{% url 'accounts:add_to_cart' %}">
+                {% csrf_token %}
+                <input type="hidden" id="cart-item-id" name="item_id" value="">
+                <input type="hidden" id="cart-item-price" name="price" value="">
+                <label for="cart-item-size">Size:</label>
+                <select id="cart-item-size" name="size">
+                    <!-- Size options will be populated dynamically -->
+                </select>
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
 
 
 
@@ -745,6 +783,36 @@
             shouldScrollToTop = false;
         }
     });
+
+    function showLikedItemDetails(itemId) {
+        // Hide all sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'none';
+        });
+
+        // Show likesingle section
+        document.getElementById('likesingle').style.display = 'block';
+
+        // Populate likesingle section with item details
+        // This is a placeholder - we'll implement the actual data fetching later
+        document.getElementById('likesingle-details').innerHTML = 'Loading details for item ' + itemId + '...';
+    }
+
+    function toggleLikeSingleImage(imageElement, itemId) {
+        const images = [
+            imageElement.src,
+            "{{ item.image_extra_1.url|default:'' }}",
+            "{{ item.image_extra_2.url|default:'' }}",
+            "{{ item.image_extra_3.url|default:'' }}",
+            "{{ item.image_extra_4.url|default:'' }}"
+        ].filter(Boolean);  // Remove empty URLs
+
+        let currentIndex = images.indexOf(imageElement.src);
+        currentIndex = (currentIndex + 1) % images.length;
+        imageElement.src = images[currentIndex];
+    }
+
+
 </script>
 
 
