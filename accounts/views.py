@@ -511,3 +511,38 @@ def get_liked_item_details(request, item_id):
     }
 
     return JsonResponse(item_details)
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.urls import reverse
+from .models import UserItemCart, UserItemLikes
+from studio.models import Item
+
+
+@login_required
+def add_liked_item_to_cart(request):
+    if request.method == 'POST':
+        item_id = request.POST.get('item_id')
+        price = request.POST.get('price')
+        size = request.POST.get('size')
+
+        item = Item.objects.get(id=item_id)
+
+        # Get the styler from the UserItemLikes model
+        user_like = UserItemLikes.objects.get(liker=request.user, item=item)
+        styler = user_like.styler
+
+        UserItemCart.objects.create(
+            buyer=request.user,
+            item=item,
+            styler=styler,
+            price=price,
+            size=size
+        )
+
+        # Redirect back to the profile page
+        return redirect(reverse('accounts:profile') + '#likes')
+
+    # If not a POST request, redirect to profile
+    return redirect('accounts:profile')
