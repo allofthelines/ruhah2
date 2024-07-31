@@ -271,7 +271,7 @@
         <div id="likesingle" class="content-section" style="display: none; padding-top: 15px;">
             <div id="likesingle-image-container">
                 <!-- Main image will be displayed here -->
-                <img id="likesingle-main-image" src="" alt="Item Image" onclick="toggleLikeSingleImage(this)">
+                <img id="likesingle-main-image" src="" alt="Item Image">
             </div>
             <div id="likesingle-details">
                 <!-- Item details will be displayed here -->
@@ -823,14 +823,6 @@
                 // Store extra images for toggling
                 window.extraImages = [data.image, data.image_extra_1, data.image_extra_2, data.image_extra_3, data.image_extra_4].filter(Boolean);
             });
-    }
-
-    function toggleLikeSingleImage(imageElement) {
-        if (window.extraImages && window.extraImages.length > 1) {
-            let currentIndex = window.extraImages.indexOf(imageElement.src);
-            currentIndex = (currentIndex + 1) % window.extraImages.length;
-            imageElement.src = window.extraImages[currentIndex];
-        }
     }
 
 
