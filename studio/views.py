@@ -32,6 +32,7 @@ def studio_tickets(request):
 
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
+        print('\nDEBUG\n', user_styles, '\nDEBUG\n')
         following_user_ids = list(request.user.following_list.values_list('id', flat=True)) # gia to palio kitrinisma eksw
         user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
 
@@ -39,7 +40,7 @@ def studio_tickets(request):
         filtered_tickets = [ticket for ticket in page_obj if
                             ticket.creator_id.id != request.user.id and # ...if its the same guy
                             ticket.has_submitted_outfits(request.user) and # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
-                            ticket.style1.id in user_styles] # ...user's studio_styles
+                            ticket.style1.id in user_styles] # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
 
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
