@@ -92,7 +92,9 @@ def studio_tickets(request):
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
             filtered_tickets = [ticket for ticket in filtered_tickets if
-                                ticket.creator_id.id in user_following_ids]
+                                # ticket.creator_id.id in user_following_ids
+                                ticket.creator_id is not None and ticket.creator_id.id in user_following_ids # kalyptei guest periptwsh opws panw
+                                ]
 
     else:
         following_user_ids = []
