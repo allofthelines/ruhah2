@@ -132,7 +132,7 @@ def ticket_view(request):
             ticket = Ticket(
                 asktype='box',
                 style1=box_form.cleaned_data['style1'],
-                curated_by=box_form.cleaned_data['curated_by'],
+                boxcuratedby=box_form.cleaned_data['curated_by'],
                 condition=box_form.cleaned_data['condition'],
                 price=box_form.cleaned_data['price'],
                 catalogue=box_form.cleaned_data['catalogue'],
