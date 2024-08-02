@@ -277,34 +277,32 @@
                         <div class="toggle" onclick="toggleImage(this)">
                             {% if ticket.outfit1 %}
                                 <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="outfit-image" style="display: block;">
-                                <div class="contNOTE" style="display: none;">
+                                <div class="contNOTE1" style="display: none;">
                                     <p>
-                                        <!-- {{ ticket.style1 }}
-                                        <br><br>-->
                                         {{ ticket.notes }}
+                                    </p>
+                                </div>
+                                <div class="contNOTE2" style="display: none;">
+                                    <p>
                                         {% if ticket.outfit1 %}
                                             <br><br>
-                                            Ask #{{ ticket.id }} Styled by: {{ ticket.outfit1.maker_id }}
-                                            <br>
-                                            Outfit Price: ${{ ticket.outfit1.total_outfit_price }}
+                                            Ask #{{ ticket.id }}<br>
+                                            Styled by: {{ ticket.outfit1.maker_id }}
+                                            <br><br>
+                                            Outfit: ${{ ticket.outfit1.total_outfit_price }}<br>
+                                            Top: ${{ ticket.outfit1.total_outfit_price }}<br>
+                                            Bottom: ${{ ticket.outfit1.total_outfit_price }}<br>
+                                            Accessory: ${{ ticket.outfit1.total_outfit_price }}<br>
+                                            Accessory: ${{ ticket.outfit1.total_outfit_price }}<br>
                                         {% endif %}
                                     </p>
                                 </div>
                             {% else %}
                                 <div class="contNOTE" style="display: block;">
                                     <p>
-                                        <!-- {{ ticket.style1 }}
-                                        <br><br>-->
                                         {{ ticket.notes }}
-                                        {% if ticket.outfit1 %}
-                                            <br><br>
-                                            Ask #{{ ticket.id }} Styled by: {{ ticket.outfit1.maker_id }}
-                                            <br>
-                                            Outfit Price: ${{ ticket.outfit1.total_outfit_price }}
-                                        {% else %}
-                                            <br><br>
-                                            Ask #{{ ticket.id }}
-                                        {% endif %}
+                                        <br><br>
+                                        Ask #{{ ticket.id }}
                                     </p>
                                 </div>
                             {% endif %}
@@ -337,13 +335,41 @@
     function toggleImage(element) {
         const outfitImage = element.querySelector('.outfit-image');
         const note = element.querySelector('.contNOTE');
+        const note1 = element.querySelector('.contNOTE1');
+        const note2 = element.querySelector('.contNOTE2');
 
+        /*
         if (outfitImage.style.display === 'none') {
             outfitImage.style.display = 'block';
             note.style.display = 'none';
         } else {
             outfitImage.style.display = 'none';
             note.style.display = 'block';
+        }
+        */
+
+        if (outfitImage && note1 && note2) {
+            // Case for when outfit1 exists (three-state toggle)
+            if (outfitImage.style.display === 'block') {
+                outfitImage.style.display = 'none';
+                note1.style.display = 'block';
+                note2.style.display = 'none';
+            } else if (note1.style.display === 'block') {
+                outfitImage.style.display = 'none';
+                note1.style.display = 'none';
+                note2.style.display = 'block';
+            } else {
+                outfitImage.style.display = 'block';
+                note1.style.display = 'none';
+                note2.style.display = 'none';
+            }
+        } else if (note) {
+            // Case for when outfit1 doesn't exist (single note toggle)
+            if (note.style.display === 'block') {
+                note.style.display = 'none';
+            } else {
+                note.style.display = 'block';
+            }
         }
     }
 </script>
@@ -365,7 +391,7 @@
         border: 1px solid black;
     }
 
-    .contAAAA img, .contAAAA .contNOTE {
+    .contAAAA img, .contAAAA .contNOTE .contNOTE1 .contNOTE2 {
         width: 100%;
         height: auto;
         flex-grow: 1;
@@ -430,13 +456,13 @@
     }
 
 
-    .contNOTE {
+    .contNOTE .contNOTE1 .contNOTE2 {
         width: 100%; /* afto kai to epomeno paketo etsi xwris height */
         padding-top: 100%; /* This makes the height equal to the width, maintaining a square aspect ratio */
         position: relative; /* To position the content inside */
     }
 
-    .contNOTE p {
+    .contNOTE .contNOTE1 .contNOTE2 p {
         width: 80%; /* afto einai pou gemizei to keno deksia aristera */
         position: absolute;
         top: 50%;
