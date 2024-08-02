@@ -69,8 +69,9 @@ class AskFitForm(forms.Form):
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 30,
-        'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
+        'cols': 30
+        # 'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'
+    }), required=False)
 
 
 class AskBoxForm(forms.Form):
@@ -106,8 +107,9 @@ class AskBoxForm(forms.Form):
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 30,
-        'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'}), required=False)
+        'cols': 30
+        # 'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'
+    }), required=False)
 
     size_top_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Top Size', required=False)
     size_bottom_xyz = forms.ChoiceField(choices=SIZE_CHOICES, label='Bottom Size', required=False)
