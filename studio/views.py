@@ -24,7 +24,14 @@ from django.core.files import File
 
 
 
-"""def studio_tickets(request):
+""" 
+PALIO POU PRWTA KANEI PAGINATE META FILTER META PALI PAGINATE
+VGAZEI PROVLHMA OTI XANONTAI ETSI MERIKA TICKETS EPEIDH TO FILTRARISMA TO KANEI
+MONO STHN PRWTH SELIDA
+KAI META APO THN PRWTH SELIDA DIALEGEI THN PRWTH
+TELOSPANTWN TO THEMA THS EINAI STO DOUBLE PAGINATOR
+
+def studio_tickets(request):
     ticket_list = Ticket.objects.filter(status='open')
     paginator = Paginator(ticket_list, 20)  # Show 20 tickets per page
     page_number = request.GET.get('page', 1)
@@ -76,12 +83,10 @@ def studio_tickets(request):
         user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
 
         # Filter tickets based on...
-        filtered_tickets = [ticket for ticket in ticket_list if
-                            ticket.creator_id.id != request.user.id and
-                            ticket.has_submitted_outfits(request.user) and
-                            ticket.style1.id in user_styles]
-
-        print('\n2 DEBUG 2\n', filtered_tickets, '\nDEBUG\n')
+        filtered_tickets = [ticket for ticket in page_obj if
+                            ticket.creator_id.id != request.user.id and  # ...if its the same guy
+                            ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
+                            ticket.style1.id in user_styles]  # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
 
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
