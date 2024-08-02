@@ -245,7 +245,7 @@ class GridPicUpload(models.Model):
             bottom = (height + width) / 2
 
         img = img.crop((left, top, right, bottom))
-        img = img.resize((300, 300), Image.ANTIALIAS)
+        img = img.resize((600, 600), Image.ANTIALIAS)
 
         output = BytesIO()
         img.save(output, format='JPEG', quality=85)
