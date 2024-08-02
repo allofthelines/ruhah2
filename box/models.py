@@ -43,8 +43,14 @@ class Ticket(models.Model):
         ('liked_only', 'liked only'),
     ]
 
+    BOXCURATEDBY_CHOICES = [
+        ('human_stylist', 'human stylist'),
+        ('personalized_algorithm', 'personalized algorithm')
+    ]
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='notpaid')
     # type = models.CharField(max_length=30, choices=TYPE_CHOICES, default='styled_outfits')
+    boxcuratedby = models.CharField(max_length=30, choices=BOXCURATEDBY_CHOICES, default='human_stylist')
     asktype = models.CharField(max_length=30, choices=ASKTYPE_CHOICES, default='outfit')
     catalogue = models.CharField(max_length=30, choices=CATALOGUE_CHOICES, default='all_items')
     timestamp = models.DateTimeField(default=timezone.now)

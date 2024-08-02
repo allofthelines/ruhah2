@@ -89,6 +89,11 @@ class AskBoxForm(forms.Form):
         ('liked_only', 'liked items only'),
     ]
 
+    CURATED_BY_CHOICES = [
+        ('human_stylist', 'human stylist'),
+        ('personalized_algorithm', 'personalized algorithm')
+    ]
+
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
     SIZE_WAIST_INCHES_CHOICES = [(str(size), str(size)) for size in range(23, 37)]
@@ -102,6 +107,7 @@ class AskBoxForm(forms.Form):
 
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
+    curated_by = forms.ChoiceField(choices=CURATED_BY_CHOICES, label='Curated by', initial='human_stylist')
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue')
     condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition')
     price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')

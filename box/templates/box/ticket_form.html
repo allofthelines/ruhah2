@@ -41,6 +41,9 @@
         <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
             {{ box_form.style1.label_tag }} {{ box_form.style1 }}<br>
+            {% if user.is_authenticated %}
+                {{ box_form.curated_by.label_tag }} {{ box_form.curated_by }}<br>
+            {% endif %}
             <!-- {{ box_form.catalogue.label_tag }} {{ box_form.catalogue }}<br> -->
             <!-- {{ box_form.condition.label_tag }} {{ box_form.condition }}<br> -->
             <!-- {{ box_form.price.label_tag }} {{ box_form.price }}<br> -->
