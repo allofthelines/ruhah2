@@ -261,6 +261,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import CustomUser, UserFollows, GridPicUpload
 from django.contrib.auth.models import AnonymousUser
 import random
+from itertools import chain
+from operator import attrgetter
 
 """ BEFORE INTRODUCTION OF GRID PICS // ONLY WITH OUTFITS - DIFFERENT LOGIC
 
@@ -288,15 +290,33 @@ def public_profile(request, username):
     if request.user.is_authenticated and not isinstance(request.user, AnonymousUser):
         is_following = UserFollows.objects.filter(user_from=request.user, user_to=profile_user).exists()
 
-    # Fetch outfits
-    outfits = Outfit.objects.filter(maker_id=profile_user, maker_grid_visibility='show')
+    # Fetch outfits and order by timestamp (recent first)
+    outfits = list(Outfit.objects.filter(maker_id=profile_user, maker_grid_visibility='show').order_by('-timestamp'))
 
-    # Fetch non-deleted GridPicUpload objects
-    grid_pics = GridPicUpload.objects.filter(uploader_id=profile_user, deleted_by_uploader='no')
+    # Fetch non-deleted GridPicUpload objects and order by timedate_uploaded (recent first)
+    grid_pics = list(GridPicUpload.objects.filter(uploader_id=profile_user, deleted_by_uploader='no').order_by('-timedate_uploaded'))
 
     # Combine and shuffle
-    grid_items = list(outfits) + list(grid_pics)
-    random.shuffle(grid_items)
+    # grid_items = list(outfits) + list(grid_pics)
+    # random.shuffle(grid_items)
+
+    # Calculate the interval for inserting GridPicUploads
+    if len(grid_pics) > 0:
+        interval = max(1, math.floor(len(outfits) / len(grid_pics)))
+    else:
+        interval = len(outfits)  # If no grid_pics, interval is the length of outfits
+
+    # Interleave outfits and grid_pics
+    grid_items = []
+    grid_pic_index = 0
+    for i, outfit in enumerate(outfits):
+        grid_items.append(outfit)
+        if i % interval == interval - 1 and grid_pic_index < len(grid_pics):
+            grid_items.append(grid_pics[grid_pic_index])
+            grid_pic_index += 1
+
+    # Add any remaining grid_pics at the end
+    grid_items.extend(grid_pics[grid_pic_index:])
 
     context = {
         'profile_user': profile_user,
