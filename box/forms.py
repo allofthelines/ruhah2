@@ -107,10 +107,10 @@ class AskBoxForm(forms.Form):
 
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
-    curated_by = forms.ChoiceField(choices=CURATED_BY_CHOICES, label='Curated by', initial='human_stylist')
-    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue')
-    condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition')
-    price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price')
+    curated_by = forms.ChoiceField(choices=CURATED_BY_CHOICES, label='Curated by', initial='human_stylist', required=False)
+    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
+    condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition', required=False)
+    price = forms.ChoiceField(choices=[('no limit', 'no limit'), ('max $59', 'max $59'), ('max $99', 'max $99')], label='Price', required=False)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 30
