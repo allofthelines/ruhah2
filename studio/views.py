@@ -73,7 +73,7 @@ def studio_tickets(request):
 
 
 def studio_tickets(request):
-    ticket_list = Ticket.objects.filter(status='open')
+    ticket_list = Ticket.objects.filter(status='open', boxcuratedby='human_stylist')
 
     print('\n1 DEBUG 1 \n', list(ticket_list.order_by('-id')), '\nDEBUG\n')
 
