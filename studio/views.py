@@ -83,7 +83,7 @@ def studio_tickets(request):
         user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
 
         # Filter tickets based on...
-        filtered_tickets = [ticket for ticket in page_obj if
+        filtered_tickets = [ticket for ticket in ticket_list if
                             ticket.creator_id.id != request.user.id and  # ...if its the same guy
                             ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles]  # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
