@@ -14,6 +14,7 @@ from .forms import OutfitRatingForm
 from .models import Outfit
 from accounts.models import Customer, CustomUser, UserFollows
 from box.models import Ticket  # Assuming the Ticket model is in the box app
+from django.contrib.auth.models import AnonymousUser
 
 def home(request):
     if request.method == "POST":
@@ -107,7 +108,7 @@ class SocialView(TemplateView):
 
 
 
-def search(request):
+"""def search(request):
     query = request.GET.get('q')
     if query:
         if query.lower() == 'all':
@@ -118,6 +119,29 @@ def search(request):
         users = CustomUser.objects.none()
 
     followed_users = request.user.following.values_list('user_to_id', flat=True)  # Fetch followed user IDs
+
+    context = {
+        'users': users,
+        'query': query,
+        'followed_users': followed_users,
+    }
+    return render(request, 'core/search.html', context)"""
+
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        if query.lower() == 'all':
+            users = CustomUser.objects.all().order_by('username')
+        else:
+            users = CustomUser.objects.filter(username__icontains=query).order_by('username')
+    else:
+        users = CustomUser.objects.none()
+
+    # Check if user is authenticated before accessing 'following'
+    if request.user.is_authenticated:
+        followed_users = request.user.following.values_list('user_to_id', flat=True)
+    else:
+        followed_users = []
 
     context = {
         'users': users,
