@@ -154,17 +154,17 @@ function toggleFollowUnfollow(username, isFollowing) {
 <div id="outfit-container">
     <div id="them-by-me-content" class="outfit-grid">
         {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
-            {% for item in grid_items %}
-                {% if item.__class__.__name__ == 'Outfit' and item.maker_grid_visibility == 'show' %}
-                <div class="outfit-item" id="outfit-{{ item.id }}" {% if not is_own_profile %}ondblclick="likeOutfit({{ item.id }})"{% endif %} onclick="toggleImage(this)">
-                    {% if 'default_img.jpg' not in item.portrait.url %}
-                        <img src="{{ item.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+            {% for grid_item in grid_items %}
+                {% if grid_item.type == 'outfit' and grid_item.item.maker_grid_visibility == 'show' %}
+                <div class="outfit-item" id="outfit-{{ grid_item.item.id }}" {% if not is_own_profile %}ondblclick="likeOutfit({{ grid_item.item.id }})"{% endif %} onclick="toggleImage(this)">
+                    {% if 'default_img.jpg' not in grid_item.item.portrait.url %}
+                        <img src="{{ grid_item.item.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                     {% endif %}
-                    <img src="{{ item.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in item.portrait.url %}block{% else %}none{% endif %};">
+                    <img src="{{ grid_item.item.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in grid_item.item.portrait.url %}block{% else %}none{% endif %};">
                 </div>
-                {% elif item.__class__.__name__ == 'GridPicUpload' %}
-                <div class="outfit-item gridpic-item" id="gridpic-{{ item.id }}" onclick="toggleImage(this)">
-                    <img src="{{ item.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
+                {% elif grid_item.type == 'gridpic' %}
+                <div class="outfit-item gridpic-item" id="gridpic-{{ grid_item.item.id }}" onclick="toggleImage(this)">
+                    <img src="{{ grid_item.item.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
                 </div>
                 {% endif %}
             {% endfor %}

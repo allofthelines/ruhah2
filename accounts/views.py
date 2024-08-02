@@ -311,13 +311,13 @@ def public_profile(request, username):
     grid_items = []
     grid_pic_index = 0
     for i, outfit in enumerate(outfits):
-        grid_items.append(outfit)
+        grid_items.append({'type': 'outfit', 'item': outfit})
         if i % interval == interval - 1 and grid_pic_index < len(grid_pics):
-            grid_items.append(grid_pics[grid_pic_index])
+            grid_items.append({'type': 'gridpic', 'item': grid_pics[grid_pic_index]})
             grid_pic_index += 1
 
     # Add any remaining grid_pics at the end
-    grid_items.extend(grid_pics[grid_pic_index:])
+    grid_items.extend({'type': 'gridpic', 'item': pic} for pic in grid_pics[grid_pic_index:])
 
     context = {
         'profile_user': profile_user,
