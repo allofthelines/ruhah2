@@ -30,7 +30,7 @@ def studio_tickets(request):
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
-    print('\n1 DEBUG1 \n', ticket_list, '\nDEBUG\n')
+    print('\n1 DEBUG 1 \n', list(ticket_list.order_by('-id')), '\nDEBUG\n')
 
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
