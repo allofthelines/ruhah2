@@ -84,7 +84,8 @@ def studio_tickets(request):
 
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in ticket_list if
-                            ticket.creator_id.id != request.user.id and  # ...if its the same guy
+                            # ticket.creator_id.id != request.user.id and  # ...if its the same guy
+                            (ticket.creator_id is None or ticket.creator_id.id != request.user.id) and # kalyptei kai periptwsh guest
                             ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles]  # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
 
