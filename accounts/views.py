@@ -263,6 +263,7 @@ from django.contrib.auth.models import AnonymousUser
 import random
 from itertools import chain
 from operator import attrgetter
+import math
 
 """ BEFORE INTRODUCTION OF GRID PICS // ONLY WITH OUTFITS - DIFFERENT LOGIC
 
