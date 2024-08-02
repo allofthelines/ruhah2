@@ -24,7 +24,7 @@ from django.core.files import File
 
 
 
-def studio_tickets(request):
+"""def studio_tickets(request):
     ticket_list = Ticket.objects.filter(status='open')
     paginator = Paginator(ticket_list, 20)  # Show 20 tickets per page
     page_number = request.GET.get('page', 1)
@@ -39,7 +39,7 @@ def studio_tickets(request):
 
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in page_obj if
-                        #ticket.creator_id.id != request.user.id and # ...if its the same guy
+                            ticket.creator_id.id != request.user.id and # ...if its the same guy
                             ticket.has_submitted_outfits(request.user) and # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles] # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
 
@@ -56,6 +56,45 @@ def studio_tickets(request):
 
     # Create a new paginator for the filtered tickets
     paginator = Paginator(filtered_tickets, 20)
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+        'following_user_ids': following_user_ids,
+    }
+    return render(request, 'studio/studio_tickets.html', context)"""
+
+
+def studio_tickets(request):
+    ticket_list = Ticket.objects.filter(status='open')
+
+    print('\n1 DEBUG 1 \n', list(ticket_list.order_by('-id')), '\nDEBUG\n')
+
+    if request.user.is_authenticated:
+        user_styles = set(request.user.studio_styles.values_list('id', flat=True))
+        following_user_ids = list(request.user.following_list.values_list('id', flat=True))
+        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
+
+        # Filter tickets based on...
+        filtered_tickets = [ticket for ticket in ticket_list if
+                            ticket.creator_id.id != request.user.id and
+                            ticket.has_submitted_outfits(request.user) and
+                            ticket.style1.id in user_styles]
+
+        print('\n2 DEBUG 2\n', filtered_tickets, '\nDEBUG\n')
+
+        # Additional filtering based on studio_visibility
+        if request.user.studio_visibility == 'following':
+            filtered_tickets = [ticket for ticket in filtered_tickets if
+                                ticket.creator_id.id in user_following_ids]
+
+    else:
+        following_user_ids = []
+        filtered_tickets = ticket_list  # Show all tickets for guests
+
+    # Create a paginator for the filtered tickets
+    paginator = Paginator(filtered_tickets, 20)  # Show 20 tickets per page
+    page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
     context = {
