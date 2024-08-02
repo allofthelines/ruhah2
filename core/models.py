@@ -61,6 +61,9 @@ class Outfit(models.Model):
         super().save(*args, **kwargs)
         self._resize_image(500, 500)
 
+    def total_outfit_price(self):
+        return sum(item.price for item in self.items.all())
+
     def _get_portrait_upload_path(self, filename):
         ext = filename.split('.')[-1]
         base_filename = f"portrait_{self.pk}"

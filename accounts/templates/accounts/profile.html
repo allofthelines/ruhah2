@@ -284,7 +284,9 @@
                                         {{ ticket.notes }}
                                         {% if ticket.outfit1 %}
                                             <br><br>
-                                            Styled by: {{ ticket.outfit1.maker_id }}
+                                            Ask #{{ ticket.id }} Styled by: {{ ticket.outfit1.maker_id }}
+                                            <br>
+                                            Outfit Price: ${{ ticket.outfit1.total_price }}
                                         {% endif %}
                                     </p>
                                 </div>
@@ -297,6 +299,8 @@
                                         {% if ticket.outfit1 %}
                                             <br><br>
                                             Ask #{{ ticket.id }} Styled by: {{ ticket.outfit1.maker_id }}
+                                            <br>
+                                            Outfit Price: ${{ ticket.outfit1.total_price }}
                                         {% else %}
                                             <br><br>
                                             Ask #{{ ticket.id }}
