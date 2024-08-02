@@ -289,7 +289,8 @@
                                             Ask #{{ ticket.id }}<br>
                                             Styled by: {{ ticket.outfit1.maker_id }}
                                             <br><br>
-                                            Outfit: ${{ ticket.outfit1.total_outfit_price }}<br>
+                                            Outfit: ${{ ticket.outfit1.total_outfit_price|multiply:0.75|floatformat:1 }}
+                                            <br>
                                             {% for item in ticket.outfit1.items.all %}
                                                 {{ item.cat|title }}: ${{ item.price }}<br>
                                             {% endfor %}
@@ -372,7 +373,7 @@
                 note.style.display = 'block';
             }
         */
-            
+
         }
     }
 </script>
