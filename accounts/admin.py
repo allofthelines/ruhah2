@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart, InviteCode
+from .models import CustomUser, Customer, UserFollows, PortraitUpload, UserItemLikes, UserItemCart, InviteCode, GridPicUpload
 from django.utils.timezone import now
 from datetime import datetime, timezone
 from django.utils.html import mark_safe
@@ -99,6 +99,30 @@ class PortraitUploadAdmin(admin.ModelAdmin):
     age_in_hours.short_description = 'Age in Hours'  # Set a readable column name
 
 admin.site.register(PortraitUpload, PortraitUploadAdmin)
+
+class GridPicUploadAdmin(admin.ModelAdmin):
+    list_display = ('id', 'uploader_username', 'thumbnail', 'timedate_uploaded', 'deleted_by_uploader', 'age_in_days')
+    list_filter = ('deleted_by_uploader', 'timedate_uploaded')
+    search_fields = ('uploader_id__username',)
+    readonly_fields = ('timedate_uploaded',)
+
+    def uploader_username(self, obj):
+        return obj.uploader_id.username
+    uploader_username.admin_order_field = 'uploader_id'
+    uploader_username.short_description = 'Uploader'
+
+    def thumbnail(self, obj):
+        if obj.gridpic_processed_img:
+            return mark_safe(f'<img src="{obj.gridpic_processed_img.url}" width="50" height="50" />')
+        return 'No Image'
+    thumbnail.short_description = 'Thumbnail'
+
+    def age_in_days(self, obj):
+        delta = now() - obj.timedate_uploaded
+        return delta.days
+    age_in_days.short_description = 'Age in Days'
+
+admin.site.register(GridPicUpload, GridPicUploadAdmin)
 
 class InviteCodeAdmin(admin.ModelAdmin):
     list_display = ('invite_code', 'is_used', 'created_at', 'inviter', 'invitee')

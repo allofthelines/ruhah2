@@ -127,6 +127,9 @@ function toggleFollowUnfollow(username, isFollowing) {
 
 
 
+{% comment %}
+
+<!-- BEFORE INTRODUCTION OF GRID PICS  -->
 
 <!-- Display User's Outfits -->
 <div id="outfit-container">
@@ -139,6 +142,29 @@ function toggleFollowUnfollow(username, isFollowing) {
                         <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
                     {% endif %}
                     <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endcomment %}
+
+<!-- Display User's Outfits and Grid Pictures -->
+<div id="outfit-container">
+    <div id="them-by-me-content" class="outfit-grid">
+        {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
+            {% for item in grid_items %}
+                {% if item.__class__.__name__ == 'Outfit' and item.maker_grid_visibility == 'show' %}
+                <div class="outfit-item" id="outfit-{{ item.id }}" {% if not is_own_profile %}ondblclick="likeOutfit({{ item.id }})"{% endif %} onclick="toggleImage(this)">
+                    {% if 'default_img.jpg' not in item.portrait.url %}
+                        <img src="{{ item.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    {% endif %}
+                    <img src="{{ item.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in item.portrait.url %}block{% else %}none{% endif %};">
+                </div>
+                {% elif item.__class__.__name__ == 'GridPicUpload' %}
+                <div class="outfit-item gridpic-item" id="gridpic-{{ item.id }}" onclick="toggleImage(this)">
+                    <img src="{{ item.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
                 </div>
                 {% endif %}
             {% endfor %}
