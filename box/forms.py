@@ -66,7 +66,7 @@ class AskFitForm(forms.Form):
         casual_style = None
 
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
-    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue')
+    catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 30,
