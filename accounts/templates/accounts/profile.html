@@ -280,13 +280,13 @@
                                 <div class="contNOTE1" style="display: none;">
                                     <p>
                                         {{ ticket.notes }}
+                                        <br><br>
+                                        Ask #{{ ticket.id }}
                                     </p>
                                 </div>
                                 <div class="contNOTE2" style="display: none;">
                                     <p>
                                         {% if ticket.outfit1 %}
-                                            <br><br>
-                                            Ask #{{ ticket.id }}<br>
                                             Styled by: {{ ticket.outfit1.maker_id }}
                                             <br><br>
                                             Outfit: ${{ ticket.outfit1.total_outfit_price|multiply:0.75|floatformat:1 }}
