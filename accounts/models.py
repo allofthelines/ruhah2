@@ -229,6 +229,11 @@ class GridPicUpload(models.Model):
 
     def process_image(self):
         img = Image.open(self.gridpic_img)
+
+        # Convert RGBA to RGB if necessary
+        if img.mode == 'RGBA':
+            img = img.convert('RGB')
+
         width, height = img.size
 
         if width > height:
