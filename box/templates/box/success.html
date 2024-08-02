@@ -9,15 +9,15 @@
 {% block content %}
 <div class="success-message">
     <p style="margin-top: 0;">
-        Your ticket has been successfully submitted.<br>
-        You created <strong>Ticket #{{ ticket_id }}</strong>.<br>
+        Your Ask has been successfully submitted.<br>
+        You created Ask <strong>Ticket #{{ ticket_id }}</strong>.<br>
         <br>
         Please complete the $15 styling fee payment <br>
         to confirm the shipment of your box <br>
         with our stylists' picks.<br><br>
 
         <a href="{% url 'box:create-checkout-session' ticket_id=ticket_id %}"
-           style="display: block; width: fit-content; margin: 0 auto; margin-top:15px;"
+           style="display: block; width: fit-content; margin: 0 auto; margin-top:15px; border: 1px solid #000;"
            target="_blank" class="btn btn-primary">Order Ruhah Box</a><br><br>
 
         Remember that <br>
