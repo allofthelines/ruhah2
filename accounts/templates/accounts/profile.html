@@ -290,10 +290,9 @@
                                             Styled by: {{ ticket.outfit1.maker_id }}
                                             <br><br>
                                             Outfit: ${{ ticket.outfit1.total_outfit_price }}<br>
-                                            Top: ${{ ticket.outfit1.total_outfit_price }}<br>
-                                            Bottom: ${{ ticket.outfit1.total_outfit_price }}<br>
-                                            Accessory: ${{ ticket.outfit1.total_outfit_price }}<br>
-                                            Accessory: ${{ ticket.outfit1.total_outfit_price }}<br>
+                                            {% for item in ticket.outfit1.items.all %}
+                                                {{ item.cat|title }}: ${{ item.price }}<br>
+                                            {% endfor %}
                                         {% endif %}
                                     </p>
                                 </div>
@@ -363,6 +362,8 @@
                 note1.style.display = 'none';
                 note2.style.display = 'none';
             }
+
+        /*
         } else if (note) {
             // Case for when outfit1 doesn't exist (single note toggle)
             if (note.style.display === 'block') {
@@ -370,6 +371,8 @@
             } else {
                 note.style.display = 'block';
             }
+        */
+            
         }
     }
 </script>
