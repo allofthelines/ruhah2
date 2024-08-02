@@ -258,8 +258,11 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import CustomUser, UserFollows
+from .models import CustomUser, UserFollows, GridPicUpload
 from django.contrib.auth.models import AnonymousUser
+import random
+
+""" BEFORE INTRODUCTION OF GRID PICS // ONLY WITH OUTFITS - DIFFERENT LOGIC
 
 def public_profile(request, username):
     profile_user = get_object_or_404(CustomUser, username=username)
@@ -273,6 +276,33 @@ def public_profile(request, username):
         'profile_user': profile_user,
         'is_own_profile': is_own_profile,
         'is_following': is_following,
+    }
+    return render(request, 'accounts/public_profile.html', context)"""
+
+
+def public_profile(request, username):
+    profile_user = get_object_or_404(CustomUser, username=username)
+    is_own_profile = (request.user == profile_user)
+    is_following = False
+
+    if request.user.is_authenticated and not isinstance(request.user, AnonymousUser):
+        is_following = UserFollows.objects.filter(user_from=request.user, user_to=profile_user).exists()
+
+    # Fetch outfits
+    outfits = Outfit.objects.filter(maker_id=profile_user, maker_grid_visibility='show')
+
+    # Fetch non-deleted GridPicUpload objects
+    grid_pics = GridPicUpload.objects.filter(uploader_id=profile_user, deleted_by_uploader='no')
+
+    # Combine and shuffle
+    grid_items = list(outfits) + list(grid_pics)
+    random.shuffle(grid_items)
+
+    context = {
+        'profile_user': profile_user,
+        'is_own_profile': is_own_profile,
+        'is_following': is_following,
+        'grid_items': grid_items,
     }
     return render(request, 'accounts/public_profile.html', context)
 

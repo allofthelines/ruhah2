@@ -209,8 +209,53 @@ class PortraitUpload(models.Model):
         return f"{self.wearer_id.username}'s portrait upload"
 
 
+class GridPicUpload(models.Model):
+    DELETED_BY_UPLOADER_CHOICES = [
+        ('no', 'no'),
+        ('yes', 'yes'),
+    ]
 
+    gridpic_img = models.ImageField(upload_to='gridpicuploads/')
+    gridpic_processed_img = models.ImageField(upload_to='gridpicuploads/processed/', blank=True, null=True)
+    uploader_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    timedate_uploaded = models.DateTimeField(auto_now_add=True)
+    deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no')
+    timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.gridpic_processed_img:
+            self.process_image()
+        super().save(*args, **kwargs)
+
+    def process_image(self):
+        img = Image.open(self.gridpic_img)
+        width, height = img.size
+
+        if width > height:
+            # Horizontal image
+            left = (width - height) / 2
+            top = 0
+            right = (width + height) / 2
+            bottom = height
+        else:
+            # Vertical image
+            left = 0
+            top = (height - width) / 2
+            right = width
+            bottom = (height + width) / 2
+
+        img = img.crop((left, top, right, bottom))
+        img = img.resize((300, 300), Image.ANTIALIAS)
+
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+
+        self.gridpic_processed_img.save(
+            f"{self.gridpic_img.name.split('/')[-1].split('.')[0]}_processed.jpg",
+            ContentFile(output.read()),
+            save=False
+        )
 
 
 
