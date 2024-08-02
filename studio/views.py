@@ -30,6 +30,8 @@ def studio_tickets(request):
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
+    print('\n1 DEBUG1 \n', ticket_list, '\nDEBUG\n')
+
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
         following_user_ids = list(request.user.following_list.values_list('id', flat=True)) # gia to palio kitrinisma eksw
@@ -41,7 +43,7 @@ def studio_tickets(request):
                             ticket.has_submitted_outfits(request.user) and # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles] # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
 
-        # print('\nDEBUG\n', ticket.has_submitted_outfits(request.user), '\nDEBUG\n')
+        print('\n2 DEBUG 2\n', filtered_tickets, '\nDEBUG\n')
 
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
