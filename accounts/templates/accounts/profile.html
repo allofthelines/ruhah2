@@ -293,11 +293,13 @@
                                     <p>
                                         <!-- {{ ticket.style1 }}
                                         <br><br>-->
-                                        Ask#{{ ticket.id }}<br>
                                         {{ ticket.notes }}
                                         {% if ticket.outfit1 %}
                                             <br><br>
-                                            Styled by: {{ ticket.outfit1.maker_id }}
+                                            Ask #{{ ticket.id }} Styled by: {{ ticket.outfit1.maker_id }}
+                                        {% else %}
+                                            <br><br>
+                                            Ask #{{ ticket.id }}
                                         {% endif %}
                                     </p>
                                 </div>
