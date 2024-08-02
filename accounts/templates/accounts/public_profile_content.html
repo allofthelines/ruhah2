@@ -51,6 +51,7 @@
 
 
 <script>
+
 {% comment %}
 function toggleFollowUnfollow(username, isFollowing) {
     const button = document.getElementById('unfollow-button');
@@ -74,6 +75,7 @@ function toggleFollowUnfollow(username, isFollowing) {
     }
 }
 {% endcomment %}
+
 function toggleFollowUnfollow(username, isFollowing) {
     const button = document.getElementById('follow-unfollow-button-' + username);
     if (button.dataset.toggled === "true") {

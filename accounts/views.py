@@ -276,6 +276,7 @@ def public_profile(request, username):
     }
     return render(request, 'accounts/public_profile.html', context)
 
+
 @login_required
 def follow(request, username):
     profile_user = get_object_or_404(CustomUser, username=username)

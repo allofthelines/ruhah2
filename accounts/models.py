@@ -213,6 +213,7 @@ class PortraitUpload(models.Model):
 
 
 
+
 class Stylist(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     credits = models.IntegerField(default=0)
