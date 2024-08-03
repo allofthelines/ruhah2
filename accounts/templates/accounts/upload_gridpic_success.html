@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Grid Picture Upload Successful
+{% endblock %}
+
+{% block content %}
+<p style="margin-top: -10px;">
+    Your grid picture has been successfully uploaded and processed.<br>
+    It will now appear in your profile grid.<br>
+    <br>
+    <a href="{% url 'accounts:profile' %}#gridpic_upload" class="btn btn-primary">Back to Profile</a>
+</p>
+{% endblock %}

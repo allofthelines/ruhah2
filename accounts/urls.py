@@ -21,6 +21,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('profile/', views.profile, name='profile'),
     path('upload_success/', views.upload_success, name='upload_success'),
+    path('upload_gridpic_success/', views.upload_gridpic_success, name='upload_gridpic_success'),
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('activation_success/', views.activation_success, name='activation_success'),
     path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),

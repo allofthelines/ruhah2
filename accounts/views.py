@@ -10,7 +10,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import login
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm, EmailChangeForm
+from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm, EmailChangeForm, GridPicUploadForm
 import json
 from django.urls import reverse
 from django.middleware.csrf import get_token
@@ -109,6 +109,7 @@ def profile(request):
     user_form = UserProfileForm(instance=user, user=user)
     customer_form = CustomerForm(instance=customer, customer=customer) if customer else None
     portrait_upload_form = PortraitUploadForm(user=user)  # Pass user to the form
+    gridpic_upload_form = GridPicUploadForm(user=user)
     profile_settings_form = ProfileSettingsForm(instance=user, user=user)
 
     available_styles = Style.objects.all()
@@ -148,6 +149,13 @@ def profile(request):
                 portrait_upload.status = 'pending'  # Automatically assign status to 'pending'
                 portrait_upload.save()
                 return redirect('accounts:upload_success')  # Redirect to the success page
+        elif 'gridpic_upload_form' in request.POST:
+            gridpic_upload_form = GridPicUploadForm(request.POST, request.FILES, user=user)
+            if gridpic_upload_form.is_valid():
+                gridpic_upload = gridpic_upload_form.save(commit=False)
+                gridpic_upload.uploader_id = user
+                gridpic_upload.save()
+                return redirect('accounts:upload_gridpic_success')
         elif 'profile_settings_form' in request.POST:
             profile_settings_form = ProfileSettingsForm(request.POST, instance=user, user=user)
             if profile_settings_form.is_valid():
@@ -158,11 +166,12 @@ def profile(request):
                 user.studio_styles.set(selected_studio_styles)
                 return redirect(f'{request.path}?edit_settings=false')
 
-    return render(request, 'accounts/profile.html', {
+    context = {
         'user_form': user_form,
         'customer_form': customer_form,
         'portrait_upload_form': portrait_upload_form,
         'profile_settings_form': profile_settings_form,
+        'gridpic_upload_form': gridpic_upload_form,  # Add this line
         'user': user,
         'available_styles': available_styles,
         'user_trending_styles': user_trending_styles,
@@ -172,9 +181,12 @@ def profile(request):
         'user_likes': user_likes,
         'user_tickets': user_tickets,
         'invite_codes': invite_codes,
-    })
+    }
 
+    return render(request, 'accounts/profile.html', context)
 
+def upload_gridpic_success(request):
+    return render(request, 'accounts/upload_gridpic_success.html')
 
 @login_required
 def upload_success(request):
