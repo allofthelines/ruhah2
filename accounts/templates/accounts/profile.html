@@ -18,7 +18,8 @@
         <a href="#asks" onclick="showContent('asks', 'Profile > Asks')" style="/*color: blue;*/">ASKS</a>
         <br>
         <a href="#grid" onclick="showContent('grid', 'Profile > Grid')" style="/*color: blue;*/">GRID</a>
-        <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a>
+        <a href="#gridpic_upload" onclick="showContent('gridpic_upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a>
+        <!-- <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a> -->
         <br>
         <a href="#settings" onclick="showContent('settings', 'Profile > Settings')" style="/*color: blue;*/">STTNGS</a>
         <br>
@@ -637,6 +638,20 @@
 
 
 
+
+        <!-- GridPic Upload Section -->
+        <div id="gridpic_upload" class="content-section" style="display: none;">
+            <p style="margin-top: 15px; text-align: left;">
+                Upload a new grid picture here.<br>
+                It will appear on your profile grid.<br>
+                <br>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ gridpic_upload_form.as_p }}
+                    <button type="submit" name="gridpic_upload_form">Upload Grid Picture</button>
+                </form>
+            </p>
+        </div>
 
 
 

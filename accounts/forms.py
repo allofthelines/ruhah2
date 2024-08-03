@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import CustomUser, Customer, PortraitUpload, InviteCode
+from accounts.models import CustomUser, Customer, PortraitUpload, InviteCode, GridPicUpload
 from django.contrib.auth.models import User
 import re
 
@@ -181,6 +181,25 @@ class PortraitUploadForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class GridPicUploadForm(forms.ModelForm):
+    class Meta:
+        model = GridPicUpload
+        fields = ['gridpic_img']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        self.user = user
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.uploader_id = self.user
+        if commit:
+            instance.save()
+        return instance
+
 
 class ProfileSettingsForm(forms.ModelForm):
     class Meta:
