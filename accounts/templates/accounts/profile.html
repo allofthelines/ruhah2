@@ -642,14 +642,13 @@
         <!-- GridPic Upload Section -->
         <div id="gridpic_upload" class="content-section" style="display: none;">
             <p style="margin-top: 15px; text-align: left;">
-                Upload a new grid picture here.<br>
-                It will appear on your profile grid.<br>
+                Pictures uploaded here appear on your profile grid.<br>
                 <br>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ gridpic_upload_form.as_p }}
                     <br>
-                    <button type="submit" name="gridpic_upload_form">Upload Grid Picture</button>
+                    <button type="submit" name="gridpic_upload_form">Upload Picture</button>
                 </form>
             </p>
         </div>
