@@ -648,6 +648,7 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ gridpic_upload_form.as_p }}
+                    <br>
                     <button type="submit" name="gridpic_upload_form">Upload Grid Picture</button>
                 </form>
             </p>
