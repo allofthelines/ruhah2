@@ -97,7 +97,7 @@ def account_activation_sent(request):
 
 
 
-from .models import PortraitUpload
+from .models import PortraitUpload, GridPicUpload
 from box.models import Ticket
 
 
@@ -115,6 +115,7 @@ def profile(request):
     available_styles = Style.objects.all()
     user_trending_styles = user.trending_styles.all()
     user_studio_styles = user.studio_styles.all()
+    user_gridpics = GridPicUpload.objects.filter(uploader_id=user, deleted_by_uploader='no').order_by('-timedate_uploaded')
 
     editing = request.GET.get('edit') == 'true'
     editing_settings = request.GET.get('edit_settings') == 'true'
@@ -176,6 +177,7 @@ def profile(request):
         'available_styles': available_styles,
         'user_trending_styles': user_trending_styles,
         'user_studio_styles': user_studio_styles,
+        'user_gridpics': user_gridpics,
         'editing': editing,
         'editing_settings': editing_settings,
         'user_likes': user_likes,
@@ -493,7 +495,16 @@ def remove_outfit(request, outfit_id):
         return redirect(next_url)
     return redirect('accounts:profile')
 
-
+@login_required
+def remove_gridpic(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id)
+    if request.method == 'POST' and request.user == gridpic.uploader_id:
+        gridpic.deleted_by_uploader = 'yes'
+        gridpic.timedate_deleted_by_uploader = timezone.now()
+        gridpic.save()
+        next_url = request.GET.get('next', 'accounts:profile')
+        return redirect(next_url)
+    return redirect('accounts:profile')
 
 
 

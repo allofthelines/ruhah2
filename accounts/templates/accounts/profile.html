@@ -19,7 +19,7 @@
         <br>
         <a style="color: grey; pointer-events: none; text-decoration: none; margin-left: -0.5px;">GRID</a>
         <a href="#grid" onclick="showContent('grid', 'Profile > Grid')" style="/*color: blue;*/">FITS</a>
-        <a href="#grid" onclick="showContent('grid', 'Profile > Grid')" style="/*color: blue;*/">PICS</a>
+        <a href="#gridpics" onclick="showContent('gridpics', 'Profile > Grid Pictures')" style="/*color: blue;*/">PICS</a>
         <a href="#gridpic_upload" onclick="showContent('gridpic_upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a>
         <!-- <a href="#upload" onclick="showContent('upload', 'Profile > Upload')" style="/*color: blue;*/">UPLOAD</a> -->
         <br>
@@ -605,6 +605,30 @@
 }
 
 </style>
+
+
+
+
+
+
+
+
+
+
+        <!-- GRIDPICS Section -->
+        <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
+            <div id="contBBBBB">
+                {% for gridpic in user_gridpics %}
+                    <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
+                        <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
+                        <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Remove</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
 
 

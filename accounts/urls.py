@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('remove_outfit/<int:outfit_id>/', views.remove_outfit, name='remove_outfit'),
 
+    path('remove_gridpic/<int:gridpic_id>/', views.remove_gridpic, name='remove_gridpic'),
+
     path('like-outfit/', views.like_outfit, name='like_outfit'),
     path('remove-like/<int:like_id>/', views.remove_like, name='remove_like'),
     path('remove-all-likes/', views.remove_all_likes, name='remove_all_likes'),
