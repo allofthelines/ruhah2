@@ -8,8 +8,11 @@
 <div class="outfit-details-container">
     {% for item in items %}
         <div class="item-container contAAAAA">
-            <div class="item-image-container" onclick="toggleItemDetails(this)">
-                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+            <div class="item-image-container" onclick="toggleItemImage(this)">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image active">
+                <!-- Placeholder for future additional images -->
+                <!-- <img src="{{ item.additional_image1.url }}" alt="{{ item.name }}" class="item-image"> -->
+                <!-- <img src="{{ item.additional_image2.url }}" alt="{{ item.name }}" class="item-image"> -->
             </div>
             <div class="item-details" style="display: none;">
                 <p>Name: {{ item.name }}</p>
@@ -32,13 +35,20 @@
 </div>
 
 <script>
-function toggleItemDetails(element) {
-    var detailsElement = element.nextElementSibling;
-    if (detailsElement.style.display === "none") {
-        detailsElement.style.display = "block";
-    } else {
-        detailsElement.style.display = "none";
-    }
+
+function toggleItemImage(container) {
+    var images = container.getElementsByClassName('item-image');
+    var activeImage = container.querySelector('.item-image.active');
+    var nextImage = activeImage.nextElementSibling || images[0];
+
+    activeImage.classList.remove('active');
+    activeImage.style.display = 'none';
+    nextImage.classList.add('active');
+    nextImage.style.display = 'block';
 }
+
+// ... (keep the existing toggleItemDetails function)
 </script>
+
+
 {% endblock %}

@@ -506,9 +506,11 @@ def remove_gridpic(request, gridpic_id):
         return redirect(next_url)
     return redirect('accounts:profile')
 
+from studio.models import SizeCategory
+
 def profile_ask_outfit_details(request, outfit_id):
     outfit = get_object_or_404(Outfit, id=outfit_id)
-    items = outfit.items.all()
+    items = outfit.items.all().prefetch_related('sizes_xyz')
 
     context = {
         'outfit': outfit,
