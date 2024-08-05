@@ -36,6 +36,10 @@
     <button id="place-order-btn" class="btn btn-primary" onclick="prepareOrder()">Place Order</button>
 </div>
 
+<div class="back-button-container">
+    <a href="{% url 'accounts:profile' %}#asks" class="btn btn-secondary" id="back-to-asks-btn">Back to Asks</a>
+</div>
+
 <script>
 function toggleItemDetails(element) {
     var imageElement = element.querySelector('.item-image');
@@ -134,7 +138,7 @@ function prepareOrder() {
         margin-top: 20px;
     }
 
-    #place-order-btn {
+    #place-order-btn, #back-to-asks-btn {
         display: inline-block;
         width: auto;
         margin: 20px auto;
