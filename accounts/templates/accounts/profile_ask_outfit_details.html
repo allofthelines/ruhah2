@@ -30,7 +30,10 @@
             </div>
         </div>
     {% endfor %}
-    <button id="place-order-btn" class="btn btn-primary">Place Order</button>
+</div>
+
+<div class="order-button-container">
+    <button id="place-order-btn" class="btn btn-primary" onclick="prepareOrder()">Place Order</button>
 </div>
 
 <script>
@@ -125,15 +128,14 @@ function prepareOrder() {
         margin: 0 5px;
     }
 
-    #place-order-btn {
+    .order-button-container {
         width: 100%;
+        text-align: center;
         margin-top: 20px;
-        border: 1px solid black;
-        padding: 2px;
     }
 
     #place-order-btn {
-        display: block;
+        display: inline-block;
         width: auto;
         margin: 20px auto;
         border: 1px solid black;
