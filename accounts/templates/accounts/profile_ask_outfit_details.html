@@ -47,8 +47,87 @@ function toggleItemImage(container) {
     nextImage.style.display = 'block';
 }
 
-// ... (keep the existing toggleItemDetails function)
+function prepareOrder() {
+    var selectedItems = [];
+    var selects = document.querySelectorAll('select[name^="size-"]');
+
+    selects.forEach(function(select) {
+        var itemId = select.name.split('-')[1];
+        var selectedSize = select.value;
+
+        if (selectedSize !== 'exclude') {
+            selectedItems.push({
+                itemId: itemId,
+                size: selectedSize
+            });
+        }
+    });
+
+    if (selectedItems.length === 0) {
+        alert('Please select at least one item to order.');
+        return;
+    }
+
+    console.log('Selected items:', selectedItems);
+    // Here you would typically send this data to the server or integrate with Stripe
+    alert('Order prepared! In the future, this will proceed to payment.');
+}
+
 </script>
 
+
+
+
+
+
+
+
+
+<style>
+    .outfit-details-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .item-container {
+        width: 48%; /* For desktop: two columns */
+        margin-bottom: 20px;
+    }
+
+    .item-image-container {
+        width: 100%;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .item-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .item-details, .item-size-selection {
+        margin-top: 10px;
+    }
+
+    #place-order-btn {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .item-container {
+            width: 100%; /* For mobile: one column */
+        }
+    }
+</style>
+
+
+    
 
 {% endblock %}
