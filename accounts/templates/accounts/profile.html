@@ -281,14 +281,14 @@
                         <div class="toggle" onclick="toggleImage(this)">
                             {% if ticket.outfit1 %}
                                 <img src="{{ ticket.outfit1.image.url }}" alt="Outfit Image" class="outfit-image" style="display: block;">
-                                <div class="contNOTE1" style="display: none;">
+                                <div class="contNOTE1" style="display: none; background-color: #f8f8f8;">
                                     <p>
                                         {{ ticket.notes }}
                                         <br><br>
                                         Ask #{{ ticket.id }}
                                     </p>
                                 </div>
-                                <div class="contNOTE2" style="display: none;">
+                                <div class="contNOTE2" style="display: none; background-color: #f8f8f8;">
                                     <p>
                                         {% if ticket.outfit1 %}
                                             Styled by: {{ ticket.outfit1.maker_id }}
@@ -302,7 +302,7 @@
                                     </p>
                                 </div>
                             {% else %}
-                                <div class="contNOTE" style="display: block;">
+                                <div class="contNOTE" style="display: block; background-color: #f8f8f8;">
                                     <p>
                                         {{ ticket.notes }}
                                         <br><br>
