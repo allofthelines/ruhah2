@@ -20,7 +20,7 @@
                 <p class="item-price">${{ item.price }}</p>
             </div>
             <div class="item-size-selection">
-                <label for="size-select-{{ item.id }}">Select:</label>
+                <label for="size-select-{{ item.id }}">Select Size:</label>
                 <select id="size-select-{{ item.id }}" name="size-{{ item.id }}">
                     <option value="exclude">Exclude</option>
                     {% for size in item.sizes_xyz.all %}
