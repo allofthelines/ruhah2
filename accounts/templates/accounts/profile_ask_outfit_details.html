@@ -8,7 +8,7 @@
 <div class="outfit-details-container">
     {% for item in items %}
         <div class="item-container contAAAAA">
-            <div class="item-image-container" onclick="toggleItemImage(this)">
+            <div class="item-image-container" onclick="toggleItemDetails(this)">
                 <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image active">
                 <!-- Placeholder for future additional images -->
                 <!-- <img src="{{ item.additional_image1.url }}" alt="{{ item.name }}" class="item-image"> -->
@@ -34,6 +34,14 @@
     <button id="place-order-btn" class="btn btn-primary">Place Order</button>
 </div>
 
+
+
+
+
+
+
+
+
 <script>
 
 function toggleItemImage(container) {
@@ -45,6 +53,15 @@ function toggleItemImage(container) {
     activeImage.style.display = 'none';
     nextImage.classList.add('active');
     nextImage.style.display = 'block';
+}
+
+function toggleItemDetails(element) {
+    var detailsElement = element.nextElementSibling;
+    if (detailsElement.style.display === "none") {
+        detailsElement.style.display = "block";
+    } else {
+        detailsElement.style.display = "none";
+    }
 }
 
 function prepareOrder() {
@@ -128,6 +145,6 @@ function prepareOrder() {
 </style>
 
 
-    
+
 
 {% endblock %}
