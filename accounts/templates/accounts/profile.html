@@ -321,7 +321,7 @@
                             <div class="LLRR-button-container">
                                 {% if ticket.outfit1 %}
                                     <form>
-                                        <button type="button" class="link-style">Details</button>
+                                        <a href="{% url 'accounts:profile_ask_outfit_details' outfit_id=ticket.outfit1.id %}" class="link-style">Details</a>
                                     </form>
                                 {% else %}
                                     <form>

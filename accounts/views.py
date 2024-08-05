@@ -506,7 +506,15 @@ def remove_gridpic(request, gridpic_id):
         return redirect(next_url)
     return redirect('accounts:profile')
 
+def profile_ask_outfit_details(request, outfit_id):
+    outfit = get_object_or_404(Outfit, id=outfit_id)
+    items = outfit.items.all()
 
+    context = {
+        'outfit': outfit,
+        'items': items,
+    }
+    return render(request, 'accounts/profile_ask_outfit_details.html', context)
 
 
 

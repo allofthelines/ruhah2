@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Outfit Details
+{% endblock %}
+
+{% block content %}
+<div class="outfit-details-container">
+    {% for item in items %}
+        <div class="item-container contAAAAA">
+            <div class="item-image-container" onclick="toggleItemDetails(this)">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+            </div>
+            <div class="item-details" style="display: none;">
+                <p>Name: {{ item.name }}</p>
+                <p>Price: ${{ item.price }}</p>
+                <p>Condition: {{ item.condition }}</p>
+                <p>ID: {{ item.itemid }}</p>
+            </div>
+            <div class="item-size-selection">
+                <label for="size-select-{{ item.id }}">Select:</label>
+                <select id="size-select-{{ item.id }}" name="size-{{ item.id }}">
+                    <option value="exclude">Exclude</option>
+                    {% for size in item.sizes_xyz.all %}
+                        <option value="{{ size.name }}">{{ size.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endfor %}
+    <button id="place-order-btn" class="btn btn-primary">Place Order</button>
+</div>
+
+<script>
+function toggleItemDetails(element) {
+    var detailsElement = element.nextElementSibling;
+    if (detailsElement.style.display === "none") {
+        detailsElement.style.display = "block";
+    } else {
+        detailsElement.style.display = "none";
+    }
+}
+</script>
+{% endblock %}
