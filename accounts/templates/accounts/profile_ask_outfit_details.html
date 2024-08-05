@@ -10,15 +10,14 @@
         <div class="item-container contAAAAA">
             <div class="item-image-container" onclick="toggleItemDetails(this)">
                 <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image active">
-                <!-- Placeholder for future additional images -->
-                <!-- <img src="{{ item.additional_image1.url }}" alt="{{ item.name }}" class="item-image"> -->
-                <!-- <img src="{{ item.additional_image2.url }}" alt="{{ item.name }}" class="item-image"> -->
+                <div class="item-extra-details" style="display: none;">
+                    <p>Condition: {{ item.condition }}</p>
+                    <p>ID: {{ item.itemid }}</p>
+                </div>
             </div>
-            <div class="item-details" style="display: none;">
-                <p>Name: {{ item.name }}</p>
-                <p>Price: ${{ item.price }}</p>
-                <p>Condition: {{ item.condition }}</p>
-                <p>ID: {{ item.itemid }}</p>
+            <div class="item-basic-details">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="item-price">${{ item.price }}</p>
             </div>
             <div class="item-size-selection">
                 <label for="size-select-{{ item.id }}">Select:</label>
@@ -34,32 +33,15 @@
     <button id="place-order-btn" class="btn btn-primary">Place Order</button>
 </div>
 
-
-
-
-
-
-
-
-
 <script>
-
-function toggleItemImage(container) {
-    var images = container.getElementsByClassName('item-image');
-    var activeImage = container.querySelector('.item-image.active');
-    var nextImage = activeImage.nextElementSibling || images[0];
-
-    activeImage.classList.remove('active');
-    activeImage.style.display = 'none';
-    nextImage.classList.add('active');
-    nextImage.style.display = 'block';
-}
-
 function toggleItemDetails(element) {
-    var detailsElement = element.nextElementSibling;
-    if (detailsElement.style.display === "none") {
-        detailsElement.style.display = "block";
+    var imageElement = element.querySelector('.item-image');
+    var detailsElement = element.querySelector('.item-extra-details');
+    if (imageElement.style.display !== "none") {
+        imageElement.style.display = "none";
+        detailsElement.style.display = "flex";
     } else {
+        imageElement.style.display = "block";
         detailsElement.style.display = "none";
     }
 }
@@ -86,19 +68,9 @@ function prepareOrder() {
     }
 
     console.log('Selected items:', selectedItems);
-    // Here you would typically send this data to the server or integrate with Stripe
     alert('Order prepared! In the future, this will proceed to payment.');
 }
-
 </script>
-
-
-
-
-
-
-
-
 
 <style>
     .outfit-details-container {
@@ -119,7 +91,7 @@ function prepareOrder() {
         overflow: hidden;
     }
 
-    .item-image {
+    .item-image, .item-extra-details {
         position: absolute;
         top: 0;
         left: 0;
@@ -128,8 +100,27 @@ function prepareOrder() {
         object-fit: cover;
     }
 
-    .item-details, .item-size-selection {
+    .item-extra-details {
+        background-color: #f8f8f8;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .item-basic-details, .item-size-selection {
         margin-top: 10px;
+        text-align: center;
+    }
+
+    .item-name, .item-price {
+        margin: 5px 0;
+    }
+
+    .item-size-selection label, .item-size-selection select {
+        display: inline-block;
+        margin: 0 5px;
     }
 
     #place-order-btn {
@@ -142,11 +133,6 @@ function prepareOrder() {
             width: 100%; /* For mobile: one column */
         }
     }
-
-
 </style>
-
-
-
 
 {% endblock %}
