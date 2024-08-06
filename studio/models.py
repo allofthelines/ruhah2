@@ -20,7 +20,7 @@ class Tag(models.Model):
         return self.tag_name
 
 class SizeCategory(models.Model):
-    SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL')]
+    SIZE_CHOICES = [('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'), ('one_size', 'One Size')]
 
     name = models.CharField(max_length=10, choices=SIZE_CHOICES, unique=True)
 
