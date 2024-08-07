@@ -14,44 +14,58 @@
   <title>RUHAH</title>
   {% block scripts %}{% endblock %}
 
-    <style>
-      #header-title {
-        position: relative;
-        cursor: pointer;
-      }
+  <style>
+    #header-title {
+      position: relative;
+      cursor: pointer;
+    }
 
-      #header-title .parenthesis {
-        position: relative;
-        top: -0.1em;
-        font-size: 0.9em;
-      }
+    #header-title .parenthesis {
+      position: relative;
+      top: -0.1em;
+      font-size: 0.9em;
+    }
 
-      #alternate-content {
-        display: none;
-        text-align: center;
-        padding: 20px;
-      }
+    #alternate-content {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
 
-      .math-concept {
-        font-size: 24px;
-        margin: 20px 0;
-      }
+    .math-concept {
+      font-size: 24px;
+      margin: 20px 0;
+    }
 
-      .math-concept.spacer {
-        height: 20px;
-      }
+    .math-concept.spacer {
+      height: 20px;
+    }
 
-      .math-parenthesis {
-        position: relative;
-        top: -0.1em;
-        font-size: 0.9em;
-      }
+    .math-parenthesis {
+      position: relative;
+      top: -0.1em;
+      font-size: 0.9em;
+    }
 
-      .math-word {
-        position: relative;
-        top: -0.05px;
-      }
-    </style>
+    .math-word {
+      position: relative;
+      top: -0.05px;
+    }
+
+    .alternate-view #main-nav,
+    .alternate-view #content,
+    .alternate-view #footer {
+      display: none;
+    }
+
+    .alternate-view #header-title .parenthesis {
+      display: none;
+    }
+
+    .alternate-view #alternate-content {
+      display: block;
+    }
+  </style>
 
 </head>
 
@@ -142,29 +156,20 @@
   });
 
   function toggleView() {
+    var body = document.body;
     var headerTitle = document.getElementById('header-title');
-    var mainContent = document.getElementById('content');
     var alternateContent = document.getElementById('alternate-content');
-    var parentheses = headerTitle.getElementsByClassName('parenthesis');
-    var mainNav = document.getElementById('main-nav');
-    var footer = document.getElementById('footer');
 
-    if (mainContent.style.display !== 'none') {
-      mainContent.style.display = 'none';
-      alternateContent.style.display = 'block';
-      mainNav.style.display = 'none';
-      footer.style.display = 'none';
-      for (var i = 0; i < parentheses.length; i++) {
-        parentheses[i].style.display = 'none';
-      }
+    if (!body.classList.contains('alternate-view')) {
+      // Switch to alternate view
+      body.classList.add('alternate-view');
+      headerTitle.onclick = function() {
+        body.classList.remove('alternate-view');
+        headerTitle.onclick = toggleView;
+      };
     } else {
-      mainContent.style.display = 'block';
-      alternateContent.style.display = 'none';
-      mainNav.style.display = 'block';
-      footer.style.display = 'block';
-      for (var i = 0; i < parentheses.length; i++) {
-        parentheses[i].style.display = 'inline';
-      }
+      // Switch back to regular view
+      body.classList.remove('alternate-view');
     }
   }
 
@@ -172,7 +177,9 @@
     var samples = document.querySelector('#alternate-content .math-concept');
     if (samples) {
       samples.style.cursor = 'pointer';
-      samples.addEventListener('click', toggleView);
+      samples.addEventListener('click', function() {
+        window.location.href = '/';  // Redirect to home page
+      });
     }
   });
 </script>
