@@ -18,24 +18,34 @@
   {% block scripts %}{% endblock %}
 
   <style>
-        #header-title {
-            position: relative;
-            cursor: pointer;
-        }
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
 
-        #header-title .parenthesis {
-            position: relative;
-            top: -0.1em; /* Adjust this value to move parentheses up or down */
-            font-size: 0.9em; /* Optional: adjust size of parentheses */
-        }
+    #header-title {
+        position: relative;
+        cursor: pointer;
+    }
 
-        #alternate-nav {
-            display: none;
-            font-family: 'Oswald', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-        }
-    </style>
+    #header-title .parenthesis {
+        position: relative;
+        top: -0.1em;
+        font-size: 0.9em;
+    }
+
+    #header #alternate-nav {
+        display: none;
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    #header #main-nav,
+    #footer {
+        font-family: inherit;
+        font-weight: normal;
+    }
+  </style>
 
 </head>
 
