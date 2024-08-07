@@ -14,29 +14,41 @@
   <title>RUHAH</title>
   {% block scripts %}{% endblock %}
 
-  <style>
-    #header-title {
-      position: relative;
-      cursor: pointer;
-    }
+    <style>
+      #header-title {
+        position: relative;
+        cursor: pointer;
+      }
 
-    #header-title .parenthesis {
-      position: relative;
-      top: -0.1em;
-      font-size: 0.9em;
-    }
+      #header-title .parenthesis {
+        position: relative;
+        top: -0.1em;
+        font-size: 0.9em;
+      }
 
-    #alternate-content {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
+      #alternate-content {
+        display: none;
+        text-align: center;
+        padding: 20px;
+      }
 
-    .math-concept {
-      font-size: 24px;
-      margin: 20px 0;
-    }
-  </style>
+      .math-concept {
+        font-size: 24px;
+        margin: 20px 0;
+      }
+
+      .math-parenthesis {
+        position: relative;
+        top: -0.1em;
+        font-size: 0.9em;
+      }
+
+      .math-word {
+        position: relative;
+        top: 0.1em;
+      }
+    </style>
+
 </head>
 
 <body>
@@ -68,12 +80,13 @@
 </div>
 
 <div id="alternate-content">
-  <div class="math-concept">( SAMPLES )</div>
-  <div class="math-concept">| ABSOLUTES |</div>
-  <div class="math-concept">{ ELEMENTS }</div>
-  <div class="math-concept">&lt; PRIMES &gt;</div>
-  <div class="math-concept">(( VECTORS ))</div>
-  <div class="math-concept">[ SPACE ]</div>
+  <div class="math-concept"><span class="math-parenthesis">(</span> <span class="math-word">SAMPLES</span> <span class="math-parenthesis">)</span></div>
+  <div class="math-concept"><span class="math-parenthesis">|</span> <span class="math-word">ABSOLUTES</span> <span class="math-parenthesis">|</span></div>
+  <div class="math-concept"><span class="math-parenthesis">{</span> <span class="math-word">ELEMENTS</span> <span class="math-parenthesis">}</span></div>
+  <div class="math-concept"><span class="math-parenthesis">&lt;</span> <span class="math-word">PRIMES</span> <span class="math-parenthesis">&gt;</span></div>
+
+  <div class="math-concept"><span class="math-parenthesis">((</span> <span class="math-word">VECTORS</span> <span class="math-parenthesis">))</span></div>
+  <div class="math-concept"><span class="math-parenthesis">[</span> <span class="math-word">SPACE</span> <span class="math-parenthesis">]</span></div>
 </div>
 
 <footer id="footer" style="text-align:center; padding:20px; font-family:inherit;">
