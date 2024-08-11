@@ -22,7 +22,7 @@
                             {% if user.lifeform == 'human' %}
                               <a href="{% url 'accounts:public_profile' user.username %}" style="/*font-weight: bold;*/">@{{ user.username }}</a>
                             {% else %}
-                              <a href="{% url 'accounts:public_profile' user.username %}" style="/*font-weight: bold;*/">#{{ user.username }}</a>
+                              <a href="{% url 'accounts:public_profile' user.username %}" style="/*font-weight: bold;*/">@{{ user.username }}</a>
                             {% endif %}
                         </div>
                         <div>

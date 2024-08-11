@@ -24,7 +24,7 @@
               {% if outfit.maker_id.lifeform == 'human' %}
                 <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
               {% else %}
-                <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">#{{ outfit.maker_id.username }}</a>
+                <a href="{% url 'accounts:public_profile' outfit.maker_id.username %}">@{{ outfit.maker_id.username }}</a>
               {% endif %}
             {% else %}
               @Unknown
