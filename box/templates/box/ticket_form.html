@@ -11,16 +11,9 @@
 <p style="color: red;">Please complete the size fields</p>
 {% endif %}
 
-
 <div style="border: 1px solid black; padding: 15px;">
-
-    <div class="tab-container">
-        <a class="tab-link active-tab" id="fitTab" onclick="showFitForm()">OUTFIT</a>
-        <a class="tab-link" id="boxTab" onclick="showBoxForm()">BOX</a>
-    </div>
-
     <!-- FIT FORM -->
-    <div id="fitForm" style="display: block;">
+    <div id="fitForm">
         <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
             {% csrf_token %}
             {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
@@ -36,51 +29,6 @@
         </form>
     </div>
 
-    <!-- BOX FORM -->
-    <div id="boxForm" style="display: none;">
-        <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
-            {% csrf_token %}
-            {{ box_form.style1.label_tag }} {{ box_form.style1 }}<br>
-            {% if user.is_authenticated %}
-                {{ box_form.curated_by.label_tag }} {{ box_form.curated_by }}<br>
-            {% endif %}
-            <!-- {{ box_form.catalogue.label_tag }} {{ box_form.catalogue }}<br> -->
-            <!-- {{ box_form.condition.label_tag }} {{ box_form.condition }}<br> -->
-            <!-- {{ box_form.price.label_tag }} {{ box_form.price }}<br> -->
-            <br>
-            {{ box_form.notes.label_tag }} <br> {{ box_form.notes }}<br>
-            <br>
-            {% if user.is_authenticated %}
-                {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk %}
-                    {% if not user.customer.top_size_xyz %}
-                        {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
-                    {% endif %}
-                    {% if not user.customer.bottom_size_xyz %}
-                        {{ box_form.size_bottom_xyz.label_tag }} {{ box_form.size_bottom_xyz }}<br>
-                    {% endif %}
-                    {% if not user.customer.size_waist_inches %}
-                        {{ box_form.size_waist_inches.label_tag }} {{ box_form.size_waist_inches }}<br>
-                    {% endif %}
-                    {% if not user.customer.shoe_size_eu %}
-                        {{ box_form.size_shoe_eu.label_tag }} {{ box_form.size_shoe_eu }}<br>
-                    {% endif %}
-                    {% if not user.customer.shoe_size_uk %}
-                        {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
-                    {% endif %}
-                    <br>
-                {% endif %}
-            {% else %}
-                {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
-                {{ box_form.size_bottom_xyz.label_tag }} {{ box_form.size_bottom_xyz }}<br>
-                {{ box_form.size_waist_inches.label_tag }} {{ box_form.size_waist_inches }}<br>
-                {{ box_form.size_shoe_eu.label_tag }} {{ box_form.size_shoe_eu }}<br>
-                {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
-                <br>
-            {% endif %}
-            <button type="submit" name="box_form">Proceed to Order Box</button>
-        </form>
-    </div>
-
     {% if form.errors %}
         <p style="color: red;">Please complete the size fields</p>
         {{ form.non_field_errors }}
@@ -90,11 +38,58 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-
 </div>
 
+{% comment %}
+<!-- Commented out BOX FORM and related elements -->
+<div class="tab-container">
+    <a class="tab-link active-tab" id="fitTab" onclick="showFitForm()">OUTFIT</a>
+    <a class="tab-link" id="boxTab" onclick="showBoxForm()">BOX</a>
+</div>
 
-
+<div id="boxForm" style="display: none;">
+    <form method="post" class="ticket-form" action="{% url 'box:ticket_form' %}">
+        {% csrf_token %}
+        {{ box_form.style1.label_tag }} {{ box_form.style1 }}<br>
+        {% if user.is_authenticated %}
+            {{ box_form.curated_by.label_tag }} {{ box_form.curated_by }}<br>
+        {% endif %}
+        <!-- {{ box_form.catalogue.label_tag }} {{ box_form.catalogue }}<br> -->
+        <!-- {{ box_form.condition.label_tag }} {{ box_form.condition }}<br> -->
+        <!-- {{ box_form.price.label_tag }} {{ box_form.price }}<br> -->
+        <br>
+        {{ box_form.notes.label_tag }} <br> {{ box_form.notes }}<br>
+        <br>
+        {% if user.is_authenticated %}
+            {% if not user.customer.top_size_xyz or not user.customer.bottom_size_xyz or not user.customer.size_waist_inches or not user.customer.shoe_size_eu or not user.customer.shoe_size_uk %}
+                {% if not user.customer.top_size_xyz %}
+                    {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
+                {% endif %}
+                {% if not user.customer.bottom_size_xyz %}
+                    {{ box_form.size_bottom_xyz.label_tag }} {{ box_form.size_bottom_xyz }}<br>
+                {% endif %}
+                {% if not user.customer.size_waist_inches %}
+                    {{ box_form.size_waist_inches.label_tag }} {{ box_form.size_waist_inches }}<br>
+                {% endif %}
+                {% if not user.customer.shoe_size_eu %}
+                    {{ box_form.size_shoe_eu.label_tag }} {{ box_form.size_shoe_eu }}<br>
+                {% endif %}
+                {% if not user.customer.shoe_size_uk %}
+                    {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
+                {% endif %}
+                <br>
+            {% endif %}
+        {% else %}
+            {{ box_form.size_top_xyz.label_tag }} {{ box_form.size_top_xyz }}<br>
+            {{ box_form.size_bottom_xyz.label_tag }} {{ box_form.size_bottom_xyz }}<br>
+            {{ box_form.size_waist_inches.label_tag }} {{ box_form.size_waist_inches }}<br>
+            {{ box_form.size_shoe_eu.label_tag }} {{ box_form.size_shoe_eu }}<br>
+            {{ box_form.size_shoe_uk.label_tag }} {{ box_form.size_shoe_uk }}<br>
+            <br>
+        {% endif %}
+        <button type="submit" name="box_form">Proceed to Order Box</button>
+    </form>
+</div>
 
 <script>
     function showFitForm() {
@@ -113,37 +108,33 @@
 </script>
 
 <style>
+    .tab-container {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-bottom: 15px;
+    }
 
-.tab-container {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-bottom: 15px;
-}
+    .tab-link {
+        padding: 0px;
+        text-decoration: none;
+        color: #000;
+        cursor: pointer;
+        flex: 1;
+        text-align: center;
+    }
 
-.tab-link {
-    padding: 0px;
-    text-decoration: none;
-    color: #000; /* Change to your preferred color */
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-}
+    .active-tab {
+        font-weight: initial;
+        font-weight: 600;
+    }
 
-.active-tab {
-    font-weight: initial;
-    font-weight: 600;
-}
-
-.content-box {
-    width: 100%;
-    padding: 15px;
-    box-sizing: border-box;
-}
-
-
+    .content-box {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
 </style>
-
-
+{% endcomment %}
 
 {% endblock %}
