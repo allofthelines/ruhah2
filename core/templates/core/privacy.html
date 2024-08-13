@@ -7,20 +7,21 @@
 {% block content %}
 
 <style>
-    #content-privacy {
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        width: 70%;
-    }
+#content-privacy {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 10px);  /* Full width minus 5px on each side */
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+}
 
-    @media screen and (max-width: 768px) {
-        #content-privacy {
-            width: auto;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
+@media screen and (min-width: 769px) {
+    #content-privacy {
+        width: 70%;  /* 70% width for desktop */
     }
+}
 </style>
 
 <div id="content-privacy">
