@@ -16,7 +16,7 @@
             &nbsp;
 
             {% if is_own_profile %}
-                <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'">Account</button>
+                <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'">ACCOUNT</button>
             {% else %}
                 {% if request.user.is_authenticated %}
                     {% if is_following %}
