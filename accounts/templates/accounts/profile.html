@@ -185,13 +185,13 @@
                             <button type="submit" class="link-style">Remove All</button>
                         </form>
                     </div>
-                    <div id="randomize-likes" class="contAAA">
+                    <div class="contAAA" id="randomize-likes">
                         <div class="randomize-likes-box">
                         </div>
-                        {% csrf_token %}
-                        <a href="{% url 'accounts:profile_likes_randomize' %}" class="link-style">
-                            <span style="position: relative; top: 5px;">Randomize</span>
-                        </a>
+                        <form action="{% url 'accounts:profile_likes_randomize' %}" method="GET">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Randomize</button>
+                        </form>
                     </div>
                 {% else %}
                     <p></p>
