@@ -478,6 +478,25 @@ def remove_all_likes(request):
     return redirect(next_url)
 
 
+def profile_likes_randomize(request):
+    user_likes = UserItemLikes.objects.filter(liker=request.user)
+    available_items = [like.item for like in user_likes if like.item.sizes_xyz.exists()]
+
+    if not available_items:
+        message = "None of these items is available. Please like more outfits and try again."
+        return render(request, 'accounts/profile_likes_randomize.html', {'message': message})
+
+    randomized_items = random.sample(available_items, min(8, len(available_items)))
+
+    # Remove all likes
+    user_likes.delete()
+
+    context = {
+        'randomized_items': randomized_items,
+    }
+    return render(request, 'accounts/profile_likes_randomize.html', context)
+
+
 def remove_ask(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     if ticket.creator_id.id == request.user.id:

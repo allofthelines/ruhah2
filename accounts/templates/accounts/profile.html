@@ -185,6 +185,12 @@
                             <button type="submit" class="link-style">Remove All</button>
                         </form>
                     </div>
+                    <div id="randomize-likes" class="contAAA">
+                        <div class="randomize-likes-box">
+                        </div>
+                        {% csrf_token %}
+                        <a href="{% url 'accounts:profile_likes_randomize' %}" class="randomize-button">Randomize</a>
+                    </div>
                 {% endif %}
             </div>
         </div>
