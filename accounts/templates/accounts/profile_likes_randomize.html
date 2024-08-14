@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
+
 {% if message %}
 <div class="message" style="margin-top: -10px;">
     {{ message }}
     <br><br>
 </div>
 {% else %}
+
 <div class="outfit-details-container">
     {% for item in randomized_items %}
         <div class="item-container contAAAAA">
@@ -91,6 +93,9 @@ function prepareOrder() {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+
+        max-width: 1200px; /* Set your desired maximum width here */
+        margin: 0 auto; /* This centers the container */
     }
 
     .item-container {
