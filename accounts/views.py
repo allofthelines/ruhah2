@@ -488,7 +488,7 @@ def profile_likes_randomize(request):
             message = "None of these items is available. Please like more outfits and try again."
             return render(request, 'accounts/profile_likes_randomize.html', {'message': message})
 
-        randomized_items = random.sample(available_items, min(8, len(available_items)))
+        randomized_items = random.sample(available_items, min(6, len(available_items)))
 
         # Remove all likes
         user_likes.delete()
