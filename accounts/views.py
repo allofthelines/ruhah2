@@ -482,13 +482,33 @@ def remove_all_likes(request):
 def profile_likes_randomize(request):
     if request.method == 'POST':
         user_likes = UserItemLikes.objects.filter(liker=request.user)
-        available_items = [like.item for like in user_likes if like.item.sizes_xyz.exists()]
 
-        if not available_items:
+        # Separate items by category
+        tops = [like.item for like in user_likes if like.item.cat == 'top' and like.item.sizes_xyz.exists()]
+        bottoms = [like.item for like in user_likes if like.item.cat == 'bottom' and like.item.sizes_xyz.exists()]
+        accessories = [like.item for like in user_likes if
+                       like.item.cat == 'accessory' and like.item.sizes_xyz.exists()]
+
+        # Function to get a random item of a specific category
+        def get_random_item(category):
+            items = category[:]  # Create a copy to avoid modifying the original list
+            if items:
+                item = random.choice(items)
+                category.remove(item)  # Remove the item to avoid repetition
+                return item
+            return None
+
+        # Create two sets of 3 items each
+        randomized_items = []
+        for _ in range(2):  # Do this twice for 3+3 items
+            for category in [tops, bottoms, accessories]:
+                item = get_random_item(category)
+                if item:
+                    randomized_items.append(item)
+
+        if not randomized_items:
             message = "None of these items is available. Please like more outfits and try again."
             return render(request, 'accounts/profile_likes_randomize.html', {'message': message})
-
-        randomized_items = random.sample(available_items, min(6, len(available_items)))
 
         # Remove all likes
         user_likes.delete()
