@@ -189,7 +189,9 @@
                         <div class="randomize-likes-box">
                         </div>
                         {% csrf_token %}
-                        <a href="{% url 'accounts:profile_likes_randomize' %}" class="link-style">Randomize</a>
+                        <a href="{% url 'accounts:profile_likes_randomize' %}" class="link-style">
+                            <span style="position: relative; top: 4px;">Randomize</span>
+                        </a>
                     </div>
                 {% else %}
                     <p></p>
