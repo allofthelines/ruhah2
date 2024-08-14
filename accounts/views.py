@@ -478,23 +478,28 @@ def remove_all_likes(request):
     return redirect(next_url)
 
 
+@login_required
 def profile_likes_randomize(request):
-    user_likes = UserItemLikes.objects.filter(liker=request.user)
-    available_items = [like.item for like in user_likes if like.item.sizes_xyz.exists()]
+    if request.method == 'POST':
+        user_likes = UserItemLikes.objects.filter(liker=request.user)
+        available_items = [like.item for like in user_likes if like.item.sizes_xyz.exists()]
 
-    if not available_items:
-        message = "None of these items is available. Please like more outfits and try again."
-        return render(request, 'accounts/profile_likes_randomize.html', {'message': message})
+        if not available_items:
+            message = "None of these items is available. Please like more outfits and try again."
+            return render(request, 'accounts/profile_likes_randomize.html', {'message': message})
 
-    randomized_items = random.sample(available_items, min(4, len(available_items)))
+        randomized_items = random.sample(available_items, min(8, len(available_items)))
 
-    # Remove all likes
-    user_likes.delete()
+        # Remove all likes
+        user_likes.delete()
 
-    context = {
-        'randomized_items': randomized_items,
-    }
-    return render(request, 'accounts/profile_likes_randomize.html', context)
+        context = {
+            'randomized_items': randomized_items,
+        }
+        return render(request, 'accounts/profile_likes_randomize.html', context)
+    else:
+        # Handle GET request, maybe redirect to profile page
+        return redirect('accounts:profile')
 
 
 def remove_ask(request, ticket_id):

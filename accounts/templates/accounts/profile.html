@@ -188,7 +188,7 @@
                     <div class="contAAA" id="randomize-likes">
                         <div class="randomize-likes-box">
                         </div>
-                        <form action="{% url 'accounts:profile_likes_randomize' %}" method="GET">
+                        <form action="{% url 'accounts:profile_likes_randomize' %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="link-style">Randomize</button>
                         </form>
