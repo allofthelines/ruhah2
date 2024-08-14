@@ -87,14 +87,18 @@ function prepareOrder() {
 
 <style>
     .outfit-details-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
     }
 
     .item-container {
-        width: 48%; /* For desktop: two columns */
+        width: calc(50% - 10px);
         margin-bottom: 20px;
+        max-width: 500px;
     }
 
     .item-image-container {
@@ -167,7 +171,7 @@ function prepareOrder() {
 
     @media (max-width: 768px) {
         .item-container {
-            width: 100%; /* For mobile: one column */
+            width: 100%;
         }
     }
 </style>
