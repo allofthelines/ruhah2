@@ -191,6 +191,8 @@
                         {% csrf_token %}
                         <a href="{% url 'accounts:profile_likes_randomize' %}" class="randomize-button">Randomize</a>
                     </div>
+                {% else %}
+                    <p>You haven't liked any items yet.</p>
                 {% endif %}
             </div>
         </div>
