@@ -19,6 +19,7 @@ urlpatterns = [
     path('remove-all-likes/', views.remove_all_likes, name='remove_all_likes'),
 
     path('profile/ask_outfit_details/<int:outfit_id>/', views.profile_ask_outfit_details, name='profile_ask_outfit_details'),
+    path('profile/likes/randomize/', views.profile_likes_randomize, name='profile_likes_randomize'),
 
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html', next_page='core:home'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),

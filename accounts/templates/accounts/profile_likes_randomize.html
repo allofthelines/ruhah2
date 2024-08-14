@@ -1,0 +1,174 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Randomized Likes
+{% endblock %}
+
+{% block content %}
+{% if message %}
+<div class="message">
+    {{ message }}
+</div>
+{% else %}
+<div class="outfit-details-container">
+    {% for item in randomized_items %}
+        <div class="item-container contAAAAA">
+            <div class="item-image-container" onclick="toggleItemDetails(this)">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image active">
+                <div class="item-extra-details" style="display: none;">
+                    <p>Condition: {{ item.condition }}</p>
+                    <p>ID: {{ item.itemid }}</p>
+                </div>
+            </div>
+            <div class="item-basic-details">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="item-price">${{ item.price }}</p>
+            </div>
+            <div class="item-size-selection">
+                <label for="size-select-{{ item.id }}">Select Size:</label>
+                <select id="size-select-{{ item.id }}" name="size-{{ item.id }}">
+                    <option value="exclude">Exclude</option>
+                    {% for size in item.sizes_xyz.all %}
+                        <option value="{{ size.name }}">{{ size.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="order-button-container">
+    <button id="place-order-btn" class="btn btn-primary" onclick="prepareOrder()">Place Order</button>
+</div>
+{% endif %}
+
+<div class="back-button-container">
+    <a href="{% url 'accounts:profile' %}#likes" class="btn btn-secondary" id="back-to-likes-btn">Back to Likes</a>
+</div>
+
+<script>
+function toggleItemDetails(element) {
+    var imageElement = element.querySelector('.item-image');
+    var detailsElement = element.querySelector('.item-extra-details');
+    if (imageElement.style.display !== "none") {
+        imageElement.style.display = "none";
+        detailsElement.style.display = "flex";
+    } else {
+        imageElement.style.display = "block";
+        detailsElement.style.display = "none";
+    }
+}
+
+function prepareOrder() {
+    var selectedItems = [];
+    var selects = document.querySelectorAll('select[name^="size-"]');
+
+    selects.forEach(function(select) {
+        var itemId = select.name.split('-')[1];
+        var selectedSize = select.value;
+
+        if (selectedSize !== 'exclude') {
+            selectedItems.push({
+                itemId: itemId,
+                size: selectedSize
+            });
+        }
+    });
+
+    if (selectedItems.length === 0) {
+        alert('Please select at least one item to order.');
+        return;
+    }
+
+    console.log('Selected items:', selectedItems);
+    alert('Order prepared! In the future, this will proceed to payment.');
+}
+</script>
+
+<style>
+    .outfit-details-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .item-container {
+        width: 48%; /* For desktop: two columns */
+        margin-bottom: 20px;
+    }
+
+    .item-image-container {
+        width: 100%;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        position: relative;
+        overflow: hidden;
+        border: 1px solid black;
+        box-sizing: border-box;
+    }
+
+    .item-image, .item-extra-details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .item-extra-details {
+        background-color: #f8f8f8;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .item-basic-details, .item-size-selection {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .item-name, .item-price {
+        margin: 5px 0;
+    }
+
+    .item-size-selection label, .item-size-selection select {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .order-button-container {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #place-order-btn {
+        display: inline-block;
+        width: auto;
+        margin: 20px auto;
+        border: 1px solid black;
+        padding: 10px 20px;
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #back-to-likes-btn {
+        display: inline-block;
+        width: auto;
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .item-container {
+            width: 100%; /* For mobile: one column */
+        }
+    }
+</style>
+{% endblock %}
