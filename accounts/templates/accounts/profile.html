@@ -189,10 +189,10 @@
                         <div class="randomize-likes-box">
                         </div>
                         {% csrf_token %}
-                        <a href="{% url 'accounts:profile_likes_randomize' %}" class="randomize-button">Randomize</a>
+                        <a href="{% url 'accounts:profile_likes_randomize' %}" class="link-style">Randomize</a>
                     </div>
                 {% else %}
-                    <p>You haven't liked any items yet.</p>
+                    <p style="text-align: center;">Double click on an outfit in a user's profile to like it.</p>
                 {% endif %}
             </div>
         </div>
