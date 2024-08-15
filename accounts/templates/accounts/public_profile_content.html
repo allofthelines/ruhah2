@@ -28,7 +28,7 @@
                         -->
                         <button id="follow-unfollow-button-{{ profile_user.username }}" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)" style="color: #ffa500;">Following</button>
                     {% else %}
-                        <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')" style="color: #007bff;">Follow</button>
+                        <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')" style="color: #c5c6c7;">Follow</button>
                     {% endif %}
                     <form id="follow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
                         {% csrf_token %}
@@ -96,7 +96,7 @@ function toggleFollowUnfollow(username, isFollowing) {
             setTimeout(() => {
                 if (button.dataset.toggled === "true") {
                     button.textContent = "Following";
-                    button.style.color = "#ffa500";  // Reset color
+                    button.style.color = "#c5c6c7";  // Reset color
                     button.dataset.toggled = "false";
                 }
             }, 2000);
