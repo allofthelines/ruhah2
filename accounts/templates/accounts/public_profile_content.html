@@ -26,9 +26,9 @@
                         <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</button>
                         <button id="unfollow-button" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)">Following</button>
                         -->
-                        <button id="follow-unfollow-button-{{ profile_user.username }}" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)" style="color: #ffa500;">Following</button>
+                        <button id="follow-unfollow-button-{{ profile_user.username }}" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)" style="color: #c5c6c7;">Following</button>
                     {% else %}
-                        <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')" style="color: #c5c6c7;">Follow</button>
+                        <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')" style="color: #007bff;">Follow</button>
                     {% endif %}
                     <form id="follow-form-{{ profile_user.username }}" method="post" action="{% url 'accounts:follow' profile_user.username %}" style="display: none;">
                         {% csrf_token %}
