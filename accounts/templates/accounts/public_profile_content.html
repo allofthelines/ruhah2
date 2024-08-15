@@ -16,7 +16,7 @@
             &nbsp;
 
             {% if is_own_profile %}
-                <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'" style="font-family: 'Poppins', sans-serif; font-weight: 300;">ACCOUNT</button>
+                <button id="edit-button" onclick="window.location.href='{% url 'accounts:profile' %}'" style="font-family: 'Poppins', sans-serif; font-weight: 300; color: #c5c6c7;">ACCOUNT</button>
             {% else %}
                 {% if request.user.is_authenticated %}
                     {% if is_following %}
