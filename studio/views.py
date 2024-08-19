@@ -102,7 +102,7 @@ def studio_tickets(request):
 
     else:
         following_user_ids = []
-        filtered_tickets = ticket_list  # Show all tickets for guests
+        filtered_tickets = ticket_list  # Show all tickets for guestsa allakse to me to allo apo katw otan
         # filtered_tickets = [ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'] # deikse ola ektos apo afta pou exoun sygekrimeno following
 
     # Create a paginator for the filtered tickets
