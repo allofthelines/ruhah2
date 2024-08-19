@@ -21,7 +21,7 @@ class SortedTicketListFilter(admin.SimpleListFilter):
         return queryset
 
 class OutfitAdmin(admin.ModelAdmin):
-    list_display = ('id', 'thumbnail', 'maker_id', 'maker_grid', 'image', 'rating', 'ticket_id', 'portrait_thumbnail')
+    list_display = ('id', 'thumbnail', 'maker_id', 'maker_grid', 'image', 'rating', 'ticket_id', 'portrait_thumbnail', 'days_since_creation')
     list_filter = (SortedTicketListFilter,)
     search_fields = ('rating', 'id', 'ticket_id__id', 'maker_id__username')  # Adjust based on the actual fields
 
@@ -41,6 +41,13 @@ class OutfitAdmin(admin.ModelAdmin):
     maker_grid.short_description = 'Maker Grid'
 
     portrait_thumbnail.short_description = 'Portrait'
+
+    def days_since_creation(self, obj):
+        if obj.timestamp:
+            days = (timezone.now() - obj.timestamp).days
+            return f"{days} day{'s' if days != 1 else ''}"
+        return "N/A"
+    days_since_creation.short_description = 'Age (days)'
 
     # Customizing the formfield for ticket_id
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
