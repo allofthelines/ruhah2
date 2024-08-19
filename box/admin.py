@@ -1,12 +1,12 @@
 from django.contrib import admin
 from .models import Ticket, Order, Return
 from core.models import Outfit
+from django.utils import timezone
 
 # Register your models here.
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Ticket._meta.get_fields()]
-    list_display = ['id', 'asktype', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'occupancy']
+    list_display = ['id', 'asktype', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'occupancy', 'days_since_creation']
     list_filter = ['asktype', 'status', 'occasion', 'style1', 'style2', 'boxcuratedby']
     search_fields = ['notes']
 
@@ -18,6 +18,13 @@ class TicketAdmin(admin.ModelAdmin):
     def occupancy(self, obj):
         return f"{obj.current_outfits} / {obj.maximum_outfits}"
     occupancy.short_description = 'Occupancy'
+
+    def days_since_creation(self, obj):
+        if obj.timestamp:
+            days = (timezone.now() - obj.timestamp).days
+            return f"{days} day{'s' if days != 1 else ''}"
+        return "N/A"
+    days_since_creation.short_description = 'Age (days)'
 
     # Customizing the formfield for outfit1 and outfit2
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
