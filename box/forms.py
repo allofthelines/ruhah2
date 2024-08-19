@@ -71,7 +71,7 @@ class AskFitForm(forms.Form):
         casual_style = None
 
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
-    stylist_type = forms.ChoiceField(choices=STYLIST_CHOICES, label='Stylist', initial='everyone')
+    # stylist_type = forms.ChoiceField(choices=STYLIST_CHOICES, label='Stylist', initial='everyone')
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
@@ -118,7 +118,7 @@ class AskBoxForm(forms.Form):
 
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
-    stylist_type = forms.ChoiceField(choices=STYLIST_CHOICES, label='Stylist', initial='everyone')
+    # stylist_type = forms.ChoiceField(choices=STYLIST_CHOICES, label='Stylist', initial='everyone')
     curated_by = forms.ChoiceField(choices=CURATED_BY_CHOICES, label='Curated by', initial='human_stylist', required=False)
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition', required=False)

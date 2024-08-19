@@ -49,7 +49,7 @@ def ticket_view(request):
                 style1=fit_form.cleaned_data['style1'],
                 catalogue=fit_form.cleaned_data['catalogue'],
                 notes=fit_form.cleaned_data['notes'],
-                stylist_type=fit_form.cleaned_data['stylist_type'],
+                # stylist_type=fit_form.cleaned_data['stylist_type'],
                 creator_id=request.user if request.user.is_authenticated else None,
             )
             ticket.save()
@@ -138,7 +138,7 @@ def ticket_view(request):
                 price=box_form.cleaned_data['price'],
                 catalogue=box_form.cleaned_data['catalogue'],
                 notes=box_form.cleaned_data['notes'],
-                stylist_type=box_form.cleaned_data['stylist_type'],
+                # stylist_type=box_form.cleaned_data['stylist_type'],
                 size_top_xyz=size_top_xyz,
                 size_bottom_xyz=size_bottom_xyz,
                 size_waist_inches=size_waist_inches,
