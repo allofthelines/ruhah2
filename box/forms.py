@@ -60,12 +60,18 @@ class AskFitForm(forms.Form):
         ('liked_only', 'liked items only'),
     ]
 
+    STYLIST_CHOICES = [
+        ('everyone', 'Everyone'),
+        ('following', 'Following')
+    ]
+
     try:
         casual_style = Style.objects.get(style_name='casual')
     except Style.DoesNotExist:
         casual_style = None
 
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
+    stylist_type = forms.ChoiceField(choices=STYLIST_CHOICES, label='Stylist', initial='everyone')
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
@@ -94,6 +100,11 @@ class AskBoxForm(forms.Form):
         ('personalized_algorithm', 'personalized algorithm')
     ]
 
+    STYLIST_CHOICES = [
+        ('everyone', 'Everyone'),
+        ('following', 'Following')
+    ]
+
     SHOE_SIZE_EU_CHOICES = [(str(size), str(size)) for size in range(34, 49)] + \
                            [(str(size + 0.5), str(size + 0.5)) for size in range(34, 48)]
     SIZE_WAIST_INCHES_CHOICES = [(str(size), str(size)) for size in range(23, 37)]
@@ -107,6 +118,7 @@ class AskBoxForm(forms.Form):
 
     # style1 = forms.ChoiceField(choices=STYLE_CHOICES, label='Base')
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
+    stylist_type = forms.ChoiceField(choices=STYLIST_CHOICES, label='Stylist', initial='everyone')
     curated_by = forms.ChoiceField(choices=CURATED_BY_CHOICES, label='Curated by', initial='human_stylist', required=False)
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     condition = forms.ChoiceField(choices=[('new_or_like_new', 'new or like new'), ('new', 'new'), ('like_new', 'like new')], label='Condition', required=False)
