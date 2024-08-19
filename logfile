@@ -1,0 +1,3216 @@
+2024-08-19 11:13:58.497 BST [35658] LOG:  starting PostgreSQL 16.3 (Homebrew) on x86_64-apple-darwin23.4.0, compiled by Apple clang version 15.0.0 (clang-1500.3.9.4), 64-bit
+2024-08-19 11:13:58.498 BST [35658] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-19 11:13:58.498 BST [35658] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-19 11:13:58.499 BST [35658] LOG:  listening on IPv6 address "fe80::1%lo0", port 5432
+2024-08-19 11:13:58.499 BST [35658] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-08-19 11:13:58.500 BST [35658] FATAL:  postmaster became multithreaded during startup
+2024-08-19 11:13:58.500 BST [35658] HINT:  Set the LC_ALL environment variable to a valid locale.
+2024-08-19 11:13:58.500 BST [35658] LOG:  database system is shut down
+2024-08-19 11:14:53.462 BST [35698] LOG:  starting PostgreSQL 16.3 (Homebrew) on x86_64-apple-darwin23.4.0, compiled by Apple clang version 15.0.0 (clang-1500.3.9.4), 64-bit
+2024-08-19 11:14:53.464 BST [35698] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-19 11:14:53.464 BST [35698] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-19 11:14:53.464 BST [35698] LOG:  listening on IPv6 address "fe80::1%lo0", port 5432
+2024-08-19 11:14:53.464 BST [35698] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-08-19 11:14:53.473 BST [35702] LOG:  database system was shut down at 2024-08-19 11:13:40 BST
+2024-08-19 11:14:53.483 BST [35698] LOG:  database system is ready to accept connections
+2024-08-19 11:19:53.463 BST [35699] LOG:  checkpoint starting: time
+2024-08-19 11:20:37.010 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.010 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes" DROP CONSTRAINT "user_item_likes_styler_id_b7f48007_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.010 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.010 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes" DROP CONSTRAINT "user_item_likes_liker_id_3db3e01e_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.010 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.010 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes" DROP CONSTRAINT "user_item_likes_item_id_c245e38a_fk_studio_item_id";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_studiooutfittemp" DROP CONSTRAINT "studio_studiooutfittemp_ticket_id_12d723fd_fk_box_ticket_id";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_studiooutfittemp" DROP CONSTRAINT "studio_studiooutfitt_user_id_fbd145ab_fk_accounts_";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist" DROP CONSTRAINT "studio_item_taglist_tag_id_def765ac_fk_studio_tag_id";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist" DROP CONSTRAINT "studio_item_taglist_item_id_dd8bd9e7_fk_studio_item_id";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz" DROP CONSTRAINT "studio_item_sizes_xyz_item_id_5724c172_fk_studio_item_id";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz" DROP CONSTRAINT "studio_item_sizes_xy_sizecategory_id_9e97caf6_fk_studio_si";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches" DROP CONSTRAINT "studio_item_sizes_wa_sizewaistinchcategor_1905fea0_fk_studio_si";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches" DROP CONSTRAINT "studio_item_sizes_wa_item_id_716f2b77_fk_studio_it";
+	
+2024-08-19 11:20:37.011 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.011 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk" DROP CONSTRAINT "studio_item_sizes_shoe_uk_item_id_896df26b_fk_studio_item_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu" DROP CONSTRAINT "studio_item_sizes_shoe_eu_item_id_83ecbde6_fk_studio_item_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk" DROP CONSTRAINT "studio_item_sizes_sh_sizeshoeukcategory_i_40bbdd4d_fk_studio_si";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu" DROP CONSTRAINT "studio_item_sizes_sh_sizeshoeeucategory_i_218f546c_fk_studio_si";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item" DROP CONSTRAINT "studio_item_ecommerce_store_id_db7756e1_fk_studio_ec";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table" DROP CONSTRAINT "outfit_table_ticket_id_id_d5c3777b_fk_box_ticket_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table" DROP CONSTRAINT "outfit_table_maker_id_id_48df3afd_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items" DROP CONSTRAINT "outfit_table_items_outfit_id_3c6dcc46_fk_outfit_table_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items" DROP CONSTRAINT "outfit_table_items_item_id_81080f12_fk_studio_item_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_admin_log" DROP CONSTRAINT "django_admin_log_user_id_c564eba6_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.012 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.012 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_admin_log" DROP CONSTRAINT "django_admin_log_content_type_id_c4bce8eb_fk_django_co";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all" DROP CONSTRAINT "box_ticket_stylists_all_ticket_id_c6168cac_fk_box_ticket_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all" DROP CONSTRAINT "box_ticket_stylists__customuser_id_bc9b4441_fk_accounts_";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket" DROP CONSTRAINT "box_ticket_style2_id_7a84ce55_fk_studio_style_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket" DROP CONSTRAINT "box_ticket_style1_id_92bcaabd_fk_studio_style_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all" DROP CONSTRAINT "box_ticket_outfits_all_ticket_id_3267b5c9_fk_box_ticket_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all" DROP CONSTRAINT "box_ticket_outfits_all_outfit_id_62f4fa7e_fk_outfit_table_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket" DROP CONSTRAINT "box_ticket_outfit2_id_15393545_fk_outfit_table_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket" DROP CONSTRAINT "box_ticket_outfit1_id_18acb247_fk_outfit_table_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket" DROP CONSTRAINT "box_ticket_creator_id_id_543a2607_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.013 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.013 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_return" DROP CONSTRAINT "box_return_returner_id_id_da4c4f43_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_return" DROP CONSTRAINT "box_return_order_id_id_25600e2e_fk_box_order_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order" DROP CONSTRAINT "box_order_ticket_id_id_1a0761f7_fk_box_ticket_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items" DROP CONSTRAINT "box_order_items_order_id_c7fe9010_fk_box_order_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items" DROP CONSTRAINT "box_order_items_item_id_59252d7e_fk_studio_item_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order" DROP CONSTRAINT "box_order_creator_id_id_5e8c2ce7_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_permission" DROP CONSTRAINT "auth_permission_content_type_id_2f476e4b_fk_django_co";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions" DROP CONSTRAINT "auth_group_permissions_group_id_b120cbf9_fk_auth_group_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions" DROP CONSTRAINT "auth_group_permissio_permission_id_84c5c92e_fk_auth_perm";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart" DROP CONSTRAINT "accounts_useritemcart_item_id_987c50eb_fk_studio_item_id";
+	
+2024-08-19 11:20:37.014 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.014 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart" DROP CONSTRAINT "accounts_useritemcar_styler_id_ea8c20c2_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart" DROP CONSTRAINT "accounts_useritemcar_buyer_id_1ea1aec9_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows" DROP CONSTRAINT "accounts_userfollows_user_to_id_e8a64c34_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows" DROP CONSTRAINT "accounts_userfollows_user_from_id_d811b0c8_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_stylist" DROP CONSTRAINT "accounts_stylist_user_id_aa195999_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_portraitupload" DROP CONSTRAINT "accounts_portraitupl_wearer_id_id_9f0bab96_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_portraitupload" DROP CONSTRAINT "accounts_portraitupl_outfit_id_id_1eb81bcf_fk_outfit_ta";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode" DROP CONSTRAINT "accounts_invitecode_inviter_id_a90ca96f_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode" DROP CONSTRAINT "accounts_invitecode_invitee_id_cab4364e_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_gridpicupload" DROP CONSTRAINT "accounts_gridpicuplo_uploader_id_id_b18a103b_fk_accounts_";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups" DROP CONSTRAINT "accounts_customuser_groups_group_id_86ba5f9e_fk_auth_group_id";
+	
+2024-08-19 11:20:37.015 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.015 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles" DROP CONSTRAINT "accounts_customuser__style_id_4f1f5255_fk_studio_st";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles" DROP CONSTRAINT "accounts_customuser__style_id_24b87f8a_fk_studio_st";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions" DROP CONSTRAINT "accounts_customuser__permission_id_aea3d0e5_fk_auth_perm";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles" DROP CONSTRAINT "accounts_customuser__customuser_id_faf3667f_fk_accounts_";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups" DROP CONSTRAINT "accounts_customuser__customuser_id_bc55088e_fk_accounts_";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles" DROP CONSTRAINT "accounts_customuser__customuser_id_15ec1e16_fk_accounts_";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions" DROP CONSTRAINT "accounts_customuser__customuser_id_0deaefae_fk_accounts_";
+	
+2024-08-19 11:20:37.016 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.016 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customer" DROP CONSTRAINT "accounts_customer_user_id_11606857_fk_accounts_customuser_id";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "user_item_likes_styler_id_b7f48007" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."user_item_likes_styler_id_b7f48007";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "user_item_likes_liker_id_3db3e01e" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."user_item_likes_liker_id_3db3e01e";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "user_item_likes_item_id_c245e38a" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."user_item_likes_item_id_c245e38a";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "studio_studiooutfittemp_user_id_fbd145ab" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."studio_studiooutfittemp_user_id_fbd145ab";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "studio_studiooutfittemp_ticket_id_12d723fd" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."studio_studiooutfittemp_ticket_id_12d723fd";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "studio_sizewaistinchcategory_size_53af147f_like" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."studio_sizewaistinchcategory_size_53af147f_like";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "studio_sizeshoeukcategory_size_dbb77d5f_like" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."studio_sizeshoeukcategory_size_dbb77d5f_like";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "studio_sizeshoeeucategory_size_833ebf14_like" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."studio_sizeshoeeucategory_size_833ebf14_like";
+	
+2024-08-19 11:20:37.017 BST [36054] ERROR:  index "studio_sizecategory_name_b9eeea07_like" does not exist
+2024-08-19 11:20:37.017 BST [36054] STATEMENT:  DROP INDEX "public"."studio_sizecategory_name_b9eeea07_like";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_taglist_tag_id_def765ac" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_taglist_tag_id_def765ac";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_taglist_item_id_dd8bd9e7" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_taglist_item_id_dd8bd9e7";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_xyz_sizecategory_id_9e97caf6" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_xyz_sizecategory_id_9e97caf6";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_xyz_item_id_5724c172" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_xyz_item_id_5724c172";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_waist_inches_item_id_716f2b77" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_waist_inches_item_id_716f2b77";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_waist_in_sizewaistinchcategory_id_1905fea0" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_waist_in_sizewaistinchcategory_id_1905fea0";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_shoe_uk_sizeshoeukcategory_id_40bbdd4d" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_shoe_uk_sizeshoeukcategory_id_40bbdd4d";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_shoe_uk_item_id_896df26b" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_shoe_uk_item_id_896df26b";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_shoe_eu_sizeshoeeucategory_id_218f546c" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_shoe_eu_sizeshoeeucategory_id_218f546c";
+	
+2024-08-19 11:20:37.018 BST [36054] ERROR:  index "studio_item_sizes_shoe_eu_item_id_83ecbde6" does not exist
+2024-08-19 11:20:37.018 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_sizes_shoe_eu_item_id_83ecbde6";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "studio_item_shopify_store_id_91c3d0f8" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."studio_item_shopify_store_id_91c3d0f8";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "outfit_table_ticket_id_id_d5c3777b" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."outfit_table_ticket_id_id_d5c3777b";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "outfit_table_maker_id_id_48df3afd" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."outfit_table_maker_id_id_48df3afd";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "outfit_table_items_outfit_id_3c6dcc46" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."outfit_table_items_outfit_id_3c6dcc46";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "outfit_table_items_item_id_81080f12" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."outfit_table_items_item_id_81080f12";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "django_session_session_key_c0390e0f_like" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."django_session_session_key_c0390e0f_like";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "django_session_expire_date_a5c62663" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."django_session_expire_date_a5c62663";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "django_admin_log_user_id_c564eba6" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."django_admin_log_user_id_c564eba6";
+	
+2024-08-19 11:20:37.019 BST [36054] ERROR:  index "django_admin_log_content_type_id_c4bce8eb" does not exist
+2024-08-19 11:20:37.019 BST [36054] STATEMENT:  DROP INDEX "public"."django_admin_log_content_type_id_c4bce8eb";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_stylists_all_ticket_id_c6168cac" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_stylists_all_ticket_id_c6168cac";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_stylists_all_customuser_id_bc9b4441" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_stylists_all_customuser_id_bc9b4441";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_style2_id_7a84ce55" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_style2_id_7a84ce55";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_style1_id_92bcaabd" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_style1_id_92bcaabd";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_outfits_all_ticket_id_3267b5c9" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_outfits_all_ticket_id_3267b5c9";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_outfits_all_outfit_id_62f4fa7e" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_outfits_all_outfit_id_62f4fa7e";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_outfit2_id_15393545" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_outfit2_id_15393545";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_outfit1_id_18acb247" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_outfit1_id_18acb247";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_ticket_creator_id_id_543a2607" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_ticket_creator_id_id_543a2607";
+	
+2024-08-19 11:20:37.020 BST [36054] ERROR:  index "box_return_returner_id_id_da4c4f43" does not exist
+2024-08-19 11:20:37.020 BST [36054] STATEMENT:  DROP INDEX "public"."box_return_returner_id_id_da4c4f43";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "box_return_order_id_id_25600e2e" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."box_return_order_id_id_25600e2e";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "box_order_ticket_id_id_1a0761f7" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."box_order_ticket_id_id_1a0761f7";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "box_order_items_order_id_c7fe9010" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."box_order_items_order_id_c7fe9010";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "box_order_items_item_id_59252d7e" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."box_order_items_item_id_59252d7e";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "box_order_creator_id_id_5e8c2ce7" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."box_order_creator_id_id_5e8c2ce7";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "auth_permission_content_type_id_2f476e4b" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."auth_permission_content_type_id_2f476e4b";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "auth_group_permissions_permission_id_84c5c92e" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."auth_group_permissions_permission_id_84c5c92e";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "auth_group_permissions_group_id_b120cbf9" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."auth_group_permissions_group_id_b120cbf9";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "auth_group_name_a6ea08ec_like" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."auth_group_name_a6ea08ec_like";
+	
+2024-08-19 11:20:37.021 BST [36054] ERROR:  index "accounts_useritemcart_styler_id_ea8c20c2" does not exist
+2024-08-19 11:20:37.021 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_useritemcart_styler_id_ea8c20c2";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_useritemcart_item_id_987c50eb" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_useritemcart_item_id_987c50eb";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_useritemcart_buyer_id_1ea1aec9" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_useritemcart_buyer_id_1ea1aec9";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_userfollows_user_to_id_e8a64c34" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_userfollows_user_to_id_e8a64c34";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_userfollows_user_from_id_d811b0c8" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_userfollows_user_from_id_d811b0c8";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_portraitupload_wearer_id_id_9f0bab96" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_portraitupload_wearer_id_id_9f0bab96";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_portraitupload_outfit_id_id_1eb81bcf" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_portraitupload_outfit_id_id_1eb81bcf";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_invitecode_inviter_id_a90ca96f" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_invitecode_inviter_id_a90ca96f";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_invitecode_invitee_id_cab4364e" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_invitecode_invitee_id_cab4364e";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_invitecode_invide_code_4f00a3d8_like" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_invitecode_invide_code_4f00a3d8_like";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_gridpicupload_uploader_id_id_b18a103b" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_gridpicupload_uploader_id_id_b18a103b";
+	
+2024-08-19 11:20:37.022 BST [36054] ERROR:  index "accounts_customuser_username_722f3555_like" does not exist
+2024-08-19 11:20:37.022 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_username_722f3555_like";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_user_permissions_permission_id_aea3d0e5" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_user_permissions_permission_id_aea3d0e5";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_user_permissions_customuser_id_0deaefae" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_user_permissions_customuser_id_0deaefae";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_trending_styles_style_id_4f1f5255" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_trending_styles_style_id_4f1f5255";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_trending_styles_customuser_id_15ec1e16" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_trending_styles_customuser_id_15ec1e16";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_studio_styles_style_id_24b87f8a" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_studio_styles_style_id_24b87f8a";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_studio_styles_customuser_id_faf3667f" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_studio_styles_customuser_id_faf3667f";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_groups_group_id_86ba5f9e" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_groups_group_id_86ba5f9e";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  index "accounts_customuser_groups_customuser_id_bc55088e" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  DROP INDEX "public"."accounts_customuser_groups_customuser_id_bc55088e";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes" DROP CONSTRAINT "user_item_likes_pkey";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  relation "public.studio_tag" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_tag" DROP CONSTRAINT "studio_tag_pkey";
+	
+2024-08-19 11:20:37.023 BST [36054] ERROR:  relation "public.studio_style" does not exist
+2024-08-19 11:20:37.023 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_style" DROP CONSTRAINT "studio_style_pkey";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_studiooutfittemp" DROP CONSTRAINT "studio_studiooutfittemp_pkey";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizewaistinchcategory" DROP CONSTRAINT "studio_sizewaistinchcategory_size_key";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizewaistinchcategory" DROP CONSTRAINT "studio_sizewaistinchcategory_pkey";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeukcategory" DROP CONSTRAINT "studio_sizeshoeukcategory_size_key";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeukcategory" DROP CONSTRAINT "studio_sizeshoeukcategory_pkey";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeeucategory" DROP CONSTRAINT "studio_sizeshoeeucategory_size_key";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeeucategory" DROP CONSTRAINT "studio_sizeshoeeucategory_pkey";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizecategory" DROP CONSTRAINT "studio_sizecategory_pkey";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizecategory" DROP CONSTRAINT "studio_sizecategory_name_key";
+	
+2024-08-19 11:20:37.024 BST [36054] ERROR:  relation "public.studio_ecommercestore" does not exist
+2024-08-19 11:20:37.024 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_ecommercestore" DROP CONSTRAINT "studio_shopifystore_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist" DROP CONSTRAINT "studio_item_taglist_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist" DROP CONSTRAINT "studio_item_taglist_item_id_tag_id_3699882e_uniq";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz" DROP CONSTRAINT "studio_item_sizes_xyz_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz" DROP CONSTRAINT "studio_item_sizes_xyz_item_id_sizecategory_id_61af94f4_uniq";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches" DROP CONSTRAINT "studio_item_sizes_waist_inches_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches" DROP CONSTRAINT "studio_item_sizes_waist__item_id_sizewaistinchcat_0679ca7a_uniq";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk" DROP CONSTRAINT "studio_item_sizes_shoe_uk_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk" DROP CONSTRAINT "studio_item_sizes_shoe_u_item_id_sizeshoeukcatego_3525dfc6_uniq";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu" DROP CONSTRAINT "studio_item_sizes_shoe_eu_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu" DROP CONSTRAINT "studio_item_sizes_shoe_e_item_id_sizeshoeeucatego_a1c872fc_uniq";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item" DROP CONSTRAINT "studio_item_pkey";
+	
+2024-08-19 11:20:37.025 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.025 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table" DROP CONSTRAINT "outfit_table_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items" DROP CONSTRAINT "outfit_table_items_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items" DROP CONSTRAINT "outfit_table_items_outfit_id_item_id_07aba569_uniq";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.django_session" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_session" DROP CONSTRAINT "django_session_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.django_migrations" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_migrations" DROP CONSTRAINT "django_migrations_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.django_content_type" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_content_type" DROP CONSTRAINT "django_content_type_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.django_content_type" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_content_type" DROP CONSTRAINT "django_content_type_app_label_model_76bd3d3b_uniq";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_admin_log" DROP CONSTRAINT "django_admin_log_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all" DROP CONSTRAINT "box_ticket_stylists_all_ticket_id_customuser_id_29fd01cb_uniq";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all" DROP CONSTRAINT "box_ticket_stylists_all_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket" DROP CONSTRAINT "box_ticket_pkey";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all" DROP CONSTRAINT "box_ticket_outfits_all_ticket_id_outfit_id_77064bdc_uniq";
+	
+2024-08-19 11:20:37.026 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.026 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all" DROP CONSTRAINT "box_ticket_outfits_all_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_return" DROP CONSTRAINT "box_return_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order" DROP CONSTRAINT "box_order_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items" DROP CONSTRAINT "box_order_items_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items" DROP CONSTRAINT "box_order_items_order_id_item_id_05f50c98_uniq";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_permission" DROP CONSTRAINT "auth_permission_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_permission" DROP CONSTRAINT "auth_permission_content_type_id_codename_01ab375a_uniq";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group" DROP CONSTRAINT "auth_group_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions" DROP CONSTRAINT "auth_group_permissions_pkey";
+	
+2024-08-19 11:20:37.027 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.027 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions" DROP CONSTRAINT "auth_group_permissions_group_id_permission_id_0cd325b0_uniq";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group" DROP CONSTRAINT "auth_group_name_key";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart" DROP CONSTRAINT "accounts_useritemcart_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows" DROP CONSTRAINT "accounts_userfollows_user_from_id_user_to_id_580e77c0_uniq";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows" DROP CONSTRAINT "accounts_userfollows_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_stylist" DROP CONSTRAINT "accounts_stylist_user_id_key";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_stylist" DROP CONSTRAINT "accounts_stylist_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_portraitupload" DROP CONSTRAINT "accounts_portraitupload_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode" DROP CONSTRAINT "accounts_invitecode_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode" DROP CONSTRAINT "accounts_invitecode_invide_code_key";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_gridpicupload" DROP CONSTRAINT "accounts_gridpicupload_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser" DROP CONSTRAINT "accounts_customuser_username_key";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions" DROP CONSTRAINT "accounts_customuser_user_permissions_pkey";
+	
+2024-08-19 11:20:37.028 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.028 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions" DROP CONSTRAINT "accounts_customuser_user_customuser_id_permission_9632a709_uniq";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles" DROP CONSTRAINT "accounts_customuser_trending_styles_pkey";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles" DROP CONSTRAINT "accounts_customuser_tren_customuser_id_style_id_4023b074_uniq";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles" DROP CONSTRAINT "accounts_customuser_studio_styles_pkey";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles" DROP CONSTRAINT "accounts_customuser_stud_customuser_id_style_id_89258a3b_uniq";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser" DROP CONSTRAINT "accounts_customuser_pkey";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups" DROP CONSTRAINT "accounts_customuser_groups_pkey";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups" DROP CONSTRAINT "accounts_customuser_groups_customuser_id_group_id_c074bdcb_uniq";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customer" DROP CONSTRAINT "accounts_customer_user_id_key";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customer" DROP CONSTRAINT "accounts_customer_pkey";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  table "studio_tag" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  DROP TABLE "public"."studio_tag";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  table "studio_style" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  DROP TABLE "public"."studio_style";
+	
+2024-08-19 11:20:37.029 BST [36054] ERROR:  table "studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.029 BST [36054] STATEMENT:  DROP TABLE "public"."studio_studiooutfittemp";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_sizewaistinchcategory";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_sizeshoeukcategory";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_sizeshoeeucategory";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_item_taglist" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_item_taglist";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_item_sizes_waist_inches";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  view "studio_item_sizes_view" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP VIEW "public"."studio_item_sizes_view";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_sizecategory" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_sizecategory";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_item_sizes_xyz";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_item_sizes_shoe_uk";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_item_sizes_shoe_eu";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_item" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_item";
+	
+2024-08-19 11:20:37.030 BST [36054] ERROR:  table "studio_ecommercestore" does not exist
+2024-08-19 11:20:37.030 BST [36054] STATEMENT:  DROP TABLE "public"."studio_ecommercestore";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "outfit_table_items" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."outfit_table_items";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "outfit_table" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."outfit_table";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "django_session" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."django_session";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "django_migrations" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."django_migrations";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "django_content_type" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."django_content_type";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "django_admin_log" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."django_admin_log";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."box_ticket_stylists_all";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."box_ticket_outfits_all";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "box_ticket" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."box_ticket";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "box_return" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."box_return";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "box_order_items" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."box_order_items";
+	
+2024-08-19 11:20:37.031 BST [36054] ERROR:  table "box_order" does not exist
+2024-08-19 11:20:37.031 BST [36054] STATEMENT:  DROP TABLE "public"."box_order";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "auth_permission" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."auth_permission";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "auth_group_permissions" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."auth_group_permissions";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "auth_group" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."auth_group";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_useritemlikes";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_useritemcart" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_useritemcart";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_userfollows" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_userfollows";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_stylist" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_stylist";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_portraitupload" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_portraitupload";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_invitecode" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_invitecode";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_gridpicupload";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_customuser_user_permissions";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_customuser_trending_styles";
+	
+2024-08-19 11:20:37.032 BST [36054] ERROR:  table "accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.032 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_customuser_studio_styles";
+	
+2024-08-19 11:20:37.033 BST [36054] ERROR:  table "accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.033 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_customuser_groups";
+	
+2024-08-19 11:20:37.033 BST [36054] ERROR:  table "accounts_customuser" does not exist
+2024-08-19 11:20:37.033 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_customuser";
+	
+2024-08-19 11:20:37.033 BST [36054] ERROR:  table "accounts_customer" does not exist
+2024-08-19 11:20:37.033 BST [36054] STATEMENT:  DROP TABLE "public"."accounts_customer";
+	
+2024-08-19 11:20:37.033 BST [36054] ERROR:  extension "pg_stat_statements" does not exist
+2024-08-19 11:20:37.033 BST [36054] STATEMENT:  DROP EXTENSION "pg_stat_statements";
+	
+2024-08-19 11:20:37.034 BST [36054] ERROR:  must be owner of schema public
+2024-08-19 11:20:37.034 BST [36054] STATEMENT:  COMMENT ON SCHEMA "public" IS 'standard public schema';
+	
+	
+	
+2024-08-19 11:20:37.035 BST [36054] ERROR:  permission denied to create extension "pg_stat_statements"
+2024-08-19 11:20:37.035 BST [36054] HINT:  Must be superuser to create this extension.
+2024-08-19 11:20:37.035 BST [36054] STATEMENT:  CREATE EXTENSION IF NOT EXISTS "pg_stat_statements" WITH SCHEMA "public";
+	
+	
+	
+2024-08-19 11:20:37.035 BST [36054] ERROR:  extension "pg_stat_statements" does not exist
+2024-08-19 11:20:37.035 BST [36054] STATEMENT:  COMMENT ON EXTENSION "pg_stat_statements" IS 'track planning and execution statistics of all SQL statements executed';
+	
+	
+	
+2024-08-19 11:20:37.035 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.035 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_customer" (
+	    "id" bigint NOT NULL,
+	    "top_size_xyz" character varying(10),
+	    "bottom_size_xyz" character varying(10),
+	    "size_waist_inches" character varying(10),
+	    "shoe_size_eu" character varying(10),
+	    "shoe_size_uk" character varying(10),
+	    "height" integer,
+	    "weight" integer,
+	    "birth_year" integer,
+	    "user_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_customer" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_customer_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_customuser" (
+	    "id" bigint NOT NULL,
+	    "password" character varying(128) NOT NULL,
+	    "last_login" timestamp with time zone,
+	    "is_superuser" boolean NOT NULL,
+	    "username" character varying(150) NOT NULL,
+	    "first_name" character varying(150) NOT NULL,
+	    "last_name" character varying(150) NOT NULL,
+	    "email" character varying(254) NOT NULL,
+	    "is_staff" boolean NOT NULL,
+	    "is_active" boolean NOT NULL,
+	    "date_joined" timestamp with time zone NOT NULL,
+	    "is_stylist" character varying(10) NOT NULL,
+	    "is_customer" character varying(10) NOT NULL,
+	    "is_seller" character varying(10) NOT NULL,
+	    "bio" character varying(150),
+	    "name" character varying(30),
+	    "pfp" character varying(100),
+	    "profile_visibility" character varying(20) NOT NULL,
+	    "credits" integer NOT NULL,
+	    "trending_mode" character varying(10) NOT NULL,
+	    "lifeform" character varying(10) NOT NULL,
+	    "studio_visibility" character varying(15) NOT NULL,
+	    "email_change_requested_at" timestamp with time zone,
+	    "is_email_confirmed" boolean NOT NULL,
+	    "new_email" character varying(254)
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_customuser_groups" (
+	    "id" bigint NOT NULL,
+	    "customuser_id" bigint NOT NULL,
+	    "group_id" integer NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_customuser_groups" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_customuser_groups_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_customuser" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_customuser_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_customuser_studio_styles" (
+	    "id" bigint NOT NULL,
+	    "customuser_id" bigint NOT NULL,
+	    "style_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_customuser_studio_styles" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_customuser_studio_styles_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.036 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.036 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_customuser_trending_styles" (
+	    "id" bigint NOT NULL,
+	    "customuser_id" bigint NOT NULL,
+	    "style_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_customuser_trending_styles" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_customuser_trending_styles_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_customuser_user_permissions" (
+	    "id" bigint NOT NULL,
+	    "customuser_id" bigint NOT NULL,
+	    "permission_id" integer NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_customuser_user_permissions" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_customuser_user_permissions_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_gridpicupload" (
+	    "id" bigint NOT NULL,
+	    "gridpic_img" character varying(100) NOT NULL,
+	    "gridpic_processed_img" character varying(100),
+	    "timedate_uploaded" timestamp with time zone NOT NULL,
+	    "deleted_by_uploader" character varying(10) NOT NULL,
+	    "timedate_deleted_by_uploader" timestamp with time zone,
+	    "uploader_id_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_gridpicupload" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_gridpicupload_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_invitecode" (
+	    "id" bigint NOT NULL,
+	    "invite_code" character varying(20) NOT NULL,
+	    "is_used" boolean NOT NULL,
+	    "created_at" timestamp with time zone NOT NULL,
+	    "invitee_id" bigint,
+	    "inviter_id" bigint
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_invitecode" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_invitecode_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_portraitupload" (
+	    "id" bigint NOT NULL,
+	    "portrait_img" character varying(100) NOT NULL,
+	    "ticket_id_int" integer,
+	    "timedate_created" timestamp with time zone NOT NULL,
+	    "status" character varying(10) NOT NULL,
+	    "outfit_id_id" bigint,
+	    "wearer_id_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_portraitupload" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_portraitupload_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_stylist" (
+	    "id" bigint NOT NULL,
+	    "credits" integer NOT NULL,
+	    "user_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.037 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.037 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_stylist" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_stylist_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_userfollows" (
+	    "id" bigint NOT NULL,
+	    "created" timestamp with time zone NOT NULL,
+	    "user_from_id" bigint NOT NULL,
+	    "user_to_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_userfollows" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_userfollows_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_useritemcart" (
+	    "id" bigint NOT NULL,
+	    "buyer_id" bigint,
+	    "item_id" bigint,
+	    "styler_id" bigint,
+	    "price" double precision,
+	    "size" character varying(10)
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_useritemcart" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."accounts_useritemcart_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  CREATE TABLE "public"."accounts_useritemlikes" (
+	    "id" bigint NOT NULL,
+	    "item_id" bigint,
+	    "styler_id" bigint,
+	    "liker_id" bigint,
+	    "liked_at" timestamp with time zone
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  CREATE TABLE "public"."auth_group" (
+	    "id" integer NOT NULL,
+	    "name" character varying(150) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  ALTER TABLE "public"."auth_group" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."auth_group_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  CREATE TABLE "public"."auth_group_permissions" (
+	    "id" bigint NOT NULL,
+	    "group_id" integer NOT NULL,
+	    "permission_id" integer NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  ALTER TABLE "public"."auth_group_permissions" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."auth_group_permissions_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.038 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.038 BST [36054] STATEMENT:  CREATE TABLE "public"."auth_permission" (
+	    "id" integer NOT NULL,
+	    "name" character varying(255) NOT NULL,
+	    "content_type_id" integer NOT NULL,
+	    "codename" character varying(100) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  ALTER TABLE "public"."auth_permission" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."auth_permission_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  CREATE TABLE "public"."box_order" (
+	    "id" bigint NOT NULL,
+	    "type" character varying(5) NOT NULL,
+	    "ticket_id_id" bigint,
+	    "money" double precision,
+	    "status" character varying(10),
+	    "address_customer" character varying(100),
+	    "address_fumio" character varying(100),
+	    "timestamp" timestamp with time zone,
+	    "creator_id_id" bigint
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  ALTER TABLE "public"."box_order" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."box_order_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  CREATE TABLE "public"."box_order_items" (
+	    "id" bigint NOT NULL,
+	    "order_id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  ALTER TABLE "public"."box_order_items" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."box_order_items_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  CREATE TABLE "public"."box_return" (
+	    "id" bigint NOT NULL,
+	    "order_id_id" bigint,
+	    "timestamp" timestamp with time zone NOT NULL,
+	    "money" double precision,
+	    "status" character varying(10) NOT NULL,
+	    "address_customer" character varying(100),
+	    "address_fumio" character varying(100),
+	    "returner_id_id" bigint
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  ALTER TABLE "public"."box_return" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."box_return_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  CREATE TABLE "public"."box_ticket" (
+	    "id" bigint NOT NULL,
+	    "style2_id" bigint,
+	    "occasion" character varying(100),
+	    "condition" character varying(100),
+	    "price" character varying(100),
+	    "notes" "text" NOT NULL,
+	    "status" character varying(10) NOT NULL,
+	    "timestamp" timestamp with time zone NOT NULL,
+	    "outfit1_id" bigint,
+	    "outfit2_id" bigint,
+	    "current_outfits" integer NOT NULL,
+	    "maximum_outfits" integer NOT NULL,
+	    "size_bottom_xyz" character varying(3),
+	    "size_shoe_eu" character varying(10),
+	    "size_top_xyz" character varying(3),
+	    "size_waist_inches" character varying(10),
+	    "creator_id_id" bigint,
+	    "size_shoe_uk" character varying(10),
+	    "style1_id" bigint,
+	    "asktype" character varying(30) NOT NULL,
+	    "creator_profile_visibility" character varying(10),
+	    "catalogue" character varying(30) NOT NULL,
+	    "boxcuratedby" character varying(30) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  ALTER TABLE "public"."box_ticket" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."box_ticket_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  CREATE TABLE "public"."box_ticket_outfits_all" (
+	    "id" bigint NOT NULL,
+	    "ticket_id" bigint NOT NULL,
+	    "outfit_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.039 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.039 BST [36054] STATEMENT:  ALTER TABLE "public"."box_ticket_outfits_all" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."box_ticket_outfits_all_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  CREATE TABLE "public"."box_ticket_stylists_all" (
+	    "id" bigint NOT NULL,
+	    "ticket_id" bigint NOT NULL,
+	    "customuser_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  ALTER TABLE "public"."box_ticket_stylists_all" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."box_ticket_stylists_all_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  CREATE TABLE "public"."django_admin_log" (
+	    "id" integer NOT NULL,
+	    "action_time" timestamp with time zone NOT NULL,
+	    "object_id" "text",
+	    "object_repr" character varying(200) NOT NULL,
+	    "action_flag" smallint NOT NULL,
+	    "change_message" "text" NOT NULL,
+	    "content_type_id" integer,
+	    "user_id" bigint NOT NULL,
+	    CONSTRAINT "django_admin_log_action_flag_check" CHECK (("action_flag" >= 0))
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  ALTER TABLE "public"."django_admin_log" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."django_admin_log_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  CREATE TABLE "public"."django_content_type" (
+	    "id" integer NOT NULL,
+	    "app_label" character varying(100) NOT NULL,
+	    "model" character varying(100) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  relation "public.django_content_type" does not exist
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  ALTER TABLE "public"."django_content_type" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."django_content_type_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  CREATE TABLE "public"."django_migrations" (
+	    "id" bigint NOT NULL,
+	    "app" character varying(255) NOT NULL,
+	    "name" character varying(255) NOT NULL,
+	    "applied" timestamp with time zone NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  relation "public.django_migrations" does not exist
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  ALTER TABLE "public"."django_migrations" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."django_migrations_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  CREATE TABLE "public"."django_session" (
+	    "session_key" character varying(40) NOT NULL,
+	    "session_data" "text" NOT NULL,
+	    "expire_date" timestamp with time zone NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  CREATE TABLE "public"."outfit_table" (
+	    "id" bigint NOT NULL,
+	    "rating" integer NOT NULL,
+	    "image" character varying(100) NOT NULL,
+	    "timestamp" timestamp with time zone NOT NULL,
+	    "maker_id_id" bigint,
+	    "ticket_id_id" bigint,
+	    "portrait" character varying(100),
+	    "maker_grid_visibility" character varying(10)
+	);
+	
+	
+	
+2024-08-19 11:20:37.040 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.040 BST [36054] STATEMENT:  ALTER TABLE "public"."outfit_table" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."outfit_table_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."outfit_table_items" (
+	    "id" bigint NOT NULL,
+	    "outfit_id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  ALTER TABLE "public"."outfit_table_items" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."outfit_table_items_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_ecommercestore" (
+	    "id" bigint NOT NULL,
+	    "name" character varying(255),
+	    "api_key" character varying(255),
+	    "api_secret" character varying(255),
+	    "api_access_token" character varying(255),
+	    "shop_url" character varying(255),
+	    "size_mapping" "text",
+	    "address_city" character varying(50),
+	    "address_country" character varying(50),
+	    "address_postal_code" character varying(50),
+	    "address_street_1" character varying(255),
+	    "address_street_2" character varying(255),
+	    "api_store_id" character varying(255),
+	    "platform" character varying(50)
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_item" (
+	    "id" bigint NOT NULL,
+	    "name" character varying(255),
+	    "condition" character varying(10),
+	    "location" character varying(255),
+	    "image" character varying(100),
+	    "itemid" character varying(30),
+	    "cat" character varying(20) NOT NULL,
+	    "tags" character varying(255),
+	    "price" double precision,
+	    "ecommerce_product_id" character varying(255),
+	    "ecommerce_store_id" bigint,
+	    "modality" character varying(20) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_item" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_item_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_item_sizes_shoe_eu" (
+	    "id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL,
+	    "sizeshoeeucategory_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_item_sizes_shoe_eu" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_item_sizes_shoe_eu_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_item_sizes_shoe_uk" (
+	    "id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL,
+	    "sizeshoeukcategory_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_item_sizes_shoe_uk" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_item_sizes_shoe_uk_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_item_sizes_xyz" (
+	    "id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL,
+	    "sizecategory_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.041 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.041 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_sizecategory" (
+	    "id" bigint NOT NULL,
+	    "name" character varying(10) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist at character 228
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  CREATE VIEW "public"."studio_item_sizes_view" AS
+	 SELECT "s"."id",
+	    "s"."item_id",
+	    "i"."name" AS "item_name",
+	    "i"."cat" AS "item_category",
+	    "s"."sizecategory_id",
+	    "sc"."name" AS "sizecategory_name"
+	   FROM (("public"."studio_item_sizes_xyz" "s"
+	     JOIN "public"."studio_item" "i" ON (("s"."item_id" = "i"."id")))
+	     JOIN "public"."studio_sizecategory" "sc" ON (("s"."sizecategory_id" = "sc"."id")))
+	  ORDER BY "s"."id";
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_item_sizes_waist_inches" (
+	    "id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL,
+	    "sizewaistinchcategory_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_item_sizes_waist_inches" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_item_sizes_waist_inches_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_item_sizes_xyz" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_item_sizes_xyz_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_item_taglist" (
+	    "id" bigint NOT NULL,
+	    "item_id" bigint NOT NULL,
+	    "tag_id" bigint NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_item_taglist" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_item_taglist_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.042 BST [36054] ERROR:  relation "public.studio_ecommercestore" does not exist
+2024-08-19 11:20:37.042 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_ecommercestore" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_shopifystore_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_sizecategory" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_sizecategory_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_sizeshoeeucategory" (
+	    "id" bigint NOT NULL,
+	    "size" character varying(10) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_sizeshoeeucategory" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_sizeshoeeucategory_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_sizeshoeukcategory" (
+	    "id" bigint NOT NULL,
+	    "size" character varying(10) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_sizeshoeukcategory" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_sizeshoeukcategory_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_sizewaistinchcategory" (
+	    "id" bigint NOT NULL,
+	    "size" character varying(10) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_sizewaistinchcategory" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_sizewaistinchcategory_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_studiooutfittemp" (
+	    "id" bigint NOT NULL,
+	    "item1img" character varying(100) NOT NULL,
+	    "item1id" character varying(20) NOT NULL,
+	    "item2img" character varying(100) NOT NULL,
+	    "item2id" character varying(20) NOT NULL,
+	    "item3img" character varying(100) NOT NULL,
+	    "item3id" character varying(20) NOT NULL,
+	    "item4img" character varying(100) NOT NULL,
+	    "item4id" character varying(20) NOT NULL,
+	    "ticket_id" bigint,
+	    "user_id" bigint
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_studiooutfittemp" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_studiooutfittemp_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_style" (
+	    "id" bigint NOT NULL,
+	    "style_name" character varying(100) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  relation "public.studio_style" does not exist
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_style" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_style_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.043 BST [36054] ERROR:  permission denied for schema public at character 14
+2024-08-19 11:20:37.043 BST [36054] STATEMENT:  CREATE TABLE "public"."studio_tag" (
+	    "id" bigint NOT NULL,
+	    "tag_name" character varying(100) NOT NULL,
+	    "tag_type" character varying(100) NOT NULL
+	);
+	
+	
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.studio_tag" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  ALTER TABLE "public"."studio_tag" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."studio_tag_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  ALTER TABLE "public"."accounts_useritemlikes" ALTER COLUMN "id" ADD GENERATED BY DEFAULT AS IDENTITY (
+	    SEQUENCE NAME "public"."user_item_likes_id_seq"
+	    START WITH 1
+	    INCREMENT BY 1
+	    NO MINVALUE
+	    NO MAXVALUE
+	    CACHE 1
+	);
+	
+	
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_customer" ("id", "top_size_xyz", "bottom_size_xyz", "size_waist_inches", "shoe_size_eu", "shoe_size_uk", "height", "weight", "birth_year", "user_id") FROM stdin;
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_customuser" ("id", "password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined", "is_stylist", "is_customer", "is_seller", "bio", "name", "pfp", "profile_visibility", "credits", "trending_mode", "lifeform", "studio_visibility", "email_change_requested_at", "is_email_confirmed", "new_email") FROM stdin;
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_customuser_groups" ("id", "customuser_id", "group_id") FROM stdin;
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_customuser_studio_styles" ("id", "customuser_id", "style_id") FROM stdin;
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_customuser_trending_styles" ("id", "customuser_id", "style_id") FROM stdin;
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_customuser_user_permissions" ("id", "customuser_id", "permission_id") FROM stdin;
+	
+2024-08-19 11:20:37.044 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.044 BST [36054] STATEMENT:  COPY "public"."accounts_gridpicupload" ("id", "gridpic_img", "gridpic_processed_img", "timedate_uploaded", "deleted_by_uploader", "timedate_deleted_by_uploader", "uploader_id_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."accounts_invitecode" ("id", "invite_code", "is_used", "created_at", "invitee_id", "inviter_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."accounts_portraitupload" ("id", "portrait_img", "ticket_id_int", "timedate_created", "status", "outfit_id_id", "wearer_id_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."accounts_stylist" ("id", "credits", "user_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."accounts_userfollows" ("id", "created", "user_from_id", "user_to_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."accounts_useritemcart" ("id", "buyer_id", "item_id", "styler_id", "price", "size") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."accounts_useritemlikes" ("id", "item_id", "styler_id", "liker_id", "liked_at") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."auth_group" ("id", "name") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."auth_group_permissions" ("id", "group_id", "permission_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."auth_permission" ("id", "name", "content_type_id", "codename") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."box_order" ("id", "type", "ticket_id_id", "money", "status", "address_customer", "address_fumio", "timestamp", "creator_id_id") FROM stdin;
+	
+2024-08-19 11:20:37.045 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.045 BST [36054] STATEMENT:  COPY "public"."box_order_items" ("id", "order_id", "item_id") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."box_return" ("id", "order_id_id", "timestamp", "money", "status", "address_customer", "address_fumio", "returner_id_id") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."box_ticket" ("id", "style2_id", "occasion", "condition", "price", "notes", "status", "timestamp", "outfit1_id", "outfit2_id", "current_outfits", "maximum_outfits", "size_bottom_xyz", "size_shoe_eu", "size_top_xyz", "size_waist_inches", "creator_id_id", "size_shoe_uk", "style1_id", "asktype", "creator_profile_visibility", "catalogue", "boxcuratedby") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."box_ticket_outfits_all" ("id", "ticket_id", "outfit_id") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."box_ticket_stylists_all" ("id", "ticket_id", "customuser_id") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."django_admin_log" ("id", "action_time", "object_id", "object_repr", "action_flag", "change_message", "content_type_id", "user_id") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.django_content_type" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."django_content_type" ("id", "app_label", "model") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.django_migrations" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."django_migrations" ("id", "app", "name", "applied") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.django_session" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."django_session" ("session_key", "session_data", "expire_date") FROM stdin;
+	
+2024-08-19 11:20:37.046 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.046 BST [36054] STATEMENT:  COPY "public"."outfit_table" ("id", "rating", "image", "timestamp", "maker_id_id", "ticket_id_id", "portrait", "maker_grid_visibility") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."outfit_table_items" ("id", "outfit_id", "item_id") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_ecommercestore" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_ecommercestore" ("id", "name", "api_key", "api_secret", "api_access_token", "shop_url", "size_mapping", "address_city", "address_country", "address_postal_code", "address_street_1", "address_street_2", "api_store_id", "platform") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_item" ("id", "name", "condition", "location", "image", "itemid", "cat", "tags", "price", "ecommerce_product_id", "ecommerce_store_id", "modality") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_item_sizes_shoe_eu" ("id", "item_id", "sizeshoeeucategory_id") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_item_sizes_shoe_uk" ("id", "item_id", "sizeshoeukcategory_id") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_item_sizes_waist_inches" ("id", "item_id", "sizewaistinchcategory_id") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_item_sizes_xyz" ("id", "item_id", "sizecategory_id") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_item_taglist" ("id", "item_id", "tag_id") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_sizecategory" ("id", "name") FROM stdin;
+	
+2024-08-19 11:20:37.047 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.047 BST [36054] STATEMENT:  COPY "public"."studio_sizeshoeeucategory" ("id", "size") FROM stdin;
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  COPY "public"."studio_sizeshoeukcategory" ("id", "size") FROM stdin;
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  COPY "public"."studio_sizewaistinchcategory" ("id", "size") FROM stdin;
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  COPY "public"."studio_studiooutfittemp" ("id", "item1img", "item1id", "item2img", "item2id", "item3img", "item3id", "item4img", "item4id", "ticket_id", "user_id") FROM stdin;
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.studio_style" does not exist
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  COPY "public"."studio_style" ("id", "style_name") FROM stdin;
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.studio_tag" does not exist
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  COPY "public"."studio_tag" ("id", "tag_name", "tag_type") FROM stdin;
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.accounts_customer_id_seq" does not exist at character 26
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_customer_id_seq"', 198, true);
+	
+	
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.accounts_customuser_groups_id_seq" does not exist at character 26
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_customuser_groups_id_seq"', 1, false);
+	
+	
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.accounts_customuser_id_seq" does not exist at character 26
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_customuser_id_seq"', 200, true);
+	
+	
+	
+2024-08-19 11:20:37.048 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles_id_seq" does not exist at character 26
+2024-08-19 11:20:37.048 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_customuser_studio_styles_id_seq"', 397, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_customuser_trending_styles_id_seq"', 399, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_customuser_user_permissions_id_seq"', 99, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_gridpicupload_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_gridpicupload_id_seq"', 44, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_invitecode_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_invitecode_id_seq"', 132, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_portraitupload_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_portraitupload_id_seq"', 99, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_stylist_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_stylist_id_seq"', 1, false);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_userfollows_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_userfollows_id_seq"', 468, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.accounts_useritemcart_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."accounts_useritemcart_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.auth_group_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."auth_group_id_seq"', 1, false);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.auth_group_permissions_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."auth_group_permissions_id_seq"', 1, false);
+	
+	
+	
+2024-08-19 11:20:37.049 BST [36054] ERROR:  relation "public.auth_permission_id_seq" does not exist at character 26
+2024-08-19 11:20:37.049 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."auth_permission_id_seq"', 208, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.box_order_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."box_order_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.box_order_items_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."box_order_items_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.box_return_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."box_return_id_seq"', 1, false);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.box_ticket_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."box_ticket_id_seq"', 463, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.box_ticket_outfits_all_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."box_ticket_outfits_all_id_seq"', 500, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.box_ticket_stylists_all_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."box_ticket_stylists_all_id_seq"', 1, false);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.django_admin_log_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."django_admin_log_id_seq"', 949, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.django_content_type_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."django_content_type_id_seq"', 184, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.django_migrations_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."django_migrations_id_seq"', 307, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.outfit_table_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."outfit_table_id_seq"', 500, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.outfit_table_items_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."outfit_table_items_id_seq"', 713, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.studio_item_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_item_id_seq"', 376, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_item_sizes_shoe_eu_id_seq"', 165, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_item_sizes_shoe_uk_id_seq"', 66, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_item_sizes_waist_inches_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.050 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz_id_seq" does not exist at character 26
+2024-08-19 11:20:37.050 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_item_sizes_xyz_id_seq"', 533, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_item_taglist_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_item_taglist_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_shopifystore_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_shopifystore_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_sizecategory_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_sizecategory_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_sizeshoeeucategory_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_sizeshoeukcategory_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_sizewaistinchcategory_id_seq"', 33, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_studiooutfittemp_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_studiooutfittemp_id_seq"', 500, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_style_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_style_id_seq"', 34, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.studio_tag_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."studio_tag_id_seq"', 561, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.user_item_likes_id_seq" does not exist at character 26
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  SELECT pg_catalog.setval('"public"."user_item_likes_id_seq"', 2105, true);
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customer"
+	    ADD CONSTRAINT "accounts_customer_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customer"
+	    ADD CONSTRAINT "accounts_customer_user_id_key" UNIQUE ("user_id");
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups"
+	    ADD CONSTRAINT "accounts_customuser_groups_customuser_id_group_id_c074bdcb_uniq" UNIQUE ("customuser_id", "group_id");
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups"
+	    ADD CONSTRAINT "accounts_customuser_groups_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser"
+	    ADD CONSTRAINT "accounts_customuser_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles"
+	    ADD CONSTRAINT "accounts_customuser_stud_customuser_id_style_id_89258a3b_uniq" UNIQUE ("customuser_id", "style_id");
+	
+	
+	
+2024-08-19 11:20:37.051 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.051 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles"
+	    ADD CONSTRAINT "accounts_customuser_studio_styles_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles"
+	    ADD CONSTRAINT "accounts_customuser_tren_customuser_id_style_id_4023b074_uniq" UNIQUE ("customuser_id", "style_id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles"
+	    ADD CONSTRAINT "accounts_customuser_trending_styles_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions"
+	    ADD CONSTRAINT "accounts_customuser_user_customuser_id_permission_9632a709_uniq" UNIQUE ("customuser_id", "permission_id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions"
+	    ADD CONSTRAINT "accounts_customuser_user_permissions_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser"
+	    ADD CONSTRAINT "accounts_customuser_username_key" UNIQUE ("username");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_gridpicupload"
+	    ADD CONSTRAINT "accounts_gridpicupload_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode"
+	    ADD CONSTRAINT "accounts_invitecode_invide_code_key" UNIQUE ("invite_code");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode"
+	    ADD CONSTRAINT "accounts_invitecode_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_portraitupload"
+	    ADD CONSTRAINT "accounts_portraitupload_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_stylist"
+	    ADD CONSTRAINT "accounts_stylist_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_stylist"
+	    ADD CONSTRAINT "accounts_stylist_user_id_key" UNIQUE ("user_id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows"
+	    ADD CONSTRAINT "accounts_userfollows_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows"
+	    ADD CONSTRAINT "accounts_userfollows_user_from_id_user_to_id_580e77c0_uniq" UNIQUE ("user_from_id", "user_to_id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart"
+	    ADD CONSTRAINT "accounts_useritemcart_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group"
+	    ADD CONSTRAINT "auth_group_name_key" UNIQUE ("name");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions"
+	    ADD CONSTRAINT "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" UNIQUE ("group_id", "permission_id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions"
+	    ADD CONSTRAINT "auth_group_permissions_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group"
+	    ADD CONSTRAINT "auth_group_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.052 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.052 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_permission"
+	    ADD CONSTRAINT "auth_permission_content_type_id_codename_01ab375a_uniq" UNIQUE ("content_type_id", "codename");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_permission"
+	    ADD CONSTRAINT "auth_permission_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items"
+	    ADD CONSTRAINT "box_order_items_order_id_item_id_05f50c98_uniq" UNIQUE ("order_id", "item_id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items"
+	    ADD CONSTRAINT "box_order_items_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order"
+	    ADD CONSTRAINT "box_order_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_return"
+	    ADD CONSTRAINT "box_return_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all"
+	    ADD CONSTRAINT "box_ticket_outfits_all_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all"
+	    ADD CONSTRAINT "box_ticket_outfits_all_ticket_id_outfit_id_77064bdc_uniq" UNIQUE ("ticket_id", "outfit_id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket"
+	    ADD CONSTRAINT "box_ticket_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all"
+	    ADD CONSTRAINT "box_ticket_stylists_all_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all"
+	    ADD CONSTRAINT "box_ticket_stylists_all_ticket_id_customuser_id_29fd01cb_uniq" UNIQUE ("ticket_id", "customuser_id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_admin_log"
+	    ADD CONSTRAINT "django_admin_log_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.django_content_type" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_content_type"
+	    ADD CONSTRAINT "django_content_type_app_label_model_76bd3d3b_uniq" UNIQUE ("app_label", "model");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.django_content_type" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_content_type"
+	    ADD CONSTRAINT "django_content_type_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.django_migrations" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_migrations"
+	    ADD CONSTRAINT "django_migrations_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.django_session" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_session"
+	    ADD CONSTRAINT "django_session_pkey" PRIMARY KEY ("session_key");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items"
+	    ADD CONSTRAINT "outfit_table_items_outfit_id_item_id_07aba569_uniq" UNIQUE ("outfit_id", "item_id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items"
+	    ADD CONSTRAINT "outfit_table_items_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table"
+	    ADD CONSTRAINT "outfit_table_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item"
+	    ADD CONSTRAINT "studio_item_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.053 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.053 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu"
+	    ADD CONSTRAINT "studio_item_sizes_shoe_e_item_id_sizeshoeeucatego_a1c872fc_uniq" UNIQUE ("item_id", "sizeshoeeucategory_id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu"
+	    ADD CONSTRAINT "studio_item_sizes_shoe_eu_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk"
+	    ADD CONSTRAINT "studio_item_sizes_shoe_u_item_id_sizeshoeukcatego_3525dfc6_uniq" UNIQUE ("item_id", "sizeshoeukcategory_id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk"
+	    ADD CONSTRAINT "studio_item_sizes_shoe_uk_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches"
+	    ADD CONSTRAINT "studio_item_sizes_waist__item_id_sizewaistinchcat_0679ca7a_uniq" UNIQUE ("item_id", "sizewaistinchcategory_id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches"
+	    ADD CONSTRAINT "studio_item_sizes_waist_inches_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz"
+	    ADD CONSTRAINT "studio_item_sizes_xyz_item_id_sizecategory_id_61af94f4_uniq" UNIQUE ("item_id", "sizecategory_id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz"
+	    ADD CONSTRAINT "studio_item_sizes_xyz_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist"
+	    ADD CONSTRAINT "studio_item_taglist_item_id_tag_id_3699882e_uniq" UNIQUE ("item_id", "tag_id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist"
+	    ADD CONSTRAINT "studio_item_taglist_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_ecommercestore" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_ecommercestore"
+	    ADD CONSTRAINT "studio_shopifystore_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizecategory"
+	    ADD CONSTRAINT "studio_sizecategory_name_key" UNIQUE ("name");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizecategory"
+	    ADD CONSTRAINT "studio_sizecategory_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeeucategory"
+	    ADD CONSTRAINT "studio_sizeshoeeucategory_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeeucategory"
+	    ADD CONSTRAINT "studio_sizeshoeeucategory_size_key" UNIQUE ("size");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeukcategory"
+	    ADD CONSTRAINT "studio_sizeshoeukcategory_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizeshoeukcategory"
+	    ADD CONSTRAINT "studio_sizeshoeukcategory_size_key" UNIQUE ("size");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizewaistinchcategory"
+	    ADD CONSTRAINT "studio_sizewaistinchcategory_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_sizewaistinchcategory"
+	    ADD CONSTRAINT "studio_sizewaistinchcategory_size_key" UNIQUE ("size");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_studiooutfittemp"
+	    ADD CONSTRAINT "studio_studiooutfittemp_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.054 BST [36054] ERROR:  relation "public.studio_style" does not exist
+2024-08-19 11:20:37.054 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_style"
+	    ADD CONSTRAINT "studio_style_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.studio_tag" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_tag"
+	    ADD CONSTRAINT "studio_tag_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes"
+	    ADD CONSTRAINT "user_item_likes_pkey" PRIMARY KEY ("id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_groups_customuser_id_bc55088e" ON "public"."accounts_customuser_groups" USING "btree" ("customuser_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_groups_group_id_86ba5f9e" ON "public"."accounts_customuser_groups" USING "btree" ("group_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_studio_styles_customuser_id_faf3667f" ON "public"."accounts_customuser_studio_styles" USING "btree" ("customuser_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_studio_styles_style_id_24b87f8a" ON "public"."accounts_customuser_studio_styles" USING "btree" ("style_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_trending_styles_customuser_id_15ec1e16" ON "public"."accounts_customuser_trending_styles" USING "btree" ("customuser_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_trending_styles_style_id_4f1f5255" ON "public"."accounts_customuser_trending_styles" USING "btree" ("style_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_user_permissions_customuser_id_0deaefae" ON "public"."accounts_customuser_user_permissions" USING "btree" ("customuser_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_user_permissions_permission_id_aea3d0e5" ON "public"."accounts_customuser_user_permissions" USING "btree" ("permission_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_customuser" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_customuser_username_722f3555_like" ON "public"."accounts_customuser" USING "btree" ("username" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_gridpicupload_uploader_id_id_b18a103b" ON "public"."accounts_gridpicupload" USING "btree" ("uploader_id_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_invitecode_invide_code_4f00a3d8_like" ON "public"."accounts_invitecode" USING "btree" ("invite_code" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_invitecode_invitee_id_cab4364e" ON "public"."accounts_invitecode" USING "btree" ("invitee_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_invitecode_inviter_id_a90ca96f" ON "public"."accounts_invitecode" USING "btree" ("inviter_id");
+	
+	
+	
+2024-08-19 11:20:37.055 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.055 BST [36054] STATEMENT:  CREATE INDEX "accounts_portraitupload_outfit_id_id_1eb81bcf" ON "public"."accounts_portraitupload" USING "btree" ("outfit_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "accounts_portraitupload_wearer_id_id_9f0bab96" ON "public"."accounts_portraitupload" USING "btree" ("wearer_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "accounts_userfollows_user_from_id_d811b0c8" ON "public"."accounts_userfollows" USING "btree" ("user_from_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "accounts_userfollows_user_to_id_e8a64c34" ON "public"."accounts_userfollows" USING "btree" ("user_to_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "accounts_useritemcart_buyer_id_1ea1aec9" ON "public"."accounts_useritemcart" USING "btree" ("buyer_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "accounts_useritemcart_item_id_987c50eb" ON "public"."accounts_useritemcart" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "accounts_useritemcart_styler_id_ea8c20c2" ON "public"."accounts_useritemcart" USING "btree" ("styler_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.auth_group" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "auth_group_name_a6ea08ec_like" ON "public"."auth_group" USING "btree" ("name" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "auth_group_permissions_group_id_b120cbf9" ON "public"."auth_group_permissions" USING "btree" ("group_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "auth_group_permissions_permission_id_84c5c92e" ON "public"."auth_group_permissions" USING "btree" ("permission_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "auth_permission_content_type_id_2f476e4b" ON "public"."auth_permission" USING "btree" ("content_type_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_order_creator_id_id_5e8c2ce7" ON "public"."box_order" USING "btree" ("creator_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_order_items_item_id_59252d7e" ON "public"."box_order_items" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_order_items_order_id_c7fe9010" ON "public"."box_order_items" USING "btree" ("order_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_order_ticket_id_id_1a0761f7" ON "public"."box_order" USING "btree" ("ticket_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_return_order_id_id_25600e2e" ON "public"."box_return" USING "btree" ("order_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_return_returner_id_id_da4c4f43" ON "public"."box_return" USING "btree" ("returner_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_creator_id_id_543a2607" ON "public"."box_ticket" USING "btree" ("creator_id_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_outfit1_id_18acb247" ON "public"."box_ticket" USING "btree" ("outfit1_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_outfit2_id_15393545" ON "public"."box_ticket" USING "btree" ("outfit2_id");
+	
+	
+	
+2024-08-19 11:20:37.056 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.056 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_outfits_all_outfit_id_62f4fa7e" ON "public"."box_ticket_outfits_all" USING "btree" ("outfit_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_outfits_all_ticket_id_3267b5c9" ON "public"."box_ticket_outfits_all" USING "btree" ("ticket_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_style1_id_92bcaabd" ON "public"."box_ticket" USING "btree" ("style1_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_style2_id_7a84ce55" ON "public"."box_ticket" USING "btree" ("style2_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_stylists_all_customuser_id_bc9b4441" ON "public"."box_ticket_stylists_all" USING "btree" ("customuser_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "box_ticket_stylists_all_ticket_id_c6168cac" ON "public"."box_ticket_stylists_all" USING "btree" ("ticket_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "public"."django_admin_log" USING "btree" ("content_type_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "django_admin_log_user_id_c564eba6" ON "public"."django_admin_log" USING "btree" ("user_id");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.django_session" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "django_session_expire_date_a5c62663" ON "public"."django_session" USING "btree" ("expire_date");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.django_session" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "django_session_session_key_c0390e0f_like" ON "public"."django_session" USING "btree" ("session_key" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.057 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.057 BST [36054] STATEMENT:  CREATE INDEX "outfit_table_items_item_id_81080f12" ON "public"."outfit_table_items" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "outfit_table_items_outfit_id_3c6dcc46" ON "public"."outfit_table_items" USING "btree" ("outfit_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "outfit_table_maker_id_id_48df3afd" ON "public"."outfit_table" USING "btree" ("maker_id_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "outfit_table_ticket_id_id_d5c3777b" ON "public"."outfit_table" USING "btree" ("ticket_id_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_shopify_store_id_91c3d0f8" ON "public"."studio_item" USING "btree" ("ecommerce_store_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_shoe_eu_item_id_83ecbde6" ON "public"."studio_item_sizes_shoe_eu" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_shoe_eu_sizeshoeeucategory_id_218f546c" ON "public"."studio_item_sizes_shoe_eu" USING "btree" ("sizeshoeeucategory_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_shoe_uk_item_id_896df26b" ON "public"."studio_item_sizes_shoe_uk" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_shoe_uk_sizeshoeukcategory_id_40bbdd4d" ON "public"."studio_item_sizes_shoe_uk" USING "btree" ("sizeshoeukcategory_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_waist_in_sizewaistinchcategory_id_1905fea0" ON "public"."studio_item_sizes_waist_inches" USING "btree" ("sizewaistinchcategory_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_waist_inches_item_id_716f2b77" ON "public"."studio_item_sizes_waist_inches" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_xyz_item_id_5724c172" ON "public"."studio_item_sizes_xyz" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_sizes_xyz_sizecategory_id_9e97caf6" ON "public"."studio_item_sizes_xyz" USING "btree" ("sizecategory_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_taglist_item_id_dd8bd9e7" ON "public"."studio_item_taglist" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_item_taglist_tag_id_def765ac" ON "public"."studio_item_taglist" USING "btree" ("tag_id");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_sizecategory" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_sizecategory_name_b9eeea07_like" ON "public"."studio_sizecategory" USING "btree" ("name" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.058 BST [36054] ERROR:  relation "public.studio_sizeshoeeucategory" does not exist
+2024-08-19 11:20:37.058 BST [36054] STATEMENT:  CREATE INDEX "studio_sizeshoeeucategory_size_833ebf14_like" ON "public"."studio_sizeshoeeucategory" USING "btree" ("size" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.studio_sizeshoeukcategory" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "studio_sizeshoeukcategory_size_dbb77d5f_like" ON "public"."studio_sizeshoeukcategory" USING "btree" ("size" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.studio_sizewaistinchcategory" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "studio_sizewaistinchcategory_size_53af147f_like" ON "public"."studio_sizewaistinchcategory" USING "btree" ("size" "varchar_pattern_ops");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "studio_studiooutfittemp_ticket_id_12d723fd" ON "public"."studio_studiooutfittemp" USING "btree" ("ticket_id");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "studio_studiooutfittemp_user_id_fbd145ab" ON "public"."studio_studiooutfittemp" USING "btree" ("user_id");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "user_item_likes_item_id_c245e38a" ON "public"."accounts_useritemlikes" USING "btree" ("item_id");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "user_item_likes_liker_id_3db3e01e" ON "public"."accounts_useritemlikes" USING "btree" ("liker_id");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  CREATE INDEX "user_item_likes_styler_id_b7f48007" ON "public"."accounts_useritemlikes" USING "btree" ("styler_id");
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customer" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customer"
+	    ADD CONSTRAINT "accounts_customer_user_id_11606857_fk_accounts_customuser_id" FOREIGN KEY ("user_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions"
+	    ADD CONSTRAINT "accounts_customuser__customuser_id_0deaefae_fk_accounts_" FOREIGN KEY ("customuser_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles"
+	    ADD CONSTRAINT "accounts_customuser__customuser_id_15ec1e16_fk_accounts_" FOREIGN KEY ("customuser_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups"
+	    ADD CONSTRAINT "accounts_customuser__customuser_id_bc55088e_fk_accounts_" FOREIGN KEY ("customuser_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles"
+	    ADD CONSTRAINT "accounts_customuser__customuser_id_faf3667f_fk_accounts_" FOREIGN KEY ("customuser_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customuser_user_permissions" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_user_permissions"
+	    ADD CONSTRAINT "accounts_customuser__permission_id_aea3d0e5_fk_auth_perm" FOREIGN KEY ("permission_id") REFERENCES "public"."auth_permission"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.059 BST [36054] ERROR:  relation "public.accounts_customuser_studio_styles" does not exist
+2024-08-19 11:20:37.059 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_studio_styles"
+	    ADD CONSTRAINT "accounts_customuser__style_id_24b87f8a_fk_studio_st" FOREIGN KEY ("style_id") REFERENCES "public"."studio_style"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_customuser_trending_styles" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_trending_styles"
+	    ADD CONSTRAINT "accounts_customuser__style_id_4f1f5255_fk_studio_st" FOREIGN KEY ("style_id") REFERENCES "public"."studio_style"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_customuser_groups" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_customuser_groups"
+	    ADD CONSTRAINT "accounts_customuser_groups_group_id_86ba5f9e_fk_auth_group_id" FOREIGN KEY ("group_id") REFERENCES "public"."auth_group"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_gridpicupload" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_gridpicupload"
+	    ADD CONSTRAINT "accounts_gridpicuplo_uploader_id_id_b18a103b_fk_accounts_" FOREIGN KEY ("uploader_id_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode"
+	    ADD CONSTRAINT "accounts_invitecode_invitee_id_cab4364e_fk_accounts_" FOREIGN KEY ("invitee_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_invitecode" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_invitecode"
+	    ADD CONSTRAINT "accounts_invitecode_inviter_id_a90ca96f_fk_accounts_" FOREIGN KEY ("inviter_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_portraitupload"
+	    ADD CONSTRAINT "accounts_portraitupl_outfit_id_id_1eb81bcf_fk_outfit_ta" FOREIGN KEY ("outfit_id_id") REFERENCES "public"."outfit_table"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_portraitupload" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_portraitupload"
+	    ADD CONSTRAINT "accounts_portraitupl_wearer_id_id_9f0bab96_fk_accounts_" FOREIGN KEY ("wearer_id_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_stylist" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_stylist"
+	    ADD CONSTRAINT "accounts_stylist_user_id_aa195999_fk_accounts_customuser_id" FOREIGN KEY ("user_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows"
+	    ADD CONSTRAINT "accounts_userfollows_user_from_id_d811b0c8_fk_accounts_" FOREIGN KEY ("user_from_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_userfollows" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_userfollows"
+	    ADD CONSTRAINT "accounts_userfollows_user_to_id_e8a64c34_fk_accounts_" FOREIGN KEY ("user_to_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart"
+	    ADD CONSTRAINT "accounts_useritemcar_buyer_id_1ea1aec9_fk_accounts_" FOREIGN KEY ("buyer_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart"
+	    ADD CONSTRAINT "accounts_useritemcar_styler_id_ea8c20c2_fk_accounts_" FOREIGN KEY ("styler_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.accounts_useritemcart" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemcart"
+	    ADD CONSTRAINT "accounts_useritemcart_item_id_987c50eb_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions"
+	    ADD CONSTRAINT "auth_group_permissio_permission_id_84c5c92e_fk_auth_perm" FOREIGN KEY ("permission_id") REFERENCES "public"."auth_permission"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.060 BST [36054] ERROR:  relation "public.auth_group_permissions" does not exist
+2024-08-19 11:20:37.060 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_group_permissions"
+	    ADD CONSTRAINT "auth_group_permissions_group_id_b120cbf9_fk_auth_group_id" FOREIGN KEY ("group_id") REFERENCES "public"."auth_group"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.auth_permission" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."auth_permission"
+	    ADD CONSTRAINT "auth_permission_content_type_id_2f476e4b_fk_django_co" FOREIGN KEY ("content_type_id") REFERENCES "public"."django_content_type"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order"
+	    ADD CONSTRAINT "box_order_creator_id_id_5e8c2ce7_fk_accounts_customuser_id" FOREIGN KEY ("creator_id_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items"
+	    ADD CONSTRAINT "box_order_items_item_id_59252d7e_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_order_items" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order_items"
+	    ADD CONSTRAINT "box_order_items_order_id_c7fe9010_fk_box_order_id" FOREIGN KEY ("order_id") REFERENCES "public"."box_order"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_order" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_order"
+	    ADD CONSTRAINT "box_order_ticket_id_id_1a0761f7_fk_box_ticket_id" FOREIGN KEY ("ticket_id_id") REFERENCES "public"."box_ticket"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_return"
+	    ADD CONSTRAINT "box_return_order_id_id_25600e2e_fk_box_order_id" FOREIGN KEY ("order_id_id") REFERENCES "public"."box_order"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_return" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_return"
+	    ADD CONSTRAINT "box_return_returner_id_id_da4c4f43_fk_accounts_customuser_id" FOREIGN KEY ("returner_id_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket"
+	    ADD CONSTRAINT "box_ticket_creator_id_id_543a2607_fk_accounts_customuser_id" FOREIGN KEY ("creator_id_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket"
+	    ADD CONSTRAINT "box_ticket_outfit1_id_18acb247_fk_outfit_table_id" FOREIGN KEY ("outfit1_id") REFERENCES "public"."outfit_table"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket"
+	    ADD CONSTRAINT "box_ticket_outfit2_id_15393545_fk_outfit_table_id" FOREIGN KEY ("outfit2_id") REFERENCES "public"."outfit_table"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all"
+	    ADD CONSTRAINT "box_ticket_outfits_all_outfit_id_62f4fa7e_fk_outfit_table_id" FOREIGN KEY ("outfit_id") REFERENCES "public"."outfit_table"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket_outfits_all" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_outfits_all"
+	    ADD CONSTRAINT "box_ticket_outfits_all_ticket_id_3267b5c9_fk_box_ticket_id" FOREIGN KEY ("ticket_id") REFERENCES "public"."box_ticket"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket"
+	    ADD CONSTRAINT "box_ticket_style1_id_92bcaabd_fk_studio_style_id" FOREIGN KEY ("style1_id") REFERENCES "public"."studio_style"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket"
+	    ADD CONSTRAINT "box_ticket_style2_id_7a84ce55_fk_studio_style_id" FOREIGN KEY ("style2_id") REFERENCES "public"."studio_style"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.061 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.061 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all"
+	    ADD CONSTRAINT "box_ticket_stylists__customuser_id_bc9b4441_fk_accounts_" FOREIGN KEY ("customuser_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.box_ticket_stylists_all" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."box_ticket_stylists_all"
+	    ADD CONSTRAINT "box_ticket_stylists_all_ticket_id_c6168cac_fk_box_ticket_id" FOREIGN KEY ("ticket_id") REFERENCES "public"."box_ticket"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_admin_log"
+	    ADD CONSTRAINT "django_admin_log_content_type_id_c4bce8eb_fk_django_co" FOREIGN KEY ("content_type_id") REFERENCES "public"."django_content_type"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.django_admin_log" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."django_admin_log"
+	    ADD CONSTRAINT "django_admin_log_user_id_c564eba6_fk_accounts_customuser_id" FOREIGN KEY ("user_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items"
+	    ADD CONSTRAINT "outfit_table_items_item_id_81080f12_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.outfit_table_items" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table_items"
+	    ADD CONSTRAINT "outfit_table_items_outfit_id_3c6dcc46_fk_outfit_table_id" FOREIGN KEY ("outfit_id") REFERENCES "public"."outfit_table"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table"
+	    ADD CONSTRAINT "outfit_table_maker_id_id_48df3afd_fk_accounts_customuser_id" FOREIGN KEY ("maker_id_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.outfit_table" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."outfit_table"
+	    ADD CONSTRAINT "outfit_table_ticket_id_id_d5c3777b_fk_box_ticket_id" FOREIGN KEY ("ticket_id_id") REFERENCES "public"."box_ticket"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item"
+	    ADD CONSTRAINT "studio_item_ecommerce_store_id_db7756e1_fk_studio_ec" FOREIGN KEY ("ecommerce_store_id") REFERENCES "public"."studio_ecommercestore"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu"
+	    ADD CONSTRAINT "studio_item_sizes_sh_sizeshoeeucategory_i_218f546c_fk_studio_si" FOREIGN KEY ("sizeshoeeucategory_id") REFERENCES "public"."studio_sizeshoeeucategory"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk"
+	    ADD CONSTRAINT "studio_item_sizes_sh_sizeshoeukcategory_i_40bbdd4d_fk_studio_si" FOREIGN KEY ("sizeshoeukcategory_id") REFERENCES "public"."studio_sizeshoeukcategory"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_eu" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_eu"
+	    ADD CONSTRAINT "studio_item_sizes_shoe_eu_item_id_83ecbde6_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_shoe_uk" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_shoe_uk"
+	    ADD CONSTRAINT "studio_item_sizes_shoe_uk_item_id_896df26b_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches"
+	    ADD CONSTRAINT "studio_item_sizes_wa_item_id_716f2b77_fk_studio_it" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_waist_inches" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_waist_inches"
+	    ADD CONSTRAINT "studio_item_sizes_wa_sizewaistinchcategor_1905fea0_fk_studio_si" FOREIGN KEY ("sizewaistinchcategory_id") REFERENCES "public"."studio_sizewaistinchcategory"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz"
+	    ADD CONSTRAINT "studio_item_sizes_xy_sizecategory_id_9e97caf6_fk_studio_si" FOREIGN KEY ("sizecategory_id") REFERENCES "public"."studio_sizecategory"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_sizes_xyz" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_sizes_xyz"
+	    ADD CONSTRAINT "studio_item_sizes_xyz_item_id_5724c172_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist"
+	    ADD CONSTRAINT "studio_item_taglist_item_id_dd8bd9e7_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.062 BST [36054] ERROR:  relation "public.studio_item_taglist" does not exist
+2024-08-19 11:20:37.062 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_item_taglist"
+	    ADD CONSTRAINT "studio_item_taglist_tag_id_def765ac_fk_studio_tag_id" FOREIGN KEY ("tag_id") REFERENCES "public"."studio_tag"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.063 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.063 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_studiooutfittemp"
+	    ADD CONSTRAINT "studio_studiooutfitt_user_id_fbd145ab_fk_accounts_" FOREIGN KEY ("user_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.063 BST [36054] ERROR:  relation "public.studio_studiooutfittemp" does not exist
+2024-08-19 11:20:37.063 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."studio_studiooutfittemp"
+	    ADD CONSTRAINT "studio_studiooutfittemp_ticket_id_12d723fd_fk_box_ticket_id" FOREIGN KEY ("ticket_id") REFERENCES "public"."box_ticket"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.063 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.063 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes"
+	    ADD CONSTRAINT "user_item_likes_item_id_c245e38a_fk_studio_item_id" FOREIGN KEY ("item_id") REFERENCES "public"."studio_item"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.063 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.063 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes"
+	    ADD CONSTRAINT "user_item_likes_liker_id_3db3e01e_fk_accounts_customuser_id" FOREIGN KEY ("liker_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:20:37.063 BST [36054] ERROR:  relation "public.accounts_useritemlikes" does not exist
+2024-08-19 11:20:37.063 BST [36054] STATEMENT:  ALTER TABLE ONLY "public"."accounts_useritemlikes"
+	    ADD CONSTRAINT "user_item_likes_styler_id_b7f48007_fk_accounts_customuser_id" FOREIGN KEY ("styler_id") REFERENCES "public"."accounts_customuser"("id") DEFERRABLE INITIALLY DEFERRED;
+	
+	
+	
+2024-08-19 11:21:32.900 BST [35699] LOG:  checkpoint complete: wrote 984 buffers (6.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=99.423 s, sync=0.011 s, total=99.438 s; sync files=318, longest=0.001 s, average=0.001 s; distance=4597 kB, estimate=4597 kB; lsn=0/1991408, redo lsn=0/19890E8
+2024-08-19 11:25:39.741 BST [36275] ERROR:  must be owner of database ruhahlocal
+2024-08-19 11:25:39.741 BST [36275] STATEMENT:  DROP DATABASE IF EXISTS ruhahlocal;
+2024-08-19 11:25:39.742 BST [36275] ERROR:  permission denied to create database
+2024-08-19 11:25:39.742 BST [36275] STATEMENT:  CREATE DATABASE ruhahlocal;
+2024-08-19 11:25:47.418 BST [36275] ERROR:  must be owner of database ruhahlocal
+2024-08-19 11:25:47.418 BST [36275] STATEMENT:  DROP DATABASE IF EXISTS ruhahlocal;
+2024-08-19 11:26:44.522 BST [36317] FATAL:  role "postgres" does not exist
+2024-08-19 11:27:13.589 BST [36338] FATAL:  role "postgres" does not exist
+2024-08-19 11:28:52.259 BST [36397] FATAL:  lock file "postmaster.pid" already exists
+2024-08-19 11:28:52.259 BST [36397] HINT:  Is another postmaster (PID 35698) running in data directory "/usr/local/var/postgres"?
+2024-08-19 11:30:48.567 BST [36445] ERROR:  permission denied to alter role
+2024-08-19 11:30:48.567 BST [36445] DETAIL:  Only roles with the SUPERUSER attribute may change the SUPERUSER attribute.
+2024-08-19 11:30:48.567 BST [36445] STATEMENT:  ALTER USER arislocal WITH SUPERUSER;
+2024-08-19 11:36:34.431 BST [37134] FATAL:  could not open file "global/pg_filenode.map": No such file or directory
+2024-08-19 11:36:54.209 BST [35698] LOG:  could not open file "postmaster.pid": No such file or directory
+2024-08-19 11:36:54.209 BST [35698] LOG:  performing immediate shutdown because data directory lock file is invalid
+2024-08-19 11:36:54.209 BST [35698] LOG:  received immediate shutdown request
+2024-08-19 11:36:54.209 BST [35698] LOG:  could not open file "postmaster.pid": No such file or directory
+2024-08-19 11:36:54.215 BST [35698] LOG:  database system is shut down
+2024-08-19 11:39:00.324 BST [38476] LOG:  starting PostgreSQL 16.3 (Homebrew) on x86_64-apple-darwin23.4.0, compiled by Apple clang version 15.0.0 (clang-1500.3.9.4), 64-bit
+2024-08-19 11:39:00.326 BST [38476] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-08-19 11:39:00.326 BST [38476] LOG:  listening on IPv6 address "::1", port 5432
+2024-08-19 11:39:00.327 BST [38476] LOG:  listening on IPv6 address "fe80::1%lo0", port 5432
+2024-08-19 11:39:00.327 BST [38476] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-08-19 11:39:00.335 BST [38479] LOG:  database system was shut down at 2024-08-19 11:37:35 BST
+2024-08-19 11:39:00.344 BST [38476] LOG:  database system is ready to accept connections
+2024-08-19 11:40:18.881 BST [38523] FATAL:  role "arislocal" does not exist
+2024-08-19 11:40:42.635 BST [38537] FATAL:  role "postgres" does not exist
+2024-08-19 11:44:00.328 BST [38477] LOG:  checkpoint starting: time
+2024-08-19 11:44:04.584 BST [38477] LOG:  checkpoint complete: wrote 45 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.249 s, sync=0.002 s, total=4.256 s; sync files=11, longest=0.001 s, average=0.001 s; distance=269 kB, estimate=269 kB; lsn=0/154F088, redo lsn=0/154F050
+2024-08-19 11:47:00.974 BST [38476] LOG:  could not open file "postmaster.pid": No such file or directory
+2024-08-19 11:47:00.975 BST [38476] LOG:  performing immediate shutdown because data directory lock file is invalid
+2024-08-19 11:47:00.975 BST [38476] LOG:  received immediate shutdown request
+2024-08-19 11:47:00.975 BST [38476] LOG:  could not open file "postmaster.pid": No such file or directory
+2024-08-19 11:47:00.983 BST [38476] LOG:  database system is shut down
