@@ -9,7 +9,7 @@ class SortedTicketListFilter(admin.SimpleListFilter):
     parameter_name = 'ticket_id'
 
     def lookups(self, request, model_admin):
-        ticket_ids = Outfit.objects.values_list('ticket_id__id', flat=True).distinct().order_by('ticket_id__id')
+        ticket_ids = Outfit.objects.values_list('ticket_id__id', flat=True).distinct().order_by('-ticket_id__id')
         return [(str(tid), f'Ticket {tid}') for tid in ticket_ids if tid is not None]
 
     def queryset(self, request, queryset):
