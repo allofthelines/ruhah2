@@ -81,16 +81,16 @@ def studio_tickets(request):
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
         following_user_ids = list(request.user.following_list.values_list('id', flat=True))
         user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
-        user_followers = list(request.user.followers.values_list('user_from_id', flat=True))
+        # user_followers = list(request.user.followers.values_list('user_from_id', flat=True))
 
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in ticket_list if
                             # ticket.creator_id.id != request.user.id and  # ...if its the same guy
                             (ticket.creator_id is None or ticket.creator_id.id != request.user.id) and # kalyptei kai periptwsh guest
                             ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
-                            ticket.style1.id in user_styles and # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
-                            (ticket.stylist_type == 'everyone' or
-                                (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
+                            ticket.style1.id in user_styles # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
+                            #(ticket.stylist_type == 'everyone' or
+                            #    (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
                             ]
 
         # Additional filtering based on studio_visibility
@@ -102,8 +102,8 @@ def studio_tickets(request):
 
     else:
         following_user_ids = []
-        # filtered_tickets = ticket_list  # Show all tickets for guests
-        filtered_tickets = [ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'] # deikse ola ektos apo afta pou exoun sygekrimeno following
+        filtered_tickets = ticket_list  # Show all tickets for guests
+        # filtered_tickets = [ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'] # deikse ola ektos apo afta pou exoun sygekrimeno following
 
     # Create a paginator for the filtered tickets
     paginator = Paginator(filtered_tickets, 20)  # Show 20 tickets per page
