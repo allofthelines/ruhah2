@@ -49,7 +49,8 @@ ALLOWED_HOSTS = [
     'www.fumio.xyz',
     'ruhah.com',
     'www.ruhah.com',
-    'fumio-c90be99ba1a3.herokuapp.com'
+    'fumio-c90be99ba1a3.herokuapp.com',
+    'ruhah2-d3d177545264.herokuapp.com'
 ]
 
 # IMPORTANT GIA STRIPE WEBHOOK
@@ -58,7 +59,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://fumio.xyz',
     'https://www.fumio.xyz',
     'https://ruhah.com',
-    'https://www.ruhah.com'
+    'https://www.ruhah.com',
+    'https://ruhah2-d3d177545264.herokuapp.com'
 ]
 
 INSTALLED_APPS = [
