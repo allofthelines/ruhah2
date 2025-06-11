@@ -630,3 +630,37 @@ def confirm_email(request, uidb64, token):
         return render(request, 'accounts/email_confirmed.html')
     else:
         return render(request, 'accounts/email_confirmation_failed.html')
+
+
+
+
+import requests
+from django.conf import settings
+
+def call_kolors_api(image1_path, image2_path):
+    """
+    Function to call the Kolors model API with two images and receive a processed image.
+    """
+    try:
+        # Prepare the payload for the API request
+        with open(image1_path, 'rb') as image1, open(image2_path, 'rb') as image2:
+            files = {
+                'image1': image1,
+                'image2': image2
+            }
+            headers = {
+                'Authorization': f"Bearer {settings.KOLORS_API_KEY}",
+                'Content-Type': 'multipart/form-data'
+            }
+            response = requests.post(settings.KOLORS_API_URL, files=files, headers=headers)
+
+        # Check if the response is successful
+        if response.status_code == 200:
+            return response.content  # Assume the API returns the processed image content
+        else:
+            print("Error:", response.json())
+            return None
+
+    except Exception as e:
+        print(f"Error calling Kolors API: {str(e)}")
+        return None
