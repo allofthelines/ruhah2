@@ -61,7 +61,7 @@ def signup(request):
 
 def send_confirmation_email(user):
     subject = 'Welcome'
-    from_email = 'RUHAH <fumioxyz1@gmail.com>'
+    from_email = 'RUHAH <contact@ruhah.com>'
     message = render_to_string('accounts/activation_email.txt', {
         'user': user,
         'domain': settings.EMAIL_DOMAIN,
@@ -246,7 +246,7 @@ def password_reset_request(request):
                         'protocol': settings.EMAIL_PROTOCOL,
                     }
                     email = render_to_string(email_template_name, c)
-                    from_email = 'RUHAH <fumioxyz1@gmail.com>'  # Set the sender name here
+                    from_email = 'RUHAH <contact@ruhah.com>'  # Set the sender name here
                     send_mail(subject, email, from_email, [user.email], fail_silently=False)
             return redirect("accounts:password_reset_done")
     password_reset_form = PasswordResetForm()
@@ -586,7 +586,7 @@ def email_change_request(request):
 
 def send_confirmation_email(user):
     subject = "Confirm Your Email Address"
-    from_email = 'RUHAH <fumioxyz1@gmail.com>'
+    from_email = 'RUHAH <contact@ruhah.com>'
     email_template_name = "accounts/email_change_confirmation.html"
     c = {
         "email": user.new_email,

@@ -1,6 +1,10 @@
 {% extends "core/base.html" %}
 {% load static %}
 
+{% block scripts %}
+  <script src="{% static "core/home.js" %}" defer></script>
+{% endblock %}
+
 {% block content %}
   {% if user.is_authenticated %}
     <!-- Display current page for logged-in users -->
@@ -23,15 +27,24 @@
     </form>
   {% else %}
     <!-- Display new landing page for guest users -->
-    <div id="landing-container" style="width: 80%; max-width: 2000px; margin: -25px auto 0 auto;">
+    <div id="landing-container" style="width: 90%; max-width: 2000px; margin: -25px auto 0 auto;">
 
       <!-- contHELLO -->
       <div id="contHELLO" style="text-align: center; margin-bottom: 70px;">
         <img src="{% static 'images/landing/balenciaga1.jpg' %}" alt="Balenciaga Image" style="width: 100%;">
         <h1 class="goodbye-decisions">goodbye decisions</h1>
-        <h2>hello @maria</h2>
-        <p style="font-size: 18px; max-width: 400px; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum, libero et suscipit condimentum, elit odio volutpat nisi, ac interdum neque nisl sit amet lorem. Morbi nec dolor quis odio.</p>
+        <h1 class="goodbye-decisions" style="font-weight:300; margin-top: -25px;">hello <a href="https://ruhah.com/accounts/slayyyer/">@slayyyer</a></h1>
+        <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">I always wanted to work in the fashion industry. Maybe a stylist for the magazines. Instead I’m an office assistant at a pharmaceutical company. Though I must say, I think the office looks better because of me. I’ve been handing out tips. Just kidding im a professional stylist, check out my ruhah xoxo. </p>
       </div>
+
+      <!-- WHAT IS SECTION -->
+        <h2 style="text-align: center; margin: 50px 0;">WHAT IS</h2>
+
+        <div id="contWHAT">
+          <div id="contWHAT-img">
+            <img src="{% static 'images/landing/asanser1.jpg' %}" alt="What is Image" style="width: 100%;">
+          </div>
+        </div>
 
       <!-- HOW IT WORKS -->
       <h2 style="text-align: center; margin: 50px 0;">HOW IT WORKS</h2>
@@ -39,47 +52,46 @@
       <!-- contHOW -->
       <div id="contHOW">
         <!-- contHOW1 -->
-        <div id="contHOW1" style="flex: 1; margin: 20px;">
+        <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
           <h3>1. ASK FOR A FIT</h3>
           <img src="{% static 'images/landing/ask1.jpg' %}" alt="Outfit 1" style="width: 100%;">
-          <p>...describing your mood, the trend you're into, the occasion - anything that would help the stylist get it.</p>
+          <p style="font-size: 16px; width: 80%; text-align: center; margin: 0 auto;">...describing your mood, the trend you're into, the occasion - anything that would help the stylist get it.</p>
         </div>
 
         <!-- contHOW2 -->
-        <div id="contHOW2" style="flex: 1; margin: 20px;">
+        <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
           <h3>2. GET A FIT</h3>
           <img src="{% static 'images/landing/outfit1.jpeg' %}" alt="Outfit 1" style="width: 100%;">
-          <p>...curated by our users and (human) stylists tailor-made for your ask.</p>
+          <p style="font-size: 16px; width: 80%; text-align: center; margin: 0 auto;">...curated by our users and (human) stylists tailor-made for your ask.</p>
         </div>
 
         <!-- contHOW3 -->
-        <div id="contHOW3" style="flex: 1; margin: 20px;">
-          <h3>3. CLICK AND BUY</h3>
+        <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+          <h3>3. PURCHASE</h3>
           <img src="{% static 'images/landing/item1.jpg' %}" alt="Item 1" style="width: 100%;">
-          <!-- <p style="text-align: center;">METALLIC THREAD SHIRT - $55</p> -->
-          <p>...the clothes you like from the outfits recommended.</p>
+          <p style="font-size: 16px; width: 80%; text-align: center; margin: 0 auto;">...the clothes you like from the outfits recommended.</p>
         </div>
       </div>
 
       <!-- ARE YOU FEELING -->
-      <h2 style="text-align: center; margin: 50px 0;">ARE YOU FEELING</h2>
+      <h2 style="text-align: center; margin: 50px 0;">ARE YOU</h2>
 
       <!-- contFEELING -->
       <div id="contFEELING">
         <!-- contFEELING1 -->
-        <div id="contFEELING1" style="flex: 1; min-width: 300px; margin: 20px;">
-          <h3>CREATIVE?</h3>
-          <h4>STYLE AND EARN</h4>
-          <img src="{% static 'images/landing/feeling1.png' %}" alt="Feeling 1" style="width: 100%;">
-          <p>...money by creating outfits for others in the studio.</p>
+        <div id="contFEELING1" style="flex: 1;">
+          <h3>FEELING CREATIVE?</h3>
+          <h4 style="font-family: Orbitron; font-weight: 500; font-style: normal; font-size: 25px; margin-top: -18px;">STYLE AND EARN</h4>
+          <img src="{% static 'images/landing/feeling1.png' %}" alt="Feeling 1" style="width: 100%; margin-top: -25px;">
+          <p style="font-size: 16px; width: 80%; text-align: center; margin-top: 20;">...money by creating outfits for others in the studio.</p>
         </div>
 
         <!-- contFEELING2 -->
-        <div id="contFEELING2" style="flex: 1; min-width: 300px; margin: 20px;">
-          <h3>ADVENTUROUS?</h3>
-          <h4>EXPLORE</h4>
-          <img src="{% static 'images/landing/feeling2.png' %}" alt="Feeling 2" style="width: 100%;">
-          <p>...follow and keep up with users and trending outfits for inspiration.</p>
+        <div id="contFEELING2" style="flex: 1;">
+          <h3>FEELING ADVENTUROUS?</h3>
+          <h4 style="font-family: Orbitron; font-weight: 500; font-style: normal; font-size: 25px; margin-top: -18px;">EXPLORE</h4>
+          <img src="{% static 'images/landing/feeling2.png' %}" alt="Feeling 2" style="width: 100%; margin-top: -25px;">
+          <p style="font-size: 16px; width: 80%; text-align: center; margin-top: 20;">...follow and keep up with users and trending outfits for inspiration.</p>
         </div>
       </div>
 
@@ -87,31 +99,40 @@
 
     <!-- Inline CSS for desktop and mobile views -->
     <style>
-      /* Align the items at the top in contHOW */
-      #contHOW {
+      /* Align the items at the top in contHOW and contFEELING */
+      #contHOW, #contFEELING {
         display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: flex-start;
-        margin-bottom: 50px;
+        margin: 0 auto 50px auto;
+        width: 100%;
       }
 
-      /* Align the items at the top in contFEELING */
-      #contFEELING {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-        align-items: flex-start;
-        margin-bottom: 50px;
-      }
-
-      /* Align items in contHOW1, contHOW2, contHOW3, contFEELING1, contFEELING2 */
+      /* Align items within individual containers */
       #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
+      }
+
+      #contWHAT {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 50px auto;
+          width: 100%;
+        }
+
+      h3 {
+          font-size: 20px;
+      }
+
+      #contHOW h3 {
+          margin-bottom: -2px;
+          font-weight: 600;
       }
 
       /* For desktop mode */
@@ -122,14 +143,42 @@
         }
       }
 
+      #contWHAT-img {
+    flex: 1 1 33.333%;
+    max-width: 33.333%;
+    margin: 0 auto;
+  }
+
+  #contWHAT-img img {
+    width: 100%;
+  }
+
+      #contHOW {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between; /* Space between items */
+        align-items: flex-start;
+        gap: 20px; /* Add a gap between items to ensure no overlap */
+        margin: 0 auto 50px auto;
+        width: 100%;
+    }
+
+    #contHOW1, #contHOW2, #contHOW3 {
+        flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
+        margin: 0; /* Remove the extra margin */
+    }
+
       /* For mobile mode */
       @media (max-width: 767px) {
-        .goodbye-decisions {
+
+        #landing-container {
+            width: 100%;
+        }
+        .goodbye-decisions  {
           white-space: nowrap;
-          font-size: calc(5vw + 10px);
+          font-size: calc(4vw + 10px); /* Dynamically adjust font size */
           max-width: 100%;
           overflow: hidden;
-          text-overflow: ellipsis;
           display: block;
         }
 
@@ -142,6 +191,14 @@
           margin: 0 auto;
         }
 
+        #contWHAT-img img {
+    width: 100%;
+    max-width: 95%; /* Adds the gaps to right and left */
+    margin: 0 auto;
+    display: block;
+  }
+}
+
         #contHOW, #contFEELING {
           display: block;
           justify-content: center;
@@ -150,6 +207,10 @@
 
         #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
           margin: 0 auto;
+        }
+
+        #contFEELING2 {
+            margin-top: 40px;
         }
       }
     </style>

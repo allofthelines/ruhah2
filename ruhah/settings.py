@@ -226,12 +226,12 @@ if ENVIRONMENT == 'development':
 # EMAIL SETTINGS
 # EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'mail.privateemail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'fumioxyz1@gmail.com'
-EMAIL_HOST_PASSWORD = 'gcxtfsvznyycqowj'
-DEFAULT_FROM_EMAIL = 'fumioxyz1@gmail.com'
+EMAIL_HOST_USER = 'contact@ruhah.com'
+EMAIL_HOST_PASSWORD = 'cocococo00'
+DEFAULT_FROM_EMAIL = 'RUHAH <contact@ruhah.com>'
 
 # Ensure this is set to your production domain
 if os.getenv('DJANGO_ENV') == 'production':
