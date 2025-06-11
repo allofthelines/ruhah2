@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block page-header %}
-    Gridpic Try-On
+    Virtual Try-On
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
     </div>
 
     <!-- Search form (copied from studio_items.html) -->
-    <form method="get" action="{% url 'accounts:tryon_item_search' selected_gridpic.id %}">
+    <form method="get" action="{% url 'accounts:tryon_item_search' selected_gridpic.id %}" class="centered-form">
         <select name="category">
             <option value="all">All</option>
             <option value="top">Top</option>
@@ -25,11 +25,8 @@
         </select>
         <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
         <input type="hidden" name="search" value="1">
-        <button type="submit">Search</button>
+        <button type="submit" style="margin-left: 5px;">Search</button>
     </form>
-
-
-
 
     <!-- Display search results with Try-On buttons -->
     {% if search_results %}
@@ -44,23 +41,50 @@
     {% endif %}
 
     <!-- Navigation Buttons -->
-    <button onclick="location.href='{% url 'accounts:profile' %}'">Back to Gridpics</button>
-    <button onclick="location.href='{% url 'accounts:delete_all_tryons' selected_gridpic.id %}'">Delete All Try-Ons</button>
+    <div class="button-container">
+        <button onclick="location.href='{% url 'accounts:delete_all_tryons' selected_gridpic.id %}'" class="btn btn-secondary">Revert to Original</button>
+        <a href="{% url 'accounts:profile' %}#gridpics" class="btn-link">Back to Gridpics</a>
+    </div>
+
+
 </div>
 
 <style>
+    #studio-items-all-content {
+        width: 100%; /* Increased width to reduce left and right margins */
+        max-width: 1000px; /* Maximum width for desktop */
+        margin: 0 auto; /* Center the entire content */
+        text-align: center; /* Center-align text */
+    }
+
+    .gridpic-try-on img {
+        max-width: 100%; /* Make the image responsive */
+        max-height: 400px; /* Optional: Limit the height */
+        margin: 0 auto; /* Center the image horizontally */
+    }
+
+    .centered-form {
+        display: flex;
+        justify-content: center; /* Center the form elements */
+        align-items: center; /* Align form elements vertically */
+        margin: 20px 0; /* Add margin above and below the form */
+        gap: 10px; /* Add space between form elements */
+    }
+
     #contB {
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 1x4 layout on desktop */
-        grid-gap: 2px;
-        border: 0px solid black; /* Border around the entire container */
-        margin: 0 0px;
+        grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+        grid-gap: 2px; /* Reduced gap between grid items */
+        border: 0px solid black;
+        margin: 10px auto; /* Center the grid and reduce margins */
+        max-width: 1000px;
     }
 
     .contA {
         display: flex;
         flex-direction: column; /* Image on top, button on bottom */
         border: 1px solid black;
+        text-align: center;
     }
 
     .contA img {
@@ -77,9 +101,50 @@
         cursor: pointer;
     }
 
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        border: 1px solid black;
+        padding: 10px 20px;
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        justify-content: center;
+        align-items: center; /* Center-align the buttons */
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn-link {
+        background: none;
+        border: none;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        padding: 10px 20px;
+        text-decoration: none; /* Remove underline */
+    }
+
+
     @media (max-width: 768px) {
+        #studio-items-all-content {
+            width: 100%; /* Full width on mobile */
+        }
         #contB {
-            grid-template-columns: repeat(2, 1fr); /* 2x2 layout on mobile */
+            grid-template-columns: repeat(2, 1fr); /* Two columns on mobile */
         }
     }
 </style>

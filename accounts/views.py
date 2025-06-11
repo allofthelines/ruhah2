@@ -637,32 +637,46 @@ def tryon_item_search(request, gridpic_id):
     # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    print(f"\n\n\n\n\nSelected GridPic ID: {gridpic.id}\n\n\n\n\n")
+    print(f"Selected GridPic: {gridpic}")
+
+    # Determine which image to show
+    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
+        # Show the temporary image if it exists and is active
+        selected_gridpic_url = gridpic.gridpic_temp_img.url
+    elif gridpic.gridpic_tryon_item_id.exists():
+        # Show the latest tryon image if it exists
+        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    else:
+        # Show the original processed image
+        selected_gridpic_url = gridpic.gridpic_processed_img.url
 
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    items = Item.objects.none()
+    search_results = Item.objects.none()
 
     if 'search' in request.GET:
-        items = Item.objects.all()
+        search_results = Item.objects.all()
 
         if search_query:
             words = search_query.split()
             query = Q()
             for word in words:
                 query &= Q(tags__icontains=word)
-            items = items.filter(query)
+            search_results = search_results.filter(query)
 
         if category and category != 'all':
-            items = items.filter(cat=category)
+            search_results = search_results.filter(cat=category)
 
     context = {
-        'gridpic': gridpic,
-        'items': items,
+        'selected_gridpic': gridpic,  # Ensure the gridpic is available in the template
+        'selected_gridpic_url': selected_gridpic_url,  # Add the URL for the selected gridpic
+        'search_results': search_results,  # Pass search results to the template
     }
 
     # Render the template and display search results
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
+
 
 
 import requests

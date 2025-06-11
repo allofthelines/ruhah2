@@ -648,16 +648,22 @@
                     <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
 
-                        <!-- Remove Button Form -->
-                        <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="link-style">Remove XXX</button>
-                        </form>
+                        <div class="contLLRR">
+                            <div class="LLRR-button-container">
+                                <!-- Remove Button Form -->
+                                <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="link-style">Remove</button>
+                                </form>
+                            </div>
+                            <div class="LLRR-button-container">
+                                <!-- Try-On Button Form -->
+                                <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
+                                    <button type="submit" class="link-style">Virtual+</button>
+                                </form>
+                            </div>
+                        </div>
 
-                        <!-- Try-On Button Form -->
-                        <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
-                            <button type="submit" class="link-style">Try-On</button>
-                        </form>
                     </div>
                 {% endfor %}
             </div>
