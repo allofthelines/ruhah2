@@ -217,6 +217,8 @@ class PortraitUpload(models.Model):
         return f"{self.wearer_id.username}'s portrait upload"
 
 
+from studio.models import Item  # Make sure this import is present
+
 class GridPicUpload(models.Model):
     DELETED_BY_UPLOADER_CHOICES = [
         ('no', 'no'),
@@ -229,6 +231,14 @@ class GridPicUpload(models.Model):
     timedate_uploaded = models.DateTimeField(auto_now_add=True)
     deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no')
     timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True)
+
+    gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/temps/', blank=True, null=True)
+    gridpic_temp_active = models.BooleanField(default=False)
+    gridpic_tryon_item_id = models.ManyToManyField(Item, blank=True)
+    tryon_times = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"GridPic {self.id} uploaded by {self.uploader_id}"
 
     def save(self, *args, **kwargs):
         if not self.gridpic_processed_img:
