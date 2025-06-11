@@ -243,7 +243,8 @@ class GridPicUpload(models.Model):
 
     gridpic_tryon_img = models.ImageField(upload_to='gridpicuploads/processed/tryons/', blank=True, null=True)
     gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/temps/', blank=True, null=True)
-    gridpic_tryon_item_id = models.ManyToManyField(Item, blank=True)
+    # gridpic_tryon_item_id = models.ManyToManyField(Item, blank=True)
+    gridpic_tryon_item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
     tryon_state = models.CharField(max_length=10, choices=TRYON_STATE_CHOICES, default='original')
 
     def __str__(self):
