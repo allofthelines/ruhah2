@@ -22,7 +22,11 @@ python manage.py rename_items_before_upload
 8.
 python manage.py upload_items_s3
 9.
-heroku run python manage.py upload_items_json
+heroku run python manage.py upload_items_json --app ruhah
+
+10.
+heroku run python manage.py update_shopify_items --app ruhah
+heroku run python manage.py update_shopify_sizes --app ruhah
 
 
 """

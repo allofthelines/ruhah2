@@ -100,21 +100,18 @@ class Command(BaseCommand):
             product = response.json()
 
             # Update item name
-            item.name = product.get('name', 'Unnamed Product')
+            item.name = product.get('name', 'Unknown Product')
             print(f"Product title from WooCommerce: {item.name}")
 
-            # Try to get the first price available
-            price = product.get('price', None)  # Get the main product price
-            if not price:  # If no main product price, check the variations
-                variations = product.get('variations', [])
-                if isinstance(variations, list) and variations:
-                    price = float(variations[0].get('price', 0))  # Take the first variation's price
-
-            if not price:
-                print(f"No price found for Item ID: {item.id}")
-                return
-
-            print(f"Price from WooCommerce: {price}")
+            # Extract price
+            try:
+                # Try to get the price directly
+                price = float(product.get('price', 0.0))
+                print(f"Price from WooCommerce: {price}")
+            except (ValueError, TypeError):
+                # If there is an issue parsing the price, set it to 0
+                price = 0.0
+                print(f"Unable to parse price; defaulting to: {price}")
 
             item.price = price
             item.save()
