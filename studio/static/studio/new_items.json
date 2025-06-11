@@ -10,7 +10,7 @@
         "tags": ""
     },
     {
-        "temp_upload_id": "2",
+        "temp_upload_id": "2`",
         "itemid": "",
         "ecommerce_product_id": "",
         "modality": "",
@@ -98,5 +98,5 @@
         "image": "items/xxxxxxxx.png",
         "cat": "",
         "tags": ""
-    },
+    }
 ]

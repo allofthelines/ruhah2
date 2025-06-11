@@ -6,7 +6,7 @@ NEW IMAGE UPLOAD PIPELINE se S3 KAI POSTGRES (BULK)
 raw fwtografies se /media/items-temp
 
 2.
-REMOVE BACKGROUND
+MANUALLY REMOVE BACKGROUND
 3.
 python manage.py crop_png
 4.
