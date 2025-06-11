@@ -75,11 +75,6 @@ def studio_tickets(request):
 def studio_tickets(request):
     ticket_list = Ticket.objects.filter(status='open', boxcuratedby='human_stylist')
 
-    # DEBUG GIA TO APO KATW DEBUG 1Add commentMore actions
-    for ticket in ticket_list.order_by('-id'):
-        print(
-            f"\nDEBUG Ticket:\n id={ticket.id}, creator={ticket.creator_id}, stylist_type={ticket.stylist_type}, status={ticket.status}")
-
     print('\n1 DEBUG 1 \n', list(ticket_list.order_by('-id')), '\nDEBUG\n')
 
     if request.user.is_authenticated:
@@ -96,12 +91,9 @@ def studio_tickets(request):
                             # ticket.creator_id.id != request.user.id and  # ...if its the same guy
                             (ticket.creator_id is None or ticket.creator_id.id != request.user.id) and # kalyptei kai periptwsh guest
                             ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
-                            ticket.style1.id in user_styles # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
-                            # (ticket.stylist_type == 'everyone' or (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
+                            ticket.style1.id in user_styles and # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
+                            (ticket.stylist_type == 'everyone' or (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
                             ]
-
-        for ticket in filtered_tickets:
-            print(f"\nDEBUG 777:\n ticket.creator_id={ticket.creator_id}, ticket.stylist_type={ticket.stylist_type}, user_followers={user_followers}")
 
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
