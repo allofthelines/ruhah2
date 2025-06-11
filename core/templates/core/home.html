@@ -1,29 +1,158 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
-{% block scripts %}
-  <script src="{% static "core/home.js" %}" defer></script>
-{% endblock %}
-
 {% block content %}
-  <form id="outfits-form" method="post">
-    {% csrf_token %}
-    <input id="winner-input" name="winner" hidden>
+  {% if user.is_authenticated %}
+    <!-- Display current page for logged-in users -->
+    <form id="outfits-form" method="post">
+      {% csrf_token %}
+      <input id="winner-input" name="winner" hidden>
 
-    <div id="outfits-container">
-      {% for outfit in outfits %}
-        <input id="outfit{{ forloop.counter }}-input" name="outfit{{ forloop.counter }}" value="{{ outfit.pk }}" hidden>
-        <div class="outfit">
-          <input id="outfit{{ forloop.counter }}-image" type="image" class="outfit-image" src="{{ outfit.image.url }}">
-          <br>
-        </div>
-        {% if forloop.first %}
-          <div id="outfit-separator">
+      <div id="outfits-container">
+        {% for outfit in outfits %}
+          <input id="outfit{{ forloop.counter }}-input" name="outfit{{ forloop.counter }}" value="{{ outfit.pk }}" hidden>
+          <div class="outfit">
+            <input id="outfit{{ forloop.counter }}-image" type="image" class="outfit-image" src="{{ outfit.image.url }}">
+            <br>
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </form>
+          {% if forloop.first %}
+            <div id="outfit-separator"></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </form>
+  {% else %}
+    <!-- Display new landing page for guest users -->
+    <div id="landing-container" style="width: 80%; max-width: 2000px; margin: -25px auto 0 auto;">
 
+      <!-- contHELLO -->
+      <div id="contHELLO" style="text-align: center; margin-bottom: 70px;">
+        <img src="{% static 'images/landing/balenciaga1.jpg' %}" alt="Balenciaga Image" style="width: 100%;">
+        <h1 class="goodbye-decisions">goodbye decisions</h1>
+        <h2>hello @maria</h2>
+        <p style="font-size: 18px; max-width: 400px; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum, libero et suscipit condimentum, elit odio volutpat nisi, ac interdum neque nisl sit amet lorem. Morbi nec dolor quis odio.</p>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <h2 style="text-align: center; margin: 50px 0;">HOW IT WORKS</h2>
+
+      <!-- contHOW -->
+      <div id="contHOW">
+        <!-- contHOW1 -->
+        <div id="contHOW1" style="flex: 1; margin: 20px;">
+          <h3>1. ASK FOR A FIT</h3>
+          <img src="{% static 'images/landing/ask1.jpg' %}" alt="Outfit 1" style="width: 100%;">
+          <p>...describing your mood, the trend you're into, the occasion - anything that would help the stylist get it.</p>
+        </div>
+
+        <!-- contHOW2 -->
+        <div id="contHOW2" style="flex: 1; margin: 20px;">
+          <h3>2. GET A FIT</h3>
+          <img src="{% static 'images/landing/outfit1.jpeg' %}" alt="Outfit 1" style="width: 100%;">
+          <p>...curated by our users and (human) stylists tailor-made for your ask.</p>
+        </div>
+
+        <!-- contHOW3 -->
+        <div id="contHOW3" style="flex: 1; margin: 20px;">
+          <h3>3. CLICK AND BUY</h3>
+          <img src="{% static 'images/landing/item1.jpg' %}" alt="Item 1" style="width: 100%;">
+          <!-- <p style="text-align: center;">METALLIC THREAD SHIRT - $55</p> -->
+          <p>...the clothes you like from the outfits recommended.</p>
+        </div>
+      </div>
+
+      <!-- ARE YOU FEELING -->
+      <h2 style="text-align: center; margin: 50px 0;">ARE YOU FEELING</h2>
+
+      <!-- contFEELING -->
+      <div id="contFEELING">
+        <!-- contFEELING1 -->
+        <div id="contFEELING1" style="flex: 1; min-width: 300px; margin: 20px;">
+          <h3>CREATIVE?</h3>
+          <h4>STYLE AND EARN</h4>
+          <img src="{% static 'images/landing/feeling1.png' %}" alt="Feeling 1" style="width: 100%;">
+          <p>...money by creating outfits for others in the studio.</p>
+        </div>
+
+        <!-- contFEELING2 -->
+        <div id="contFEELING2" style="flex: 1; min-width: 300px; margin: 20px;">
+          <h3>ADVENTUROUS?</h3>
+          <h4>EXPLORE</h4>
+          <img src="{% static 'images/landing/feeling2.png' %}" alt="Feeling 2" style="width: 100%;">
+          <p>...follow and keep up with users and trending outfits for inspiration.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Inline CSS for desktop and mobile views -->
+    <style>
+      /* Align the items at the top in contHOW */
+      #contHOW {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-bottom: 50px;
+      }
+
+      /* Align the items at the top in contFEELING */
+      #contFEELING {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-bottom: 50px;
+      }
+
+      /* Align items in contHOW1, contHOW2, contHOW3, contFEELING1, contFEELING2 */
+      #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* For desktop mode */
+      @media (min-width: 768px) {
+        #landing-container {
+          width: 80%;
+          max-width: 2000px;
+        }
+      }
+
+      /* For mobile mode */
+      @media (max-width: 767px) {
+        .goodbye-decisions {
+          white-space: nowrap;
+          font-size: calc(5vw + 10px);
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
+
+        #contHELLO img {
+          content: url("{% static 'images/landing/polaroid1.png' %}");
+        }
+
+        #contHELLO p {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        #contHOW, #contFEELING {
+          display: block;
+          justify-content: center;
+          margin: 0 auto;
+        }
+
+        #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+          margin: 0 auto;
+        }
+      }
+    </style>
+
+  {% endif %}
 {% endblock %}
