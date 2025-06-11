@@ -90,7 +90,7 @@ def studio_tickets(request):
                             ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles and  # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
                             (ticket.stylist_type == 'everyone' or
-                                (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
+                                (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_following_ids)) # ...kalyptei o ticket creator na exei valei stylist == following
                             ]
 
         # Additional filtering based on studio_visibility
