@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from ruhah import settings
-from .forms import TicketForm  # Ensure you create this form in the forms.py file
+from .forms import TicketForm, PrivateAskFitForm
 from .models import Ticket  # Make sure you have this model defined in your models.py
 import stripe
 from django.utils import timezone
@@ -13,6 +13,7 @@ from .models import Ticket
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from accounts.models import CustomUser, Customer
+from django.contrib import messages
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -49,7 +50,7 @@ def ticket_view(request):
                 style1=fit_form.cleaned_data['style1'],
                 catalogue=fit_form.cleaned_data['catalogue'],
                 notes=fit_form.cleaned_data['notes'],
-                # stylist_type=fit_form.cleaned_data['stylist_type'],
+                stylist_type=fit_form.cleaned_data['stylist_type'],
                 creator_id=request.user if request.user.is_authenticated else None,
             )
             ticket.save()
@@ -138,7 +139,7 @@ def ticket_view(request):
                 price=box_form.cleaned_data['price'],
                 catalogue=box_form.cleaned_data['catalogue'],
                 notes=box_form.cleaned_data['notes'],
-                # stylist_type=box_form.cleaned_data['stylist_type'],
+                stylist_type=box_form.cleaned_data['stylist_type'],
                 size_top_xyz=size_top_xyz,
                 size_bottom_xyz=size_bottom_xyz,
                 size_waist_inches=size_waist_inches,
@@ -176,6 +177,61 @@ def ticket_view(request):
         'fit_form': fit_form,
         'box_form': box_form,
     })
+
+
+from django.contrib.auth import get_user_model
+
+
+def private_ask_view(request, stylist_username):
+    # Get the target stylist user
+    User = get_user_model()
+    stylist = get_object_or_404(User, username=stylist_username)
+
+    # Check if the stylist accepts private asks
+    if stylist.accept_private_asks != 'yes':
+        messages.error(request, 'This user does not accept private asks.')
+        return redirect('accounts:public_profile', stylist_username=stylist_username)
+
+    # Fetch the price set by the stylist
+    private_ask_price = stylist.private_ask_price
+
+    if request.method == 'POST':
+        # Process the form submission
+        form = PrivateAskFitForm(request.POST, stylist_username=stylist_username, private_ask_price=private_ask_price)
+        if form.is_valid():
+            # Check if the logged-in user has enough credits
+            if request.user.credits < private_ask_price:
+                messages.error(request, 'Not enough credits to submit this ask.')
+                return redirect('box:private_ask', stylist_username=stylist_username)
+
+            # Deduct credits from the logged-in user
+            request.user.credits -= private_ask_price
+            request.user.save()
+
+            # Add credits to the stylist
+            stylist.credits += private_ask_price
+            stylist.save()
+
+            # Create the ticket
+            Ticket.objects.create(
+                user=request.user,
+                style=form.cleaned_data['style1'],
+                notes=form.cleaned_data['notes'],
+                stylist_type='private',
+                target_stylist_username=stylist.username
+            )
+
+            messages.success(request, 'Your private ask has been submitted successfully.')
+            return redirect('box:ask_fit_success')
+    else:
+        # Initialize the form for a GET request
+        form = PrivateAskFitForm(stylist_username=stylist_username, private_ask_price=private_ask_price)
+
+    return render(request, 'box/private_ask.html', {'form': form})
+
+
+
+
 
 
 """def ask_fit_view(request):

@@ -2,7 +2,7 @@ from django.urls import path
 from .views import ticket_view, success_view, api_tickets
 from .views import ticket_view, success_view, api_tickets, stripe_webhook, create_checkout_session
 from .views import payment_successful, payment_rejected
-from .views import ask_fit_success, success_view
+from .views import ask_fit_success, success_view, private_ask_view
 
 urlpatterns = [
     path('ticket/', ticket_view, name='ticket_form'),
@@ -14,5 +14,6 @@ urlpatterns = [
     path('payment-rejected/', payment_rejected, name='payment_rejected'),
 
     path('ask/fit/success/<int:ticket_id>/', ask_fit_success, name='ask_fit_success'),
+    path('private_ask/<str:stylist_username>/', private_ask_view, name='private_ask'),
     path('success/<int:ticket_id>/', success_view, name='success'),
 ]

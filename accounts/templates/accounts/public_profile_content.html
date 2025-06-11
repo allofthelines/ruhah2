@@ -2,8 +2,15 @@
 <div class="profile-container">
     <div class="profile-left">
         {% if profile_user.pfp %}
-            <img src="{{ profile_user.pfp.url }}" alt="Profile Picture" class="profile-picture">
+            {% if profile_user.accept_private_asks == 'yes' %}
+                <a href="{% url 'box:private_ask' stylist_username=profile_user.username %}" class="clickable-profile-picture">
+                    <img src="{{ profile_user.pfp.url }}" alt="Profile Picture" class="profile-picture">
+                </a>
+            {% else %}
+                <img src="{{ profile_user.pfp.url }}" alt="Profile Picture" class="profile-picture">
+            {% endif %}
         {% endif %}
+
     </div>
     <div class="profile-right">
         <div class="profile-row">
@@ -341,6 +348,19 @@ function toggleFollowUnfollow(username, isFollowing) {
         font-size: 20px;
         font-weight: 400;
     }
+
+    .clickable-profile-picture {
+        display: inline-block; /* Allows adding space around the image */
+        padding: 1px; /* No extra padding needed */
+        border-radius: 50%; /* Makes the border circular */
+        cursor: pointer; /* Changes the cursor to indicate the image is clickable */
+        background-color: white; /* Ensures there's a white background within the circular border */
+        box-shadow: 0 0 0 2px black; /* Adds a centered 2px black border around the image */
+        position: relative; /* Allows positioning adjustments */
+        top: -3px; /* Moves the border 5px up */
+    }
+
+
     .profile-picture {
         width: 100px;
         height: 100px;

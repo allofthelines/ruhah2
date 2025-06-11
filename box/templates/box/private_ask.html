@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block page-header %}
+    Private Ask
+{% endblock %}
+
+{% block content %}
+<div style="border: 1px solid black; padding: 15px;">
+    <!-- Form for private ask submission -->
+    <form method="post" action="{% url 'box:private_ask' stylist_username=form.stylist_username.value %}" class="ticket-form">
+        {% csrf_token %}
+        <!-- Display fields in the desired order with additional spacing -->
+        <div style="margin-bottom: 7px;">Style: {{ form.style1 }}</div>
+        <div style="margin-bottom: 12px;">Stylist: {{ form.stylist_username.value }}</div>
+        <div style="margin-bottom: 25px;">Price (Credits): {{ form.private_ask_price_display.value }}</div>
+        <div style="margin-bottom: 19px;">
+            {{ form.notes.label_tag }}<br> {{ form.notes }}
+        </div>
+        <button type="submit">Submit Ask</button>
+    </form>
+</div>
+
+<!-- Button to return to the user profile page -->
+<div style="text-align: center; margin-top: 20px;">
+     <button onclick="window.location.href='{% url 'accounts:public_profile' username=form.stylist_username.value %}'">
+        Back to User
+    </button>
+</div>
+
+<script>
+    // Example JavaScript for dynamic behavior
+    document.addEventListener('DOMContentLoaded', function() {
+        const backButton = document.querySelector('button[onclick^="window.location.href"]');
+
+        backButton.addEventListener('click', function() {
+            // Navigate back to the user profile
+            window.history.back();
+        });
+    });
+</script>
+
+{% endblock %}
