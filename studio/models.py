@@ -71,10 +71,6 @@ class EcommerceStore(models.Model):
         ('woocommerce', 'WooCommerce'),
         ('magento', 'Magento'),
         ('squarespace', 'Squarespace'),
-        ('wix', 'Wix'),
-        ('prestashop', 'PrestaShop'),
-        ('weebly', 'Weebly'),
-        ('bigcartel', 'BigCartel'),
     ]
 
     # address
