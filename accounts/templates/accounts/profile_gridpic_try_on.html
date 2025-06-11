@@ -1,0 +1,87 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Gridpic Try-On
+{% endblock %}
+
+{% block content %}
+
+<div id="studio-items-all-content">
+
+    <!-- Display the selected gridpic image -->
+    <div class="gridpic-try-on">
+        <img src="{{ selected_gridpic_url }}" alt="Selected Image">
+    </div>
+
+    <!-- Search form (copied from studio_items.html) -->
+    <form method="get" action="{% url 'accounts:tryon_item_search' selected_gridpic.id %}">
+        <select name="category">
+            <option value="all">All</option>
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="dress">Dress</option>
+            <option value="footwear">Footwear</option>
+            <option value="accessory">Accessory</option>
+        </select>
+        <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
+        <input type="hidden" name="search" value="1">
+        <button type="submit">Search</button>
+    </form>
+
+
+
+
+    <!-- Display search results with Try-On buttons -->
+    {% if search_results %}
+    <div id="contB">
+        {% for item in search_results %}
+        <div class="contA">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            <button onclick="location.href='{% url 'accounts:perform_try_on' selected_gridpic.id item.id %}'">Try-On</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Navigation Buttons -->
+    <button onclick="location.href='{% url 'accounts:profile' %}'">Back to Gridpics</button>
+    <button onclick="location.href='{% url 'accounts:delete_all_tryons' selected_gridpic.id %}'">Delete All Try-Ons</button>
+</div>
+
+<style>
+    #contB {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 1x4 layout on desktop */
+        grid-gap: 2px;
+        border: 0px solid black; /* Border around the entire container */
+        margin: 0 0px;
+    }
+
+    .contA {
+        display: flex;
+        flex-direction: column; /* Image on top, button on bottom */
+        border: 1px solid black;
+    }
+
+    .contA img {
+        width: 100%;
+        height: auto;
+        flex-grow: 1;
+    }
+
+    .contA button {
+        background: white;
+        border-top: 1px solid black;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        #contB {
+            grid-template-columns: repeat(2, 1fr); /* 2x2 layout on mobile */
+        }
+    }
+</style>
+
+{% endblock %}

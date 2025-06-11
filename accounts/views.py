@@ -15,6 +15,7 @@ import json
 from django.urls import reverse
 from django.middleware.csrf import get_token
 from django.utils import timezone
+from django.db.models import Q  # gia to search sto profile_gridpic_try_on
 
 
 
@@ -632,6 +633,36 @@ def confirm_email(request, uidb64, token):
         return render(request, 'accounts/email_confirmation_failed.html')
 
 
+def tryon_item_search(request, gridpic_id):
+    # Fetch the GridPicUpload object using gridpic_id from the URL
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    print(f"\n\n\n\n\nSelected GridPic ID: {gridpic.id}\n\n\n\n\n")
+
+    search_query = request.GET.get('search_query', '')
+    category = request.GET.get('category', 'all')
+    items = Item.objects.none()
+
+    if 'search' in request.GET:
+        items = Item.objects.all()
+
+        if search_query:
+            words = search_query.split()
+            query = Q()
+            for word in words:
+                query &= Q(tags__icontains=word)
+            items = items.filter(query)
+
+        if category and category != 'all':
+            items = items.filter(cat=category)
+
+    context = {
+        'gridpic': gridpic,
+        'items': items,
+    }
+
+    # Render the template and display search results
+    return render(request, 'accounts/profile_gridpic_try_on.html', context)
 
 
 import requests
@@ -664,3 +695,135 @@ def call_kolors_api(image1_path, image2_path):
     except Exception as e:
         print(f"Error calling Kolors API: {str(e)}")
         return None
+
+
+
+
+
+
+
+
+import requests
+from django.conf import settings
+from django.core.files.base import ContentFile
+
+@login_required
+def perform_try_on(request, gridpic_id, item_id):
+    """
+    Handle the "Try-On" process by integrating with the Kolors model API.
+    """
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+    item = get_object_or_404(Item, id=item_id)
+
+    # Ensure user has enough credits
+    if request.user.credits < 10:
+        # Not enough credits; redirect to profile with a message
+        messages.error(request, "You need at least 10 credits to perform a Try-On.")
+        return redirect('accounts:profile')
+
+    # Call the Kolors API with the selected images
+    response = call_kolors_api(gridpic.gridpic_processed_img.path, item.image.path)
+
+    if response:
+        # Save the processed image temporarily
+        temp_image_name = f"{gridpic.gridpic_processed_img.name.split('/')[-1].split('.')[0]}_temp.png"
+        gridpic.gridpic_temp_img.save(temp_image_name, ContentFile(response), save=True)
+        gridpic.gridpic_temp_active = True
+        gridpic.gridpic_tryon_item_id.add(item)  # Associate the selected item
+        gridpic.save()
+
+        # Deduct credits from the user
+        request.user.credits -= 10
+        request.user.save()
+
+        return redirect('accounts:profile_try_on_submitted')
+    else:
+        # Handle API error
+        messages.error(request, "Failed to process Try-On. Please try again later.")
+        return redirect('accounts:profile')
+
+
+from django.shortcuts import get_object_or_404, redirect
+from .models import GridPicUpload
+from django.contrib import messages
+
+
+def delete_all_tryons(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    # Delete all try-on images associated with this gridpic
+    gridpic.gridpic_tryons.all().delete()
+    gridpic.tryon_times = 0
+    gridpic.save()
+
+    # Optionally, show a message to the user
+    messages.success(request, "All try-ons have been deleted.")
+
+    return redirect('accounts:profile')
+
+
+def profile_gridpic_try_on(request, gridpic_id):
+    # Retrieve the selected gridpic object
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    # Determine which image to show
+    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
+        selected_gridpic_url = gridpic.gridpic_temp_img.url
+    elif gridpic.gridpic_tryon_item_id.exists():
+        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    else:
+        selected_gridpic_url = gridpic.gridpic_processed_img.url
+
+    # Prepare context for rendering
+    context = {
+        'selected_gridpic_url': selected_gridpic_url,
+        'selected_gridpic': gridpic
+    }
+
+    return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
+
+
+@login_required
+def accept_temp_image(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    if gridpic.gridpic_temp_active:
+        # Move the temp image to the tryons folder and rename it
+        new_filename = generate_new_filename(gridpic, 'processed/tryons/')
+        gridpic.gridpic_temp_img.save(new_filename, gridpic.gridpic_temp_img.file, save=False)
+
+        # Update the model fields
+        gridpic.gridpic_temp_img = None
+        gridpic.gridpic_temp_active = False
+        gridpic.tryon_times += 1
+        gridpic.save()
+
+    return redirect('accounts:profile')
+
+
+@login_required
+def reject_temp_image(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    if gridpic.gridpic_temp_active:
+        # Delete the temporary image
+        if gridpic.gridpic_temp_img:
+            gridpic.gridpic_temp_img.delete(save=False)
+
+        # Clear the temporary fields
+        gridpic.gridpic_temp_img = None
+        gridpic.gridpic_temp_active = False
+
+        # Remove the associated Try-On item(s)
+        gridpic.gridpic_tryon_item_id.clear()
+
+        gridpic.save()
+
+    return redirect('accounts:profile')
+
+
+from django.shortcuts import render
+
+def profile_try_on_submitted(request):
+    return render(request, 'accounts/profile_try_on_submitted.html')

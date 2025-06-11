@@ -624,7 +624,7 @@
 
 
 
-
+        {% comment %}
         <!-- GRIDPICS Section -->
         <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBBBB">
@@ -633,7 +633,30 @@
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
                         <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
                             {% csrf_token %}
-                            <button type="submit" class="link-style">Remove</button>
+                            <button type="submit" class="link-style">Remove LOL</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endcomment %}
+
+        <!-- GRIDPICS Section -->
+        <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
+            <div id="contBBBBB">
+                {% for gridpic in user_gridpics %}
+                    <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
+                        <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
+
+                        <!-- Remove Button Form -->
+                        <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="link-style">Remove XXX</button>
+                        </form>
+
+                        <!-- Try-On Button Form -->
+                        <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
+                            <button type="submit" class="link-style">Try-On</button>
                         </form>
                     </div>
                 {% endfor %}
