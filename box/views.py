@@ -217,7 +217,8 @@ def private_ask_view(request, stylist_username):
                 creator_id=request.user,  # Use creator_id field
                 style1=form.cleaned_data['style1'],  # Use style1 field
                 notes=form.cleaned_data['notes'],
-                stylist_type='private'  # Assuming this field exists and is correctly named
+                stylist_type='private',
+                private_stylist=stylist
             )
 
             messages.success(request, 'Your private ask has been submitted successfully.')
