@@ -11,8 +11,6 @@
 <div id="help-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
     <!-- Navigation Menu -->
     <div id="help-menu" style="width: 15%; font-family: 'Poppins', sans-serif;">
-        <a href="#" onclick="showContent('about', 'Help > About')">ABOUT</a>
-        <br>
         <a href="#" onclick="showContent('asks', 'Help > Asks')">ASKS</a>
         <a href="#" onclick="showContent('trending', 'Help > Trending')">TRNDING</a>
         <a href="#" onclick="showContent('studio', 'Help > Studio')">STUDIO</a>
@@ -27,81 +25,10 @@
     </div>
 
     <!-- Content Area -->
-    <div id="content" style="width: 70%%; padding-left: 5px; margin-top: -16px;">
+    <div id="content" style="width: 70%; padding-left: 5px; margin-top: -16px;">
         <div id="help" class="content-section active" style="display: block;">
             <p>Welcome. Please choose the section you need assistance with.<br><br>
         </div>
-
-
-
-
-
-        <div id="about" class="content-section" style="display: none;">
-
-            <p style="text-align: center; margin: 10px 0px 78px 0px; font-size: 18px; font-family: 'Arial Black', sans-serif;">
-            Ruhah is a community-powered style platform where users request outfits from fellow fashion enthusiasts
-                and receive curated looks tailored to their needs.
-                Stylists earn whenever items from their created outfits are purchased.
-            </p>
-
-
-            <!-- HOW IT WORKS SECTION -->
-            <h2 style="text-align: center; margin: 70px 0 40px 0;">POV#1: YOU<br><span id="dynamic-text">WANT STYLING ADVICE</span><br>SO YOU</h2>
-
-            <!-- contHOW -->
-            <div id="contHOW">
-                <!-- contHOW1 -->
-                <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
-                    <h3>1. ASK FOR A FIT</h3>
-                    <img src="{% static 'images/landing/ask1.jpg' %}" alt="Outfit 1" style="width: 100%;">
-                    <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">describing your mood, the trend you're into, the occasion - anything that would help the stylist get it.</p>
-                </div>
-
-                <!-- contHOW2 -->
-                <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
-                    <h3>2. GET A FIT</h3>
-                    <img src="{% static 'images/landing/outfit1.jpeg' %}" alt="Outfit 1" style="width: 100%;">
-                    <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">curated by our users and (human) stylists tailor-made for your ask.</p>
-                </div>
-
-                <!-- contHOW3 -->
-                <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
-                    <h3>3. CREATE AN OUTFIT</h3>
-                    <img src="{% static 'images/landing/item1.jpg' %}" alt="Item 1" style="width: 100%;">
-                    <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">and get paid every time a user purchases an item in it.</p>
-                </div>
-            </div>
-
-            <h2 style="text-align: center; margin: 70px 0 50px 0;">POV#2: YOU LIKE<br><span id="dynamic-text-pov2-line1">FASHION</span><br><span id="dynamic-text-pov2-line2">SO YOU</span><br></h2>
-
-            <div id="contHOW">
-                <!-- contHOW1 -->
-                <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
-                  <h3>1. VISIT THE STUDIO</h3>
-                  <img src="{% static 'images/landing/studio-asks2.jpg' %}" alt="Outfit 1" style="width: 100%;">
-                  <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">browse other users' asks and choose the one(s) you want to style.</p>
-                </div>
-
-                <!-- contHOW2 -->
-                <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
-                  <h3>2. SEARCH FOR CLOTHES</h3>
-                  <img src="{% static 'images/landing/studio-create3.jpg' %}" alt="Outfit 1" style="width: 100%;">
-                  <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">and accessories in our catalogue that best fit your vision for that ask.</p>
-                </div>
-
-                <!-- contHOW3 -->
-                <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
-                  <h3>3. CREATE AN OUTFIT</h3>
-                  <img src="{% static 'images/landing/studio-submit2.jpg' %}" alt="Item 1" style="width: 100%;">
-                  <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;"> and get paid every time a user purchases an item in it.</p>
-                </div>
-            </div>
-        </div>
-        <!-- END NEW CONTENT -->
-
-
-
-
 
         <div id="asks" class="content-section" style="display: none;">
             <p>
@@ -112,10 +39,12 @@
             or private to an account of your choice.
             <h3>How are the outfits created?</h3>
             For each ask, multiple different users create and submit their own outfit idea for your ask.
-            Then our algorithm selects one of them, which is the one you see.
+            Then our algorithm selects one of them based on their popularity, which is the one you see.
             <h3>What should i write in the ask's stylist notes?</h3>
             Anything that could help a human get it. You can describe a mood you're into, a trend you wanna explore, a specific occasion
             or an idea you already have but need help with.
+            <h3>When is the outfit ready?</h3>
+            1-5 hours for regular asks. For private asks it's completely up to the stylist.
             <h3>Can i buy an outfit's items?</h3>
             Yes, all the items (clothes and accessories) in an outfit are available for purchase.
             <h3>Do i have to buy something in it?</h3>
@@ -123,7 +52,7 @@
             <h3>Is creating and submitting an ask free?</h3>
             Yes.
             <h3>Can i create an outfit for another user's ask?</h3>
-            Yes, in the studio. Visit the studio help section for more info on how it works.
+            Yes, everyone can in the studio. Visit the studio help section for more info on how it works.
             </p>
         </div>
 
@@ -146,9 +75,8 @@
             No. You buy and keep only the items you want to.
             The rest you put them back to the box and return them to us for free.
             <h3>How are the outfits curated?</h3>
-            Currently our outfit selection system includes a combination of stylist curation,
-            public voting and decision making by our in-house fashion experts and trend analysts.
-            In the future we will offer the option to choose a specific stylist of your choice to make your outfit.
+            Stylists create outfits for the same ask and then our algorithm
+            selects one of them based on its popularity.
             <h3>What do i pay for?</h3>
             <ul>
                 <li>A $15 styling fee to order the Box. This includes all Box shipping costs, both delivery and return.</li>
@@ -166,44 +94,37 @@
                 <h3>How do i create an outfit?</h3>
                 In the studio, you first select one of the available asks, then choose the clothes and accessories you like, and finally submit it.
                 <h3>How do I search for items to include in my outfit?</h3>
-                You can search for items using keywords that you think describe
+                You can use keywords that you think describe
                 the item you have in mind and its attributes ("blue" "distressed" "stripes" "loafer" etc).
-                We provide a keyword guide to assist you, but feel free to try different keywords if you
-                don't find what you're looking for with the first try.
-                <h3>Do I need to worry about the sizes of the items I select?</h3>
-                No. Our item search algorithm automatically filters items to fit the size of the user that created the ask.
-                You, the creator, can focus purely on aesthetics and style.
+                <h3>As a stylist, do I need to worry about the sizes of the items I select?</h3>
+                No. Our item search algorithm automatically filters items to fit the ask creator's size.
                 <h3>What kind of items are available in the catalogue?</h3>
-                The catalogue includes a wide range of clothing items such as shirts, trousers, dresses,
-                and accessories like bags and glasses. These items can be either new or pre-owned
-                and come from our own collection or from suppliers we collaborate with.
-                If an item appears in your search, it is available and ready to ship.
-                <h3>Why are some asks yellow?</h3>
-                The user that submitted a yellow ask follows you at Ruhah.
-                <h3>Why are some asks red?</h3>
-                This is a private ask. The user that submitted the red request specifically created
-                this ask for you and only you to see. In your profile settings you can choose whether you can
-                have private asks open, and whether they are free or you want to charge a fee.
+                Clothing items such as shirts, trousers, dresses,
+                and accessories like bags and glasses. Some new, some pre-owned. Some ours, some made by other brands.
+                <h3>Are all items ready to ship?</h3>
+                Yes. If you can see it you can buy it.
+                <h3>What is a yellow ask?</h3>
+                The user that submitted it follows you at Ruhah.
+                <h3>What is a red ask?</h3>
+                Ooh lala you've got a secret admirer. This is a private ask, created by a user only for you to style.
         </div>
         <div id="stylists" class="content-section" style="display: none;">
             <p>
                 Stylists, at heart or at profession, are registered users who create outfits for other users' asks.
                 As a stylist you earn money every time a user purchases clothes or accessories you recommended.
                 <br>
-                <h3>How do stylists earn money?</h3>
-                Every time a user buys an item from an outfit a stylist created. The amount earned is
-                a percentage of the final price. That percentage changes depending on
-                the occasion but the range is from 15% to 30%.
+                <h3>As a stylist, how do i earn money?</h3>
+                Every time a user buys an item from an outfit you created. The amount earned is
+                a percentage of the final price, from 15% to 30% depending on the occasion.
                 <h3>What happens after a stylist creates and submits an outfit?</h3>
                 For each user request, up to 10 stylists recommend an outfit each.
                 In the next few hours our algorithm selects one of them, depending on factors like
-                the ask creator's profile and the outfit's popularity. This outfit is displayed in
-                the creator's profile and they are free to either buy or not items from that outfit.
+                the outfit's popularity. Then, it is displayed in
+                the creator's account page and they are free to either buy or not items from that outfit.
                 <h3>What happens if they don't buy anything?</h3>
                 Nothing.
                 <h3>Is there any other way to earn money?</h3>
-                Yes. The outfits you create in the studio appear in your profile grid.
-                Every time a user likes an outfit in your profile and purchases an item from it,
+                Yes. Every time a user buys an item from an outfit in your profile grid,
                 you get 10% of that sale.
                 <h3>Is it really that simple?</h3>
                 Yes. You sign up, start styling, and earn money each time your items are bought.
@@ -265,16 +186,7 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
 <script>
-
-
     function showContent(sectionId, headerText) {
         var sections = document.querySelectorAll('.content-section');
         sections.forEach(function(section) {
@@ -299,22 +211,9 @@
     });
 
     // END NEW SCRIPT
-
-
-
-
-
 </script>
 
-
-
-
-
-
-
-
 <style>
-
     #help-menu a {
         display: block;
         margin-bottom: 5px; /* Ensure each link is on its own line */
@@ -354,84 +253,5 @@
         }
     }
 </style>
-
-
-
-
-
-
-
-
-<style>
-
-
-/* BEGIN NEW CSS */
-
-    /* Align the items at the top in contHOW */
-    #contHOW {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
-        margin: 0 auto 50px auto;
-        width: 100%;
-    }
-
-    /* Align items within individual containers */
-    #contHOW1, #contHOW2, #contHOW3 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    h3 {
-        font-size: 20px;
-    }
-
-    #contHOW h3 {
-        margin-bottom: -2px;
-        font-weight: 600;
-    }
-
-    @media (min-width: 768px) {
-    #contHOW {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between; /* Space between items */
-        align-items: flex-start;
-        gap: 20px; /* Add a gap between items to ensure no overlap */
-        margin: 0 auto 50px auto;
-        width: 100%;
-    }
-
-    #contHOW1, #contHOW2, #contHOW3 {
-        flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
-        margin: 0; /* Remove the extra margin */
-    }
-}
-
-@media (max-width: 767px) {
-    #contHOW, #contFEELING {
-        display: block;
-        justify-content: center;
-        margin: 0 auto;
-    }
-
-    #contHOW1, #contHOW2, #contHOW3 {
-        margin: 0 auto;
-    }
-}
-
-
-    /* END NEW CSS */
-
-
-</style>
-
-
-
-
 
 {% endblock %}

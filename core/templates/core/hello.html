@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block page-header %}
+  Hello
+{% endblock %}
+
+{% block content %}
+<div id="video-wrapper" style="width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 0px;">
+    <div id="video-container" style="width: 70%; max-width: 2000px; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe
+            src="https://www.youtube.com/embed/5EzTJ1RiwyA?controls=0&autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        </iframe>
+    </div>
+
+    <!-- Social Links Container -->
+    <div id="social-links" style="margin-top: 20px; text-align: center;">
+        <div><a href="https://instagram.com/helloruhah" target="_blank">Instagram</a></div>
+        <br>
+        <div><a href="https://tiktok.com/@helloruhah" target="_blank">TikTok</a></div>
+        <br>
+        <div><a href="https://youtube.com/@helloruhah" target="_blank">YouTube</a></div>
+    </div>
+</div>
+
+<!-- Add custom styles -->
+<style>
+    @media (max-width: 768px) { /* Mobile view adjustment */
+        #video-container {
+            width: 95% !important; /* Set width to 95% for mobile screens */
+        }
+        #social-links {
+            display: flex;
+            flex-direction: column; /* Stack links vertically */
+            align-items: center; /* Center align the links */
+            /* gap: 10px; /* Add some spacing between the links */
+        }
+    }
+</style>
+{% endblock %}

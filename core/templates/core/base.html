@@ -106,7 +106,7 @@
 
 <div id="alternate-content">
   <div class="math-concept"><span class="math-parenthesis">(</span> <span class="math-word"></span>STUDIO<span class="math-parenthesis">&nbsp;)</span></div>
-  <div class="math-concept"><span class="math-parenthesis">((</span> <span class="math-word"></span>CLOUD<span class="math-parenthesis">&nbsp;))</span></div>Add commentMore actions
+  <div class="math-concept"><span class="math-parenthesis">((</span> <span class="math-word"></span>CLOUD<span class="math-parenthesis">&nbsp;))</span></div>
   <div class="math-concept spacer"></div>
   <div class="math-concept"><span class="math-parenthesis">|</span> <span class="math-word"></span>ABSOLUTES<span class="math-parenthesis">&nbsp;|</span></div>
   <div class="math-concept"><span class="math-parenthesis">{</span> <span class="math-word"></span>ELEMENTS<span class="math-parenthesis">&nbsp;}</span></div>
@@ -122,7 +122,9 @@
     <span><a class="nav-link" href="{% url 'core:terms' %}">TERMS</a></span>
     <span><a class="nav-link" href="{% url 'core:privacy' %}">PRIVACY</a></span>
     <span><a class="nav-link" href="{% url 'core:help' %}">HELP</a></span>
-    <span><a class="nav-link" href="{% url 'core:social' %}">SOCIAL</a></span>
+    <!--<span><a class="nav-link" href="{% url 'core:social' %}">SOCIAL</a></span>-->
+    <!--<span><a class="nav-link" href="{% url 'core:about' %}">ABOUT</a></span>-->
+    <span><a class="nav-link" href="{% url 'core:hello' %}">HELLO</a></span>
     <span><a class="nav-link" href="{% url 'core:search' %}">SEARCH</a></span>
   </div>
   <div>
@@ -134,16 +136,29 @@
     <strong>Share</strong> > <strong>Add to Home Screen</strong> to download the App
 </div>
 
+
+
+
+
+
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('{% static 'serviceworker.js' %}')
-    .then(function(registration) {
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(error) {
-      console.log('ServiceWorker registration failed: ', error);
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register("{% static 'serviceworker.js' %}")
+        .then(function(registration) {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(function(err) {
+          console.error('Service Worker registration failed:', err);
+        });
     });
   }
 </script>
+
+
+
+
+
 
 <script>
   function isMobile() {

@@ -3,11 +3,11 @@ const urlsToCache = [
   '/',
   '/static/css/styles.css',
   '/static/js/scripts.js',
-  '/static/offline.html',  // Add offline page to cache
+  '/offline/',  // Update to the correct offline URL served by Django
   // add other URLs you want to cache
 ];
 
-// Install event - caching the offline page
+// Install event - caching the offline page and other resources
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -26,7 +26,8 @@ self.addEventListener('fetch', event => {
           if (response) {
             return response;
           } else if (event.request.mode === 'navigate') {
-            return caches.match('/static/offline.html');
+            // Serve the offline page from the cache when navigating
+            return caches.match('/offline/');
           }
         });
     })

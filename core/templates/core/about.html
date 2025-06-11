@@ -1,0 +1,226 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block page-header %}
+  About
+{% endblock %}
+
+{% block content %}
+<div id="about" class="content-section" style="display: block;">
+    <p style="text-align: center; margin: 20px 0px 78px 0px; font-size: 18px; font-family: 'Work Sans', sans-serif; font-weight: 600; max-width: 150px;">
+        Ruhah is a community-powered style platform where users request outfits from fellow fashion enthusiasts
+        and receive curated looks tailored to their needs.
+        Stylists earn whenever items from their created outfits are purchased.
+    </p>
+
+    <!-- HOW IT WORKS SECTION -->
+    <h2 style="text-align: center; margin: 70px 0 40px 0;">POV#1: YOU<br><span id="dynamic-text">DON'T HAVE THE TIME</span><br>SO YOU</h2>
+
+    <div id="contHOW">
+        <!-- contHOW1 -->
+        <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+            <h3>1. ASK FOR A FIT</h3>
+            <img src="{% static 'images/landing/ask1.jpg' %}" alt="Outfit 1" style="width: 100%;">
+            <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+                describing your mood, the trend you're into, the occasion - anything that would help the stylist get it.
+            </p>
+        </div>
+
+        <!-- contHOW2 -->
+        <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+            <h3>2. GET A FIT</h3>
+            <img src="{% static 'images/landing/outfit1.jpeg' %}" alt="Outfit 1" style="width: 100%;">
+            <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+                curated by our users and (human) stylists tailor-made for your ask.
+            </p>
+        </div>
+
+        <!-- contHOW3 -->
+        <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+            <h3>3. PURCHASE</h3>
+            <img src="{% static 'images/landing/item1.jpg' %}" alt="Item 1" style="width: 100%;">
+            <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+                any item that you like from that outfit.
+            </p>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; margin: 70px 0 50px 0;">POV#2: YOU LIKE<br><span id="dynamic-text-pov2-line1">FASHION</span><br>SO YOU</h2>
+
+    <div id="contHOW">
+        <!-- contHOW1 -->
+        <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+            <h3>1. VISIT THE STUDIO</h3>
+            <img src="{% static 'images/landing/studio-asks2.jpg' %}" alt="Outfit 1" style="width: 100%;">
+            <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+                browse other users' asks and choose the one(s) you want to style.
+            </p>
+        </div>
+
+        <!-- contHOW2 -->
+        <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+            <h3>2. SEARCH FOR CLOTHES</h3>
+            <img src="{% static 'images/landing/studio-create3.jpg' %}" alt="Outfit 1" style="width: 100%;">
+            <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+                and accessories in our catalogue that best fit your vision for that ask.
+            </p>
+        </div>
+
+        <!-- contHOW3 -->
+        <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+            <h3>3. CREATE AN OUTFIT</h3>
+            <img src="{% static 'images/landing/studio-submit2.jpg' %}" alt="Item 1" style="width: 100%;">
+            <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+                and get paid every time a user purchases an item in it.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    function showContent(sectionId, headerText) {
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+        document.getElementById('page-header').textContent = headerText;
+    }
+
+    // BEGIN NEW SCRIPT
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Script for dynamic text in HOW IT WORKS section
+        const textElement = document.getElementById("dynamic-text");
+        const phrases = ["JUST CAN'T DECIDE", "WANT STYLING ADVICE", "DON'T HAVE THE TIME"];
+        let currentPhraseIndex = 0;
+
+        setInterval(function() {
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            textElement.textContent = phrases[currentPhraseIndex];
+        }, 1000); // Change every 1 second
+    });
+
+    // END NEW SCRIPT
+</script>
+
+
+
+
+
+
+
+
+<style>
+/* BEGIN NEW CSS */
+
+/* Align the items at the top in contHOW and contFEELING */
+#contHOW, #contFEELING {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto 50px auto;
+    width: 100%;
+}
+
+/* Align items within individual containers */
+#contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+#contHOW h3 {
+    margin-bottom: -2px;
+    font-weight: 600;
+}
+
+/* For desktop mode */
+@media (min-width: 768px) {
+    #landing-container {
+        width: 70%;
+        max-width: 2000px;
+        margin: 0 auto; /* Center the container */
+    }
+
+    #contWHAT-img {
+        flex: 1 1 40%;
+        max-width: 40%;
+        margin: 0 auto;
+    }
+
+    #contHOW {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between; /* Space between items */
+        align-items: flex-start;
+        gap: 20px; /* Add a gap between items to ensure no overlap */
+        margin: 0 auto 50px auto;
+        width: 100%;
+    }
+
+    #contHOW1, #contHOW2, #contHOW3 {
+        flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
+        margin: 0; /* Remove the extra margin */
+    }
+}
+
+/* For mobile mode */
+@media (max-width: 767px) {
+    #landing-container {
+        width: 100%;
+    }
+
+    .goodbye-decisions  {
+        white-space: nowrap;
+        font-size: calc(4vw + 10px); /* Dynamically adjust font size */
+        max-width: 100%;
+        overflow: hidden;
+        display: block;
+    }
+
+    #contHELLO img {
+        content: url("{% static 'images/landing/polaroid1.jpg' %}");
+    }
+
+    #contHELLO p {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #contHOW, #contFEELING {
+        display: block;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+        margin: 0 auto;
+    }
+
+    #contFEELING2 {
+        margin-top: 40px;
+    }
+}
+
+/* END NEW CSS */
+</style>
+
+
+
+
+
+
+{% endblock %}
