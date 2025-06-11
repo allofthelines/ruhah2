@@ -50,6 +50,7 @@
     </tbody>
   </table>
 
+{% comment %}
   <nav>
     <span>
       {% if page_obj.has_previous %}
@@ -63,6 +64,61 @@
     </span>
   </nav>
 </div>
+{% endcomment %}
+
+<nav class="pagination">
+  <ul>
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="active"><span>{{ num }}</span></li>
+      {% elif num > page_obj.number|add:'-5' and num < page_obj.number|add:'5' %}
+        <li><a href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+<style>
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.pagination ul {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination li {
+  display: inline;
+}
+
+.pagination a, .pagination span {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+}
+</style>
+
 
 <!-- gia kapoio logo css must be in block -->
 <style>
@@ -78,9 +134,3 @@
 </style>
 
 {% endblock %}
-
-
-
-
-
-
