@@ -23,7 +23,11 @@
         <div style="margin-bottom: 19px;">
             {{ form.notes.label_tag }}<br> {{ form.notes }}
         </div>
-        <button type="submit">Submit Ask</button>
+        {% if user.is_authenticated %}
+            <button type="submit">Submit Ask</button>
+        {% else %}
+            <button type="button" disabled>Login to Submit Ask</button>
+        {% endif %}
     </form>
 </div>
 

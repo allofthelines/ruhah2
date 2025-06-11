@@ -21,12 +21,14 @@
           <!-- grafw creator_id.id giati creator_id=='eleni' an thes na to allakseis go @ customuser kai these __str__-->
           {% with ticket.creator_id.id as creator_id %}
             {% with ticket.creator_id.lifeform as creator_lifeform %}
-              {% if ticket.asktype == 'box' %}
-                <tr style="background-color: #FDFD96;"> <!--light yellow-->
-              {% elif ticket.asktype == 'outfit' %}
-                <tr style="background-color: #F5F5F5;"> <!--light grey-->
+              {% if ticket.stylist_type == 'private' and ticket.private_stylist == user %}
+                <tr style="background-color: #FDFD96;">
               {% elif creator_id in following_user_ids %}
-                <tr style="background-color: #F69697;"> <!--light red-->
+                <tr style="background-color: #F5F5F5;">
+              {% elif ticket.asktype == 'box' %}
+                <tr style="background-color: #E2E2E2;">
+              {% elif ticket.asktype == 'outfit' %}
+                <tr style="background-color: #E2E2E2;">
               {% elif creator_lifeform == 'human' %}
                 <tr style="background-color: #F69697;"> <!--light red-->
               {% else %}
