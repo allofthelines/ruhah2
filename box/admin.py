@@ -7,7 +7,7 @@ from django.utils import timezone
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     # se list_display        , 'stylist_type'
-    list_display = ['id', 'asktype', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'occupancy', 'days_since_creation']
+    list_display = ['id', 'asktype', 'stylist_type', 'status', 'creator_id', 'short_notes', 'outfit1', 'outfit2', 'occupancy', 'days_since_creation']
     list_filter = ['asktype', 'status', 'occasion', 'style1', 'style2', 'boxcuratedby']
     search_fields = ['notes']
 

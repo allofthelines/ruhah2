@@ -18,7 +18,7 @@
             {% csrf_token %}
             {{ fit_form.style1.label_tag }} {{ fit_form.style1 }}<br>
             {% if user.is_authenticated %}
-                <!-- {{ fit_form.stylist_type.label_tag }} {{ fit_form.stylist_type }}<br> -->
+                {{ fit_form.stylist_type.label_tag }} {{ fit_form.stylist_type }}<br>
             {% endif %}
             <!-- {{ fit_form.catalogue.label_tag }} {{ fit_form.catalogue }}<br> -->
             <br>
