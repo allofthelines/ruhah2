@@ -32,6 +32,12 @@ class CustomUser(AbstractUser):
         ('discover', 'Discover'),
         ('following', 'Following'),
     ]
+
+    ACCEPT_PRIVATE_ASKS_CHOICES = [
+        ('yes', 'Yes'),
+        ('no', 'No'),
+    ]
+
     # delete these
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
     is_customer = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
@@ -53,6 +59,8 @@ class CustomUser(AbstractUser):
     trending_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_trending_styles')
     studio_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_studio_styles')
     studio_visibility = models.CharField(max_length=15, choices=STUDIO_VISIBILITY_CHOICES, default='discover')
+    accept_private_asks = models.CharField(max_length=3, choices=ACCEPT_PRIVATE_ASKS_CHOICES, default='yes',help_text="Indicates if the user accepts private asks.")
+    private_ask_price = models.IntegerField(default=0,help_text="The price in credits for a private ask.")
 
     followers_list = models.ManyToManyField(
         'self',
