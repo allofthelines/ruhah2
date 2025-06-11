@@ -218,6 +218,9 @@ class PortraitUpload(models.Model):
 
 
 from studio.models import Item  # Make sure this import is present
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 
 class GridPicUpload(models.Model):
     DELETED_BY_UPLOADER_CHOICES = [
@@ -245,6 +248,46 @@ class GridPicUpload(models.Model):
             self.process_image()
         super().save(*args, **kwargs)
 
+    def process_image(self):
+        # Open the image
+        img = Image.open(self.gridpic_img)
+
+        # Convert non-RGB images to RGB
+        if img.mode not in ('RGB', 'L'):
+            img = img.convert('RGB')
+
+        width, height = img.size
+
+        if width > height:
+            # Horizontal image
+            left = (width - height) / 2
+            top = 0
+            right = (width + height) / 2
+            bottom = height
+        else:
+            # Vertical image
+            left = 0
+            top = (height - width) / 2
+            right = width
+            bottom = (height + width) / 2
+
+        # Crop and resize the image
+        img = img.crop((left, top, right, bottom))
+        img = img.resize((600, 600), Image.ANTIALIAS)
+
+        # Save the processed image to BytesIO buffer
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=85)
+        output.seek(0)
+
+        # Save the image to the gridpic_processed_img field
+        self.gridpic_processed_img.save(
+            f"{self.gridpic_img.name.split('/')[-1].split('.')[0]}_processed.jpg",
+            ContentFile(output.read()),
+            save=False
+        )
+
+    """
     def process_image(self):
         img = Image.open(self.gridpic_img)
 
@@ -279,6 +322,7 @@ class GridPicUpload(models.Model):
             ContentFile(output.read()),
             save=False
         )
+    """
 
 
 
