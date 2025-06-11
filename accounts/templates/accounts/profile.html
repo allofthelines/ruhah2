@@ -648,26 +648,61 @@
                     <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
 
-                        <div class="contLLRR">
-                            <div class="LLRR-button-container">
-                                <!-- Remove Button Form -->
-                                <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
-                                    {% csrf_token %}
-                                    <button type="submit" class="link-style">Remove</button>
-                                </form>
+                        {% if gridpic.tryon_state == 'original' %}
+                            <!-- Remove and Try-On buttons for 'original' state -->
+                            <div class="contLLRR">
+                                <div class="LLRR-button-container">
+                                    <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="link-style">Remove</button>
+                                    </form>
+                                </div>
+                                <div class="LLRR-button-container">
+                                    <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
+                                        <button type="submit" class="link-style">Try-On</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="LLRR-button-container">
-                                <!-- Try-On Button Form -->
-                                <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
-                                    <button type="submit" class="link-style">Virtual+</button>
-                                </form>
-                            </div>
-                        </div>
 
+                        {% elif gridpic.tryon_state == 'temp' %}
+                            <!-- Accept and Reject buttons for 'temp' state -->
+                            <div class="contLLRR">
+                                <div class="LLRR-button-container">
+                                    <form action="{% url 'accounts:accept_try_on' gridpic.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="link-style">Accept</button>
+                                    </form>
+                                </div>
+                                <div class="LLRR-button-container">
+                                    <!-- mallon prepei kalytera na phgainei se profile_gridpic_try_off -->
+                                    <form action="{% url 'accounts:reject_try_on' gridpic.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="link-style">Reject</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        {% elif gridpic.tryon_state == 'virtual' %}
+                            <!-- Remove and Try-Off buttons for 'virtual' state -->
+                            <div class="contLLRR">
+                                <div class="LLRR-button-container">
+                                    <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="link-style">Remove</button>
+                                    </form>
+                                </div>
+                                <div class="LLRR-button-container">
+                                    <form action="{% url 'accounts:profile_gridpic_try_off' gridpic.id %}" method="GET">
+                                        <button type="submit" class="link-style">Try-Off</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
         </div>
+
 
 
 

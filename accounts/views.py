@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm, EmailChangeForm, GridPicUploadForm
 import json
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.middleware.csrf import get_token
 from django.utils import timezone
 from django.db.models import Q  # gia to search sto profile_gridpic_try_on
@@ -583,6 +584,12 @@ def profile_ask_outfit_details(request, outfit_id):
 
 
 
+
+
+
+
+
+
 def email_change_request(request):
     if request.method == 'POST':
         form = EmailChangeForm(request.POST, instance=request.user)
@@ -633,6 +640,34 @@ def confirm_email(request, uidb64, token):
         return render(request, 'accounts/email_confirmation_failed.html')
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def tryon_item_search(request, gridpic_id):
     # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
@@ -640,12 +675,12 @@ def tryon_item_search(request, gridpic_id):
     print(f"Selected GridPic: {gridpic}")
 
     # Determine which image to show
-    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
-        # Show the temporary image if it exists and is active
+    if gridpic.tryon_state == 'temp' and gridpic.gridpic_temp_img:
+        # Show the temporary image if it exists
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryon_item_id.exists():
-        # Show the latest tryon image if it exists
-        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    elif gridpic.tryon_state == 'virtual' and gridpic.gridpic_tryon_img:
+        # Show the try-on image if it exists
+        selected_gridpic_url = gridpic.gridpic_tryon_img.url
     else:
         # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
@@ -654,6 +689,7 @@ def tryon_item_search(request, gridpic_id):
     category = request.GET.get('category', 'all')
     search_results = Item.objects.none()
 
+    # Perform the search only if the search parameter is present
     if 'search' in request.GET:
         search_results = Item.objects.all()
 
@@ -675,6 +711,8 @@ def tryon_item_search(request, gridpic_id):
 
     # Render the template and display search results
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
+
 
 
 
@@ -717,6 +755,13 @@ def call_kolors_api(image1_path, image2_path):
 
 
 
+
+
+"""
+------------------------------
+PERFORM = TELEFTAIO VHMA
+------------------------------
+"""
 import requests
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -731,9 +776,13 @@ def perform_try_on(request, gridpic_id, item_id):
 
     # Ensure user has enough credits
     if request.user.credits < 10:
-        # Not enough credits; redirect to profile with a message
         messages.error(request, "You need at least 10 credits to perform a Try-On.")
         return redirect('accounts:profile')
+
+    # Ensure the gridpic is in the original state
+    if gridpic.tryon_state != 'original':
+        messages.error(request, "This gridpic already has a try-on applied.")
+        return redirect('accounts:profile_gridpic_try_on', gridpic_id=gridpic.id)
 
     # Call the Kolors API with the selected images
     response = call_kolors_api(gridpic.gridpic_processed_img.path, item.image.path)
@@ -742,8 +791,10 @@ def perform_try_on(request, gridpic_id, item_id):
         # Save the processed image temporarily
         temp_image_name = f"{gridpic.gridpic_processed_img.name.split('/')[-1].split('.')[0]}_temp.png"
         gridpic.gridpic_temp_img.save(temp_image_name, ContentFile(response), save=True)
-        gridpic.gridpic_temp_active = True
-        gridpic.gridpic_tryon_item_id.add(item)  # Associate the selected item
+
+        # Set the tryon_state to 'temp'
+        gridpic.tryon_state = 'temp'
+        gridpic.gridpic_tryon_item_id.set([item])  # Associate the selected item
         gridpic.save()
 
         # Deduct credits from the user
@@ -752,89 +803,122 @@ def perform_try_on(request, gridpic_id, item_id):
 
         return redirect('accounts:profile_try_on_submitted')
     else:
-        # Handle API error
         messages.error(request, "Failed to process Try-On. Please try again later.")
         return redirect('accounts:profile')
+
+def perform_try_off(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    # Ensure it's in the virtual state before trying off
+    if gridpic.tryon_state != 'virtual':
+        messages.error(request, "No virtual try-on to remove.")
+        return redirect('accounts:profile')
+
+    # Set state to 'original' and delete try-on image
+    gridpic.tryon_state = 'original'
+    gridpic.gridpic_tryon_img.delete(save=False)  # Deleting the try-on image
+    gridpic.gridpic_tryon_item_id.clear()
+    gridpic.save()
+
+    messages.success(request, "Try-on removed and reverted to original.")
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
 
 from django.shortcuts import get_object_or_404, redirect
 from .models import GridPicUpload
 from django.contrib import messages
 
-
-def delete_all_tryons(request, gridpic_id):
-    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
-
-    # Delete all try-on images associated with this gridpic
-    gridpic.gridpic_tryons.all().delete()
-    gridpic.tryon_times = 0
-    gridpic.save()
-
-    # Optionally, show a message to the user
-    messages.success(request, "All try-ons have been deleted.")
-
-    return redirect('accounts:profile')
-
-
+"""
+------------------------------
+PROFILE_GRIDPIC = PHGAINEI STHN EPOMENH SELIDA
+------------------------------
+"""
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    # Determine which image to show
-    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
+    # Determine which image to show based on the tryon_state
+    if gridpic.tryon_state == 'temp' and gridpic.gridpic_temp_img:
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryon_item_id.exists():
-        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    elif gridpic.tryon_state == 'virtual' and gridpic.gridpic_tryon_img:
+        selected_gridpic_url = gridpic.gridpic_tryon_img.url
     else:
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Prepare context for rendering
     context = {
         'selected_gridpic_url': selected_gridpic_url,
-        'selected_gridpic': gridpic
+        'selected_gridpic': gridpic,
     }
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
 
-
-
-@login_required
-def accept_temp_image(request, gridpic_id):
+def profile_gridpic_try_off(request, gridpic_id):
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    if gridpic.gridpic_temp_active:
-        # Move the temp image to the tryons folder and rename it
-        new_filename = generate_new_filename(gridpic, 'processed/tryons/')
-        gridpic.gridpic_temp_img.save(new_filename, gridpic.gridpic_temp_img.file, save=False)
+    # Ensure the gridpic is in the 'virtual' state before allowing 'try-off'
+    if gridpic.tryon_state != 'virtual':
+        messages.error(request, "Cannot perform try-off as the gridpic is not in the 'virtual' state.")
+        return redirect('accounts:profile')
 
-        # Update the model fields
-        gridpic.gridpic_temp_img = None
-        gridpic.gridpic_temp_active = False
-        gridpic.tryon_times += 1
-        gridpic.save()
+    # Perform the 'try-off' by reverting the gridpic to its original state
+    gridpic.tryon_state = 'original'
+    if gridpic.gridpic_tryon_img:
+        gridpic.gridpic_tryon_img.delete(save=False)  # Delete the virtual try-on image
+    gridpic.gridpic_tryon_item_id.clear()  # Clear any associated items
+    gridpic.save()
 
-    return redirect('accounts:profile')
+    messages.success(request, "Try-off successful. Reverted to the original gridpic.")
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
-
+"""
+------------------------------
+ACCEPT = DEN PHGAINEI POUTHENA APLA KLIKAREIS STO PROFILE.HTML KAI EPIKYRWNEI H OXI
+------------------------------
+"""
 @login_required
-def reject_temp_image(request, gridpic_id):
+def accept_try_on(request, gridpic_id):
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    if gridpic.gridpic_temp_active:
-        # Delete the temporary image
-        if gridpic.gridpic_temp_img:
-            gridpic.gridpic_temp_img.delete(save=False)
+    # Ensure it's in the temp state before accepting
+    if gridpic.tryon_state != 'temp':
+        messages.error(request, "No temporary try-on to accept.")
+        return redirect('accounts:profile')
 
-        # Clear the temporary fields
-        gridpic.gridpic_temp_img = None
-        gridpic.gridpic_temp_active = False
+    # Rename and move the temp image to try-on image
+    if gridpic.gridpic_temp_img:
+        tryon_image_name = f"{gridpic.gridpic_processed_img.name.split('/')[-1].split('.')[0]}_tryon.png"
+        gridpic.gridpic_tryon_img.save(tryon_image_name, gridpic.gridpic_temp_img.file, save=True)
+        gridpic.gridpic_temp_img.delete(save=False)  # Remove temp image after moving
 
-        # Remove the associated Try-On item(s)
-        gridpic.gridpic_tryon_item_id.clear()
+    # Change the state to 'virtual'
+    gridpic.tryon_state = 'virtual'
+    gridpic.save()
 
-        gridpic.save()
+    messages.success(request, "Try-on accepted and saved.")
+    # return redirect('accounts:profile')
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
-    return redirect('accounts:profile')
+@login_required
+def reject_try_on(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    # Ensure it's in the temp state before rejecting
+    if gridpic.tryon_state != 'temp':
+        messages.error(request, "No temporary try-on to reject.")
+        return redirect('accounts:profile')
+
+    # Revert state back to 'original' and delete the temporary try-on image
+    gridpic.tryon_state = 'original'
+    if gridpic.gridpic_temp_img:
+        gridpic.gridpic_temp_img.delete(save=False)  # Delete the temp image
+    gridpic.gridpic_tryon_item_id.clear()  # Clear associated item
+    gridpic.save()
+
+    messages.success(request, "Try-on rejected and reverted to original.")
+    # return redirect('accounts:profile')
+    return HttpResponseRedirect(f"{reverse('accounts:profile')}#gridpics")
+
+
 
 
 from django.shortcuts import render

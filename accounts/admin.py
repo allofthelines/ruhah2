@@ -101,7 +101,7 @@ class PortraitUploadAdmin(admin.ModelAdmin):
 admin.site.register(PortraitUpload, PortraitUploadAdmin)
 
 class GridPicUploadAdmin(admin.ModelAdmin):
-    list_display = ('id', 'uploader_username', 'thumbnail', 'timedate_uploaded', 'deleted_by_uploader', 'age_in_days')
+    list_display = ('id', 'tryon_state', 'gridpic_tryon_item_id',  'uploader_username', 'thumbnail', 'timedate_uploaded', 'deleted_by_uploader', 'age_in_days', )
     list_filter = ('deleted_by_uploader', 'timedate_uploaded')
     search_fields = ('uploader_id__username',)
     readonly_fields = ('timedate_uploaded',)

@@ -1,0 +1,80 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Revert Try-On
+{% endblock %}
+
+{% block content %}
+
+<div id="studio-items-all-content">
+
+    <!-- Display the Try-On Image -->
+    <div class="gridpic-try-on">
+        <img src="{{ gridpic.gridpic_tryon_img.url }}" alt="Try-On Image">
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="button-container">
+        <!-- Revert to Original Button -->
+        <form action="{% url 'accounts:reject_try_on' gridpic.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary">Revert to Original</button>
+        </form>
+        <!-- Back to Profile Button -->
+        <a href="{% url 'accounts:profile' %}#gridpics" class="btn-link">Back to Gridpics</a>
+    </div>
+
+</div>
+
+<style>
+    #studio-items-all-content {
+        width: 100%; /* Increased width to reduce left and right margins */
+        max-width: 1000px; /* Maximum width for desktop */
+        margin: 0 auto; /* Center the entire content */
+        text-align: center; /* Center-align text */
+    }
+
+    .gridpic-try-on img {
+        max-width: 100%; /* Make the image responsive */
+        max-height: 400px; /* Optional: Limit the height */
+        margin: 0 auto; /* Center the image horizontally */
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        justify-content: center;
+        align-items: center; /* Center-align the buttons */
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        border: 1px solid black;
+        padding: 10px 20px;
+        background-color: white;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn-link {
+        background: none;
+        border: none;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        padding: 10px 20px;
+        text-decoration: none; /* Remove underline */
+    }
+
+    @media (max-width: 768px) {
+        #studio-items-all-content {
+            width: 100%; /* Full width on mobile */
+        }
+    }
+</style>
+
+{% endblock %}

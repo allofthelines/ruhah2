@@ -46,13 +46,24 @@ urlpatterns = [
     path('<str:username>/followers/', views.followers_list, name='followers_list'),
     path('<str:username>/following/', views.following_list, name='following_list'),
 
+    # GridPic Try-On Process
     path('gridpic/<int:gridpic_id>/try-on/', views.profile_gridpic_try_on, name='profile_gridpic_try_on'),
     path('gridpic/<int:gridpic_id>/perform-try-on/<int:item_id>/', views.perform_try_on, name='perform_try_on'),
-    path('gridpic/<int:gridpic_id>/accept-temp/', views.accept_temp_image, name='accept_temp_image'),
-    path('gridpic/<int:gridpic_id>/reject-temp/', views.reject_temp_image, name='reject_temp_image'),
-    path('try-on/submitted/', views.profile_try_on_submitted, name='profile_try_on_submitted'),
-    path('gridpic/<int:gridpic_id>/delete-all-tryons/', views.delete_all_tryons, name='delete_all_tryons'),
 
+    # Accept or Reject Temporary Image
+    path('gridpic/<int:gridpic_id>/accept-try-on/', views.accept_try_on, name='accept_try_on'),
+    path('gridpic/<int:gridpic_id>/reject-try-on/', views.reject_try_on, name='reject_try_on'),
+
+    # Try-On Submitted Confirmation Page
+    path('try-on/submitted/', views.profile_try_on_submitted, name='profile_try_on_submitted'),
+
+    # GridPic Try-Off Process
+    path('gridpic/<int:gridpic_id>/try-off/', views.profile_gridpic_try_off, name='profile_gridpic_try_off'),
+
+    # Search Items for Try-On
     path('tryon-item-search/<int:gridpic_id>/', views.tryon_item_search, name='tryon_item_search'),
+
+    # Remove GridPic (No longer necessary to delete all try-ons, as we have a single try-on per gridpic)
+    path('gridpic/<int:gridpic_id>/remove/', views.remove_gridpic, name='remove_gridpic'),
 
 ]
