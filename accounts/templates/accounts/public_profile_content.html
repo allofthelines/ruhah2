@@ -152,6 +152,9 @@ function toggleFollowUnfollow(username, isFollowing) {
 </div>
 {% endcomment %}
 
+{% comment %}
+<!-- prin valw to aplo click pou bainei mesa se details -->
+
 <!-- Display User's Outfits and Grid Pictures -->
 <div id="outfit-container">
     <div id="them-by-me-content" class="outfit-grid">
@@ -173,6 +176,32 @@ function toggleFollowUnfollow(username, isFollowing) {
         {% endif %}
     </div>
 </div>
+{% endcomment %}
+
+<!-- Display User's Outfits and Grid Pictures -->
+<div id="outfit-container">
+    <div id="them-by-me-content" class="outfit-grid">
+        {% if profile_user.profile_visibility == 'public' or request.user == profile_user %}
+            {% for grid_item in grid_items %}
+                {% if grid_item.type == 'outfit' and grid_item.item.maker_grid_visibility == 'show' %}
+                <div class="outfit-item" id="outfit-{{ grid_item.item.id }}"
+                     {% comment %}ondblclick="handleOutfitClick({{ grid_item.item.id }})" to evgala giati ME afto ginontai trigger mazi an kai den thaprepe{% endcomment %}
+                     onclick="handleOutfitClick({{ grid_item.item.id }})">
+                    {% if 'default_img.jpg' not in grid_item.item.portrait.url %}
+                        <img src="{{ grid_item.item.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
+                    {% endif %}
+                    <img src="{{ grid_item.item.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in grid_item.item.portrait.url %}block{% else %}none{% endif %};">
+                </div>
+                {% elif grid_item.type == 'gridpic' %}
+                <div class="outfit-item gridpic-item" id="gridpic-{{ grid_item.item.id }}" onclick="toggleImage(this)">
+                    <img src="{{ grid_item.item.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
 
 
 
@@ -211,6 +240,27 @@ function toggleFollowUnfollow(username, isFollowing) {
 
         // Prevent default action
         return false;
+    }
+
+
+
+
+
+    let clickTimeout = null;
+
+    function handleOutfitClick(outfitId) {
+        if (clickTimeout) {
+            // If there's a timeout already set, it's a double-click
+            clearTimeout(clickTimeout);
+            clickTimeout = null;
+            likeOutfit(outfitId);
+        } else {
+            // If no timeout, set a timeout for single-click handling
+            clickTimeout = setTimeout(function () {
+                window.location.href = `{% url 'accounts:profile_grid_outfit_details' 0 %}`.replace('0', outfitId);
+                clickTimeout = null; // Reset the timeout variable
+            }, 600); // 1000 = 1second delay
+        }
     }
 
 

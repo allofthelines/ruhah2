@@ -624,7 +624,7 @@
 
 
 
-        {% comment %}
+
         <!-- GRIDPICS Section -->
         <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBBBB">
@@ -633,13 +633,17 @@
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
                         <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
                             {% csrf_token %}
-                            <button type="submit" class="link-style">Remove LOL</button>
+                            <button type="submit" class="link-style">Remove</button>
                         </form>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        {% endcomment %}
+
+
+        {% comment %}
+        <!-- TRY-ON FUNCTIONALITY TA VIEWS KAI URLS KLP YPARXOUN ALLA DEN TO THELW PROS TO PARON -->
+        <!-- MHN ME SVHSEIS -->
 
         <!-- GRIDPICS Section -->
         <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
@@ -702,6 +706,7 @@
                 {% endfor %}
             </div>
         </div>
+        {% endcomment %}
 
 
 

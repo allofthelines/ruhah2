@@ -45,8 +45,6 @@ else:
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'fumio.xyz',
-    'www.fumio.xyz',
     'ruhah.com',
     'www.ruhah.com',
     'fumio-c90be99ba1a3.herokuapp.com',
@@ -56,8 +54,6 @@ ALLOWED_HOSTS = [
 # IMPORTANT GIA STRIPE WEBHOOK
 CSRF_TRUSTED_ORIGINS = [
     'https://sawfly-resolved-chimp.ngrok-free.app',
-    'https://fumio.xyz',
-    'https://www.fumio.xyz',
     'https://ruhah.com',
     'https://www.ruhah.com',
     'https://ruhah2-d3d177545264.herokuapp.com'
@@ -226,7 +222,7 @@ if ENVIRONMENT == 'development':
 # EMAIL SETTINGS
 # EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.privateemail.com'
+EMAIL_HOST = 'mail.privateemail.com' # ths namecheap
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'contact@ruhah.com'

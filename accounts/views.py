@@ -577,6 +577,22 @@ def profile_ask_outfit_details(request, outfit_id):
     return render(request, 'accounts/profile_ask_outfit_details.html', context)
 
 
+def profile_grid_outfit_details(request, outfit_id):
+    outfit = get_object_or_404(Outfit, id=outfit_id)
+
+    # Retrieve all the items associated with the outfit, including size details
+    items = outfit.items.all().prefetch_related('sizes_xyz')
+
+    context = {
+        'outfit': outfit,
+        'items': items,
+        'profile_user': outfit.maker_id  # Assuming outfit has a maker field that refers to the profile user
+    }
+
+    # Render the template with the context
+    return render(request, 'accounts/profile_grid_outfit_details.html', context)
+
+
 
 
 
@@ -665,7 +681,10 @@ def confirm_email(request, uidb64, token):
 
 
 
-
+"""
+ENERGO ALLA TOXW VGALEI TRY-ON PART
+VALE/VGALE KRYVONTAS TO KOUMPI TRY-ON STO PROFILE.HTML
+"""
 
 
 def tryon_item_search(request, gridpic_id):
