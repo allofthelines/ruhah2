@@ -2,15 +2,16 @@
 <div class="profile-container">
     <div class="profile-left">
         {% if profile_user.pfp %}
-            {% if profile_user.accept_private_asks == 'yes' %}
+            {% if profile_user.accept_private_asks == 'yes' and not is_own_profile %}
+                <!-- Profile is clickable only if it's not the logged-in user's own profile -->
                 <a href="{% url 'box:private_ask' stylist_username=profile_user.username %}" class="clickable-profile-picture">
                     <img src="{{ profile_user.pfp.url }}" alt="Profile Picture" class="profile-picture">
                 </a>
             {% else %}
+                <!-- Profile picture is not clickable if it's the logged-in user's own profile -->
                 <img src="{{ profile_user.pfp.url }}" alt="Profile Picture" class="profile-picture">
             {% endif %}
         {% endif %}
-
     </div>
     <div class="profile-right">
         <div class="profile-row">
@@ -27,12 +28,6 @@
             {% else %}
                 {% if request.user.is_authenticated %}
                     {% if is_following %}
-                        <!--<button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Following</button>
-                        <a href="#" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</a>-->
-                        <!--
-                        <button id="unfollow-button" onclick="submitUnfollowForm('{{ profile_user.username }}')">Unfollow</button>
-                        <button id="unfollow-button" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)">Following</button>
-                        -->
                         <button id="follow-unfollow-button-{{ profile_user.username }}" onclick="toggleFollowUnfollow('{{ profile_user.username }}', true)" style="color: #c5c6c7;">Following</button>
                     {% else %}
                         <button id="follow-button" onclick="submitFollowForm('{{ profile_user.username }}')" style="color: #007bff;">Follow</button>
@@ -350,15 +345,23 @@ function toggleFollowUnfollow(username, isFollowing) {
     }
 
     .clickable-profile-picture {
-        display: inline-block; /* Allows adding space around the image */
-        padding: 1px; /* No extra padding needed */
-        border-radius: 50%; /* Makes the border circular */
+        display: inline-block;
+        position: relative; /* Position context for the pseudo-element */
         cursor: pointer; /* Changes the cursor to indicate the image is clickable */
-        background-color: white; /* Ensures there's a white background within the circular border */
-        box-shadow: 0 0 0 2px black; /* Adds a centered 2px black border around the image */
-        position: relative; /* Allows positioning adjustments */
-        top: -3px; /* Moves the border 5px up */
     }
+
+    .clickable-profile-picture::before {
+        content: ''; /* Required for pseudo-element */
+        position: absolute;
+        top: -5px; /* Moves the border up by 5px */
+        left: -5px; /* Adjust to keep border centered horizontally */
+        right: -5px; /* Adjust to keep border centered horizontally */
+        bottom: -1px; /* gia kapoio logo exei apo mono tou 4 */
+        border: 1.5px solid black; /* Border width and color */
+        border-radius: 50%; /* Makes the border circular */
+        pointer-events: none; /* Ensures the pseudo-element does not block clicks */
+    }
+
 
 
     .profile-picture {
