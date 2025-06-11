@@ -144,7 +144,7 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register("{% static 'serviceworker.js' %}")
+      navigator.serviceWorker.register("https://ruhahbucket.s3.amazonaws.com/serviceworker.js")
         .then(function(registration) {
           console.log('Service Worker registered with scope:', registration.scope);
         })
@@ -154,6 +154,7 @@
     });
   }
 </script>
+
 
 
 

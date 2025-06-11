@@ -1,13 +1,15 @@
-const CACHE_NAME = 'myapp-cache-v1';
+const CACHE_NAME = 'ruhah-cache-v1';
 const urlsToCache = [
-  '/',
-  '/static/css/styles.css',
-  '/static/js/scripts.js',
-  '/offline/',  // Update to the correct offline URL served by Django
-  // add other URLs you want to cache
+  '/',  // Cache the home page
+  '/offline/',  // Offline page URL oxi to offline.html stoo static/ alla afto sto templates
+  // Direct URLs to the static files at the root level
+  // ta evala etsi giati gamimeno to static sta settings des bugs.txt
+  'https://ruhahbucket.s3.amazonaws.com/core/styles.css',
+  'https://ruhahbucket.s3.amazonaws.com/core/scripts.js',
+  'https://ruhahbucket.s3.amazonaws.com/manifest.json',
 ];
 
-// Install event - caching the offline page and other resources
+// Install event - caching the offline page and other assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -26,7 +28,6 @@ self.addEventListener('fetch', event => {
           if (response) {
             return response;
           } else if (event.request.mode === 'navigate') {
-            // Serve the offline page from the cache when navigating
             return caches.match('/offline/');
           }
         });
