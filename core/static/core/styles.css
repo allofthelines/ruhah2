@@ -15,6 +15,7 @@
 
 
 
+
 /* LALALALAL to evala gia footer sticky */
 html {
   height: 100%;
@@ -244,6 +245,8 @@ a:visited {
     height: auto; /* Lets the height grow as per the rows specified */
     padding: 8px; /* Adds some padding inside the textarea */
     box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    border: 1px solid #808080; /* Adds a consistent grey border */
+    border-radius: 4px; /* Adds the same rounding as default styling */
 }
 
 .stripe-button-container {

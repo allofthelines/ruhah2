@@ -76,8 +76,9 @@ class AskFitForm(forms.Form):
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 30
+        # 'style': 'background-color: #F5F5F5;'
         # 'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'
-    }), required=False)
+    }), required=True)
 
 class PrivateAskFitForm(forms.Form):
 
@@ -98,7 +99,8 @@ class PrivateAskFitForm(forms.Form):
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 30
-    }), required=False)
+        # 'style': 'background-color: #FFFFCC;'
+    }), required=True)
 
     def __init__(self, *args, **kwargs):
         # Accept additional keyword arguments for stylist and price

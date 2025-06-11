@@ -135,8 +135,17 @@ def profile(request):
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
-                user_form.save(user=user)
+                print("DEBUG: Form is valid")
+                print("DEBUG: Current username in form before save:", user_form.cleaned_data['username'])
+                saved_user = user_form.save(commit=True)
+                print("DEBUG: Username after form save:", saved_user.username)  # Confirm the username after save
+                print("DEBUG: Username directly from DB after form save:",
+                      CustomUser.objects.get(id=user.id).username)  # Check directly from DB
                 return redirect(f'{request.path}?edit=user')
+            else:
+                print("DEBUG: Form is not valid")
+                print("Form errors:", user_form.errors)  # Print form errors if form is not valid
+            # Handle other forms...
         elif 'customer_form' in request.POST and customer:
             customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
             if customer_form.is_valid():
@@ -165,13 +174,16 @@ def profile(request):
                 selected_studio_styles = request.POST.getlist('studio_styles')
                 user.trending_styles.set(selected_trending_styles)
                 user.studio_styles.set(selected_studio_styles)
+                user.accept_private_asks = request.POST.get('accept_private_asks', 'yes')
+                user.private_ask_price = request.POST.get('private_ask_price', 0)
                 return redirect(f'{request.path}?edit_settings=false')
 
     context = {
         'user_form': user_form,
         'customer_form': customer_form,
         'portrait_upload_form': portrait_upload_form,
-        'profile_settings_form': profile_settings_form,
+        'profile_s'
+        'ettings_form': profile_settings_form,
         'gridpic_upload_form': gridpic_upload_form,  # Add this line
         'user': user,
         'available_styles': available_styles,
