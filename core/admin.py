@@ -3,6 +3,7 @@ from django.utils.html import format_html
 from django.db.models import Min
 from .models import Outfit
 from box.models import Ticket
+from django.utils import timezone
 
 # einai helper etsi wste na einai ordered to list_filter me ta ticketid twn outfits swsta (3->2->1)
 # thelw ta megala na einai panw panw giati einai ta pio prosfata tickets
