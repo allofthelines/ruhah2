@@ -1,5 +1,7 @@
 {% extends "core/base.html" %}
 
+{% load static %}
+
 {% block page-header %}
   Help
 {% endblock %}
@@ -8,24 +10,63 @@
 
 <div id="help-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
     <!-- Navigation Menu -->
-    <div id="help-menu" style="width: 15%;">
-        <a href="#" onclick="showContent('box', 'Help > Box')">Box</a>
-        <a href="#" onclick="showContent('studio', 'Help > Studio')">Studio</a>
+    <div id="help-menu" style="width: 15%; font-family: 'Poppins', sans-serif;">
+        <!-- <a href="#" onclick="showContent('about', 'Help > About')">ABOUT</a> -->
+        <a href="#" onclick="showContent('asks', 'Help > Asks')">ASKS</a>
+        <a href="#" onclick="showContent('trending', 'Help > Trending')">TRNDING</a>
+        <a href="#" onclick="showContent('studio', 'Help > Studio')">STUDIO</a>
         <br>
-        <a href="#" onclick="showContent('stylists', 'Help > Stylists')">Stylists</a>
+        <a href="#" onclick="showContent('stylists', 'Help > Stylists')">STYLISTS</a>
         <br>
-        <a href="#" onclick="showContent('delivery', 'Help > Delivery')">Delivery</a>
-        <a href="#" onclick="showContent('returns', 'Help > Returns')">Returns</a>
+        <a href="#" onclick="showContent('delivery', 'Help > Delivery')">DELIVERY</a>
+        <a href="#" onclick="showContent('returns', 'Help > Returns')">RETURNS</a>
         <br>
         <!-- <a href="#" onclick="showContent('careers', 'Help > Careers')>Careers</a> -->
-        <a href="#" onclick="showContent('locations', 'Help > Locations')">Locations</a>
-        <a href="#" onclick="showContent('contact', 'Help > Contact')">Contact</a>
+        <a href="#" onclick="showContent('contact', 'Help > Contact')">CONTACT</a>
     </div>
 
     <!-- Content Area -->
     <div id="content" style="width: 70%%; padding-left: 5px; margin-top: -16px;">
         <div id="help" class="content-section active" style="display: block;">
             <p>Welcome. Please choose the section you need assistance with.<br><br>
+        </div>
+
+
+
+
+
+        <div id="asks" class="content-section" style="display: none;">
+            <p>
+            Ask is a form with which you request an outfit idea from other users.<br>
+            <h3>Who creates the outfits for the asks?</h3>
+            Other Ruhah users, so stylists at heart or profession.
+            An ask can either be open for everyone to style, only visible to people you follow,
+            or private to an account of your choice.
+            <h3>How are the outfits created?</h3>
+            For each ask, multiple different users create and submit their own outfit idea for your ask.
+            Then our algorithm selects one of them, which is the one you see.
+            <h3>What should i write in the ask's stylist notes?</h3>
+            Anything that could help a human get it. You can describe a mood you're into, a trend you wanna explore, a specific occasion
+            or an idea you already have but need help with.
+            <h3>Can i buy an outfit's items?</h3>
+            Yes, all the items (clothes and accessories) in an outfit are available for purchase.
+            <h3>Do i have to buy something in it?</h3>
+            No. You can just use the outfit as an inspiration.
+            <h3>Is creating and submitting an ask free?</h3>
+            Yes.
+            <h3>Can i create an outfit for another user's ask?</h3>
+            Yes, in the studio. Visit the studio help section for more info on how it works.
+            </p>
+        </div>
+
+        <div id="trending" class="content-section" style="display: none;">
+            <p>
+            In the trending page you discover new outfits made by other users. Each one is signed by the creator,
+            so you can explore and follow other users' profiles.<br><br>
+            Outfits are ranked depending on their popularity in the past few days.<br><br>
+            You can customise your trending page so that it only shows outfits from
+            accounts you follow or outfits of a specific style, like boho or streetwear.
+            </p>
         </div>
 
         <div id="box" class="content-section" style="display: none;">
@@ -50,61 +91,67 @@
             <h3>Is it a subscription service?</h3>
             No. You only pay each time you order a Box.</p>
         </div>
+
         <div id="studio" class="content-section" style="display: none;">
-            <p><h3>What is the Ruhah Studio?</h3>
-                Ruhah Studio is a platform where Stylists can view and respond to outfit requests from users.
-                It provides access to our entire catalogue, including items from our own collection
-                and our suppliers. In the Studio, you can browse, search, and select items to create and
-                submit outfits quickly and easily.
+            <p>
+                In the studio page you can view other users' asks and create outfits for them.<br>
+                <h3>How do i create an outfit?</h3>
+                In the studio, you first select one of the available asks, then choose the clothes and accessories you like, and finally submit it.
                 <h3>How do I search for items to include in my outfit?</h3>
                 You can search for items using keywords that you think describe
                 the item you have in mind and its attributes ("blue" "distressed" "stripes" "loafer" etc).
                 We provide a keyword guide to assist you, but feel free to try different keywords if you
                 don't find what you're looking for with the first try.
                 <h3>Do I need to worry about the sizes of the items I select?</h3>
-                No. Our item search algorithm automatically filters items to fit the customer's size.
-                You can focus purely on aesthetics and style.
+                No. Our item search algorithm automatically filters items to fit the size of the user that created the ask.
+                You, the creator, can focus purely on aesthetics and style.
                 <h3>What kind of items are available in the catalogue?</h3>
                 The catalogue includes a wide range of clothing items such as shirts, trousers, dresses,
                 and accessories like bags and glasses. These items can be either new or pre-owned
                 and come from our own collection or from suppliers we collaborate with.
                 If an item appears in your search, it is available and ready to ship.
-                In case of any unexpected issues, we will replace it with a similar item.
-                <h3>Why are some requests yellow?</h3>
-                The user that submitted a yellow request follows you at Ruhah.
+                <h3>Why are some asks yellow?</h3>
+                The user that submitted a yellow ask follows you at Ruhah.
+                <h3>Why are some asks red?</h3>
+                This is a private ask. The user that submitted the red request specifically created
+                this ask for you and only you to see. In your profile settings you can choose whether you can
+                have private asks open, and whether they are free or you want to charge a fee.
         </div>
         <div id="stylists" class="content-section" style="display: none;">
             <p>
-                <h3>Who is a Ruhah Stylist?</h3>
-                A registered user who creates an outfit as a response to a customer request.
-                Stylists make the suggestions, we handle everything else.
-                As a Stylist, you can sign up and start styling right away in the Ruhah Studio.
-                <h3>What happens if a customer buys my outfit?</h3>
-                For each user request, up to 10 stylists recommend one or more outfits each.
-                Each time your outfit is delivered to the customer and the customer chooses to buy
-                items you recommended you get notified and earn credits.
-                These credits can be cashed out whenever you want.
-                <h3>What happens if they don't?</h3>
+                Stylists, at heart or at profession, are registered users who create outfits for other users' asks.
+                As a stylist you earn money every time a user purchases clothes or accessories you recommended.
+                <br>
+                <h3>How do stylists earn money?</h3>
+                Every time a user buys an item from an outfit a stylist created. The amount earned is
+                a percentage of the final price. That percentage changes depending on
+                the occasion but the range is from 15% to 30%.
+                <h3>What happens after a stylist creates and submits an outfit?</h3>
+                For each user request, up to 10 stylists recommend an outfit each.
+                In the next few hours our algorithm selects one of them, depending on factors like
+                the ask creator's profile and the outfit's popularity. This outfit is displayed in
+                the creator's profile and they are free to either buy or not items from that outfit.
+                <h3>What happens if they don't buy anything?</h3>
                 Nothing.
-                <h3>How can I cash out my earned credits?</h3>
-                Visit your Stylist Profile page and follow the instructions provided there.
+                <h3>Is there any other way to earn money?</h3>
+                Yes. The outfits you create in the studio appear in your profile grid.
+                Every time a user likes an outfit in your profile and purchases an item from it,
+                you get 10% of that sale.
                 <h3>Is it really that simple?</h3>
-                Yes. Sign up, start styling, and earn credits for your chosen outfits.
-
+                Yes. You sign up, start styling, and earn money each time your items are bought.
             </p>
         </div>
 
         <div id="delivery" class="content-section" style="display: none;">
-            <p>We currently only deliver to London.<br>
-                <ul>
-                    <li>Standard Delivery: 2-4 working days.</li>
-                    <li>Free Box delivery for all orders.</li>
-                </ul>
-                You will receive by email a tracking number to monitor your delivery status.<br>
-                <br>
-                <strong>Disclaimer</strong>: Once packages are picked up by the carrier, we are not responsible for lost or damaged packages.
-                We recommend contacting the carrier directly for any delivery-related issues.
-                However, feel free to contact us for any issue or question, and we will do our best to find a solution.</p>
+            <p>We currently only deliver to the UK.<br>
+            <br>
+            Most of the clothes and accessories are delivered directly from the brands
+            we collaborate with. After each order the brand will email to you information regarding the
+            tracking and expected shipping time.<br>
+            <br>
+            <strong>Disclaimer</strong>: For packages not shipped by our warehouse, we are not responsible for any lost or damaged items.
+            <br>We recommend contacting the brand or carrier directly for any delivery-related issues.
+            However, feel free to contact us for any unresolved issue or question and we will do our best to find a solution.</p>
         </div>
         <div id="returns" class="content-section" style="display: none;">
             <p><h3>Items not purchased</h3>
@@ -132,7 +179,7 @@
         </div>
 
         <div id="careers" class="content-section" style="display: none;">
-            <p>As a Ruhah Stylist, all you need is your phone and the internet in order to create and earn.
+            <p>As a Ruhah stylist, all you need is your phone and the internet in order to create and earn.
             You can sign up and start styling at any time.<br><br>
             If you are interested in joining our operations team,
             although we are not currently looking to add new members,
@@ -140,12 +187,9 @@
             If you appreciate what we do, enjoy trying new things, and love solving problems,
             feel free to drop us an email. We would be happy to hear from you.</p>
         </div>
-        <div id="locations" class="content-section" style="display: none;">
-            <p>Mannequin House, 5 Blackhorse Ln, E17 6SX, London, United Kingdom<br><br>
-                Spetson 126, 11363, Athens, Greece
-        </div>
+
         <div id="contact" class="content-section" style="display: none;">
-            <p>Customer care: support@ruhah.com<br><br>All other enquiries: contact@ruhah.com</p>
+            <p>For customer care or any other enquiries:<br><br>contact@ruhah.com</p>
         </div>
     </div>
 
@@ -153,7 +197,16 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
 <script>
+
+
     function showContent(sectionId, headerText) {
         var sections = document.querySelectorAll('.content-section');
         sections.forEach(function(section) {
@@ -162,9 +215,22 @@
         document.getElementById(sectionId).style.display = 'block';
         document.getElementById('page-header').textContent = headerText;
     }
+
+
+
+
+
 </script>
 
+
+
+
+
+
+
+
 <style>
+
     #help-menu a {
         display: block;
         margin-bottom: 5px; /* Ensure each link is on its own line */
@@ -204,5 +270,9 @@
         }
     }
 </style>
+
+
+
+
 
 {% endblock %}
