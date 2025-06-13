@@ -230,7 +230,8 @@ EMAIL_HOST_PASSWORD = 'cocococo00'
 DEFAULT_FROM_EMAIL = 'RUHAH <contact@ruhah.com>'
 
 # Ensure this is set to your production domain
-if os.getenv('DJANGO_ENV') == 'production':
+# if os.getenv('DJANGO_ENV') == 'production':
+if os.environ.get('ENVIRONMENT') == 'production'
     # AFTO STELNEI TA EMAIL GIA SIGNUP CONFIRMATION
     EMAIL_DOMAIN = 'ruhah.com'
     EMAIL_PROTOCOL = 'https'
