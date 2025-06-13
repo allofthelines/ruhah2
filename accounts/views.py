@@ -50,7 +50,7 @@ def signup(request):
 
 
 
-            send_confirmation_email(user)  # Send confirmation email
+            send_signup_confirmation_email(user)  # Send confirmation email
             return redirect('accounts:account_activation_sent')
     else:
         form = SignUpForm()  # Use the custom SignUpForm
@@ -61,7 +61,7 @@ def signup(request):
 
     return render(request, 'accounts/signup.html', {'form': form})
 
-def send_confirmation_email(user):
+def send_signup_confirmation_email(user):
     subject = 'Welcome'
     from_email = 'RUHAH <contact@ruhah.com>'
     message = render_to_string('accounts/activation_email.txt', {
@@ -614,13 +614,13 @@ def email_change_request(request):
             user.new_email = form.cleaned_data['new_email']
             user.email_change_requested_at = timezone.now()
             user.save()
-            send_confirmation_email(user)
+            send_email_change_confirmation_email(user)
             return redirect('accounts:email_change_requested')
     else:
         form = EmailChangeForm(instance=request.user)
     return render(request, 'accounts/email_change_request.html', {'form': form})
 
-def send_confirmation_email(user):
+def send_email_change_confirmation_email(user):
     subject = "Confirm Your Email Address"
     from_email = 'RUHAH <contact@ruhah.com>'
     email_template_name = "accounts/email_change_confirmation.html"
