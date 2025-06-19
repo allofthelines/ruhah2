@@ -80,6 +80,56 @@
 
 </head>
 
+
+
+<script>
+
+  // OLO AFTO TSEKAREI AN NAV-BAR KAI FOOT-BAR KANOUN WRAP. AN NAI TOTE ZOOM-OUTS
+  // AFTO GINETAI SE KATHE PAGE LOAD ALLA EINAI LIGO + 3milisecond
+  // prepei nanai before body
+
+  function isMobile() {
+    return window.innerWidth <= 768; // Adjust breakpoint if needed (iPhone 12 Mini is 375px)
+  }
+
+  function needsZoomFix() {
+    const nav = document.getElementById('main-nav');
+    const footer = document.querySelector('#footer div');
+    return (nav.scrollWidth > nav.clientWidth) || (footer.scrollWidth > footer.clientWidth);
+  }
+
+  function applyOptimalZoom() {
+    if (!isMobile()) return; // Exit if desktop
+
+    const zoomLevels = [1.0, 0.95, 0.9, 0.85]; // Test from 100% down to 85%
+    let optimalZoom = 1.0;
+
+    // Find the largest zoom that prevents wrapping
+    for (const zoom of zoomLevels) {
+      document.body.style.transform = `scale(${zoom})`;
+      document.body.style.transformOrigin = 'top center';
+      if (!needsZoomFix()) {
+        optimalZoom = zoom;
+        break;
+      }
+    }
+
+    document.body.style.transform = `scale(${optimalZoom})`;
+    console.log(`Applied mobile zoom: ${optimalZoom * 100}%`);
+  }
+
+  // Run on load and resize (debounced)
+  let resizeTimer;
+  window.addEventListener('load', applyOptimalZoom);
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyOptimalZoom, 100);
+  });
+</script>
+
+
+
+
 <body>
 <div id="header">
   <h1 id="header-title" onclick="toggleView()"><span class="parenthesis">&#40;</span> RUHAH <span class="parenthesis">&#41;</span></h1>
@@ -213,36 +263,6 @@
     }
   });
 </script>
-
-
-
-
-<script>
-
-  // OLO AFTO TSEKAREI AN NAV-BAR KAI FOOT-BAR KANOUN WRAP. AN NAI TOTE ZOOM-OUTS
-  // AFTO GINETAI SE KATHE PAGE LOAD ALLA EINAI LIGO + 3milisecond
-  function adjustZoomForSingleLine() {
-    const nav = document.getElementById('main-nav');
-    const footerLinks = document.querySelector('#footer div');
-    const minZoom = 0.85; // Minimum zoom (e.g., 85%)
-    const maxZoom = 1.25; // Maximum zoom (e.g., 125%)
-
-    // Check if elements exist and content is wrapping
-    if (nav && footerLinks) {
-      const isNavWrapping = nav.scrollHeight > nav.clientHeight;
-      const isFooterWrapping = footerLinks.scrollHeight > footerLinks.clientHeight;
-
-      if (isNavWrapping || isFooterWrapping) {
-        document.body.style.zoom = minZoom; // Zoom out to 85%
-      }
-    }
-  }
-
-  // Run on load and when window resizes
-  window.addEventListener('load', adjustZoomForSingleLine);
-  window.addEventListener('resize', adjustZoomForSingleLine);
-</script>
-
 
 
 
