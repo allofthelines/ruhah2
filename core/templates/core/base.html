@@ -214,5 +214,38 @@
   });
 </script>
 
+
+
+
+<script>
+
+  // OLO AFTO TSEKAREI AN NAV-BAR KAI FOOT-BAR KANOUN WRAP. AN NAI TOTE ZOOM-OUTS
+  // AFTO GINETAI SE KATHE PAGE LOAD ALLA EINAI LIGO + 3milisecond
+  function adjustZoomForSingleLine() {
+    const nav = document.getElementById('main-nav');
+    const footerLinks = document.querySelector('#footer div');
+    const minZoom = 0.85; // Minimum zoom (e.g., 85%)
+    const maxZoom = 1.25; // Maximum zoom (e.g., 125%)
+
+    // Check if elements exist and content is wrapping
+    if (nav && footerLinks) {
+      const isNavWrapping = nav.scrollHeight > nav.clientHeight;
+      const isFooterWrapping = footerLinks.scrollHeight > footerLinks.clientHeight;
+
+      if (isNavWrapping || isFooterWrapping) {
+        document.body.style.zoom = minZoom; // Zoom out to 85%
+      }
+    }
+  }
+
+  // Run on load and when window resizes
+  window.addEventListener('load', adjustZoomForSingleLine);
+  window.addEventListener('resize', adjustZoomForSingleLine);
+</script>
+
+
+
+
+
 </body>
 </html>
