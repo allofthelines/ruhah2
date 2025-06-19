@@ -221,49 +221,13 @@
   });
 </script>
 
+
 <script>
-
-  // OLO AFTO TSEKAREI AN NAV-BAR KAI FOOT-BAR KANOUN WRAP. AN NAI TOTE ZOOM-OUTS
-  // AFTO GINETAI SE KATHE PAGE LOAD ALLA EINAI LIGO + 3milisecond
-  // prepei nanai inside body sthn arxh
-
-  function isMobile() {
-    return window.innerWidth <= 768; // Adjust breakpoint if needed (iPhone 12 Mini is 375px)
+  // Apply 85% zoom ONLY on mobile (under 768px width)
+  if (window.innerWidth <= 768) {
+    document.body.style.zoom = '0.85';
+    console.log('Mobile zoom applied (85%)');
   }
-
-  function needsZoomFix() {
-    const nav = document.getElementById('main-nav');
-    const footer = document.querySelector('#footer div');
-    return (nav.scrollWidth > nav.clientWidth) || (footer.scrollWidth > footer.clientWidth);
-  }
-
-  function applyOptimalZoom() {
-    if (!isMobile()) return; // Exit if desktop
-
-    const zoomLevels = [1.0, 0.95, 0.9, 0.85]; // Test from 100% down to 85%
-    let optimalZoom = 1.0;
-
-    // Find the largest zoom that prevents wrapping
-    for (const zoom of zoomLevels) {
-      document.body.style.transform = `scale(${zoom})`;
-      document.body.style.transformOrigin = 'top center';
-      if (!needsZoomFix()) {
-        optimalZoom = zoom;
-        break;
-      }
-    }
-
-    document.body.style.transform = `scale(${optimalZoom})`;
-    console.log(`Applied mobile zoom: ${optimalZoom * 100}%`);
-  }
-
-  // Run on load and resize (debounced)
-  let resizeTimer;
-  window.addEventListener('load', applyOptimalZoom);
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(applyOptimalZoom, 100);
-  });
 </script>
 
 
