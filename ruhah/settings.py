@@ -236,7 +236,7 @@ if os.environ.get('ENVIRONMENT') == 'production':
     EMAIL_DOMAIN = 'ruhah.com'
     EMAIL_PROTOCOL = 'https'
     SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
-    PREPEND_WWW = True  # Adds www prefix
+    # PREPEND_WWW = True  # Adds www prefix ALLA xalaei to PWA (vazei bares panw katw)
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
