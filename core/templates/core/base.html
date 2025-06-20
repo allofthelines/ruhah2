@@ -222,11 +222,18 @@
     }
   });
 
-  // Only run on mobile and if no zoom is already set
-  if (window.innerWidth <= 768 && !sessionStorage.getItem('zoomSet')) {
-    document.body.style.zoom = '0.85';
-    sessionStorage.setItem('zoomSet', 'true');
-    console.log('Applied initial 85% zoom');
+  // Apply zoom BEFORE page renders (mobile only)
+  if (window.innerWidth <= 768) {
+    document.write(`
+      <style>
+        body {
+          zoom: 0.85;
+          -moz-transform: scale(0.85);
+          -moz-transform-origin: 0 0;
+        }
+      </style>
+    `);
+    console.log('Pre-render zoom applied');
   }
 
 
