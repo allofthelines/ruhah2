@@ -76,16 +76,18 @@
       font-size: 16px;
     }
 
-    @media (max-width: 768px) {
+   @media (max-width: 768px) {
       #main-nav, #footer div {
-        width: 90vw;           /* 90% of viewport width */
-
+        width: 90vw;
+        margin-left: 5vw;     /* Centers 90% width (100% - 90% = 10%, split to 5% each side) */
+        margin-right: 5vw;
+        transform: translateX(0); /* Resets any accidental transforms */
       }
-
-      .nav-link {
-
-        font-size: 4vw;        /* Responsive font size */
-      }
+    
+      /* Optional: Ensure text alignment */
+      #main-nav { justify-content: center; }
+      #footer div { justify-content: center; }
+    }
 }
 
   </style>
