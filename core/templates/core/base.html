@@ -76,15 +76,26 @@
       font-size: 16px;
     }
 
-   @media (max-width: 768px) {
-      #main-nav, #footer div {
-        width: 90vw;
-        margin-left: 5vw;     /* Centers 90% width (100% - 90% = 10%, split to 5% each side) */
-        margin-right: 5vw;
+      @media (max-width: 768px) {
+          #main-nav, #footer div {
+            width: 90vw;
+            margin: 0 auto; /* Perfect centering */
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: hidden; /* Hide anything that might overflow */
+          }
+
+          .nav-link {
+            font-size: 14px !important; /* Fixed size - won't change with zoom */
+            white-space: nowrap; /* Prevent text wrapping */
+            flex-shrink: 0; /* Don't let items shrink */
+            padding: 0 8px; /* Consistent spacing */
+          }
+
+          #main-nav { border: 1px solid red; }
+          #footer div { border: 1px solid blue; }
       }
-       
-    }
-}
+
 
   </style>
 
