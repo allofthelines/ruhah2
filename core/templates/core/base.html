@@ -223,12 +223,14 @@
   });
 
   // Apply zoom BEFORE page renders (mobile only)
+  // tsekare pws fainetai sto responsively app
+  // edw den einai katholou allagmeno vasika
   if (window.innerWidth <= 768) {
     document.write(`
       <style>
         body {
-          zoom: 0.99;
-          -moz-transform: scale(0.99);
+          zoom: 1.00;
+          -moz-transform: scale(1.00);
           -moz-transform-origin: 0 0;
         }
       </style>
