@@ -84,6 +84,12 @@
       font-size: 16px;
     }
 
+    /* Add this to your CSS */
+    .mobile-message img {
+      max-width: 250px;
+      height: auto;
+}
+
 
 
   </style>
@@ -154,8 +160,17 @@
   </div>
 </footer>
 
+<!--
 <div id="mobileMessage" class="mobile-message">
     In your browser go to <strong>Share</strong> > <strong>Add to Home Screen</strong> to download the App
+</div>
+-->
+
+<!-- In your HTML template (e.g., base.html) -->
+<div id="mobileMessage" class="mobile-message">
+  <img src="{% static 'images/pwa-install-instruction.jpg' %}"
+       alt="Install App Instructions"
+       class="pwa-install-image">
 </div>
 
 
