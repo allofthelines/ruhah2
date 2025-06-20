@@ -76,7 +76,7 @@
       font-size: 16px;
     }
 
-    
+
 
   </style>
 
@@ -221,7 +221,18 @@
       });
     }
   });
+
+  // Only run on mobile and if no zoom is already set
+  if (window.innerWidth <= 768 && !sessionStorage.getItem('zoomSet')) {
+    document.body.style.zoom = '0.85';
+    sessionStorage.setItem('zoomSet', 'true');
+    console.log('Applied initial 85% zoom');
+  }
+
+
 </script>
+
+
 
 
 
