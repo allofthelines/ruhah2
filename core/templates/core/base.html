@@ -76,6 +76,23 @@
       font-size: 16px;
     }
 
+    @media (max-width: 768px) {
+      #main-nav, #footer div {
+        width: 90vw;           /* 90% of viewport width */
+        margin: 0 auto;        /* Center horizontally */
+        overflow-x: hidden;    /* Prevent horizontal scroll */
+        display: flex;
+        flex-wrap: nowrap;     /* Force single line */
+        justify-content: space-between; /* Distribute items evenly */
+      }
+
+      .nav-link {
+        flex-shrink: 0;        /* Prevent item shrinking */
+        padding: 0 2vw;        /* Responsive padding */
+        font-size: 4vw;        /* Responsive font size */
+      }
+}
+
   </style>
 
 </head>
