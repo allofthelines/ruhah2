@@ -60,3 +60,5 @@ python manage.py
 New items from excel to models ```
 python manage.py new_item
 ```
+
+THERE IS A .PYTHON-VERSION FILE HIDDEN
