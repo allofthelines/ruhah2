@@ -238,6 +238,8 @@ if os.environ.get('ENVIRONMENT') == 'production':
     SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
     PREPEND_WWW = True  # Adds www prefix ALLA xalaei to PWA (vazei bares panw katw)
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_DOMAIN = '.ruhah.com'  # + VGAZEI TIS MPARES STO PWA OTAN WWW ENABLED
+    CSRF_COOKIE_DOMAIN = '.ruhah.com' # + VGAZEI TIS MPARES STO PWA OTAN WWW ENABLED
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
 else:

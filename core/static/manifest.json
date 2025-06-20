@@ -2,7 +2,8 @@
   "name": "Ruhah",
   "short_name": "Ruhah",
   "description": "My Progressive Web App",
-  "start_url": "/",
+  "start_url": "/?source=pwa", // htan "/"
+  "scope": "/", // den htan katholou
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
