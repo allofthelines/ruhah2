@@ -197,6 +197,10 @@ a:visited {
 
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
+
+  font-family: 'Roboto Mono';
+  font-weight: 300;
+  font-size: 1.5rem; /* LALALALA 2.5rem isws better*/
 }
 
 #main-menu {
