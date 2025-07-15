@@ -75,12 +75,17 @@
     }
 
     .alternate-view #header-row img.header-icon {
-      display: none;
+      /* display: none; with this i cannot click but it ruins centered (RUHAH) */
+      visibility: hidden;
     }
 
     .alternate-view #header-title {
       text-align: center;
       width: 100%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto; /* Remove any fixed width */
     }
 
     .alternate-view #header-title .parenthesis {
