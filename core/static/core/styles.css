@@ -194,6 +194,25 @@ a:visited {
   position: relative;
 }
 
+#header-row-left,
+#header-row-right {
+  flex: 1; /* This makes them take equal space */
+  display: flex;
+  align-items: center;
+}
+
+#header-row-left {
+  justify-content: flex-start; /* Aligns content to the left */
+}
+
+#header-row-center {
+  flex: 0 0 auto; /* Doesn't grow or shrink, takes only needed space */
+}
+
+#header-row-right {
+  justify-content: flex-end; /* Aligns content to the right */
+}
+
 #header-title {
   color: black;
   font-family: 'Rubik', sans-serif;  /* Add the font-family */
