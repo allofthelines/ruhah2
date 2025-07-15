@@ -19,7 +19,7 @@
   <link rel="icon" href="{% static 'core/favicon.png' %}" type="image/png">
   <link rel="manifest" href="{% static 'manifest.json' %}">
 
-  <title>RUHAH</title>
+  <title>{% block title %}RUHAH{% endblock %}</title>
   {% block scripts %}{% endblock %}
 
   <style>
