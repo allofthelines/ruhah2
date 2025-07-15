@@ -192,6 +192,7 @@ a:visited {
   align-items: center;
   width: 100%;
   position: relative;
+  padding: 25px 0; /* kanei to keno deksia aristera idio me panw */
 }
 
 #header-title {
