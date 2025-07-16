@@ -2,6 +2,7 @@ from django.db import models
 from accounts.models import CustomUser
 from django.conf import settings
 import jsonfield
+from pgvector.django import VectorField
 # from multiselectfield import MultiSelectField
 # ALLAKSE TO SIZE_XYZ SE MULTIPLE
 
@@ -131,9 +132,17 @@ class Item(models.Model):
 
     # DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
     image = models.ImageField(upload_to="items/", default='items/default.jpg', blank=True, null=True)
+    embedding = VectorField(dimensions=768, blank=True, null=True)
 
     def __str__(self):
         return self.itemid
+
+    @classmethod
+    def find_similar(cls, vector, limit=10):
+        """Find similar products using pgvector cosine similarity"""
+        return cls.objects.annotate(
+            similarity=1 - CosineDistance('embedding', vector)
+        ).order_by('-similarity')[:limit]
 
 class StudioOutfitTemp(models.Model):
     # etsi wste otan kanw refresh na krathsw to idio

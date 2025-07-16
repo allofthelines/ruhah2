@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'box.apps.BoxConfig',  # app
     'accounts.apps.AccountsConfig',  # app
     'studio.apps.StudioConfig',  # app
+    'chatai.apps.ChataiConfig', #app
     'pwa',
 ]
 
@@ -126,8 +127,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': config('DB_NAME', default='ruhahlocal'),
-            'USER': config('DB_USER', default='arislocal'),
-            'PASSWORD': config('DB_PASSWORD', default='passlocal'),
+            'USER': config('DB_USER', default='aris'),
+            'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST': config('DB_HOST', default='localhost'),
             'PORT': config('DB_PORT', default='5432'),
         }
@@ -353,6 +354,11 @@ if ENVIRONMENT == 'production':
 KOLORS_API_KEY = 'your_api_key_here'
 KOLORS_API_SECRET = 'your_api_secret_here'
 KOLORS_API_URL = 'https://kolors-model.api/tryon'  # Example endpoint URL
+
+# GOOGLE API KEY
+# GEMINI MILTIMODAL
+GOOGLE_API_KEY="AIzaSyAQXN7qEIG1hU0SG6s7wNOCRKdU0grABMY"
+
 
 
 
