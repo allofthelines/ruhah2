@@ -132,7 +132,8 @@ class Item(models.Model):
 
     # DJANGO-ADMIN-MANUAL vs AWS-JSON-BATCH
     image = models.ImageField(upload_to="items/", default='items/default.jpg', blank=True, null=True)
-    embedding = VectorField(dimensions=768, blank=True, null=True)
+    # embedding = VectorField(dimensions=768, blank=True, null=True)
+    # embedding to eixa valei kai ta eixe gamisei ola alla nomizw den eixe prolavei na paei heroku
 
     def __str__(self):
         return self.itemid
