@@ -184,21 +184,28 @@ STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'core/static/core'),
     ]
 
+# In settings.py - development section only
 if ENVIRONMENT == 'development':
-    # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    # STATIC_URL = '/static/'
-    # MEDIA_URL = '/media/'
-
-    # mallon gia thn entolh collectstatic sto terminal
+    # Static files
+    STATIC_URL = '/static/'
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'core/static/core'),
+        os.path.join(BASE_DIR, 'core/static/core'),  # Your exact path
     ]
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_dev')  den kserw giati yparxei mallon gia deploy AN DEN yphrxe s3
+
+    # Media files
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+    # Disable AWS completely for development
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# TROUBLESHOOTING SVHSE ME
+# TROUBLESHOOTING SVHSE Me
+'''
 if ENVIRONMENT == 'development':
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
@@ -207,6 +214,7 @@ if ENVIRONMENT == 'development':
     ]
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+'''
 
 
 
