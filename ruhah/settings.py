@@ -181,7 +181,7 @@ MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/' # uploaded by users
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'core/static'),
+        os.path.join(BASE_DIR, 'core/static/core'),
     ]
 
 if ENVIRONMENT == 'development':
@@ -192,7 +192,7 @@ if ENVIRONMENT == 'development':
 
     # mallon gia thn entolh collectstatic sto terminal
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'core/static'),
+        os.path.join(BASE_DIR, 'core/static/core'),
     ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -203,7 +203,7 @@ if ENVIRONMENT == 'development':
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'core/static'),
+        os.path.join(BASE_DIR, 'core/static/core'),
     ]
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
