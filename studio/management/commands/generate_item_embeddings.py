@@ -9,6 +9,7 @@ from google.oauth2 import service_account
 from google.cloud import aiplatform
 from vertexai.language_models import TextEmbeddingModel
 from vertexai.preview.generative_models import GenerativeModel, Image as VertexImage
+from vertexai.generative_models import Part
 
 # ----------- SERVICE ACCOUNT HANDLING -----------
 def ensure_gcp_sa_file():
@@ -134,6 +135,19 @@ class Command(BaseCommand):
     def generate_image_description(self, image_data, prompt):
         try:
             img_part = VertexImage(data=image_data)  # correct way: SDK's Image, not PIL
+            response = GEMINI_MODEL.generate_content([prompt, img_part])
+            return response.text
+        except Exception as e:
+            raise Exception(f"Error in Gemini generate_content: {e}")
+
+    def generate_image_description(self, image_data, prompt):
+        try:
+            # Preferred: Use VertexImage.from_bytes (assuming image_data is bytes)
+            img_part = VertexImage.from_bytes(image_data)
+
+            # Alternative (if above fails): Wrap in a Part explicitly
+            # img_part = Part.from_data(data=image_data, mime_type="image/png")
+
             response = GEMINI_MODEL.generate_content([prompt, img_part])
             return response.text
         except Exception as e:
