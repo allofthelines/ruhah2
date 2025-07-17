@@ -163,6 +163,10 @@ USE_TZ = True
 
 
 
+
+
+
+
 # STATIC FILES (CSS, JavaScript, Images) + MEDIA FILES
 # STATIC FILES (CSS, JavaScript, Images) + MEDIA FILES
 # STATIC FILES (CSS, JavaScript, Images) + MEDIA FILES
@@ -361,6 +365,14 @@ KOLORS_API_URL = 'https://kolors-model.api/tryon'  # Example endpoint URL
 # GEMINI MILTIMODAL
 GOOGLE_API_KEY="AIzaSyAQXN7qEIG1hU0SG6s7wNOCRKdU0grABMY"
 
+
+
+# VERTEX API
+# VERTEX API
+# Path to the Vertex AI service account JSON (from env)
+# to evala kai sto heroku san variable
+# meta, to file, einai ena oloklhro json file sto root dipla sto requirements.txt
+GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE_PATH = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE")
 
 
 
