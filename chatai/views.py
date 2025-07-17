@@ -23,6 +23,12 @@ class AIChatStartView(View):
     def create_session(self, request, item_id=None, outfit_id=None):
         user = request.user if request.user.is_authenticated else None
 
+        # Safely handle outfit_id: Convert to int or None if empty/invalid
+        try:
+            outfit_id = int(outfit_id) if outfit_id else None
+        except (ValueError, TypeError):
+            outfit_id = None  # Ignore invalid values; set to None (allowed by model)
+
         session = ChatSession.objects.create(
             chat_user=user,
             chat_reference_outfit_id=outfit_id

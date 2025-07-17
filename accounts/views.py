@@ -586,7 +586,8 @@ def profile_grid_outfit_details(request, outfit_id):
     context = {
         'outfit': outfit,
         'items': items,
-        'profile_user': outfit.maker_id  # Assuming outfit has a maker field that refers to the profile user
+        'profile_user': outfit.maker_id,  # Assuming outfit has a maker field that refers to the profile user
+        'outfit_id': outfit.id, # passes outfit_id to template gia to ai chat gia to back button
     }
 
     # Render the template with the context
