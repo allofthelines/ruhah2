@@ -8,151 +8,174 @@
 {% endblock %}
 
 {% block content %}
-<div class="chat-container">
-    <!-- Regular content (scrolls with page, like studio_items) -->
-    <div class="chat-messages">
-        {% for message in messages %}
-            <div class="chat-bubble {% if message.msg_is_from_user %}user-bubble{% else %}ruhah-bubble{% endif %} {% if message.msg_message_type == 'recommendation' %}recommendation-bubble{% endif %}">
-                {% if message.msg_is_from_user %}
-                    <div class="user-icon"></div>  <!-- Circle icon -->
-                {% elif message.msg_message_type != 'recommendation' %}
-                    <img src="{% static 'ruhah_icon.png' %}" alt="< >" class="ruhah-icon">  <!-- Your static icon; replace with actual path; hidden for recommendations -->
-                {% endif %}
-                <div class="bubble-content">
-                    {% if message.msg_text %}
-                        <p>{{ message.msg_text }}</p>
-                    {% endif %}
-                    {% if message.msg_image_url %}
-                        <img src="{{ message.msg_image_url }}" alt="Reference Image" class="bubble-image">
-                    {% endif %}
-                    {% if message.msg_recommendations %}
-                        <div class="recommendations-grid">
-                            {% for rec in message.msg_recommendations %}
-                                <div class="rec-item">
-                                    <img src="{{ rec.main_image }}" alt="{{ rec.name }}">
-                                    <p>${{ rec.price }}</p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <!-- Fixed bottom bar (floating, like you described) -->
-    <div class="chat-bar">
-        <button onclick="location.href='{% url 'chatai:aichat' %}'">New</button>  <!-- Resets to virgin -->
-        <button {% if not can_input %}disabled{% endif %}>Upload</button>  <!-- Disabled if max user messages reached -->
-        <input type="text" placeholder="Type here (disabled for now)" {% if not can_input %}disabled{% endif %}>
-        <button {% if not can_input %}disabled{% endif %}>Send</button>
-        {% if reference_outfit_id and profile_user %}
-            <button onclick="location.href='{% url 'accounts:public_profile' profile_user.username %}#gridpics?outfit_id={{ reference_outfit_id }}'">Go Back</button>  <!-- Uses model-stored metadata -->
-        {% endif %}
-    </div>
+<div class="chat-wrapper">
+  <div class="chat-container">
+      <div class="chat-messages">
+          {% for message in messages %}
+              <div class="chat-bubble {% if message.msg_is_from_user %}user-bubble{% else %}ruhah-bubble{% endif %} {% if message.msg_message_type == 'recommendation' %}recommendation-bubble{% endif %}">
+                  {% if message.msg_is_from_user %}
+                      <div class="user-icon"></div>
+                  {% elif message.msg_message_type != 'recommendation' %}
+                      <img src="{% static 'ruhah_icon.png' %}" alt="< >" class="ruhah-icon">
+                  {% endif %}
+                  <div class="bubble-content">
+                      {% if message.msg_text %}
+                          <p>{{ message.msg_text }}</p>
+                      {% endif %}
+                      {% if message.msg_image_url %}
+                          <img src="{{ message.msg_image_url }}" alt="Reference Image" class="bubble-image">
+                      {% endif %}
+                      {% if message.msg_recommendations %}
+                          <div class="recommendations-grid">
+                              {% for rec in message.msg_recommendations %}
+                                  <div class="rec-item">
+                                      <img src="{{ rec.main_image }}" alt="{{ rec.name }}">
+                                      <p>${{ rec.price }}</p>
+                                  </div>
+                              {% endfor %}
+                          </div>
+                      {% endif %}
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  </div>
+</div>
+
+<div class="chat-low-bar">
+  <div class="input-row">
+      <input type="text" placeholder="Type here (disabled for now)" {% if not can_input %}disabled{% endif %}>
+      <div class="input-actions">
+          <button {% if not can_input %}disabled{% endif %}>Upload</button>
+          <button {% if not can_input %}disabled{% endif %}>Send</button>
+      </div>
+  </div>
+  <div class="nav-row">
+      <div></div>
+      <div class="nav-actions">
+          <button onclick="location.href='{% url 'chatai:aichat' %}'">New</button>
+          {% if reference_outfit_id and profile_user %}
+              <button onclick="location.href='{% url 'accounts:public_profile' profile_user.username %}#gridpics?outfit_id={{ reference_outfit_id }}'">Back</button>
+          {% endif %}
+      </div>
+  </div>
 </div>
 
 <style>
-    .chat-container {
-        max-width: 800px;  /* Matches studio_tickets content-wrapper */
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-    }
+.chat-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+.chat-container {
+    flex: 1;
+}
+.chat-messages {
+    padding: 10px;
+}
+.chat-bubble {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 10px;
+    word-break: break-word;
+    max-width: 100%;
+    position: relative;
+}
+.user-bubble {
+    background-color: #f0f0f0;
+    justify-content: flex-end;
+}
+.ruhah-bubble {
+    background-color: white;
+}
+.user-icon, .ruhah-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.ruhah-icon {
+    position: absolute;
+    left: -30px;
+    top: 10px;
+}
+.user-icon {
+    border-radius: 50%;
+    background-color: grey;
+    position: absolute;
+    right: -30px;
+    top: 10px;
+}
+.bubble-content {
+    flex: 1;
+}
+.bubble-image {
+    max-width: 100px;
+    height: auto;
+}
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+.rec-item {
+    border: 1px solid black;
+    text-align: center;
+}
+.rec-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+.recommendation-bubble {
+    width: 100%;
+    padding-left: 10px !important;
+}
+.recommendation-bubble .ruhah-icon {
+    display: none;
+}
 
-    .chat-messages {
-        padding: 10px;  /* Regular padding, page scrolls naturally */
+.chat-low-bar {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+.input-row, .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+}
+.input-row {
+    border-bottom: 1px solid black;
+}
+.input-row input {
+    flex: 1;
+    margin-right: 10px;
+}
+.input-actions, .nav-actions {
+    display: flex;
+    gap: 10px;
+}
+@media (max-width: 768px) {
+    .chat-wrapper {
+        padding: 0 10px;
     }
-
-    .chat-bubble {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 10px;
-        border: 1px solid black;  /* Thin black line like studio_tickets */
-        border-radius: 4px;
-        padding: 10px;
-        word-break: break-word;  /* Like studio_tickets notes */
-        max-width: 100%;  /* Matches recommendation grid width */
-    }
-
-    .user-bubble {
-        background-color: #f0f0f0;  /* Soft grey */
-        justify-content: flex-end;  /* User on right? Adjust if needed */
-    }
-
-    .ruhah-bubble {
-        background-color: white;
-    }
-
-    .user-icon, .ruhah-icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;  /* Total icon space: 20px + 10px = 30px */
-    }
-
-    .user-icon {
-        border-radius: 50%;
-        background-color: grey;  /* Simple circle */
-    }
-
-    .bubble-content {
-        flex: 1;
-    }
-
-    .bubble-image {
-        max-width: 100px;
-        height: auto;
-    }
-
     .recommendations-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);  /* 2 cols desktop; like studio_items */
-        grid-gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
     }
-
-    .rec-item {
-        border: 1px solid black;  /* Like contA in studio_items */
-        text-align: center;
-    }
-
-    .rec-item img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1/1;  /* Square like you want */
-        object-fit: cover;
-    }
-
-    /* New: Recommendation bubble adjustments */
-    .recommendation-bubble {
-        width: calc(100% - 30px);  /* Matches regular bubble width + icon space (adjust 30px if icon size/margin differs) */
-    }
-    .recommendation-bubble .ruhah-icon {
-        display: none;  /* Hide icon for recommendations */
-    }
-
-    .chat-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #f0f0f0;  /* Soft grey */
-        padding: 10px;
-        display: flex;
-        justify-content: space-around;
-        border-top: 1px solid black;
-    }
-
-    @media (max-width: 768px) {
-        .recommendations-grid {
-            grid-template-columns: repeat(1, 1fr);  /* 1 col mobile */
-        }
-
-        .chat-bubble {
-            max-width: 100%;  /* Full width mobile */
-        }
-
-        .recommendation-bubble {
-            width: 100%;  /* Full on mobile (no icon offset needed) */
-        }
-    }
+}
 </style>
 {% endblock %}
