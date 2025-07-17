@@ -110,9 +110,8 @@ class Command(BaseCommand):
 
     def generate_image_description(self, image_data, mimetype):
         api_key = settings.GOOGLE_API_KEY
-        # Latest Gemini 1.5 Vision endpoint per docs:
         url = (
-            "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-latest:generateContent"
+            "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent"
             f"?key={api_key}"
         )
         prompt = (
