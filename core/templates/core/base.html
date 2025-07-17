@@ -121,7 +121,10 @@
 <div id="header">
   <div id="header-row">
     <div id="header-row-left">
-      <img class="header-icon" src="{% static 'images/icons/icon-ai.png' %}" alt="AI">
+      <a href="{% url 'chatai:aichat' %}">
+          <img class="header-icon" src="{% static 'images/icons/icon-ai.png' %}" alt="AI">
+      </a>
+      <!--<img class="header-icon" src="{% static 'images/icons/icon-ai.png' %}" alt="AI">-->
     </div>
     <div id="header-row-center">
       <h1 id="header-title" onclick="toggleView()"><span class="parenthesis">&#40;</span>RUHAH<span class="parenthesis">&#41;</span></h1>

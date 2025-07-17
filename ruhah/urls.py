@@ -8,6 +8,7 @@ urlpatterns = [
     path('box/', include(('box.urls', 'box'), namespace='box')),
     path('accounts/', include('accounts.urls', namespace='accounts')),  # Include with namespace
     path('studio/', include('studio.urls', namespace='studio')),
+    path('chatai/', include('chatai.urls', namespace='chatai')),
     path("", include("core.urls")),
     path('', include('pwa.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

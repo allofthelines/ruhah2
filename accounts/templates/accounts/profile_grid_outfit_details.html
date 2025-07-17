@@ -18,6 +18,8 @@
             <div class="item-basic-details">
                 <p class="item-name">{{ item.name }}</p>
                 <p class="item-price">${{ item.price }}</p>
+                <!-- Minimal addition: 'FIND' link next to price CHAT AI CHATAI AICHAT tagrapsa afta gia na me vreis -->
+                <a href="{% url 'chatai:start_aichat' %}?item_id={{ item.id }}&outfit_id={{ outfit_id }}">FIND</a></p>
             </div>
             <div class="item-size-selection">
                 <label for="size-select-{{ item.id }}">Select Size:</label>
