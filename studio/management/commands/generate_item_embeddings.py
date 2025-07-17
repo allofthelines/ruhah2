@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from studio.models import Item
 from django.conf import settings
 from django.core.files.storage import default_storage
-from PIL import Image
+from PIL import Image # Gemini wants a PIL.Image.Image! Not bytes.
 import io
 
 from google.oauth2 import service_account
@@ -157,6 +157,7 @@ class Command(BaseCommand):
         )
         model = GenerativeModel('gemini-1.5-flash')
         try:
+            img_obj = Image.open(io.BytesIO(image_data))
             response = model.generate_content([
                 "Describe this fashion item in extreme detail including: "
                 "1. Primary colors and color patterns "
@@ -164,7 +165,7 @@ class Command(BaseCommand):
                 "3. Style characteristics "
                 "4. Unique design elements "
                 "5. Potential use cases and occasions",
-                image_data
+                img_obj
             ])
             return response.text
         except Exception as e:
