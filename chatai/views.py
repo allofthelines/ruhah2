@@ -95,7 +95,8 @@ class AIChatView(TemplateView):
 
         try:
             session = ChatSession.objects.get(id=session_id)
-            messages = session.messages.order_by('msg_timestamp')
+            # messages = session.messages.order_by('msg_timestamp')
+            messages = session.messages.order_by('msg_created_at')
 
             # Safer Go Back context: Fetch only if reference_outfit_id exists
             reference_outfit_id = session.chat_reference_outfit_id
