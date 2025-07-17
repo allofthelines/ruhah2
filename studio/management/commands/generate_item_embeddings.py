@@ -4,52 +4,17 @@ from django.core.management.base import BaseCommand
 from studio.models import Item
 from django.core.files.storage import default_storage
 from PIL import Image
+import google.generativeai as genai
 
-from google.oauth2 import service_account
-from google.cloud import aiplatform
-from vertexai.language_models import TextEmbeddingModel
-from vertexai.preview.generative_models import GenerativeModel, Image as VertexImage
-from vertexai.generative_models import Part
+# Configure the SDK with your API key (from env var)
+API_KEY = os.environ.get("GOOGLE_API_KEY")
+if not API_KEY:
+    raise RuntimeError("GOOGLE_API_KEY environment variable is not set!")
+genai.configure(api_key=API_KEY)
 
-# ----------- SERVICE ACCOUNT HANDLING -----------
-def ensure_gcp_sa_file():
-    json_from_env = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON")
-    file_from_env = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE")
-    if json_from_env:
-        sa_path = "/tmp/gcp-sa-key.json"
-        with open(sa_path, "w") as f:
-            if json_from_env.strip().startswith('{'):
-                f.write(json_from_env)
-            else:
-                import base64
-                try:
-                    f.write(base64.b64decode(json_from_env).decode("utf-8"))
-                except Exception:
-                    raise RuntimeError("Incomplete/bad service account JSON in config var")
-        return sa_path
-    if file_from_env and os.path.exists(file_from_env):
-        return file_from_env
-    raise RuntimeError(
-        "No valid service account found! Set GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE to a key file (locally),\n"
-        "or set GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON (on Heroku, containing the _full_ JSON key as a string/config var)"
-    )
-
-SERVICE_ACCOUNT_FILE_PATH = ensure_gcp_sa_file()
-print("DEBUG: Service account path being used:", SERVICE_ACCOUNT_FILE_PATH)
-
-creds = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE_PATH,
-    scopes=["https://www.googleapis.com/auth/cloud-platform"]
-)
-
-aiplatform.init(
-    credentials=creds,
-    project="gen-lang-client-0869247041",
-    location="us-central1"
-)
-
-EMBED_MODEL = TextEmbeddingModel.from_pretrained("textembedding-gecko@001")
-GEMINI_MODEL = GenerativeModel("gemini-1.0-pro-vision-001")
+# Models from your successful test
+DESCRIPTION_MODEL = "gemini-1.5-flash"  # For text/image generation (multimodal)
+EMBEDDING_MODEL = "models/embedding-001"  # For text embeddings
 
 DOCSTRING = """
 USAGE (interactive mode):
@@ -72,7 +37,7 @@ def smart_resize(image_data, max_px=250):
         return buf.read()
 
 class Command(BaseCommand):
-    help = "Generate vector embeddings for items using Vertex AI. " + DOCSTRING
+    help = "Generate vector embeddings for items using Google Generative AI. " + DOCSTRING
 
     def handle(self, *args, **options):
         self.stdout.write(self.help)
@@ -100,7 +65,7 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING(f"⚠️  Skipping {item.itemid} (already embedded)"))
                 continue
             if not item.image or not item.image.name:
-                self.stderr.write(self.style.WARNING(f"⏩ Skipping {item.itemid} (no image)"))
+                self.stdout.write(self.style.WARNING(f"⏩ Skipping {item.itemid} (no image)"))
                 continue
             try:
                 self.process_item(item)
@@ -122,11 +87,13 @@ class Command(BaseCommand):
         )
         description = self.generate_image_description(image_data, prompt)
         if not description:
-            raise Exception("Failed to get a description from Gemini vision/model.")
+            raise Exception("Failed to get a description from Gemini model.")
+
+        print("DEBUG: Generated description:", description)  # For troubleshooting
 
         vector = self.text_to_vector(description)
         if not isinstance(vector, list) or not vector:
-            raise Exception("Failed to obtain embedding from Vertex AI.")
+            raise Exception("Failed to obtain embedding from Google Generative AI.")
 
         item.embedding = vector
         item.save(update_fields=["embedding"])
@@ -134,28 +101,27 @@ class Command(BaseCommand):
 
     def generate_image_description(self, image_data, prompt):
         try:
-            img_part = VertexImage(data=image_data)  # correct way: SDK's Image, not PIL
-            response = GEMINI_MODEL.generate_content([prompt, img_part])
-            return response.text
-        except Exception as e:
-            raise Exception(f"Error in Gemini generate_content: {e}")
-
-    def generate_image_description(self, image_data, prompt):
-        try:
-            # Preferred: Use VertexImage.from_bytes (assuming image_data is bytes)
-            img_part = VertexImage.from_bytes(image_data)
-
-            # Alternative (if above fails): Wrap in a Part explicitly
-            # img_part = Part.from_data(data=image_data, mime_type="image/png")
-
-            response = GEMINI_MODEL.generate_content([prompt, img_part])
+            model = genai.GenerativeModel(DESCRIPTION_MODEL)
+            # Prepare image as a dict for the SDK
+            image_file = {
+                'mime_type': 'image/png',
+                'data': image_data
+            }
+            response = model.generate_content([prompt, image_file])
+            print("DEBUG: Raw response from Gemini:", response)  # For troubleshooting
             return response.text
         except Exception as e:
             raise Exception(f"Error in Gemini generate_content: {e}")
 
     def text_to_vector(self, text):
         try:
-            embeddings = EMBED_MODEL.get_embeddings([text])
-            return embeddings[0].values
+            result = genai.embed_content(
+                model=EMBEDDING_MODEL,
+                content=text,
+                task_type="retrieval_document"  # Good for your use case; can change to "semantic_similarity" if needed
+            )
+            vector = result['embedding']
+            print("DEBUG: Generated embedding vector sample:", vector[:10])  # For troubleshooting
+            return vector
         except Exception as e:
-            raise Exception(f"Error getting embedding from Vertex textembedding-gecko: {e}")
+            raise Exception(f"Error getting embedding: {e}")
