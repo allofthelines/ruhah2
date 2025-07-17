@@ -8,9 +8,9 @@ from PIL import Image
 from google.oauth2 import service_account
 from google.cloud import aiplatform
 from vertexai.language_models import TextEmbeddingModel
-from vertexai.preview.generative_models import GenerativeModel
+from vertexai.preview.generative_models import GenerativeModel, Image as VertexImage
 
-# ----------- SERVICE ACCOUNT HANDLING (WORKS LOCALLY and on HEROKU) -----------
+# ----------- SERVICE ACCOUNT HANDLING -----------
 def ensure_gcp_sa_file():
     json_from_env = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON")
     file_from_env = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE")
@@ -46,6 +46,7 @@ aiplatform.init(
     project="gen-lang-client-0869247041",
     location="us-central1"
 )
+
 EMBED_MODEL = TextEmbeddingModel.from_pretrained("textembedding-gecko@001")
 GEMINI_MODEL = GenerativeModel("gemini-1.5-flash")
 
@@ -110,13 +111,14 @@ class Command(BaseCommand):
         with default_storage.open(item.image.name, "rb") as f:
             image_bytes = f.read()
         image_data = smart_resize(image_bytes, 250)
-        prompt = ("Describe this fashion item in extreme detail including: "
-                  "1. Primary colors and color patterns "
-                  "2. Material types and textures "
-                  "3. Style characteristics "
-                  "4. Unique design elements "
-                  "5. Potential use cases and occasions")
-
+        prompt = (
+            "Describe this fashion item in extreme detail including: "
+            "1. Primary colors and color patterns "
+            "2. Material types and textures "
+            "3. Style characteristics "
+            "4. Unique design elements "
+            "5. Potential use cases and occasions"
+        )
         description = self.generate_image_description(image_data, prompt)
         if not description:
             raise Exception("Failed to get a description from Gemini vision/model.")
@@ -131,8 +133,8 @@ class Command(BaseCommand):
 
     def generate_image_description(self, image_data, prompt):
         try:
-            img_obj = Image.open(io.BytesIO(image_data))
-            response = GEMINI_MODEL.generate_content([prompt, img_obj])
+            img_part = VertexImage(image_data)  # correct way: SDK's Image, not PIL
+            response = GEMINI_MODEL.generate_content([prompt, img_part])
             return response.text
         except Exception as e:
             raise Exception(f"Error in Gemini generate_content: {e}")
