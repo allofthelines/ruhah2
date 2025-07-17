@@ -15,10 +15,14 @@ class AIChatStartView(View):
         # Create session (stores refs in model)
         session = self.create_session(request, item_id, outfit_id)
 
-        # Store session ID in Django session (hidden from URL)
-        request.session['chat_session_id'] = session.id
+        if session:
+            request.session['chat_session_id'] = session.id
+            return redirect('chatai:aichat')
 
-        return redirect('aichat')  # Clean URL (app_name not needed if no namespace conflict)
+        return redirect('core:home')
+
+        # old i dont know why
+        # return redirect('aichat')  # Clean URL (app_name not needed if no namespace conflict)
 
     def create_session(self, request, item_id=None, outfit_id=None):
         user = request.user if request.user.is_authenticated else None
