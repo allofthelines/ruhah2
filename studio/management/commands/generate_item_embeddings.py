@@ -1,11 +1,16 @@
 import base64
-import requests
+import os
 from django.core.management.base import BaseCommand
 from studio.models import Item  # Update import as needed
 from django.conf import settings
 from django.core.files.storage import default_storage
 from PIL import Image
 import io
+
+# Import Vertex AI stuff:
+from google.oauth2 import service_account
+from google.cloud import aiplatform
+from vertexai.language_models import TextEmbeddingModel
 
 DOCSTRING = """
 USAGE (interactive mode):
@@ -26,7 +31,8 @@ Notes:
 - Only items with an image file (recommended: PNG) are considered valid.
 - If an itemid is used, embedding is ALWAYS re-generated (overwriting any previous embedding).
 - If 'hard-all', all embeddings are regenerated regardless of previous value.
-- API key must be set at settings.GOOGLE_API_KEY and have billing enabled.
+- GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE env variable must be set to JSON service account.
+- Project and location are hard-coded below.
 - Images are automatically resized to 250x250 px (aspect ratio preserved).
 """
 
@@ -40,8 +46,30 @@ def smart_resize(image_data, max_px=250):
         buf.seek(0)
         return buf.read()
 
+# === VERTEX AI SETUP (do only once per Python process) ===
+SERVICE_ACCOUNT_FILE_PATH = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE")
+if not SERVICE_ACCOUNT_FILE_PATH or not os.path.exists(SERVICE_ACCOUNT_FILE_PATH):
+    raise RuntimeError(
+        "GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE env var not set "
+        "or does not point to a valid file. Cannot authenticate with Vertex AI!"
+    )
+
+creds = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE_PATH,
+    scopes=["https://www.googleapis.com/auth/cloud-platform"]
+)
+
+aiplatform.init(
+    credentials=creds,
+    project="gen-lang-client-0869247041",  # <--- YOUR PROJECT ID
+    location="us-central1"
+)
+
+# Preload model for efficiency
+embedding_model = TextEmbeddingModel.from_pretrained("textembedding-gecko@001")
+
 class Command(BaseCommand):
-    help = "Generate vector embeddings for items using Gemini API. " + DOCSTRING
+    help = "Generate vector embeddings for items using Vertex AI. " + DOCSTRING
 
     def handle(self, *args, **options):
         self.stdout.write(self.help)
@@ -94,13 +122,15 @@ class Command(BaseCommand):
         # --- Smart resize ---
         image_data = smart_resize(image_data, 250)
 
+        # Get a description (you can choose another method here if using images)
         description = self.generate_image_description(image_data, mimetype)
         if not description:
-            raise Exception("Failed to get a description from Gemini API.")
+            raise Exception("Failed to get a description from Gemini vision/model.")
 
+        # Get the text embedding from Vertex
         vector = self.text_to_vector(description)
         if not isinstance(vector, list) or not vector:
-            raise Exception("Failed to obtain a valid vector from Google Multimodal.")
+            raise Exception("Failed to obtain embedding from Vertex AI.")
 
         item.embedding = vector
         item.save(update_fields=['embedding'])
@@ -109,50 +139,40 @@ class Command(BaseCommand):
         ))
 
     def generate_image_description(self, image_data, mimetype):
-        api_key = settings.GOOGLE_API_KEY
-        url = (
-            "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent"
-            f"?key={api_key}"
+        """
+        This function uses the Gemini API to describe an image in text (calls REST API directly).
+        Switch to Vertex SDK for image description if/when available via Python SDK.
+        """
+        from google.generativeai import configure, GenerativeModel
+
+        # This step uses your Vertex Gemini model (not the legacy API_KEY method)
+        configure(
+            credentials=creds,
+            project="gen-lang-client-0869247041"
         )
-        prompt = (
-            "Describe this fashion item in extreme detail including: "
-            "1. Primary colors and color patterns "
-            "2. Material types and textures "
-            "3. Style characteristics "
-            "4. Unique design elements "
-            "5. Potential use cases and occasions"
-        )
-        base64_image = base64.b64encode(image_data).decode('utf-8')
-        payload = {
-            "contents": [{
-                "parts": [
-                    {"text": prompt},
-                    {
-                        "inline_data": {
-                            "mime_type": mimetype,
-                            "data": base64_image
-                        }
-                    }
-                ]
-            }]
-        }
-        r = requests.post(url, json=payload)
-        r.raise_for_status()
-        data = r.json()
+        model = GenerativeModel('gemini-1.5-flash')
+        # Gemini expects the image byte data directly
         try:
-            return data['candidates'][0]['content']['parts'][0]['text']
+            response = model.generate_content([
+                "Describe this fashion item in extreme detail including: "
+                "1. Primary colors and color patterns "
+                "2. Material types and textures "
+                "3. Style characteristics "
+                "4. Unique design elements "
+                "5. Potential use cases and occasions",
+                image_data
+            ])
+            return response.text
         except Exception as e:
-            raise Exception(f"Malformed or missing description from Gemini: {data}") from e
+            raise Exception(f"Error in Gemini generate_content: {e}")
 
     def text_to_vector(self, text):
-        api_key = settings.GOOGLE_API_KEY
-        url = f"https://multimodal.googleapis.com/v1beta/models/multimodal-embedding-001:embedContent?key={api_key}"
-        payload = {"text": text}
-        r = requests.post(url, json=payload)
-        r.raise_for_status()
-        data = r.json()
+        """
+        Use Vertex's text embedding model to convert description to vector.
+        """
         try:
-            vector_data = data['embedding']['values']
-            return vector_data
+            embeddings = embedding_model.get_embeddings([text])
+            # Returns a list [Embedding], each Embedding has attribute 'values'
+            return embeddings[0].values
         except Exception as e:
-            raise Exception(f"Malformed or missing embedding from Google: {data}") from e
+            raise Exception(f"Error getting embedding from Vertex textembedding-gecko: {e}")
