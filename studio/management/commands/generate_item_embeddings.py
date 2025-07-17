@@ -3,7 +3,6 @@ import requests
 from django.core.management.base import BaseCommand
 from studio.models import Item  # Change to your item import path if necessary
 from django.conf import settings
-from pgvector.django import Vector
 from django.core.files.storage import default_storage
 
 DOCSTRING = """
@@ -90,10 +89,10 @@ class Command(BaseCommand):
             raise Exception("Failed to get a description from Gemini API.")
 
         vector = self.text_to_vector(description)
-        if not isinstance(vector, Vector):
+        if not isinstance(vector, list) or not vector:
             raise Exception("Failed to obtain a valid vector from Google Multimodal.")
 
-        item.embedding = vector
+        item.embedding = vector  # Direct assignment of list!
         item.save(update_fields=['embedding'])
         self.stdout.write(self.style.SUCCESS(
             f"✅ {item.itemid or item.id}: embedding updated."
@@ -141,6 +140,6 @@ class Command(BaseCommand):
         data = r.json()
         try:
             vector_data = data['embedding']['values']
-            return Vector(vector_data)
+            return vector_data  # <--- JUST RETURN THE LIST
         except Exception as e:
             raise Exception(f"Malformed or missing embedding from Google: {data}") from e
