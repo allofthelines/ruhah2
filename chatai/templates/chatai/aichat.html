@@ -45,7 +45,7 @@
         <button {% if not can_input %}disabled{% endif %}>Upload</button>  <!-- Disabled if max user messages reached -->
         <input type="text" placeholder="Type here (disabled for now)" {% if not can_input %}disabled{% endif %}>
         <button {% if not can_input %}disabled{% endif %}>Send</button>
-        {% if reference_outfit_id %}
+        {% if reference_outfit_id and profile_user %}
             <button onclick="location.href='{% url 'accounts:public_profile' profile_user.username %}#gridpics?outfit_id={{ reference_outfit_id }}'">Go Back</button>  <!-- Uses model-stored metadata -->
         {% endif %}
     </div>

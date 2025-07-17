@@ -96,21 +96,22 @@ class AIChatView(TemplateView):
             session = ChatSession.objects.get(id=session_id)
             messages = session.messages.order_by('msg_timestamp')
 
-            # Add Go Back context: Fetch outfit and its maker (profile_user)
+            # Safer Go Back context: Fetch only if reference_outfit_id exists
             reference_outfit_id = session.chat_reference_outfit_id
             profile_user = None
             if reference_outfit_id:
                 try:
                     outfit = Outfit.objects.get(id=reference_outfit_id)
-                    profile_user = outfit.maker_id  # Assuming maker_id is the CustomUser
+                    profile_user = outfit.maker_id  # Assuming maker_id is the CustomUser (from your views.py)
                 except Outfit.DoesNotExist:
-                    pass  # Outfit missing? Skip or handle (e.g., log error)
+                    # Optionally log: print("Outfit not found for ID:", reference_outfit_id)
+                    pass  # Skip; button will be hidden via template check
 
             context.update({
                 'messages': messages,
                 'can_input': messages.filter(msg_is_from_user=True).count() < 1,  # Max 1 user message
-                'reference_outfit_id': reference_outfit_id,  # For {% if %} and ?outfit_id=
-                'profile_user': profile_user,  # For {% url ... profile_user.username %}
+                'reference_outfit_id': reference_outfit_id if profile_user else None,  # Only set if valid profile_user
+                'profile_user': profile_user,  # None if invalid/no outfit
             })
         except ChatSession.DoesNotExist:
             return redirect('chatai:start_aichat')  # Reset if session invalid
