@@ -9,3 +9,6 @@
 # GIA TO VERTEX API JSON FILE GINETAI AFTOMATA DISABLED OTAN STO GIT
 *.json
 !settings*.json
+# Ignore env/config files JUST IN CASE FOR SAME REASON AS JSON
+.env
+*.env
