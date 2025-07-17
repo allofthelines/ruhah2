@@ -365,7 +365,7 @@ KOLORS_API_URL = 'https://kolors-model.api/tryon'  # Example endpoint URL
 # GEMINI MILTIMODAL
 # den prepei na einai mazi me vertex ai
 # giafto to exw vgalei apo heroku config vars
-# GOOGLE_API_KEY="AIzaSyAQXN7qEIG1hU0SG6s7wNOCRKdU0grABMY"
+GOOGLE_API_KEY="AIzaSyABrLYaoB4yDJdDEKBjwmJ3PYsi17Wkhks"
 
 
 
@@ -374,7 +374,7 @@ KOLORS_API_URL = 'https://kolors-model.api/tryon'  # Example endpoint URL
 # Path to the Vertex AI service account JSON (from env)
 # to evala kai sto heroku san variable
 # meta, to file, einai ena oloklhro json file sto root dipla sto requirements.txt
-GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE_PATH = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE")
+# GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE_PATH = os.environ.get("GOOGLE_VERTEX_SERVICE_ACCOUNT_FILE")
 
 
 
