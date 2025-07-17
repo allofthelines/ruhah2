@@ -49,7 +49,7 @@ aiplatform.init(
 )
 
 EMBED_MODEL = TextEmbeddingModel.from_pretrained("textembedding-gecko@001")
-GEMINI_MODEL = GenerativeModel("gemini-1.5-flash")
+GEMINI_MODEL = GenerativeModel("gemini-1.5-pro-001")
 
 DOCSTRING = """
 USAGE (interactive mode):
