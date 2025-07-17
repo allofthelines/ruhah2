@@ -116,6 +116,8 @@ WSGI_APPLICATION = "ruhah.wsgi.application"
 # DATABASE
 # DATABASE
 # DATABASE
+# The psql "version mismatch" warning is okay (it just means your client is v16, server is v17).
+# did it because pgvector local only works for v17, not v16. but my dump heroku is v16
 print(f"Environment: {ENVIRONMENT}")
 
 if ENVIRONMENT == 'production':
@@ -127,7 +129,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': config('DB_NAME', default='ruhahlocal'),
-            'USER': config('DB_USER', default='aris'),
+            'USER': config('DB_USER', default='arislocal'),
             'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST': config('DB_HOST', default='localhost'),
             'PORT': config('DB_PORT', default='5432'),
