@@ -29,25 +29,37 @@ class Command(BaseCommand):
             with open(filepath, 'r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    data = {}
+                    data = {'product_brand': brand}  # Set brand dynamically
                     for csv_col, model_field in mapping.items():
                         value = row.get(csv_col)
                         if value:
                             if model_field == 'product_images':
                                 try:
                                     data[model_field] = ast.literal_eval(value)  # Parse string to list of dicts
-                                except:
-                                    continue  # Skip invalid
+                                except Exception as e:
+                                    self.stdout.write(f"⚠️ Skipping row due to invalid images: {e}")
+                                    continue
                             elif model_field == 'product_price':
                                 try:
                                     cleaned = value.replace('₹ ', '').replace(',', '')
                                     data[model_field] = Decimal(cleaned)
                                 except InvalidOperation:
+                                    self.stdout.write(f"⚠️ Skipping row due to invalid price: {value}")
                                     continue
                             else:
                                 data[model_field] = value
+
+                    if not data.get('product_link'):  # Skip if no link (required for dupe check)
+                        self.stdout.write("⚠️ Skipping row (no link)")
+                        continue
+
+                    # Duplicate check: same brand AND link
+                    if Product.objects.filter(product_brand=brand, product_link=data['product_link']).exists():
+                        self.stdout.write(f"⚠️ Skipping duplicate: {data.get('product_name')} (brand: {brand}, link: {data['product_link']})")
+                        continue
+
                     if data:
                         Product.objects.create(**data)
-                        self.stdout.write(f"✅ Added {data.get('product_name')}")
+                        self.stdout.write(f"✅ Added {data.get('product_name')} (brand: {brand})")
 
-        self.stdout.write("Done.")
+        self.stdout.write("Done. Total products in DB: " + str(Product.objects.count()))  # Debug: print total after load
