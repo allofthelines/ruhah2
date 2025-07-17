@@ -152,8 +152,8 @@ class Command(BaseCommand):
         from google.generativeai import configure, GenerativeModel
 
         configure(
-            credentials=creds,
-            project="gen-lang-client-0869247041"
+            credentials=creds
+            # project="gen-lang-client-0869247041" to eixa kai to evgala giati error
         )
         model = GenerativeModel('gemini-1.5-flash')
         try:
