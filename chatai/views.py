@@ -6,6 +6,7 @@ from studio.models import Item  # For reference_item
 from accounts.models import CustomUser  # For chat_user
 from chatai.utils import get_similar_products
 from core.models import Outfit
+from django.views.generic import TemplateView
 
 class AIChatStartView(View):
     """Starter view to create session from params and redirect to clean /aichat/."""
