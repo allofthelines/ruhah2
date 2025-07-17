@@ -133,7 +133,7 @@ class Command(BaseCommand):
 
     def generate_image_description(self, image_data, prompt):
         try:
-            img_part = VertexImage(image_data)  # correct way: SDK's Image, not PIL
+            img_part = VertexImage(data=image_data)  # correct way: SDK's Image, not PIL
             response = GEMINI_MODEL.generate_content([prompt, img_part])
             return response.text
         except Exception as e:
