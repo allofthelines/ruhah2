@@ -58,6 +58,14 @@ class Command(BaseCommand):
                         self.stdout.write(f"⚠️ Skipping duplicate: {data.get('product_name')} (brand: {brand}, link: {data['product_link']})")
                         continue
 
+                    # Set product_main_image: For now, just pick the first image's URL if available.
+                    # FUTURE: Replace this with AI logic to analyze images (e.g., download each URL, use an AI model like Google Vision or custom ML to detect if it shows a single product vs. multiple/full-body.
+                    # Example criteria: If category is 'top', prefer zoomed-in images showing only the shirt (e.g., score based on object detection: single item, no full body/jeans).
+                    # Could use libraries like OpenCV or APIs to evaluate and select the best URL.
+                    product_images = data.get('product_images', [])
+                    if product_images and isinstance(product_images, list) and len(product_images) > 0 and 'url' in product_images[0]:
+                        data['product_main_image'] = product_images[0]['url']
+
                     if data:
                         Product.objects.create(**data)
                         self.stdout.write(f"✅ Added {data.get('product_name')} (brand: {brand})")
