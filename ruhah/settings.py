@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     'box.apps.BoxConfig',  # app
     'accounts.apps.AccountsConfig',  # app
     'studio.apps.StudioConfig',  # app
-    # 'chatai.apps.ChataiConfig', #app
+    'chatai.apps.ChataiConfig', #app
     'pwa',
 ]
 
