@@ -363,7 +363,9 @@ KOLORS_API_URL = 'https://kolors-model.api/tryon'  # Example endpoint URL
 
 # GOOGLE API KEY
 # GEMINI MILTIMODAL
-GOOGLE_API_KEY="AIzaSyAQXN7qEIG1hU0SG6s7wNOCRKdU0grABMY"
+# den prepei na einai mazi me vertex ai
+# giafto to exw vgalei apo heroku config vars
+# GOOGLE_API_KEY="AIzaSyAQXN7qEIG1hU0SG6s7wNOCRKdU0grABMY"
 
 
 
