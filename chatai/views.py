@@ -5,6 +5,7 @@ from chatai.models import ChatSession, ChatMessage, Product
 from studio.models import Item  # For reference_item
 from accounts.models import CustomUser  # For chat_user
 from chatai.utils import get_similar_products
+from core.models import Outfit
 
 class AIChatStartView(View):
     """Starter view to create session from params and redirect to clean /aichat/."""
@@ -80,34 +81,40 @@ class AIChatStartView(View):
 
         return session
 
-class AIChatView(View):
+
+class AIChatView(TemplateView):
     template_name = 'chatai/aichat.html'
 
-    def get(self, request):
-        session_id = request.session.get('chat_session_id')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        session_id = self.request.session.get('chat_session_id')
+
         if not session_id:
-            # If no session, create virgin one
-            session = AIChatStartView().create_session(request)
-            request.session['chat_session_id'] = session.id
-        else:
-            try:
-                session = ChatSession.objects.get(id=session_id)
-            except ChatSession.DoesNotExist:
-                session = AIChatStartView().create_session(request)
-                request.session['chat_session_id'] = session.id
+            return redirect('chatai:start_aichat')  # Redirect to starter if no session
 
-        # Get messages for rendering
-        messages_list = session.messages.all()
+        try:
+            session = ChatSession.objects.get(id=session_id)
+            messages = session.messages.order_by('msg_timestamp')
 
-        # Check if user can input (max 1 user message)
-        can_input = session.messages.filter(msg_is_from_user=True).count() < 1
+            # Add Go Back context: Fetch outfit and its maker (profile_user)
+            reference_outfit_id = session.chat_reference_outfit_id
+            profile_user = None
+            if reference_outfit_id:
+                try:
+                    outfit = Outfit.objects.get(id=reference_outfit_id)
+                    profile_user = outfit.maker_id  # Assuming maker_id is the CustomUser
+                except Outfit.DoesNotExist:
+                    pass  # Outfit missing? Skip or handle (e.g., log error)
 
-        context = {
-            'messages': messages_list,
-            'reference_outfit_id': session.chat_reference_outfit_id,
-            'can_input': can_input,  # For disabling UI in template
-            # Future: Add form for text/upload if can_input
-        }
-        return render(request, self.template_name, context)
+            context.update({
+                'messages': messages,
+                'can_input': messages.filter(msg_is_from_user=True).count() < 1,  # Max 1 user message
+                'reference_outfit_id': reference_outfit_id,  # For {% if %} and ?outfit_id=
+                'profile_user': profile_user,  # For {% url ... profile_user.username %}
+            })
+        except ChatSession.DoesNotExist:
+            return redirect('chatai:start_aichat')  # Reset if session invalid
+
+        return context
 
     # Future: def post(self, request) for text/send or uploads (check can_input first)
