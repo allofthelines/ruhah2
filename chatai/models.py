@@ -2,6 +2,7 @@ from django.db import models
 
 class Product(models.Model):
     product_name = models.CharField(max_length=255)
+    product_brand = models.CharField(max_length=100, default='unknown')
     product_link = models.URLField()
     product_images = models.JSONField()  # Stores list of dicts like [{'url': 'https://...', 'desc': 'Image 0'}]
     product_price = models.DecimalField(max_digits=10, decimal_places=2)
