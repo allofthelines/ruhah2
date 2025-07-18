@@ -56,7 +56,7 @@ class AIChatStartView(View):
                 ChatMessage.objects.create(
                     msg_chat_session=session,
                     msg_is_from_user=True,
-                    msg_text=f"Help me find similar products to Item #{item.id}",
+                    msg_text=f"Hello Ruhah, help me find similar products to Item #{item.id}",
                     msg_image_url=item.image.url if item.image else None,
                     msg_message_type='item'
                 )
@@ -66,7 +66,7 @@ class AIChatStartView(View):
                 ChatMessage.objects.create(
                     msg_chat_session=session,
                     msg_is_from_user=False,
-                    msg_text="Here are some similar products:",
+                    msg_text="Got it. Here are some similar products:",
                     msg_recommendations=similar,
                     msg_message_type='recommendation'
                 )
