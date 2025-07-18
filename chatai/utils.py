@@ -1,4 +1,4 @@
-# utils.py (updated to fix the ValueError)
+# utils.py (updated to fix JSON serialization)
 
 from pgvector.django import CosineDistance
 from django.db.models import F
@@ -10,7 +10,6 @@ def get_similar_products(main_embedding, limit=6):
     Find similar products based on cosine distance of main_embedding.
     Future: Add params for filters (e.g., color, size) or sorting (e.g., by price).
     """
-    # Fixed check: Use 'is None' instead of 'not' to avoid truth value ambiguity on arrays
     if main_embedding is None:
         return []
 
@@ -25,7 +24,7 @@ def get_similar_products(main_embedding, limit=6):
         {
             'id': p.id,
             'main_image': p.product_main_image,
-            'price': p.product_price,
+            'price': float(p.product_price),  # Convert Decimal to float for JSON serialization
             'name': p.product_name,  # Future: Use for pop-ups
             'link': p.product_link  # Future: For details
         } for p in similar
