@@ -172,6 +172,7 @@
     <a class="nav-link" href="{% url 'core:trending' %}">TRENDING</a>
     <a class="nav-link" href="{% url 'studio:studio_tickets' %}">STUDIO</a>
 
+    <!--
     {% if user.is_authenticated %}
         {% if user.username == "guest" %}
             <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
@@ -181,6 +182,7 @@
     {% else %}
         <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
     {% endif %}
+    -->
   </nav>
 </div>
 
