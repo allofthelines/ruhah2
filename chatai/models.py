@@ -3,6 +3,9 @@ from pgvector.django import VectorField
 from accounts.models import CustomUser
 from studio.models import Item
 
+import random
+import string
+
 
 
 
@@ -22,14 +25,18 @@ class Product(models.Model):
         return self.product_name
 
 
-
+"""
 import secrets
 
 def generate_chat_id():
     return secrets.token_urlsafe(10)
+"""
+def generate_chat_id():
+    chars = string.ascii_lowercase + string.digits
+    return ''.join(random.choices(chars, k=10))
 
 class ChatSession(models.Model):
-    chat_id = models.CharField(max_length=32, unique=True, null=True, blank=True)  # temporarily allow null
+    chat_id = models.CharField(max_length=32, unique=False, default=generate_chat_id)  # temporarily allow null
     chat_user = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.SET_NULL)  # Updated to CustomUser; optional for guests
     chat_reference_item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.SET_NULL)  # For mode 1; uses studio Item
     chat_reference_outfit_id = models.IntegerField(null=True, blank=True)  # Metadata for "Go Back" (outfit ID)
