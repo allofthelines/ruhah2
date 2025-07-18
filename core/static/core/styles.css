@@ -21,6 +21,11 @@ html {
   height: 100%;
 }
 
+/* DOCUS INDICATOR = HIGHLIGHT SE ACTIVE/SELECTED STUFF (PX TEXTBOX) */
+:focus {
+  outline: none !important;
+}
+
 /* LALALALAL to evala gia footer sticky */
 body {
   display: flex;
