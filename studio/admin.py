@@ -36,7 +36,7 @@ class ItemAdmin(admin.ModelAdmin):
         'image', 'itemid', 'tags',
         'ecommerce_product_id', 'ecommerce_store', 'modality', 'cat', 'taglist', 'condition',
         'name', 'price', 'sizes_xyz', 'sizes_shoe_uk', 'sizes_shoe_eu', 'sizes_waist_inches',
-        'location'
+        'location', 'embedding'
     ]
 
     def thumbnail(self, obj):
