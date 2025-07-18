@@ -77,7 +77,7 @@ class AIChatStartView(View):
             ChatMessage.objects.create(
                 msg_chat_session=session,
                 msg_is_from_user=False,
-                msg_text="Hello! How can I help? (Future: Type or upload to search.)"
+                msg_text="Hello! How can I help?" # Future: Type or upload to search
             )
 
         return session
