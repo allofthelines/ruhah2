@@ -79,9 +79,6 @@ class Command(BaseCommand):
             if mode == 'soft-all' and product.product_embedding:
                 self.stdout.write(self.style.WARNING(f"⚠️  Skipping {product.id} (already embedded)"))
                 continue
-            if not product.product_main_image:
-                self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no main image URL)"))
-                continue
             try:
                 self.process_product(product)
             except Exception as e:
@@ -89,9 +86,29 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Done."))
 
     def process_product(self, product):
-        # Download image from URL (handles jpg, png, webp, etc.)
+        # Check for product_images (list) and ensure at least 1 image
+        if not product.product_images or not isinstance(product.product_images, list) or len(product.product_images) < 1:
+            self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no images in product_images)"))
+            return  # Use return instead of continue for clarity in method
+
+        # Determine which image to use: prefer second (index 1), fallback to first (index 0)
         try:
-            response = requests.get(product.product_main_image, timeout=10)
+            if len(product.product_images) >= 2:
+                image_index = 1
+                selected_image = product.product_images[1]
+            else:
+                image_index = 0
+                selected_image = product.product_images[0]
+
+            if not isinstance(selected_image, dict) or 'url' not in selected_image:
+                raise ValueError(f"Invalid image structure: missing 'url' in image at index {image_index}.")
+            selected_image_url = selected_image['url']
+        except (IndexError, KeyError, TypeError) as e:
+            raise Exception(f"Error accessing image URL (index {image_index}): {e}")
+
+        # Download image from the selected URL (handles jpg, png, webp, etc.)
+        try:
+            response = requests.get(selected_image_url, timeout=10)
             response.raise_for_status()  # Raise if download fails (e.g., 404)
             image_bytes = response.content
         except requests.RequestException as e:
@@ -122,7 +139,8 @@ class Command(BaseCommand):
 
         product.product_embedding = vector
         product.save(update_fields=["product_embedding"])
-        self.stdout.write(self.style.SUCCESS(f"✅ {product.id}: embedding updated."))
+        image_note = "second" if image_index == 1 else "first (fallback)"
+        self.stdout.write(self.style.SUCCESS(f"✅ {product.id}: embedding updated (using {image_note} image)."))
 
     def generate_image_description(self, image_data, prompt):
         try:
