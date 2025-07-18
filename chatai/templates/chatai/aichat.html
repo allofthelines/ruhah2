@@ -58,7 +58,7 @@
 
 <div class="chat-low-bar">
   <div class="low-row top">
-    <input type="text" placeholder="Type here (disabled for now)" {% if not can_input %}disabled{% endif %}>
+    <input type="text" placeholder="Type here (disabled)" {% if not can_input %}disabled{% endif %}>
     <div class="upload-send">
       <button {% if not can_input %}disabled{% endif %}>Upload</button>
       <button {% if not can_input %}disabled{% endif %}>Send</button>
