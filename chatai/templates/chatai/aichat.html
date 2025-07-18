@@ -188,33 +188,7 @@
   height: 105px;
   justify-content: space-between;
   border-radius: 20px;
-
-  /* Add position relative for pseudo-element positioning */
-  position: relative;
-  isolation: isolate; /* Helps with stacking context for backdrop-filter */
 }
-
-/* Frosted glass effect with dissipating blur using ::before pseudo-element */
-.chat-low-bar::before {
-  content: '';
-  position: absolute;
-  top: -30px; /* Extend 30px outward for fade area */
-  left: -30px;
-  right: -30px;
-  bottom: -30px;
-  z-index: -1; /* Behind the chat-low-bar */
-  border-radius: 40px; /* Larger radius to match rounded extension */
-  backdrop-filter: blur(10px); /* Strong blur (radius 10px) */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-
-  /* Mask to create gradient fade: strong (opaque) in center, fading to transparent at edges */
-  mask-image: radial-gradient(circle at center, black 40%, transparent 100%); /* Fade starts at ~20px (40% radius), fully transparent by 30px (100%) */
-  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-
-  /* Optional: Add slight opacity or background for frosted look (e.g., semi-transparent white) */
-  background-color: rgba(255, 255, 255, 0.2); /* Light frosted tint, adjust as needed */
-}
-
 .low-row {
   display: flex;
   justify-content: space-between;
@@ -252,12 +226,6 @@
     width: calc(100% - 40px);
     left: 20px;
     transform: none;
-  }
-  .chat-low-bar::before {
-    top: -30px;
-    left: -20px; /* Adjust for mobile padding */
-    right: -20px;
-    bottom: -30px;
   }
 }
 </style>
