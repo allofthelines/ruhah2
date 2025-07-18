@@ -13,3 +13,11 @@ class ChatSessionAdmin(admin.ModelAdmin):
 
     fields = ('chat_id', 'chat_user', 'chat_reference_item', 'chat_reference_outfit_id', 'chat_status')
     readonly_fields = ('chat_main_embedding', 'chat_created_at')
+
+
+class ChatMessageAdmin(admin.ModelAdmin):
+    list_display = ('msg_chat_session', 'msg_is_from_user', 'msg_text', 'msg_message_type')
+
+    fields = ('msg_chat_session', 'msg_is_from_user', 'msg_text', 'msg_message_type', 'msg_recommendations', 'msg_image', 'msg_image_url')
+    readonly_fields = ('msg_created_at')
+
