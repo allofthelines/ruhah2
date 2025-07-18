@@ -40,8 +40,8 @@
               </div>
             </div>
           {% else %}
+            <img src="{% static 'images/icons/icon-ai.png' %}" class="ruhah-icon" alt="RU">
             <div class="ruhah-bubble chat-bubble">
-              <img src="{% static 'images/icons/icon-ai.png' %}" class="ruhah-icon" alt="RU">
               <div class="bubble-content">
                 {% if message.msg_text %}<p>{{ message.msg_text }}</p>{% endif %}
                 {% if message.msg_image_url %}
@@ -129,7 +129,7 @@
 .ruhah-icon {
   width: 25px;
   height: 25px;
-  margin-right: 10px;
+  margin-left: 10px;
   flex-shrink: 0;
   align-self: center;
 }
