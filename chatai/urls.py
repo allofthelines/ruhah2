@@ -4,6 +4,7 @@ from . import views
 app_name = 'chatai'
 
 urlpatterns = [
-    path('start-aichat/', views.AIChatStartView.as_view(), name='start_aichat'),  # Starter for button
-    path('aichat/', views.AIChatView.as_view(), name='aichat'),  # Main clean URL
+    path('aichat/', views.AIChatStartView.as_view(), name='start_aichat'),  # Starter for button
+    path('aichat/<str:chat_id>/', views.AIChatView.as_view(), name='aichat'),
+]
 ]
