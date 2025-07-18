@@ -22,6 +22,7 @@
                 <a href="{% url 'chatai:start_aichat' %}?item_id={{ item.id }}&outfit_id={{ outfit_id }}">< FIND SIMILAR ></a></p>
             </div>
             <div class="item-size-selection">
+                <!--
                 <label for="size-select-{{ item.id }}">Select Size:</label>
                 <select id="size-select-{{ item.id }}" name="size-{{ item.id }}">
                     <option value="exclude">Exclude</option>
@@ -29,6 +30,7 @@
                         <option value="{{ size.name }}">{{ size.name }}</option>
                     {% endfor %}
                 </select>
+                -->
             </div>
         </div>
     {% endfor %}
