@@ -32,7 +32,7 @@
                     {% for rec in message.msg_recommendations %}
                       <div class="rec-item">
                         <img src="{{ rec.main_image }}" alt="{{ rec.name }}">
-                        <p>${{ rec.price }}</p>
+                        <p>€ {{ rec.price }}</p>
                       </div>
                     {% endfor %}
                   </div>
