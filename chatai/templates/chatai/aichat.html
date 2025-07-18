@@ -1,3 +1,4 @@
+```html
 {% extends "core/base.html" %}
 {% load static %}
 
@@ -10,172 +11,200 @@
 {% block content %}
 <div class="chat-wrapper">
   <div class="chat-container">
-      <div class="chat-messages">
-          {% for message in messages %}
-              <div class="chat-bubble {% if message.msg_is_from_user %}user-bubble{% else %}ruhah-bubble{% endif %} {% if message.msg_message_type == 'recommendation' %}recommendation-bubble{% endif %}">
-                  {% if message.msg_is_from_user %}
-                      <div class="user-icon"></div>
-                  {% elif message.msg_message_type != 'recommendation' %}
-                      <img src="{% static 'ruhah_icon.png' %}" alt="< >" class="ruhah-icon">
-                  {% endif %}
-                  <div class="bubble-content">
-                      {% if message.msg_text %}
-                          <p>{{ message.msg_text }}</p>
-                      {% endif %}
-                      {% if message.msg_image_url %}
-                          <img src="{{ message.msg_image_url }}" alt="Reference Image" class="bubble-image">
-                      {% endif %}
-                      {% if message.msg_recommendations %}
-                          <div class="recommendations-grid">
-                              {% for rec in message.msg_recommendations %}
-                                  <div class="rec-item">
-                                      <img src="{{ rec.main_image }}" alt="{{ rec.name }}">
-                                      <p>${{ rec.price }}</p>
-                                  </div>
-                              {% endfor %}
-                          </div>
-                      {% endif %}
-                  </div>
+    <div class="chat-messages">
+      {% for message in messages %}
+        <div class="bubble-wrapper {% if not message.msg_is_from_user and message.msg_message_type != 'recommendation' %}with-icon{% endif %}">
+          {% if message.msg_is_from_user %}
+            <div class="user-bubble chat-bubble">
+              <div class="bubble-content">
+                {% if message.msg_text %}<p>{{ message.msg_text }}</p>{% endif %}
+                {% if message.msg_image_url %}
+                  <img src="{{ message.msg_image_url }}" alt="Reference Image" class="bubble-image">
+                {% endif %}
               </div>
-          {% endfor %}
-      </div>
+              <div class="user-icon"></div>
+            </div>
+          {% elif message.msg_message_type == 'recommendation' %}
+            <div class="recommendation-bubble chat-bubble">
+              <div class="bubble-content">
+                {% if message.msg_text %}<p>{{ message.msg_text }}</p>{% endif %}
+                {% if message.msg_recommendations %}
+                  <div class="recommendations-grid">
+                    {% for rec in message.msg_recommendations %}
+                      <div class="rec-item">
+                        <img src="{{ rec.main_image }}" alt="{{ rec.name }}">
+                        <p>${{ rec.price }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% else %}
+            <div class="ruhah-bubble chat-bubble">
+              <div class="bubble-content">
+                {% if message.msg_text %}<p>{{ message.msg_text }}</p>{% endif %}
+                {% if message.msg_image_url %}
+                  <img src="{{ message.msg_image_url }}" alt="Reference Image" class="bubble-image">
+                {% endif %}
+              </div>
+            </div>
+            <img src="{% static 'ruhah_icon.png' %}" class="ruhah-icon" alt="RU">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
 <div class="chat-low-bar">
-  <div class="input-row">
-      <input type="text" placeholder="Type here (disabled for now)" {% if not can_input %}disabled{% endif %}>
-      <div class="input-actions">
-          <button {% if not can_input %}disabled{% endif %}>Upload</button>
-          <button {% if not can_input %}disabled{% endif %}>Send</button>
-      </div>
+  <div class="low-row top">
+    <input type="text" placeholder="Type here (disabled for now)" {% if not can_input %}disabled{% endif %}>
+    <div class="upload-send">
+      <button {% if not can_input %}disabled{% endif %}>Upload</button>
+      <button {% if not can_input %}disabled{% endif %}>Send</button>
+    </div>
   </div>
-  <div class="nav-row">
-      <div></div>
-      <div class="nav-actions">
-          <button onclick="location.href='{% url 'chatai:aichat' %}'">New</button>
-          {% if reference_outfit_id and profile_user %}
-              <button onclick="location.href='{% url 'accounts:public_profile' profile_user.username %}#gridpics?outfit_id={{ reference_outfit_id }}'">Back</button>
-          {% endif %}
-      </div>
+  <div class="low-row bottom">
+    <div></div>
+    <div class="new-back">
+      <button onclick="location.href='{% url 'chatai:aichat' %}'">New</button>
+      {% if reference_outfit_id and profile_user %}
+        <button onclick="location.href='{% url 'accounts:public_profile' profile_user.username %}#gridpics?outfit_id={{ reference_outfit_id }}'">Back</button>
+      {% endif %}
+    </div>
   </div>
 </div>
 
 <style>
 .chat-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 .chat-container {
-    flex: 1;
+  width: 100%;
 }
 .chat-messages {
-    padding: 10px;
+  padding: 10px;
+}
+.bubble-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  position: relative;
+}
+.with-icon {
+  justify-content: flex-start;
 }
 .chat-bubble {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    border: 1px solid black;
-    border-radius: 4px;
-    padding: 10px;
-    word-break: break-word;
-    max-width: 100%;
-    position: relative;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+  word-break: break-word;
+  max-width: 700px;
+  flex: 1;
 }
 .user-bubble {
-    background-color: #f0f0f0;
-    justify-content: flex-end;
+  display: flex;
+  background-color: #f0f0f0;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 700px;
 }
 .ruhah-bubble {
-    background-color: white;
-}
-.user-icon, .ruhah-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-.ruhah-icon {
-    position: absolute;
-    left: -30px;
-    top: 10px;
+  background-color: white;
 }
 .user-icon {
-    border-radius: 50%;
-    background-color: grey;
-    position: absolute;
-    right: -30px;
-    top: 10px;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-color: grey;
+  flex-shrink: 0;
+}
+.ruhah-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  flex-shrink: 0;
+  align-self: center;
 }
 .bubble-content {
-    flex: 1;
+  flex: 1;
 }
 .bubble-image {
-    max-width: 100px;
-    height: auto;
+  max-width: 100px;
+  height: auto;
 }
 .recommendations-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
 }
 .rec-item {
-    border: 1px solid black;
-    text-align: center;
+  border: 1px solid black;
+  text-align: center;
 }
 .rec-item img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-    object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 .recommendation-bubble {
-    width: 100%;
-    padding-left: 10px !important;
-}
-.recommendation-bubble .ruhah-icon {
-    display: none;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+  word-break: break-word;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .chat-low-bar {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 740px;
+  background-color: #f0f0f0;
+  border: 1px solid black;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
 }
-.input-row, .nav-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
+.low-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
 }
-.input-row {
-    border-bottom: 1px solid black;
+.top {
+  border-bottom: 1px solid black;
 }
-.input-row input {
-    flex: 1;
-    margin-right: 10px;
+.upload-send, .new-back {
+  display: flex;
+  gap: 10px;
 }
-.input-actions, .nav-actions {
-    display: flex;
-    gap: 10px;
+.low-row input {
+  flex: 1;
+  margin-right: 10px;
 }
 @media (max-width: 768px) {
-    .chat-wrapper {
-        padding: 0 10px;
-    }
-    .recommendations-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
+  .chat-wrapper {
+    padding: 0 10px;
+  }
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+  }
+  .chat-low-bar {
+    width: calc(100% - 20px);
+    left: 10px;
+    transform: none;
+  }
 }
 </style>
 {% endblock %}
+```
