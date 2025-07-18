@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
 class ChatSessionAdmin(admin.ModelAdmin):
     list_display = ('chat_id', 'chat_user', 'chat_reference_item', 'chat_reference_outfit_id', 'chat_status', 'chat_created_at')
 
-    fields = ('chat_id', 'chat_user', 'chat_reference_item', 'chat_reference_outfit_id', 'chat_status', 'chat_created_at', 'chat_created_at')
+    fields = ('chat_id', 'chat_user', 'chat_reference_item', 'chat_reference_outfit_id', 'chat_status', 'chat_created_at')
     readonly_fields = ('chat_main_embedding', 'chat_created_at')
 
 admin.site.register(ChatSession, ChatSessionAdmin)
