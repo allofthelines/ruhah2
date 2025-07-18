@@ -1,3 +1,5 @@
+# models.py (updated)
+
 from django.db import models
 from pgvector.django import VectorField
 from accounts.models import CustomUser
@@ -45,7 +47,7 @@ class ChatSession(models.Model):
     chat_status = models.CharField(max_length=20, default='active')  # Future: 'active', 'closed' for limits
 
     def __str__(self):
-        return f"Session {self.id} for user {self.user or 'Guest'}"
+        return f"Session {self.id} for user {self.chat_user or 'Guest'}"
 
 
 
@@ -67,4 +69,4 @@ class ChatMessage(models.Model):
     """
 
     def __str__(self):
-        return f"Message {self.id} in session {self.session.id}"
+        return f"Message {self.id} in session {self.msg_chat_session.id}"
