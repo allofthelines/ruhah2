@@ -27,7 +27,7 @@ class ProductAdmin(admin.ModelAdmin):
         'product_embedding',
     )
 
-    readonly_fields = ('product_created_at', 'product_embedding',)
+    readonly_fields = ('product_created_at',)
 
     # Optional: Add search and filtering for better admin usability
     search_fields = ('product_name', 'product_brand', 'product_details',)
