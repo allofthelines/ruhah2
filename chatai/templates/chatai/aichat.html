@@ -209,9 +209,18 @@
     height: 80px;
     backdrop-filter: blur(30px); /* Blur radius of 10px; adjust as needed */
     -webkit-backdrop-filter: blur(10px); /* Safari support */
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent for frosted look; adjust opacity/color */
+    /*background-color: rgba(255, 255, 255, 0.2);/* /* Semi-transparent for frosted look; adjust opacity/color */
+    background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 50px,
+      rgba(255, 255, 255, 0.3) 60px,
+      rgba(255, 255, 255, 0.6) 70px,
+      rgba(255, 255, 255, 0.8) 80px
+    );
     z-index: 999; /* Lower than chat-low-bar's z-index:1000, so it's behind and doesn't affect it */
   }
+
 
   .low-row {
     display: flex;
