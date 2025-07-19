@@ -23,9 +23,22 @@ def get_similar_products(main_embedding, limit=6):
     return [
         {
             'id': p.id,
-            'main_image': p.product_main_image,
+            'main_image': get_first_image_url(p),  # Use first image from product_images
             'price': float(p.product_price),  # Convert Decimal to float for JSON serialization
             'name': p.product_name,  # Future: Use for pop-ups
             'link': p.product_link  # Future: For details
         } for p in similar
     ]
+
+def get_first_image_url(product):
+    """
+    Helper to extract the first image URL from product_images JSONField.
+    Returns the key (URL) of the first dict if available, else None.
+    """
+    images = product.product_images
+    if isinstance(images, list) and len(images) > 0:
+        first_image = images[0]
+        if isinstance(first_image, dict) and len(first_image) > 0:
+            # Get the first key (which is the URL)
+            return next(iter(first_image))
+    return None  # Or fallback to product_main_image if desired: product.product_main_image
