@@ -5,9 +5,10 @@ from django.db.models import F
 from chatai.models import Product
 
 
-def get_similar_products(main_embedding, limit=6):
+def get_similar_products(main_embedding, category=None, limit=6):
     """
     Find similar products based on cosine distance of main_embedding.
+    Optionally filter by product_category (must match exactly, e.g., 'top').
     Future: Add params for filters (e.g., color, size) or sorting (e.g., by price).
     """
     if main_embedding is None:
@@ -17,6 +18,11 @@ def get_similar_products(main_embedding, limit=6):
     similar = Product.objects.annotate(
         distance=CosineDistance('product_embedding', main_embedding)
     ).filter(distance__lt=0.5)  # Threshold for "similar"; adjustable
+
+    # Apply category filter if provided
+    if category:
+        similar = similar.filter(product_category=category)
+
     similar = similar.order_by('distance')[:limit]
 
     # Return list of dicts for easy rendering (expandable for future details)

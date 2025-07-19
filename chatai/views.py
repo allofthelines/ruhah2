@@ -1,3 +1,5 @@
+# views.py (updated to pass category to get_similar_products)
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -61,8 +63,8 @@ class AIChatStartView(View):
                     msg_message_type='item'
                 )
 
-                # Auto Ruhah response
-                similar = get_similar_products(session.chat_main_embedding)
+                # Auto Ruhah response (pass item.cat as category)
+                similar = get_similar_products(session.chat_main_embedding, category=item.cat)
                 ChatMessage.objects.create(
                     msg_chat_session=session,
                     msg_is_from_user=False,
