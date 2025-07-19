@@ -60,7 +60,7 @@
 
 <div class="chat-low-bar">
   <div class="low-row top">
-    <input type="text" placeholder="Type here (disabled)" {% if not can_input %}disabled{% endif %}>
+    <input type="text" placeholder="TYPING DISABLED" {% if not can_input %}disabled{% endif %}>
     <div class="upload-send">
       <button {% if not can_input %}disabled{% endif %}>Upload</button>
       <button {% if not can_input %}disabled{% endif %}>Send</button>
@@ -254,27 +254,15 @@
     gap: 10px;
   }
 
-  /*
   .low-row input {
     flex: 1;
     margin-right: 10px;
+    /* border: 1px solid #f0f0f0; gia black perigramma */
     border: 1px solid #f0f0f0;
     border-radius: 5px;
     background-color: #f0f0f0;
     color: #333;
     font-size: 14px;
-  }
-  */
-
-  .low-row input {
-    flex: 1;
-    margin-right: 10px;
-    /* Remove border and grey background */
-    border: none; /* Remove border */
-    background-color: transparent; /* Transparent background */
-    color: #333;
-    font-size: 14px;
-    outline: none; /* Remove focus outline */
   }
 
   /* Desktop Mode: Expand the entire .recommendation-bubble */
