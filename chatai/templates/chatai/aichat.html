@@ -84,174 +84,184 @@
 
 
 <style>
-.chat-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-.chat-container {
-  width: 100%;
-}
-.chat-messages {
-  /* padding: 10px; */
-  max-width: 400px;
-}
-.bubble-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-bottom: 10px;
-  position: relative;
-}
-.with-icon {
-  justify-content: flex-start;
-}
-.chat-bubble {
-  border: 1px solid black;
-  border-radius: 20px;
-  /* padding: 10px; */
-  padding-left: 15px;
-  padding-right: 15px;
-  word-break: break-word;
-  max-width: 400px;
-  flex: 1;
-}
-.user-bubble {
-  display: flex;
-  background-color: #f0f0f0;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 400px;
-}
-.ruhah-bubble {
-  background-color: white;
-}
-.user-icon {
-  /* PROSWRINA TO VGAZW GIA NA MHN FAINETAI GIATI DEN TO EXW FTIAKSEI
-  width: 25px;
-  height: 25px;
-  margin-left: 10px;
-  border-radius: 50%;
-  background-color: grey;
-  flex-shrink: 0;
-  */
-}
-.ruhah-icon {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-  flex-shrink: 0;
-  align-self: center;
-  position: relative;
-  left: -10px;
-}
-.bubble-content {
-  flex: 1;
-  /*padding-bottom: 15px;*/
-}
-.recommendation-bubble .bubble-content:has(img) {
-  padding-bottom: 15px;
-}
-.bubble-image {
-  max-width: 200px;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 10px;
-}
-.recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-}
-.rec-item {
-  border: 1px solid black;
-  text-align: center;
-}
-.rec-item img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-bottom: 1px solid black;
-}
-.recommendation-bubble {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 20px;
-  /*padding: 10px;*/
-  word-break: break-word;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.chat-low-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 400px;
-  background-color: #f0f0f0;
-  border: 1px solid black;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  height: 105px;
-  justify-content: space-between;
-  border-radius: 20px;
-}
-
-.bottom-blur-strip {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  backdrop-filter: blur(30px); /* Blur radius of 10px; adjust as needed */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent for frosted look; adjust opacity/color */
-  z-index: 999; /* Lower than chat-low-bar's z-index:1000, so it's behind and doesn't affect it */
-}
-
-
-.low-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50%;
-  /* padding: 0 10px; */
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.low-row.top {
-  border-bottom: 1px solid black;
-}
-.upload-send, .new-back {
-  display: flex;
-  gap: 10px;
-}
-.low-row input {
-  flex: 1;
-  margin-right: 10px;
-  /* border: 1px solid #f0f0f0; gia black perigramma */
-  border: 1px solid #f0f0f0;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  color: #333;
-  font-size: 14px;
-}
-@media (max-width: 768px) {
   .chat-wrapper {
-    padding: 0 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  .chat-container {
+    width: 100%;
+  }
+  .chat-messages {
+    /* padding: 10px; */
+    max-width: 400px;
+  }
+  .bubble-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .with-icon {
+    justify-content: flex-start;
+  }
+  .chat-bubble {
+    border: 1px solid black;
+    border-radius: 20px;
+    /* padding: 10px; */
+    padding-left: 15px;
+    padding-right: 15px;
+    word-break: break-word;
+    max-width: 400px;
+    flex: 1;
+  }
+  .user-bubble {
+    display: flex;
+    background-color: #f0f0f0;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+  }
+  .ruhah-bubble {
+    background-color: white;
+  }
+  .user-icon {
+    /* PROSWRINA TO VGAZW GIA NA MHN FAINETAI GIATI DEN TO EXW FTIAKSEI
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    border-radius: 50%;
+    background-color: grey;
+    flex-shrink: 0;
+    */
+  }
+  .ruhah-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    align-self: center;
+    position: relative;
+    left: -10px;
+  }
+  .bubble-content {
+    flex: 1;
+    /*padding-bottom: 15px;*/
+  }
+  .recommendation-bubble .bubble-content:has(img) {
+    padding-bottom: 15px;
+  }
+  .bubble-image {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
   }
   .recommendations-grid {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
   }
+  .rec-item {
+    border: 1px solid black;
+    text-align: center;
+  }
+  .rec-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-bottom: 1px solid black;
+  }
+  .recommendation-bubble {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    /*padding: 10px;*/
+    word-break: break-word;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
   .chat-low-bar {
-    width: calc(100% - 40px);
-    left: 20px;
-    transform: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    height: 105px;
+    justify-content: space-between;
+    border-radius: 20px;
   }
-}
+
+  .bottom-blur-strip {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    backdrop-filter: blur(30px); /* Blur radius of 10px; adjust as needed */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent for frosted look; adjust opacity/color */
+    z-index: 999; /* Lower than chat-low-bar's z-index:1000, so it's behind and doesn't affect it */
+  }
+
+  .low-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%;
+    /* padding: 0 10px; */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .low-row.top {
+    border-bottom: 1px solid black;
+  }
+  .upload-send, .new-back {
+    display: flex;
+    gap: 10px;
+  }
+  .low-row input {
+    flex: 1;
+    margin-right: 10px;
+    /* border: 1px solid #f0f0f0; gia black perigramma */
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 14px;
+  }
+
+  /* Desktop Mode: Expand .recommendation-bubble .bubble-content:has(img) */
+  @media (min-width: 769px) {
+    .recommendation-bubble .bubble-content:has(img) {
+      width: 180%;
+      max-width: none;
+      margin-left: -40%; /* Center the expanded bubble */
+      margin-right: -40%; /* Center the expanded bubble */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .chat-wrapper {
+      padding: 0 20px;
+    }
+    .recommendations-grid {
+      grid-template-columns: 1fr;
+    }
+    .chat-low-bar {
+      width: calc(100% - 40px);
+      left: 20px;
+      transform: none;
+    }
+  }
 </style>
 {% endblock %}
