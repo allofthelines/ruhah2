@@ -17,6 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
     fields = (
         'product_name',
         'product_brand',
+        'product_category',
         'product_link',
         'product_images',
         'product_main_image',
