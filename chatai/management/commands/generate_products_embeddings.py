@@ -89,22 +89,37 @@ class Command(BaseCommand):
         # Check for product_images (list) and ensure at least 1 image
         if not product.product_images or not isinstance(product.product_images, list) or len(product.product_images) < 1:
             self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no images in product_images)"))
-            return  # Use return instead of continue for clarity in method
+            return
 
-        # Determine which image to use: prefer second (index 1), fallback to first (index 0)
-        try:
-            if len(product.product_images) >= 2:
-                image_index = 1
-                selected_image = product.product_images[1]
-            else:
-                image_index = 0
-                selected_image = product.product_images[0]
+        # Try to select an image: prefer second (index 1) if valid, fallback to first (index 0) if valid
+        selected_image_url = None
+        image_note = None
 
-            if not isinstance(selected_image, dict) or 'url' not in selected_image:
-                raise ValueError(f"Invalid image structure: missing 'url' in image at index {image_index}.")
-            selected_image_url = selected_image['url']
-        except (IndexError, KeyError, TypeError) as e:
-            raise Exception(f"Error accessing image URL (index {image_index}): {e}")
+        # Try second image first
+        if len(product.product_images) >= 2:
+            second_image = product.product_images[1]
+            if isinstance(second_image, dict) and len(second_image) == 1:
+                # Extract URL from the single key in the dict
+                url = next(iter(second_image))  # Get the key (which is the URL)
+                if url.startswith('http'):  # Basic validation that it's a URL
+                    selected_image_url = url
+                    image_note = "second"
+
+        # Fallback to first image if second is invalid or missing
+        if selected_image_url is None and len(product.product_images) >= 1:
+            first_image = product.product_images[0]
+            if isinstance(first_image, dict) and len(first_image) == 1:
+                # Extract URL from the single key in the dict
+                url = next(iter(first_image))  # Get the key (which is the URL)
+                if url.startswith('http'):  # Basic validation that it's a URL
+                    selected_image_url = url
+                    image_note = "first (fallback)"
+
+        # If no valid URL found, skip
+        if selected_image_url is None:
+            print(f"DEBUG: No valid image URL found in product_images for ID={product.id}: {product.product_images}")  # For troubleshooting; remove if not needed
+            self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no valid image URLs in product_images)"))
+            return
 
         # Download image from the selected URL (handles jpg, png, webp, etc.)
         try:
@@ -139,7 +154,6 @@ class Command(BaseCommand):
 
         product.product_embedding = vector
         product.save(update_fields=["product_embedding"])
-        image_note = "second" if image_index == 1 else "first (fallback)"
         self.stdout.write(self.style.SUCCESS(f"✅ {product.id}: embedding updated (using {image_note} image)."))
 
     def generate_image_description(self, image_data, prompt):
