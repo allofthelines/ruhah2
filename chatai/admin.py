@@ -6,6 +6,7 @@ from .models import Product, ChatSession, ChatMessage
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'product_name',
+        'product_images',
         'product_brand',
         'product_link',
         'product_price',
