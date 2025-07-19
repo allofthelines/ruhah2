@@ -5,6 +5,24 @@ from django.utils.html import format_html
 from .models import Product, ChatSession, ChatMessage
 
 
+class HasEmbeddingFilter(SimpleListFilter):
+    title = 'Has Embedding'
+    parameter_name = 'has_embedding'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(product_embedding__isnull=True).exclude(product_embedding__len=0)
+        if self.value() == 'no':
+            return queryset.filter(product_embedding__isnull=True) | queryset.filter(product_embedding__len=0)
+        return queryset
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
@@ -90,21 +108,3 @@ class ChatMessageAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('msg_created_at',)
-
-
-class HasEmbeddingFilter(SimpleListFilter):
-    title = 'Has Embedding'
-    parameter_name = 'has_embedding'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('yes', 'Yes'),
-            ('no', 'No'),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == 'yes':
-            return queryset.exclude(product_embedding__isnull=True).exclude(product_embedding__len=0)
-        if self.value() == 'no':
-            return queryset.filter(product_embedding__isnull=True) | queryset.filter(product_embedding__len=0)
-        return queryset
