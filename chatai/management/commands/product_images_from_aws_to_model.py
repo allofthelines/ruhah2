@@ -1,5 +1,6 @@
 import boto3
 from django.core.management.base import BaseCommand
+import os
 from chatai.models import Product  # Adjust if your model path differs
 
 class Command(BaseCommand):
