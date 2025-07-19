@@ -184,7 +184,7 @@
     max-width: 400px;
     margin: 0 auto;
   }
-
+  /* GREY
   .chat-low-bar {
     position: fixed;
     bottom: 20px;
@@ -200,27 +200,42 @@
     justify-content: space-between;
     border-radius: 20px;
   }
+  */
 
+  .chat-low-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    /* Replace grey background with blurry background */
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid black;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    height: 105px;
+    justify-content: space-between;
+    border-radius: 20px;
+  }
+
+
+
+  /*
   .bottom-blur-strip {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 80px;
-    backdrop-filter: blur(30px); /* Blur radius of 10px; adjust as needed */
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
-    /*background-color: rgba(255, 255, 255, 0.2);/* /* Semi-transparent for frosted look; adjust opacity/color */
-    background: linear-gradient(
-      to top,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0) 50px,
-      rgba(255, 255, 255, 0.3) 60px,
-      rgba(255, 255, 255, 0.6) 70px,
-      rgba(255, 255, 255, 0.8) 80px
-    );
-    z-index: 999; /* Lower than chat-low-bar's z-index:1000, so it's behind and doesn't affect it */
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 999;
   }
-
+  */
 
   .low-row {
     display: flex;
