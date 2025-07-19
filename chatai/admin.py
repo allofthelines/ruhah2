@@ -30,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('product_created_at', 'product_embedding',)
 
     # Optional: Add search and filtering for better admin usability
-    search_fields = ('product_name', 'product_brand', 'product_details',)
+    search_fields = ('product_name', 'product_brand', 'product_details', 'product_images',)
     list_filter = ('product_brand',)  # Filter by brand and embedding status
 
 
