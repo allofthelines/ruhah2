@@ -12,8 +12,18 @@ import string
 
 
 class Product(models.Model):
+
+    PRODUCT_CATEGORY_CHOICES = [
+        ('top', 'top'),
+        ('bottom', 'bottom'),
+        ('accessory', 'accessory'),
+        ('footwear', 'footwear'),
+        ('dress', 'dress')
+    ]
+
     product_name = models.CharField(max_length=255)
     product_brand = models.CharField(max_length=100, default='unknown')
+    product_category = models.CharField(max_length=20, choices=PRODUCT_CATEGORY_CHOICES, blank=True)
     product_link = models.URLField()
     product_images = models.JSONField()  # Stores list of dicts like [{'url': 'https://...', 'desc': 'Image 0'}]
     product_main_image = models.URLField(null=True, blank=True)
