@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
+from django.utils import timezone
+from django.utils.html import format_html
 from .models import Product, ChatSession, ChatMessage
 
 
@@ -11,7 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
         'product_price',
         'product_details',
         'product_created_at',
-        'has_embedding',  # New computed field for list view
+        'has_embedding',
     )
 
     fields = (
@@ -28,18 +31,17 @@ class ProductAdmin(admin.ModelAdmin):
 
     readonly_fields = ('product_created_at', 'product_embedding',)
 
-    # Optional: Add search and filtering for better admin usability
     search_fields = ('product_name', 'product_brand', 'product_details',)
-    list_filter = ('product_brand', 'has_embedding',)  # Filter by brand and embedding status
+
+    list_filter = ('product_brand', HasEmbeddingFilter,)
 
     def has_embedding(self, obj):
-        # Check if product_embedding exists and has length > 0 to avoid array truth value errors
         if obj.product_embedding and len(obj.product_embedding) > 0:
             return "Yes"
         return "No"
 
-    has_embedding.short_description = "Has Embedding"  # Column header in admin
-    has_embedding.boolean = True  # Displays as green check (Yes) or red cross (No)
+    has_embedding.short_description = "Has Embedding"
+    has_embedding.boolean = True
 
 
 @admin.register(ChatSession)
@@ -60,7 +62,7 @@ class ChatSessionAdmin(admin.ModelAdmin):
         'chat_reference_outfit_id',
         'chat_status',
         'chat_created_at',
-        'chat_main_embedding',  # Added to fields for visibility (was only in readonly_fields)
+        'chat_main_embedding',
     )
 
     readonly_fields = ('chat_main_embedding', 'chat_created_at',)
@@ -88,3 +90,21 @@ class ChatMessageAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('msg_created_at',)
+
+
+class HasEmbeddingFilter(SimpleListFilter):
+    title = 'Has Embedding'
+    parameter_name = 'has_embedding'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(product_embedding__isnull=True).exclude(product_embedding__len=0)
+        if self.value() == 'no':
+            return queryset.filter(product_embedding__isnull=True) | queryset.filter(product_embedding__len=0)
+        return queryset
