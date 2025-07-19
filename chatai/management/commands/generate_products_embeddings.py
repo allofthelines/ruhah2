@@ -80,45 +80,44 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING(f"⚠️  Skipping {product.id} (already embedded)"))
                 continue
             try:
-                self.process_product(product)
+                self.process_product(product, mode)
             except Exception as e:
                 self.stderr.write(self.style.ERROR(f"❌ Error processing product ID={product.id}: {str(e)}"))
         self.stdout.write(self.style.SUCCESS("Done."))
 
-    def process_product(self, product):
+    def process_product(self, product, mode):
         # Check for product_images (list) and ensure at least 1 image
         if not product.product_images or not isinstance(product.product_images, list) or len(product.product_images) < 1:
             self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no images in product_images)"))
             return
 
-        # Try to select an image: prefer second (index 1) if valid, fallback to first (index 0) if valid
+        # Search for an S3 image URL containing 'amazonaws' (prioritize second if available, else first matching)
         selected_image_url = None
         image_note = None
 
-        # Try second image first
+        # First, try to find in preferred order: second image if it has 'amazonaws', then scan others
         if len(product.product_images) >= 2:
             second_image = product.product_images[1]
             if isinstance(second_image, dict) and len(second_image) == 1:
-                # Extract URL from the single key in the dict
                 url = next(iter(second_image))  # Get the key (which is the URL)
-                if url.startswith('http'):  # Basic validation that it's a URL
+                if url.startswith('http') and 'amazonaws' in url:
                     selected_image_url = url
-                    image_note = "second"
+                    image_note = "second (S3)"
 
-        # Fallback to first image if second is invalid or missing
-        if selected_image_url is None and len(product.product_images) >= 1:
-            first_image = product.product_images[0]
-            if isinstance(first_image, dict) and len(first_image) == 1:
-                # Extract URL from the single key in the dict
-                url = next(iter(first_image))  # Get the key (which is the URL)
-                if url.startswith('http'):  # Basic validation that it's a URL
-                    selected_image_url = url
-                    image_note = "first (fallback)"
-
-        # If no valid URL found, skip
+        # If not found, scan all images for the first one with 'amazonaws'
         if selected_image_url is None:
-            print(f"DEBUG: No valid image URL found in product_images for ID={product.id}: {product.product_images}")  # For troubleshooting; remove if not needed
-            self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no valid image URLs in product_images)"))
+            for idx, image_entry in enumerate(product.product_images):
+                if isinstance(image_entry, dict) and len(image_entry) == 1:
+                    url = next(iter(image_entry))  # Get the key (which is the URL)
+                    if url.startswith('http') and 'amazonaws' in url:
+                        selected_image_url = url
+                        image_note = f"index {idx} (S3)"
+                        break  # Use the first matching S3 URL
+
+        # If no S3 URL found (no 'amazonaws' in any key), skip regardless of mode
+        if selected_image_url is None:
+            print(f"DEBUG: No S3 image URL ('amazonaws') found in product_images for ID={product.id}: {product.product_images}")  # For troubleshooting; remove if not needed
+            self.stdout.write(self.style.WARNING(f"⏩ Skipping {product.id} (no S3 image URL with 'amazonaws')"))
             return
 
         # Download image from the selected URL (handles jpg, png, webp, etc.)
