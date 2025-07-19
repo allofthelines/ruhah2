@@ -3,10 +3,6 @@ from .models import Product, ChatSession, ChatMessage
 
 
 # @admin.register(Product)
-from django.db.models import Q
-from django.contrib.postgres.search import SearchVector
-
-# @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'product_name',
@@ -34,28 +30,8 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('product_created_at', 'product_embedding',)
 
     # Optional: Add search and filtering for better admin usability
-    search_fields = (
-    'product_name', 'product_brand', 'product_details')  # Removed product_images from here; we'll handle it custom
-
+    search_fields = ('product_name', 'product_brand', 'product_details',)
     list_filter = ('product_brand',)  # Filter by brand and embedding status
-
-    def get_search_results(self, request, queryset, search_term):
-        """
-        Custom search to include text search inside product_images JSON as if it's a string.
-        """
-        queryset, use_distinct = super().get_search_results(request, queryset, search_term)
-
-        if search_term:
-            # Search in other fields as usual (from search_fields)
-            # Now add custom search for product_images: treat it as text
-            vector = SearchVector('product_images',
-                                  config='english')  # Assuming PostgreSQL; convert JSON to text for search
-            queryset = queryset.annotate(search=vector).filter(search=search_term) | queryset
-
-            # Alternatively, if not using SearchVector, a simple icontains on cast to str (but SearchVector is better for Postgres)
-            # queryset = queryset.filter(product_images__icontains=search_term)  # This works if JSONField is searchable as text
-
-        return queryset, use_distinct
 
 
 
