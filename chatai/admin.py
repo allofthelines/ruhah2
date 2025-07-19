@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
         'product_price',
         'product_details',
         'product_created_at',
-        'has_embedding',  # New computed field for list view
+        'product_embedding',  # New computed field for list view
     )
 
     fields = (
@@ -30,16 +30,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     # Optional: Add search and filtering for better admin usability
     search_fields = ('product_name', 'product_brand', 'product_details',)
-    list_filter = ('product_brand', 'has_embedding',)  # Filter by brand and embedding status
+    list_filter = ('product_brand',)  # Filter by brand and embedding status
 
-    def has_embedding(self, obj):
 
-        if obj.product_embedding is None:
-            return "No"
-        return "Yes"
-
-    has_embedding.short_description = "Has Embedding"  # Column header in admin
-    has_embedding.boolean = True  # Displays as green check (Yes) or red cross (No)
 
 admin.site.register(Product, ProductAdmin)
 
