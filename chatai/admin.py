@@ -41,6 +41,7 @@ class ProductAdmin(admin.ModelAdmin):
     has_embedding.short_description = "Has Embedding"  # Column header in admin
     has_embedding.boolean = True  # Displays as green check (Yes) or red cross (No)
 
+admin.site.register(Product, ProductAdmin)
 
 @admin.register(ChatSession)
 class ChatSessionAdmin(admin.ModelAdmin):
