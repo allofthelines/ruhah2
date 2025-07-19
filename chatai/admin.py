@@ -11,7 +11,6 @@ class ProductAdmin(admin.ModelAdmin):
         'product_price',
         'product_details',
         'product_created_at',
-        'product_embedding',  # New computed field for list view
     )
 
     fields = (
